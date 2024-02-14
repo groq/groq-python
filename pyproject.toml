@@ -1,5 +1,5 @@
 [project]
-name = "groqcloud"
+name = "groq"
 version = "0.1.0"
 description = "The official Python library for the groq API"
 readme = "README.md"
