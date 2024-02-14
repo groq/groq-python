@@ -39,8 +39,8 @@ classifiers = [
 
 
 [project.urls]
-Homepage = "https://github.com/definitive-io/groqcloud-python"
-Repository = "https://github.com/definitive-io/groqcloud-python"
+Homepage = "https://github.com/groq/groq-python"
+Repository = "https://github.com/groq/groq-python"
 
 
 
