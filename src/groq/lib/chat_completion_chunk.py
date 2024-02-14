@@ -101,4 +101,4 @@ class ChatCompletionChunk(BaseModel):
 
     object: str
 
-    system_fingerprint: Optional[str] = None
+    system_fingerprint: str
