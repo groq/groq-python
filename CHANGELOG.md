@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.4.0 (2024-02-14)
+
+Full Changelog: [v0.1.0...v0.4.0](https://github.com/groq/groq-python/compare/v0.1.0...v0.4.0)
+
+### Features
+
+* Add initial Stainless SDK ([316de2c](https://github.com/groq/groq-python/commit/316de2ccfeb76e36fe34bb8656ea90a8d42a7d00))
+* create default branch ([7e00266](https://github.com/groq/groq-python/commit/7e00266e3c691d92d508e753e2c14c03297c09f9))
+* update via SDK Studio ([#3](https://github.com/groq/groq-python/issues/3)) ([2241036](https://github.com/groq/groq-python/commit/2241036e9dbee6629ad7ebce5e6f4f5e5f1028ce))
+
+
+### Chores
+
+* go live ([#2](https://github.com/groq/groq-python/issues/2)) ([13665ad](https://github.com/groq/groq-python/commit/13665ad76705513d99cbaa497ccccc694932f2c3))
+
 ## 0.1.0 (2024-02-10)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/definitive-io/groqcloud-python/compare/v0.0.1...v0.1.0)
