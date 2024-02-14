@@ -1,6 +1,6 @@
 # Groq Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/groqcloud.svg)](https://pypi.org/project/groqcloud/)
+[![PyPI version](https://img.shields.io/pypi/v/groq.svg)](https://pypi.org/project/groq/)
 
 The Groq Python library provides convenient access to the Groq REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
@@ -13,7 +13,7 @@ The REST API documentation can be found [on console.groq.com](https://console.gr
 ## Installation
 
 ```sh
-pip install groqcloud
+pip install groq
 ```
 
 ## Usage
