@@ -53,6 +53,8 @@ class Stream(Generic[_T]):
         iterator = self._iter_events()
 
         for sse in iterator:
+            if sse.data.startswith("[DONE]"):
+                break
             yield process_data(data=sse.json(), cast_to=cast_to, response=response)
 
         # Ensure the entire stream is consumed
@@ -106,6 +108,8 @@ class AsyncStream(Generic[_T]):
 
     async def _iter_events(self) -> AsyncIterator[ServerSentEvent]:
         async for sse in self._decoder.aiter(self.response.aiter_lines()):
+            if sse.data.startswith("[DONE]"):
+                break
             yield sse
 
     async def __stream__(self) -> AsyncIterator[_T]:
