@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, List, Union, Iterable, Optional
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -22,6 +22,10 @@ __all__ = [
 
 
 class CompletionCreateParams(TypedDict, total=False):
+    messages: Required[Iterable[Message]]
+
+    model: Required[str]
+
     frequency_penalty: float
 
     logit_bias: Dict[str, int]
@@ -29,10 +33,6 @@ class CompletionCreateParams(TypedDict, total=False):
     logprobs: bool
 
     max_tokens: int
-
-    messages: Iterable[Message]
-
-    model: str
 
     n: int
 
@@ -78,11 +78,11 @@ class MessageToolCall(TypedDict, total=False):
 
 
 class Message(TypedDict, total=False):
-    content: str
+    content: Required[str]
+
+    role: Required[str]
 
     name: str
-
-    role: str
 
     tool_call_id: str
     """ToolMessage Fields"""
