@@ -19,16 +19,28 @@ class TestCompletions:
 
     @parametrize
     def test_method_create(self, client: Groq) -> None:
-        completion = client.chat.completions.create()
+        completion = client.chat.completions.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+            ],
+            model="string",
+        )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Groq) -> None:
         completion = client.chat.completions.create(
-            frequency_penalty=0,
-            logit_bias={"foo": 0},
-            logprobs=True,
-            max_tokens=0,
             messages=[
                 {
                     "content": "string",
@@ -128,6 +140,10 @@ class TestCompletions:
                 },
             ],
             model="string",
+            frequency_penalty=0,
+            logit_bias={"foo": 0},
+            logprobs=True,
+            max_tokens=0,
             n=0,
             presence_penalty=0,
             response_format={"type": "string"},
@@ -176,7 +192,23 @@ class TestCompletions:
 
     @parametrize
     def test_raw_response_create(self, client: Groq) -> None:
-        response = client.chat.completions.with_raw_response.create()
+        response = client.chat.completions.with_raw_response.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+            ],
+            model="string",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -185,7 +217,23 @@ class TestCompletions:
 
     @parametrize
     def test_streaming_response_create(self, client: Groq) -> None:
-        with client.chat.completions.with_streaming_response.create() as response:
+        with client.chat.completions.with_streaming_response.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+            ],
+            model="string",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -200,16 +248,28 @@ class TestAsyncCompletions:
 
     @parametrize
     async def test_method_create(self, async_client: AsyncGroq) -> None:
-        completion = await async_client.chat.completions.create()
+        completion = await async_client.chat.completions.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+            ],
+            model="string",
+        )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
         completion = await async_client.chat.completions.create(
-            frequency_penalty=0,
-            logit_bias={"foo": 0},
-            logprobs=True,
-            max_tokens=0,
             messages=[
                 {
                     "content": "string",
@@ -309,6 +369,10 @@ class TestAsyncCompletions:
                 },
             ],
             model="string",
+            frequency_penalty=0,
+            logit_bias={"foo": 0},
+            logprobs=True,
+            max_tokens=0,
             n=0,
             presence_penalty=0,
             response_format={"type": "string"},
@@ -357,7 +421,23 @@ class TestAsyncCompletions:
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
-        response = await async_client.chat.completions.with_raw_response.create()
+        response = await async_client.chat.completions.with_raw_response.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+            ],
+            model="string",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -366,7 +446,23 @@ class TestAsyncCompletions:
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
-        async with async_client.chat.completions.with_streaming_response.create() as response:
+        async with async_client.chat.completions.with_streaming_response.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "string",
+                },
+            ],
+            model="string",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
