@@ -16,6 +16,8 @@ __all__ = [
     "ChoiceDeltaToolCall",
     "ChoiceDeltaToolCallFunction",
 ]
+
+
 class ChoiceDeltaFunctionCall(BaseModel):
     arguments: Optional[str] = None
     """
@@ -27,6 +29,7 @@ class ChoiceDeltaFunctionCall(BaseModel):
 
     name: Optional[str] = None
     """The name of the function to call."""
+
 
 class ChoiceLogprobsContentTopLogprob(BaseModel):
     token: Optional[str] = None
