@@ -54,21 +54,21 @@ class ChoiceMessageToolCall(BaseModel):
 
 
 class ChoiceMessage(BaseModel):
-    content: Optional[str] = None
+    content: str
 
-    role: Optional[str] = None
+    role: str
 
     tool_calls: Optional[List[ChoiceMessageToolCall]] = None
 
 
 class Choice(BaseModel):
-    finish_reason: Optional[str] = None
+    finish_reason: str
 
-    index: Optional[int] = None
+    index: int
 
-    logprobs: Optional[ChoiceLogprobs] = None
+    logprobs: ChoiceLogprobs
 
-    message: Optional[ChoiceMessage] = None
+    message: ChoiceMessage
 
 
 class Usage(BaseModel):
@@ -86,9 +86,9 @@ class Usage(BaseModel):
 
 
 class ChatCompletion(BaseModel):
-    id: Optional[str] = None
+    choices: List[Choice]
 
-    choices: Optional[List[Choice]] = None
+    id: Optional[str] = None
 
     created: Optional[int] = None
 
