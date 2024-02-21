@@ -261,9 +261,9 @@ completion = response.parse()  # get the object that `chat.completions.create()`
 print(completion.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/groq/groq-python/tree/stainless/src/groq/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/groq/groq-python/tree/main/src/groq/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/groq/groq-python/tree/stainless/src/groq/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/groq/groq-python/tree/main/src/groq/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
