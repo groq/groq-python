@@ -11,13 +11,13 @@
 annotated-types==0.6.0
     # via pydantic
 anyio==4.1.0
-    # via groq-sdk
+    # via groq
     # via httpx
 certifi==2023.7.22
     # via httpcore
     # via httpx
 distro==1.8.0
-    # via groq-sdk
+    # via groq
 exceptiongroup==1.1.3
     # via anyio
 h11==0.14.0
@@ -25,19 +25,19 @@ h11==0.14.0
 httpcore==1.0.2
     # via httpx
 httpx==0.25.2
-    # via groq-sdk
+    # via groq
 idna==3.4
     # via anyio
     # via httpx
 pydantic==2.4.2
-    # via groq-sdk
+    # via groq
 pydantic-core==2.10.1
     # via pydantic
 sniffio==1.3.0
     # via anyio
-    # via groq-sdk
+    # via groq
     # via httpx
 typing-extensions==4.8.0
-    # via groq-sdk
+    # via groq
     # via pydantic
     # via pydantic-core
