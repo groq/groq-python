@@ -1,6 +1,6 @@
 # Groq Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/groq.svg)](https://pypi.org/project/groq/)
+[![PyPI version](https://img.shields.io/pypi/v/groq-sdk.svg)](https://pypi.org/project/groq-sdk/)
 
 The Groq Python library provides convenient access to the Groq REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
@@ -13,7 +13,7 @@ The REST API documentation can be found [on console.groq.com](https://console.gr
 ## Installation
 
 ```sh
-pip install groq
+pip install groq-sdk
 ```
 
 ## Usage
@@ -261,9 +261,9 @@ completion = response.parse()  # get the object that `chat.completions.create()`
 print(completion.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/groq/groq-python/tree/stainless/src/groq/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/groq/groq-python/tree/main/src/groq/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/groq/groq-python/tree/stainless/src/groq/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/groq/groq-python/tree/main/src/groq/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
