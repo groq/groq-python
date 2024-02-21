@@ -70,11 +70,12 @@ class ChoiceDeltaToolCall(BaseModel):
 
 
 class ChoiceDelta(BaseModel):
-    content: Optional[str] = None
+    content: str
+
+    role: str
 
     function_call: Optional[ChoiceDeltaFunctionCall] = None
 
-    role: Optional[str] = None
 
     tool_calls: Optional[List[ChoiceDeltaToolCall]] = None
 
@@ -82,22 +83,22 @@ class ChoiceDelta(BaseModel):
 class Choice(BaseModel):
     delta: ChoiceDelta
 
-    finish_reason: Optional[str] = None
+    finish_reason: str
 
-    index: Optional[int] = None
+    index: int
 
-    logprobs: Optional[ChoiceLogprobs] = None
+    logprobs: ChoiceLogprobs
 
 
 class ChatCompletionChunk(BaseModel):
-    id: Optional[str] = None
+    id: str
 
-    choices: Optional[List[Choice]] = None
+    choices: List[Choice]
 
-    created: Optional[int] = None
+    created: int
 
-    model: Optional[str] = None
+    model: str
 
-    object: Optional[str] = None
+    object: str
 
     system_fingerprint: Optional[str] = None

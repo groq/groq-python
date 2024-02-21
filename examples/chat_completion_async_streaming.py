@@ -3,7 +3,7 @@ import asyncio
 from groq import AsyncGroq
 
 
-async def main():
+async def main() -> None:
     client = AsyncGroq()
 
     stream = await client.chat.completions.create(
