@@ -5,7 +5,7 @@ description = "The official Python library for the groq API"
 readme = "README.md"
 license = "Apache-2.0"
 authors = [
-{ name = "Groq", email = "grea@groq.com" },
+{ name = "Groq", email = "support@groq.com" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
