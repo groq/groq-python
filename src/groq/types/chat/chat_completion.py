@@ -80,6 +80,8 @@ class Usage(BaseModel):
 
     prompt_tokens: Optional[int] = None
 
+    queue_time: Optional[float] = None
+
     total_time: Optional[float] = None
 
     total_tokens: Optional[int] = None
