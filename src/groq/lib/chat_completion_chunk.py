@@ -76,7 +76,6 @@ class ChoiceDelta(BaseModel):
 
     function_call: Optional[ChoiceDeltaFunctionCall] = None
 
-
     tool_calls: Optional[List[ChoiceDeltaToolCall]] = None
 
 
