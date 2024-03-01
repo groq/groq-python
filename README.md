@@ -13,6 +13,7 @@ The REST API documentation can be found [on console.groq.com](https://console.gr
 ## Installation
 
 ```sh
+# install from PyPI
 pip install groq
 ```
 
@@ -38,7 +39,7 @@ chat_completion = client.chat.completions.create(
     ],
     model="mixtral-8x7b-32768",
 )
-print(chat_completion.choices[0].message.content)
+print(chat_completion.choices_0.message.content)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -71,7 +72,7 @@ async def main() -> None:
         ],
         model="mixtral-8x7b-32768",
     )
-    print(chat_completion.choices[0].message.content)
+    print(chat_completion.choices_0.message.content)
 
 
 asyncio.run(main())
@@ -261,9 +262,9 @@ completion = response.parse()  # get the object that `chat.completions.create()`
 print(completion.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/groq/groq-python/tree/stainless/src/groq/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/groq/groq-python/tree/main/src/groq/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/groq/groq-python/tree/stainless/src/groq/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/groq/groq-python/tree/main/src/groq/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
