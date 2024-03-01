@@ -44,3 +44,6 @@ stream = client.chat.completions.create(
 # Print the incremental deltas returned by the LLM.
 for chunk in stream:
     print(chunk.choices[0].delta.content, end="")
+    if chunk.choices[0].finish_reason:
+        print(f"\n\nUsage stats: {chunk.x_groq.usage}")
+

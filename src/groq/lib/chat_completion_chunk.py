@@ -2,6 +2,7 @@
 # File is in libs instead of models to avoid conflicts with stainless bot
 
 from typing import List, Optional
+from ..types.chat.chat_completion import Usage
 
 from .._models import BaseModel
 
@@ -89,6 +90,10 @@ class Choice(BaseModel):
     logprobs: ChoiceLogprobs
 
 
+class XGroq(BaseModel):
+    usage: Usage
+
+
 class ChatCompletionChunk(BaseModel):
     id: str
 
@@ -101,3 +106,5 @@ class ChatCompletionChunk(BaseModel):
     object: str
 
     system_fingerprint: str
+
+    x_groq: Optional[XGroq]
