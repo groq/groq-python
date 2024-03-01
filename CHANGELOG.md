@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.2 (2024-03-01)
+
+Full Changelog: [v0.4.1...v0.4.2](https://github.com/groq/groq-python/compare/v0.4.1...v0.4.2)
+
+### Features
+
+* OpenAPI spec update via Stainless API ([#19](https://github.com/groq/groq-python/issues/19)) ([84ad1a4](https://github.com/groq/groq-python/commit/84ad1a4cd90eeee21a8f7bed1003ea8c51669f29))
+
 ## 0.4.1 (2024-02-21)
 
 Full Changelog: [v0.1.0...v0.4.1](https://github.com/groq/groq-python/compare/v0.1.0...v0.4.1)
