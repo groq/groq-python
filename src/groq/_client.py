@@ -47,6 +47,7 @@ __all__ = [
 
 class Groq(SyncAPIClient):
     chat: resources.Chat
+    audio: resources.Audio
     models: resources.Models
     with_raw_response: GroqWithRawResponse
     with_streaming_response: GroqWithStreamedResponse
@@ -104,6 +105,7 @@ class Groq(SyncAPIClient):
         )
 
         self.chat = resources.Chat(self)
+        self.audio = resources.Audio(self)
         self.models = resources.Models(self)
         self.with_raw_response = GroqWithRawResponse(self)
         self.with_streaming_response = GroqWithStreamedResponse(self)
@@ -215,6 +217,7 @@ class Groq(SyncAPIClient):
 
 class AsyncGroq(AsyncAPIClient):
     chat: resources.AsyncChat
+    audio: resources.AsyncAudio
     models: resources.AsyncModels
     with_raw_response: AsyncGroqWithRawResponse
     with_streaming_response: AsyncGroqWithStreamedResponse
@@ -272,6 +275,7 @@ class AsyncGroq(AsyncAPIClient):
         )
 
         self.chat = resources.AsyncChat(self)
+        self.audio = resources.AsyncAudio(self)
         self.models = resources.AsyncModels(self)
         self.with_raw_response = AsyncGroqWithRawResponse(self)
         self.with_streaming_response = AsyncGroqWithStreamedResponse(self)
@@ -384,24 +388,28 @@ class AsyncGroq(AsyncAPIClient):
 class GroqWithRawResponse:
     def __init__(self, client: Groq) -> None:
         self.chat = resources.ChatWithRawResponse(client.chat)
+        self.audio = resources.AudioWithRawResponse(client.audio)
         self.models = resources.ModelsWithRawResponse(client.models)
 
 
 class AsyncGroqWithRawResponse:
     def __init__(self, client: AsyncGroq) -> None:
         self.chat = resources.AsyncChatWithRawResponse(client.chat)
+        self.audio = resources.AsyncAudioWithRawResponse(client.audio)
         self.models = resources.AsyncModelsWithRawResponse(client.models)
 
 
 class GroqWithStreamedResponse:
     def __init__(self, client: Groq) -> None:
         self.chat = resources.ChatWithStreamingResponse(client.chat)
+        self.audio = resources.AudioWithStreamingResponse(client.audio)
         self.models = resources.ModelsWithStreamingResponse(client.models)
 
 
 class AsyncGroqWithStreamedResponse:
     def __init__(self, client: AsyncGroq) -> None:
         self.chat = resources.AsyncChatWithStreamingResponse(client.chat)
+        self.audio = resources.AsyncAudioWithStreamingResponse(client.audio)
         self.models = resources.AsyncModelsWithStreamingResponse(client.models)
 
 
