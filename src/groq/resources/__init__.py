@@ -8,6 +8,14 @@ from .chat import (
     ChatWithStreamingResponse,
     AsyncChatWithStreamingResponse,
 )
+from .audio import (
+    Audio,
+    AsyncAudio,
+    AudioWithRawResponse,
+    AsyncAudioWithRawResponse,
+    AudioWithStreamingResponse,
+    AsyncAudioWithStreamingResponse,
+)
 from .models import (
     Models,
     AsyncModels,
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncChatWithRawResponse",
     "ChatWithStreamingResponse",
     "AsyncChatWithStreamingResponse",
+    "Audio",
+    "AsyncAudio",
+    "AudioWithRawResponse",
+    "AsyncAudioWithRawResponse",
+    "AudioWithStreamingResponse",
+    "AsyncAudioWithStreamingResponse",
     "Models",
     "AsyncModels",
     "ModelsWithRawResponse",
