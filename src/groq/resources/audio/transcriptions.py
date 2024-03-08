@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Union, Mapping, cast
+from typing import List, Union, Mapping, cast
 from typing_extensions import Literal
 
 import httpx
 
-from ...types import translation
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
 from ..._utils import (
     extract_files,
@@ -23,50 +22,57 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.audio import translation_create_params
+from ...types.audio import Transcription, transcription_create_params
 from ..._base_client import (
     make_request_options,
 )
 
-__all__ = ["Translation", "AsyncTranslation"]
+__all__ = ["Transcriptions", "AsyncTranscriptions"]
 
 
-class Translation(SyncAPIResource):
+class Transcriptions(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TranslationWithRawResponse:
-        return TranslationWithRawResponse(self)
+    def with_raw_response(self) -> TranscriptionsWithRawResponse:
+        return TranscriptionsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TranslationWithStreamingResponse:
-        return TranslationWithStreamingResponse(self)
+    def with_streaming_response(self) -> TranscriptionsWithStreamingResponse:
+        return TranscriptionsWithStreamingResponse(self)
 
     def create(
         self,
         *,
         file: FileTypes,
         model: Union[str, Literal["whisper-large-v3"]],
+        language: str | NotGiven = NOT_GIVEN,
         prompt: str | NotGiven = NOT_GIVEN,
-        response_format: str | NotGiven = NOT_GIVEN,
+        response_format: Literal["json", "text", "srt", "verbose_json", "vtt"] | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
+        timestamp_granularities: List[Literal["word", "segment"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> translation.Translation:
+    ) -> Transcription:
         """
-        Translates audio into English.
+        Transcribes audio into the input language.
 
         Args:
-          file: The audio file object (not file name) translate, in one of these formats: flac,
-              mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
+          file:
+              The audio file object (not file name) to transcribe, in one of these formats:
+              flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
 
           model: ID of the model to use. Only `whisper-large-v3` is currently available.
 
+          language: The language of the input audio. Supplying the input language in
+              [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will
+              improve accuracy and latency.
+
           prompt: An optional text to guide the model's style or continue a previous audio
-              segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in
-              English.
+              segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the
+              audio language.
 
           response_format: The format of the transcript output, in one of these options: `json`, `text`,
               `srt`, `verbose_json`, or `vtt`.
@@ -76,6 +82,12 @@ class Translation(SyncAPIResource):
               deterministic. If set to 0, the model will use
               [log probability](https://en.wikipedia.org/wiki/Log_probability) to
               automatically increase the temperature until certain thresholds are hit.
+
+          timestamp_granularities: The timestamp granularities to populate for this transcription.
+              `response_format` must be set `verbose_json` to use timestamp granularities.
+              Either or both of these options are supported: `word`, or `segment`. Note: There
+              is no additional latency for segment timestamps, but generating word timestamps
+              incurs additional latency.
 
           extra_headers: Send extra headers
 
@@ -89,9 +101,11 @@ class Translation(SyncAPIResource):
             {
                 "file": file,
                 "model": model,
+                "language": language,
                 "prompt": prompt,
                 "response_format": response_format,
                 "temperature": temperature,
+                "timestamp_granularities": timestamp_granularities,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
@@ -101,52 +115,59 @@ class Translation(SyncAPIResource):
             # multipart/form-data; boundary=---abc--
             extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            "/openai/v1/audio/translations",
-            body=maybe_transform(body, translation_create_params.TranslationCreateParams),
+            "/openai/v1/audio/transcriptions",
+            body=maybe_transform(body, transcription_create_params.TranscriptionCreateParams),
             files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=translation.Translation,
+            cast_to=Transcription,
         )
 
 
-class AsyncTranslation(AsyncAPIResource):
+class AsyncTranscriptions(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncTranslationWithRawResponse:
-        return AsyncTranslationWithRawResponse(self)
+    def with_raw_response(self) -> AsyncTranscriptionsWithRawResponse:
+        return AsyncTranscriptionsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncTranslationWithStreamingResponse:
-        return AsyncTranslationWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncTranscriptionsWithStreamingResponse:
+        return AsyncTranscriptionsWithStreamingResponse(self)
 
     async def create(
         self,
         *,
         file: FileTypes,
         model: Union[str, Literal["whisper-large-v3"]],
+        language: str | NotGiven = NOT_GIVEN,
         prompt: str | NotGiven = NOT_GIVEN,
-        response_format: str | NotGiven = NOT_GIVEN,
+        response_format: Literal["json", "text", "srt", "verbose_json", "vtt"] | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
+        timestamp_granularities: List[Literal["word", "segment"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> translation.Translation:
+    ) -> Transcription:
         """
-        Translates audio into English.
+        Transcribes audio into the input language.
 
         Args:
-          file: The audio file object (not file name) translate, in one of these formats: flac,
-              mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
+          file:
+              The audio file object (not file name) to transcribe, in one of these formats:
+              flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
 
           model: ID of the model to use. Only `whisper-large-v3` is currently available.
 
+          language: The language of the input audio. Supplying the input language in
+              [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will
+              improve accuracy and latency.
+
           prompt: An optional text to guide the model's style or continue a previous audio
-              segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in
-              English.
+              segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the
+              audio language.
 
           response_format: The format of the transcript output, in one of these options: `json`, `text`,
               `srt`, `verbose_json`, or `vtt`.
@@ -156,6 +177,12 @@ class AsyncTranslation(AsyncAPIResource):
               deterministic. If set to 0, the model will use
               [log probability](https://en.wikipedia.org/wiki/Log_probability) to
               automatically increase the temperature until certain thresholds are hit.
+
+          timestamp_granularities: The timestamp granularities to populate for this transcription.
+              `response_format` must be set `verbose_json` to use timestamp granularities.
+              Either or both of these options are supported: `word`, or `segment`. Note: There
+              is no additional latency for segment timestamps, but generating word timestamps
+              incurs additional latency.
 
           extra_headers: Send extra headers
 
@@ -169,9 +196,11 @@ class AsyncTranslation(AsyncAPIResource):
             {
                 "file": file,
                 "model": model,
+                "language": language,
                 "prompt": prompt,
                 "response_format": response_format,
                 "temperature": temperature,
+                "timestamp_granularities": timestamp_granularities,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
@@ -181,47 +210,47 @@ class AsyncTranslation(AsyncAPIResource):
             # multipart/form-data; boundary=---abc--
             extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            "/openai/v1/audio/translations",
-            body=await async_maybe_transform(body, translation_create_params.TranslationCreateParams),
+            "/openai/v1/audio/transcriptions",
+            body=await async_maybe_transform(body, transcription_create_params.TranscriptionCreateParams),
             files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=translation.Translation,
+            cast_to=Transcription,
         )
 
 
-class TranslationWithRawResponse:
-    def __init__(self, translation: Translation) -> None:
-        self._translation = translation
+class TranscriptionsWithRawResponse:
+    def __init__(self, transcriptions: Transcriptions) -> None:
+        self._transcriptions = transcriptions
 
         self.create = to_raw_response_wrapper(
-            translation.create,
+            transcriptions.create,
         )
 
 
-class AsyncTranslationWithRawResponse:
-    def __init__(self, translation: AsyncTranslation) -> None:
-        self._translation = translation
+class AsyncTranscriptionsWithRawResponse:
+    def __init__(self, transcriptions: AsyncTranscriptions) -> None:
+        self._transcriptions = transcriptions
 
         self.create = async_to_raw_response_wrapper(
-            translation.create,
+            transcriptions.create,
         )
 
 
-class TranslationWithStreamingResponse:
-    def __init__(self, translation: Translation) -> None:
-        self._translation = translation
+class TranscriptionsWithStreamingResponse:
+    def __init__(self, transcriptions: Transcriptions) -> None:
+        self._transcriptions = transcriptions
 
         self.create = to_streamed_response_wrapper(
-            translation.create,
+            transcriptions.create,
         )
 
 
-class AsyncTranslationWithStreamingResponse:
-    def __init__(self, translation: AsyncTranslation) -> None:
-        self._translation = translation
+class AsyncTranscriptionsWithStreamingResponse:
+    def __init__(self, transcriptions: AsyncTranscriptions) -> None:
+        self._transcriptions = transcriptions
 
         self.create = async_to_streamed_response_wrapper(
-            translation.create,
+            transcriptions.create,
         )

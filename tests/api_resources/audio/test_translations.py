@@ -14,12 +14,12 @@ from tests.utils import assert_matches_type
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestTranslation:
+class TestTranslations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_create(self, client: Groq) -> None:
-        translation = client.audio.translation.create(
+        translation = client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
         )
@@ -27,7 +27,7 @@ class TestTranslation:
 
     @parametrize
     def test_method_create_with_all_params(self, client: Groq) -> None:
-        translation = client.audio.translation.create(
+        translation = client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
             prompt="string",
@@ -38,7 +38,7 @@ class TestTranslation:
 
     @parametrize
     def test_raw_response_create(self, client: Groq) -> None:
-        response = client.audio.translation.with_raw_response.create(
+        response = client.audio.translations.with_raw_response.create(
             file=b"raw file contents",
             model="whisper-1",
         )
@@ -50,7 +50,7 @@ class TestTranslation:
 
     @parametrize
     def test_streaming_response_create(self, client: Groq) -> None:
-        with client.audio.translation.with_streaming_response.create(
+        with client.audio.translations.with_streaming_response.create(
             file=b"raw file contents",
             model="whisper-1",
         ) as response:
@@ -63,12 +63,12 @@ class TestTranslation:
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncTranslation:
+class TestAsyncTranslations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     async def test_method_create(self, async_client: AsyncGroq) -> None:
-        translation = await async_client.audio.translation.create(
+        translation = await async_client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
         )
@@ -76,7 +76,7 @@ class TestAsyncTranslation:
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
-        translation = await async_client.audio.translation.create(
+        translation = await async_client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
             prompt="string",
@@ -87,7 +87,7 @@ class TestAsyncTranslation:
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
-        response = await async_client.audio.translation.with_raw_response.create(
+        response = await async_client.audio.translations.with_raw_response.create(
             file=b"raw file contents",
             model="whisper-1",
         )
@@ -99,7 +99,7 @@ class TestAsyncTranslation:
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
-        async with async_client.audio.translation.with_streaming_response.create(
+        async with async_client.audio.translations.with_streaming_response.create(
             file=b"raw file contents",
             model="whisper-1",
         ) as response:

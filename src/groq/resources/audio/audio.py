@@ -4,21 +4,21 @@ from __future__ import annotations
 
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from .translation import (
-    Translation,
-    AsyncTranslation,
-    TranslationWithRawResponse,
-    AsyncTranslationWithRawResponse,
-    TranslationWithStreamingResponse,
-    AsyncTranslationWithStreamingResponse,
+from .translations import (
+    Translations,
+    AsyncTranslations,
+    TranslationsWithRawResponse,
+    AsyncTranslationsWithRawResponse,
+    TranslationsWithStreamingResponse,
+    AsyncTranslationsWithStreamingResponse,
 )
-from .transcription import (
-    TranscriptionResource,
-    AsyncTranscriptionResource,
-    TranscriptionResourceWithRawResponse,
-    AsyncTranscriptionResourceWithRawResponse,
-    TranscriptionResourceWithStreamingResponse,
-    AsyncTranscriptionResourceWithStreamingResponse,
+from .transcriptions import (
+    Transcriptions,
+    AsyncTranscriptions,
+    TranscriptionsWithRawResponse,
+    AsyncTranscriptionsWithRawResponse,
+    TranscriptionsWithStreamingResponse,
+    AsyncTranscriptionsWithStreamingResponse,
 )
 
 __all__ = ["Audio", "AsyncAudio"]
@@ -26,12 +26,12 @@ __all__ = ["Audio", "AsyncAudio"]
 
 class Audio(SyncAPIResource):
     @cached_property
-    def transcription(self) -> TranscriptionResource:
-        return TranscriptionResource(self._client)
+    def transcriptions(self) -> Transcriptions:
+        return Transcriptions(self._client)
 
     @cached_property
-    def translation(self) -> Translation:
-        return Translation(self._client)
+    def translations(self) -> Translations:
+        return Translations(self._client)
 
     @cached_property
     def with_raw_response(self) -> AudioWithRawResponse:
@@ -44,12 +44,12 @@ class Audio(SyncAPIResource):
 
 class AsyncAudio(AsyncAPIResource):
     @cached_property
-    def transcription(self) -> AsyncTranscriptionResource:
-        return AsyncTranscriptionResource(self._client)
+    def transcriptions(self) -> AsyncTranscriptions:
+        return AsyncTranscriptions(self._client)
 
     @cached_property
-    def translation(self) -> AsyncTranslation:
-        return AsyncTranslation(self._client)
+    def translations(self) -> AsyncTranslations:
+        return AsyncTranslations(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncAudioWithRawResponse:
@@ -65,12 +65,12 @@ class AudioWithRawResponse:
         self._audio = audio
 
     @cached_property
-    def transcription(self) -> TranscriptionResourceWithRawResponse:
-        return TranscriptionResourceWithRawResponse(self._audio.transcription)
+    def transcriptions(self) -> TranscriptionsWithRawResponse:
+        return TranscriptionsWithRawResponse(self._audio.transcriptions)
 
     @cached_property
-    def translation(self) -> TranslationWithRawResponse:
-        return TranslationWithRawResponse(self._audio.translation)
+    def translations(self) -> TranslationsWithRawResponse:
+        return TranslationsWithRawResponse(self._audio.translations)
 
 
 class AsyncAudioWithRawResponse:
@@ -78,12 +78,12 @@ class AsyncAudioWithRawResponse:
         self._audio = audio
 
     @cached_property
-    def transcription(self) -> AsyncTranscriptionResourceWithRawResponse:
-        return AsyncTranscriptionResourceWithRawResponse(self._audio.transcription)
+    def transcriptions(self) -> AsyncTranscriptionsWithRawResponse:
+        return AsyncTranscriptionsWithRawResponse(self._audio.transcriptions)
 
     @cached_property
-    def translation(self) -> AsyncTranslationWithRawResponse:
-        return AsyncTranslationWithRawResponse(self._audio.translation)
+    def translations(self) -> AsyncTranslationsWithRawResponse:
+        return AsyncTranslationsWithRawResponse(self._audio.translations)
 
 
 class AudioWithStreamingResponse:
@@ -91,12 +91,12 @@ class AudioWithStreamingResponse:
         self._audio = audio
 
     @cached_property
-    def transcription(self) -> TranscriptionResourceWithStreamingResponse:
-        return TranscriptionResourceWithStreamingResponse(self._audio.transcription)
+    def transcriptions(self) -> TranscriptionsWithStreamingResponse:
+        return TranscriptionsWithStreamingResponse(self._audio.transcriptions)
 
     @cached_property
-    def translation(self) -> TranslationWithStreamingResponse:
-        return TranslationWithStreamingResponse(self._audio.translation)
+    def translations(self) -> TranslationsWithStreamingResponse:
+        return TranslationsWithStreamingResponse(self._audio.translations)
 
 
 class AsyncAudioWithStreamingResponse:
@@ -104,9 +104,9 @@ class AsyncAudioWithStreamingResponse:
         self._audio = audio
 
     @cached_property
-    def transcription(self) -> AsyncTranscriptionResourceWithStreamingResponse:
-        return AsyncTranscriptionResourceWithStreamingResponse(self._audio.transcription)
+    def transcriptions(self) -> AsyncTranscriptionsWithStreamingResponse:
+        return AsyncTranscriptionsWithStreamingResponse(self._audio.transcriptions)
 
     @cached_property
-    def translation(self) -> AsyncTranslationWithStreamingResponse:
-        return AsyncTranslationWithStreamingResponse(self._audio.translation)
+    def translations(self) -> AsyncTranslationsWithStreamingResponse:
+        return AsyncTranslationsWithStreamingResponse(self._audio.translations)

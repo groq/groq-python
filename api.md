@@ -20,7 +20,7 @@ Types:
 from groq.types import Translation
 ```
 
-## TranscriptionResource
+## Transcriptions
 
 Types:
 
@@ -30,13 +30,13 @@ from groq.types.audio import Transcription
 
 Methods:
 
-- <code title="post /openai/v1/audio/transcriptions">client.audio.transcription.<a href="./src/groq/resources/audio/transcription.py">create</a>(\*\*<a href="src/groq/types/audio/transcription_create_params.py">params</a>) -> <a href="./src/groq/types/audio/transcription.py">Transcription</a></code>
+- <code title="post /openai/v1/audio/transcriptions">client.audio.transcriptions.<a href="./src/groq/resources/audio/transcriptions.py">create</a>(\*\*<a href="src/groq/types/audio/transcription_create_params.py">params</a>) -> <a href="./src/groq/types/audio/transcription.py">Transcription</a></code>
 
-## Translation
+## Translations
 
 Methods:
 
-- <code title="post /openai/v1/audio/translations">client.audio.translation.<a href="./src/groq/resources/audio/translation.py">create</a>(\*\*<a href="src/groq/types/audio/translation_create_params.py">params</a>) -> <a href="./src/groq/types/translation.py">Translation</a></code>
+- <code title="post /openai/v1/audio/translations">client.audio.translations.<a href="./src/groq/resources/audio/translations.py">create</a>(\*\*<a href="src/groq/types/audio/translation_create_params.py">params</a>) -> <a href="./src/groq/types/translation.py">Translation</a></code>
 
 # Models
 
