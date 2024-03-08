@@ -2,9 +2,9 @@
 # File is in libs instead of models to avoid conflicts with stainless bot
 
 from typing import List, Optional
-from ..types.chat.chat_completion import Usage
 
 from .._models import BaseModel
+from ..types.chat.chat_completion import Usage
 
 __all__ = [
     "ChatCompletionChunk",

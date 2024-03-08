@@ -46,7 +46,11 @@ async def main() -> None:
     # Print the incremental deltas returned by the LLM.
     async for chunk in stream:
         print(chunk.choices[0].delta.content, end="")
+
+        # Usage information is available on the final chunk
         if chunk.choices[0].finish_reason:
+            assert chunk.x_groq is not None
+            assert chunk.x_groq.usage is not None
             print(f"\n\nUsage stats: {chunk.x_groq.usage}")
 
 
