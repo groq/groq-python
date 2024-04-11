@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.5.0 (2024-04-11)
+
+Full Changelog: [v0.4.2...v0.5.0](https://github.com/groq/groq-python/compare/v0.4.2...v0.5.0)
+
+### Features
+
+* Add transcription and translation endpoints ([d6be6e7](https://github.com/groq/groq-python/commit/d6be6e7fe0946c107b135bf629190041f241394b))
+
+
+### Chores
+
+* add CODEOWNERS ([a1594a7](https://github.com/groq/groq-python/commit/a1594a7e462c2e7a0deb8e32b17adf6f81d55ef1))
+* **examples:** lint ([fdcb94e](https://github.com/groq/groq-python/commit/fdcb94ee77b05fbcb926a3b80f5016626d202637))
+* Fix streaming before release ([7dec9b7](https://github.com/groq/groq-python/commit/7dec9b711c222dec4f4a86d7e6c650525066d2aa))
+
 ## 0.4.2 (2024-03-01)
 
 Full Changelog: [v0.4.1...v0.4.2](https://github.com/groq/groq-python/compare/v0.4.1...v0.4.2)
