@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -46,9 +46,9 @@ __all__ = [
 
 
 class Groq(SyncAPIClient):
-    chat: resources.Chat
-    audio: resources.Audio
-    models: resources.Models
+    chat: resources.ChatResource
+    audio: resources.AudioResource
+    models: resources.ModelsResource
     with_raw_response: GroqWithRawResponse
     with_streaming_response: GroqWithStreamedResponse
 
@@ -64,7 +64,9 @@ class Groq(SyncAPIClient):
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
-        # Configure a custom httpx client. See the [httpx documentation](https://www.python-httpx.org/api/#client) for more details.
+        # Configure a custom httpx client.
+        # We provide a `DefaultHttpxClient` class that you can pass to retain the default values we use for `limits`, `timeout` & `follow_redirects`.
+        # See the [httpx documentation](https://www.python-httpx.org/api/#client) for more details.
         http_client: httpx.Client | None = None,
         # Enable or disable schema validation for data returned by the API.
         # When enabled an error APIResponseValidationError is raised
@@ -104,9 +106,9 @@ class Groq(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.chat = resources.Chat(self)
-        self.audio = resources.Audio(self)
-        self.models = resources.Models(self)
+        self.chat = resources.ChatResource(self)
+        self.audio = resources.AudioResource(self)
+        self.models = resources.ModelsResource(self)
         self.with_raw_response = GroqWithRawResponse(self)
         self.with_streaming_response = GroqWithStreamedResponse(self)
 
@@ -216,9 +218,9 @@ class Groq(SyncAPIClient):
 
 
 class AsyncGroq(AsyncAPIClient):
-    chat: resources.AsyncChat
-    audio: resources.AsyncAudio
-    models: resources.AsyncModels
+    chat: resources.AsyncChatResource
+    audio: resources.AsyncAudioResource
+    models: resources.AsyncModelsResource
     with_raw_response: AsyncGroqWithRawResponse
     with_streaming_response: AsyncGroqWithStreamedResponse
 
@@ -234,7 +236,9 @@ class AsyncGroq(AsyncAPIClient):
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
-        # Configure a custom httpx client. See the [httpx documentation](https://www.python-httpx.org/api/#asyncclient) for more details.
+        # Configure a custom httpx client.
+        # We provide a `DefaultAsyncHttpxClient` class that you can pass to retain the default values we use for `limits`, `timeout` & `follow_redirects`.
+        # See the [httpx documentation](https://www.python-httpx.org/api/#asyncclient) for more details.
         http_client: httpx.AsyncClient | None = None,
         # Enable or disable schema validation for data returned by the API.
         # When enabled an error APIResponseValidationError is raised
@@ -274,9 +278,9 @@ class AsyncGroq(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.chat = resources.AsyncChat(self)
-        self.audio = resources.AsyncAudio(self)
-        self.models = resources.AsyncModels(self)
+        self.chat = resources.AsyncChatResource(self)
+        self.audio = resources.AsyncAudioResource(self)
+        self.models = resources.AsyncModelsResource(self)
         self.with_raw_response = AsyncGroqWithRawResponse(self)
         self.with_streaming_response = AsyncGroqWithStreamedResponse(self)
 
@@ -387,30 +391,30 @@ class AsyncGroq(AsyncAPIClient):
 
 class GroqWithRawResponse:
     def __init__(self, client: Groq) -> None:
-        self.chat = resources.ChatWithRawResponse(client.chat)
-        self.audio = resources.AudioWithRawResponse(client.audio)
-        self.models = resources.ModelsWithRawResponse(client.models)
+        self.chat = resources.ChatResourceWithRawResponse(client.chat)
+        self.audio = resources.AudioResourceWithRawResponse(client.audio)
+        self.models = resources.ModelsResourceWithRawResponse(client.models)
 
 
 class AsyncGroqWithRawResponse:
     def __init__(self, client: AsyncGroq) -> None:
-        self.chat = resources.AsyncChatWithRawResponse(client.chat)
-        self.audio = resources.AsyncAudioWithRawResponse(client.audio)
-        self.models = resources.AsyncModelsWithRawResponse(client.models)
+        self.chat = resources.AsyncChatResourceWithRawResponse(client.chat)
+        self.audio = resources.AsyncAudioResourceWithRawResponse(client.audio)
+        self.models = resources.AsyncModelsResourceWithRawResponse(client.models)
 
 
 class GroqWithStreamedResponse:
     def __init__(self, client: Groq) -> None:
-        self.chat = resources.ChatWithStreamingResponse(client.chat)
-        self.audio = resources.AudioWithStreamingResponse(client.audio)
-        self.models = resources.ModelsWithStreamingResponse(client.models)
+        self.chat = resources.ChatResourceWithStreamingResponse(client.chat)
+        self.audio = resources.AudioResourceWithStreamingResponse(client.audio)
+        self.models = resources.ModelsResourceWithStreamingResponse(client.models)
 
 
 class AsyncGroqWithStreamedResponse:
     def __init__(self, client: AsyncGroq) -> None:
-        self.chat = resources.AsyncChatWithStreamingResponse(client.chat)
-        self.audio = resources.AsyncAudioWithStreamingResponse(client.audio)
-        self.models = resources.AsyncModelsWithStreamingResponse(client.models)
+        self.chat = resources.AsyncChatResourceWithStreamingResponse(client.chat)
+        self.audio = resources.AsyncAudioResourceWithStreamingResponse(client.audio)
+        self.models = resources.AsyncModelsResourceWithStreamingResponse(client.models)
 
 
 Client = Groq

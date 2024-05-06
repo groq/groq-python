@@ -6,6 +6,8 @@ The Groq Python library provides convenient access to the Groq REST API from any
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
+It is generated with [Stainless](https://www.stainlessapi.com/).
+
 ## Documentation
 
 The REST API documentation can be found [on console.groq.com](https://console.groq.com/docs). The full API of this library can be found in [api.md](api.md).
@@ -22,13 +24,9 @@ pip install groq
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-import os
 from groq import Groq
 
-client = Groq(
-    # This is the default and can be omitted
-    api_key=os.environ.get("GROQ_API_KEY"),
-)
+client = Groq()
 
 chat_completion = client.chat.completions.create(
     messages=[
@@ -39,7 +37,7 @@ chat_completion = client.chat.completions.create(
     ],
     model="mixtral-8x7b-32768",
 )
-print(chat_completion.choices[0].message.content)
+print(chat_completion.choices_0.message.content)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -52,14 +50,10 @@ so that your API Key is not stored in source control.
 Simply import `AsyncGroq` instead of `Groq` and use `await` with each API call:
 
 ```python
-import os
 import asyncio
 from groq import AsyncGroq
 
-client = AsyncGroq(
-    # This is the default and can be omitted
-    api_key=os.environ.get("GROQ_API_KEY"),
-)
+client = AsyncGroq()
 
 
 async def main() -> None:
@@ -72,7 +66,7 @@ async def main() -> None:
         ],
         model="mixtral-8x7b-32768",
     )
-    print(chat_completion.choices[0].message.content)
+    print(chat_completion.choices_0.message.content)
 
 
 asyncio.run(main())
@@ -82,10 +76,10 @@ Functionality between the synchronous and asynchronous clients is otherwise iden
 
 ## Using types
 
-Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev), which provide helper methods for things like:
+Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
 
-- Serializing back into JSON, `model.model_dump_json(indent=2, exclude_unset=True)`
-- Converting to a dictionary, `model.model_dump(exclude_unset=True)`
+- Serializing back into JSON, `model.to_json()`
+- Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
@@ -195,7 +189,7 @@ client = Groq(
 )
 
 # Override per-request:
-client.with_options(timeout=5 * 1000).chat.completions.create(
+client.with_options(timeout=5.0).chat.completions.create(
     messages=[
         {
             "role": "system",
@@ -294,6 +288,41 @@ with client.chat.completions.with_streaming_response.create(
 
 The context manager is required so that the response will reliably be closed.
 
+### Making custom/undocumented requests
+
+This library is typed for convenient access to the documented API.
+
+If you need to access undocumented endpoints, params, or response properties, the library can still be used.
+
+#### Undocumented endpoints
+
+To make requests to undocumented endpoints, you can make requests using `client.get`, `client.post`, and other
+http verbs. Options on the client will be respected (such as retries) will be respected when making this
+request.
+
+```py
+import httpx
+
+response = client.post(
+    "/foo",
+    cast_to=httpx.Response,
+    body={"my_param": True},
+)
+
+print(response.headers.get("x-foo"))
+```
+
+#### Undocumented request params
+
+If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` request
+options.
+
+#### Undocumented response properties
+
+To access undocumented response properties, you can access the extra fields like `response.unknown_prop`. You
+can also get all the extra fields on the Pydantic model as a dict with
+[`response.model_extra`](https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_extra).
+
 ### Configuring the HTTP client
 
 You can directly override the [httpx client](https://www.python-httpx.org/api/#client) to customize it for your use case, including:
@@ -303,13 +332,12 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/#client-instances) functionality
 
 ```python
-import httpx
-from groq import Groq
+from groq import Groq, DefaultHttpxClient
 
 client = Groq(
     # Or use the `GROQ_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
-    http_client=httpx.Client(
+    http_client=DefaultHttpxClient(
         proxies="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
