@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -22,22 +22,23 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.audio import Transcription, transcription_create_params
+from ...types.audio import transcription_create_params
 from ..._base_client import (
     make_request_options,
 )
+from ...types.audio.transcription import Transcription
 
-__all__ = ["Transcriptions", "AsyncTranscriptions"]
+__all__ = ["TranscriptionsResource", "AsyncTranscriptionsResource"]
 
 
-class Transcriptions(SyncAPIResource):
+class TranscriptionsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TranscriptionsWithRawResponse:
-        return TranscriptionsWithRawResponse(self)
+    def with_raw_response(self) -> TranscriptionsResourceWithRawResponse:
+        return TranscriptionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TranscriptionsWithStreamingResponse:
-        return TranscriptionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> TranscriptionsResourceWithStreamingResponse:
+        return TranscriptionsResourceWithStreamingResponse(self)
 
     def create(
         self,
@@ -125,14 +126,14 @@ class Transcriptions(SyncAPIResource):
         )
 
 
-class AsyncTranscriptions(AsyncAPIResource):
+class AsyncTranscriptionsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncTranscriptionsWithRawResponse:
-        return AsyncTranscriptionsWithRawResponse(self)
+    def with_raw_response(self) -> AsyncTranscriptionsResourceWithRawResponse:
+        return AsyncTranscriptionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncTranscriptionsWithStreamingResponse:
-        return AsyncTranscriptionsWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncTranscriptionsResourceWithStreamingResponse:
+        return AsyncTranscriptionsResourceWithStreamingResponse(self)
 
     async def create(
         self,
@@ -220,8 +221,8 @@ class AsyncTranscriptions(AsyncAPIResource):
         )
 
 
-class TranscriptionsWithRawResponse:
-    def __init__(self, transcriptions: Transcriptions) -> None:
+class TranscriptionsResourceWithRawResponse:
+    def __init__(self, transcriptions: TranscriptionsResource) -> None:
         self._transcriptions = transcriptions
 
         self.create = to_raw_response_wrapper(
@@ -229,8 +230,8 @@ class TranscriptionsWithRawResponse:
         )
 
 
-class AsyncTranscriptionsWithRawResponse:
-    def __init__(self, transcriptions: AsyncTranscriptions) -> None:
+class AsyncTranscriptionsResourceWithRawResponse:
+    def __init__(self, transcriptions: AsyncTranscriptionsResource) -> None:
         self._transcriptions = transcriptions
 
         self.create = async_to_raw_response_wrapper(
@@ -238,8 +239,8 @@ class AsyncTranscriptionsWithRawResponse:
         )
 
 
-class TranscriptionsWithStreamingResponse:
-    def __init__(self, transcriptions: Transcriptions) -> None:
+class TranscriptionsResourceWithStreamingResponse:
+    def __init__(self, transcriptions: TranscriptionsResource) -> None:
         self._transcriptions = transcriptions
 
         self.create = to_streamed_response_wrapper(
@@ -247,8 +248,8 @@ class TranscriptionsWithStreamingResponse:
         )
 
 
-class AsyncTranscriptionsWithStreamingResponse:
-    def __init__(self, transcriptions: AsyncTranscriptions) -> None:
+class AsyncTranscriptionsResourceWithStreamingResponse:
+    def __init__(self, transcriptions: AsyncTranscriptionsResource) -> None:
         self._transcriptions = transcriptions
 
         self.create = async_to_streamed_response_wrapper(

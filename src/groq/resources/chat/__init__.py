@@ -1,33 +1,33 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .chat import (
-    Chat,
-    AsyncChat,
-    ChatWithRawResponse,
-    AsyncChatWithRawResponse,
-    ChatWithStreamingResponse,
-    AsyncChatWithStreamingResponse,
+    ChatResource,
+    AsyncChatResource,
+    ChatResourceWithRawResponse,
+    AsyncChatResourceWithRawResponse,
+    ChatResourceWithStreamingResponse,
+    AsyncChatResourceWithStreamingResponse,
 )
 from .completions import (
-    Completions,
-    AsyncCompletions,
-    CompletionsWithRawResponse,
-    AsyncCompletionsWithRawResponse,
-    CompletionsWithStreamingResponse,
-    AsyncCompletionsWithStreamingResponse,
+    CompletionsResource,
+    AsyncCompletionsResource,
+    CompletionsResourceWithRawResponse,
+    AsyncCompletionsResourceWithRawResponse,
+    CompletionsResourceWithStreamingResponse,
+    AsyncCompletionsResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "Completions",
-    "AsyncCompletions",
-    "CompletionsWithRawResponse",
-    "AsyncCompletionsWithRawResponse",
-    "CompletionsWithStreamingResponse",
-    "AsyncCompletionsWithStreamingResponse",
-    "Chat",
-    "AsyncChat",
-    "ChatWithRawResponse",
-    "AsyncChatWithRawResponse",
-    "ChatWithStreamingResponse",
-    "AsyncChatWithStreamingResponse",
+    "CompletionsResource",
+    "AsyncCompletionsResource",
+    "CompletionsResourceWithRawResponse",
+    "AsyncCompletionsResourceWithRawResponse",
+    "CompletionsResourceWithStreamingResponse",
+    "AsyncCompletionsResourceWithStreamingResponse",
+    "ChatResource",
+    "AsyncChatResource",
+    "ChatResourceWithRawResponse",
+    "AsyncChatResourceWithRawResponse",
+    "ChatResourceWithStreamingResponse",
+    "AsyncChatResourceWithStreamingResponse",
 ]
