@@ -1,80 +1,80 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from .completions import (
-    Completions,
-    AsyncCompletions,
-    CompletionsWithRawResponse,
-    AsyncCompletionsWithRawResponse,
-    CompletionsWithStreamingResponse,
-    AsyncCompletionsWithStreamingResponse,
+    CompletionsResource,
+    AsyncCompletionsResource,
+    CompletionsResourceWithRawResponse,
+    AsyncCompletionsResourceWithRawResponse,
+    CompletionsResourceWithStreamingResponse,
+    AsyncCompletionsResourceWithStreamingResponse,
 )
 
-__all__ = ["Chat", "AsyncChat"]
+__all__ = ["ChatResource", "AsyncChatResource"]
 
 
-class Chat(SyncAPIResource):
+class ChatResource(SyncAPIResource):
     @cached_property
-    def completions(self) -> Completions:
-        return Completions(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> ChatWithRawResponse:
-        return ChatWithRawResponse(self)
+    def completions(self) -> CompletionsResource:
+        return CompletionsResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> ChatWithStreamingResponse:
-        return ChatWithStreamingResponse(self)
-
-
-class AsyncChat(AsyncAPIResource):
-    @cached_property
-    def completions(self) -> AsyncCompletions:
-        return AsyncCompletions(self._client)
+    def with_raw_response(self) -> ChatResourceWithRawResponse:
+        return ChatResourceWithRawResponse(self)
 
     @cached_property
-    def with_raw_response(self) -> AsyncChatWithRawResponse:
-        return AsyncChatWithRawResponse(self)
+    def with_streaming_response(self) -> ChatResourceWithStreamingResponse:
+        return ChatResourceWithStreamingResponse(self)
+
+
+class AsyncChatResource(AsyncAPIResource):
+    @cached_property
+    def completions(self) -> AsyncCompletionsResource:
+        return AsyncCompletionsResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncChatWithStreamingResponse:
-        return AsyncChatWithStreamingResponse(self)
+    def with_raw_response(self) -> AsyncChatResourceWithRawResponse:
+        return AsyncChatResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncChatResourceWithStreamingResponse:
+        return AsyncChatResourceWithStreamingResponse(self)
 
 
-class ChatWithRawResponse:
-    def __init__(self, chat: Chat) -> None:
+class ChatResourceWithRawResponse:
+    def __init__(self, chat: ChatResource) -> None:
         self._chat = chat
 
     @cached_property
-    def completions(self) -> CompletionsWithRawResponse:
-        return CompletionsWithRawResponse(self._chat.completions)
+    def completions(self) -> CompletionsResourceWithRawResponse:
+        return CompletionsResourceWithRawResponse(self._chat.completions)
 
 
-class AsyncChatWithRawResponse:
-    def __init__(self, chat: AsyncChat) -> None:
+class AsyncChatResourceWithRawResponse:
+    def __init__(self, chat: AsyncChatResource) -> None:
         self._chat = chat
 
     @cached_property
-    def completions(self) -> AsyncCompletionsWithRawResponse:
-        return AsyncCompletionsWithRawResponse(self._chat.completions)
+    def completions(self) -> AsyncCompletionsResourceWithRawResponse:
+        return AsyncCompletionsResourceWithRawResponse(self._chat.completions)
 
 
-class ChatWithStreamingResponse:
-    def __init__(self, chat: Chat) -> None:
+class ChatResourceWithStreamingResponse:
+    def __init__(self, chat: ChatResource) -> None:
         self._chat = chat
 
     @cached_property
-    def completions(self) -> CompletionsWithStreamingResponse:
-        return CompletionsWithStreamingResponse(self._chat.completions)
+    def completions(self) -> CompletionsResourceWithStreamingResponse:
+        return CompletionsResourceWithStreamingResponse(self._chat.completions)
 
 
-class AsyncChatWithStreamingResponse:
-    def __init__(self, chat: AsyncChat) -> None:
+class AsyncChatResourceWithStreamingResponse:
+    def __init__(self, chat: AsyncChatResource) -> None:
         self._chat = chat
 
     @cached_property
-    def completions(self) -> AsyncCompletionsWithStreamingResponse:
-        return AsyncCompletionsWithStreamingResponse(self._chat.completions)
+    def completions(self) -> AsyncCompletionsResourceWithStreamingResponse:
+        return AsyncCompletionsResourceWithStreamingResponse(self._chat.completions)

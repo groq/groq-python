@@ -25,7 +25,7 @@ import httpx
 import pydantic
 
 from ._types import NoneType
-from ._utils import is_given, extract_type_var_from_base
+from ._utils import is_given, extract_type_arg, is_annotated_type, extract_type_var_from_base
 from ._models import BaseModel, is_basemodel
 from ._constants import RAW_RESPONSE_HEADER, OVERRIDE_CAST_TO_HEADER
 from ._streaming import Stream, AsyncStream, is_stream_class_type, extract_stream_chunk_type
@@ -121,6 +121,10 @@ class BaseAPIResponse(Generic[R]):
         )
 
     def _parse(self, *, to: type[_T] | None = None) -> R | _T:
+        # unwrap `Annotated[T, ...]` -> `T`
+        if to and is_annotated_type(to):
+            to = extract_type_arg(to, 0)
+
         if self._is_sse_stream:
             if to:
                 if not is_stream_class_type(to):
@@ -162,6 +166,11 @@ class BaseAPIResponse(Generic[R]):
             )
 
         cast_to = to if to is not None else self._cast_to
+
+        # unwrap `Annotated[T, ...]` -> `T`
+        if is_annotated_type(cast_to):
+            cast_to = extract_type_arg(cast_to, 0)
+
         if cast_to is NoneType:
             return cast(R, None)
 
@@ -630,7 +639,7 @@ def to_streamed_response_wrapper(func: Callable[P, R]) -> Callable[P, ResponseCo
 
     @functools.wraps(func)
     def wrapped(*args: P.args, **kwargs: P.kwargs) -> ResponseContextManager[APIResponse[R]]:
-        extra_headers = {**(cast(Any, kwargs.get("extra_headers")) or {})}
+        extra_headers: dict[str, str] = {**(cast(Any, kwargs.get("extra_headers")) or {})}
         extra_headers[RAW_RESPONSE_HEADER] = "stream"
 
         kwargs["extra_headers"] = extra_headers
@@ -651,7 +660,7 @@ def async_to_streamed_response_wrapper(
 
     @functools.wraps(func)
     def wrapped(*args: P.args, **kwargs: P.kwargs) -> AsyncResponseContextManager[AsyncAPIResponse[R]]:
-        extra_headers = {**(cast(Any, kwargs.get("extra_headers")) or {})}
+        extra_headers: dict[str, str] = {**(cast(Any, kwargs.get("extra_headers")) or {})}
         extra_headers[RAW_RESPONSE_HEADER] = "stream"
 
         kwargs["extra_headers"] = extra_headers
@@ -675,7 +684,7 @@ def to_custom_streamed_response_wrapper(
 
     @functools.wraps(func)
     def wrapped(*args: P.args, **kwargs: P.kwargs) -> ResponseContextManager[_APIResponseT]:
-        extra_headers = {**(cast(Any, kwargs.get("extra_headers")) or {})}
+        extra_headers: dict[str, Any] = {**(cast(Any, kwargs.get("extra_headers")) or {})}
         extra_headers[RAW_RESPONSE_HEADER] = "stream"
         extra_headers[OVERRIDE_CAST_TO_HEADER] = response_cls
 
@@ -700,7 +709,7 @@ def async_to_custom_streamed_response_wrapper(
 
     @functools.wraps(func)
     def wrapped(*args: P.args, **kwargs: P.kwargs) -> AsyncResponseContextManager[_AsyncAPIResponseT]:
-        extra_headers = {**(cast(Any, kwargs.get("extra_headers")) or {})}
+        extra_headers: dict[str, Any] = {**(cast(Any, kwargs.get("extra_headers")) or {})}
         extra_headers[RAW_RESPONSE_HEADER] = "stream"
         extra_headers[OVERRIDE_CAST_TO_HEADER] = response_cls
 
@@ -720,7 +729,7 @@ def to_raw_response_wrapper(func: Callable[P, R]) -> Callable[P, APIResponse[R]]
 
     @functools.wraps(func)
     def wrapped(*args: P.args, **kwargs: P.kwargs) -> APIResponse[R]:
-        extra_headers = {**(cast(Any, kwargs.get("extra_headers")) or {})}
+        extra_headers: dict[str, str] = {**(cast(Any, kwargs.get("extra_headers")) or {})}
         extra_headers[RAW_RESPONSE_HEADER] = "raw"
 
         kwargs["extra_headers"] = extra_headers
@@ -737,7 +746,7 @@ def async_to_raw_response_wrapper(func: Callable[P, Awaitable[R]]) -> Callable[P
 
     @functools.wraps(func)
     async def wrapped(*args: P.args, **kwargs: P.kwargs) -> AsyncAPIResponse[R]:
-        extra_headers = {**(cast(Any, kwargs.get("extra_headers")) or {})}
+        extra_headers: dict[str, str] = {**(cast(Any, kwargs.get("extra_headers")) or {})}
         extra_headers[RAW_RESPONSE_HEADER] = "raw"
 
         kwargs["extra_headers"] = extra_headers
@@ -759,7 +768,7 @@ def to_custom_raw_response_wrapper(
 
     @functools.wraps(func)
     def wrapped(*args: P.args, **kwargs: P.kwargs) -> _APIResponseT:
-        extra_headers = {**(cast(Any, kwargs.get("extra_headers")) or {})}
+        extra_headers: dict[str, Any] = {**(cast(Any, kwargs.get("extra_headers")) or {})}
         extra_headers[RAW_RESPONSE_HEADER] = "raw"
         extra_headers[OVERRIDE_CAST_TO_HEADER] = response_cls
 
@@ -782,7 +791,7 @@ def async_to_custom_raw_response_wrapper(
 
     @functools.wraps(func)
     def wrapped(*args: P.args, **kwargs: P.kwargs) -> Awaitable[_AsyncAPIResponseT]:
-        extra_headers = {**(cast(Any, kwargs.get("extra_headers")) or {})}
+        extra_headers: dict[str, Any] = {**(cast(Any, kwargs.get("extra_headers")) or {})}
         extra_headers[RAW_RESPONSE_HEADER] = "raw"
         extra_headers[OVERRIDE_CAST_TO_HEADER] = response_cls
 
