@@ -690,7 +690,7 @@ class TestGroq:
                         messages=[
                             {
                                 "role": "system",
-                                "content": "You are a helpful assisstant.",
+                                "content": "You are a helpful assistant.",
                             },
                             {
                                 "role": "user",
@@ -720,7 +720,7 @@ class TestGroq:
                         messages=[
                             {
                                 "role": "system",
-                                "content": "You are a helpful assisstant.",
+                                "content": "You are a helpful assistant.",
                             },
                             {
                                 "role": "user",
@@ -1394,7 +1394,7 @@ class TestAsyncGroq:
                         messages=[
                             {
                                 "role": "system",
-                                "content": "You are a helpful assisstant.",
+                                "content": "You are a helpful assistant.",
                             },
                             {
                                 "role": "user",
@@ -1424,7 +1424,7 @@ class TestAsyncGroq:
                         messages=[
                             {
                                 "role": "system",
-                                "content": "You are a helpful assisstant.",
+                                "content": "You are a helpful assistant.",
                             },
                             {
                                 "role": "user",
