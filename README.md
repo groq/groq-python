@@ -103,7 +103,7 @@ try:
         messages=[
             {
                 "role": "system",
-                "content": "You are a helpful assisstant.",
+                "content": "You are a helpful assistant.",
             },
             {
                 "role": "user",
@@ -158,7 +158,7 @@ client.with_options(max_retries=5).chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "You are a helpful assisstant.",
+            "content": "You are a helpful assistant.",
         },
         {
             "role": "user",
@@ -193,7 +193,7 @@ client.with_options(timeout=5.0).chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "You are a helpful assisstant.",
+            "content": "You are a helpful assistant.",
         },
         {
             "role": "user",
@@ -243,7 +243,7 @@ client = Groq()
 response = client.chat.completions.with_raw_response.create(
     messages=[{
         "role": "system",
-        "content": "You are a helpful assisstant.",
+        "content": "You are a helpful assistant.",
     }, {
         "role": "user",
         "content": "Explain the importance of low latency LLMs",
@@ -271,7 +271,7 @@ with client.chat.completions.with_streaming_response.create(
     messages=[
         {
             "role": "system",
-            "content": "You are a helpful assisstant.",
+            "content": "You are a helpful assistant.",
         },
         {
             "role": "user",
