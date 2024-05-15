@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from groq import Groq, AsyncGroq
-from groq.types import Embeddings
+from groq.types import CreateEmbeddingResponse
 from tests.utils import assert_matches_type
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -23,7 +23,7 @@ class TestEmbeddings:
             input="The quick brown fox jumped over the lazy dog",
             model="nomic-embed-text-v1.5",
         )
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Groq) -> None:
@@ -34,7 +34,7 @@ class TestEmbeddings:
             encoding_format="float",
             user="string",
         )
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Groq) -> None:
@@ -46,7 +46,7 @@ class TestEmbeddings:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         embedding = response.parse()
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Groq) -> None:
@@ -58,7 +58,7 @@ class TestEmbeddings:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             embedding = response.parse()
-            assert_matches_type(Embeddings, embedding, path=["response"])
+            assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -72,7 +72,7 @@ class TestAsyncEmbeddings:
             input="The quick brown fox jumped over the lazy dog",
             model="nomic-embed-text-v1.5",
         )
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
@@ -83,7 +83,7 @@ class TestAsyncEmbeddings:
             encoding_format="float",
             user="string",
         )
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
@@ -95,7 +95,7 @@ class TestAsyncEmbeddings:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         embedding = await response.parse()
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
@@ -107,6 +107,6 @@ class TestAsyncEmbeddings:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             embedding = await response.parse()
-            assert_matches_type(Embeddings, embedding, path=["response"])
+            assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
         assert cast(Any, response.is_closed) is True
