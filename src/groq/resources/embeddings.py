@@ -24,7 +24,7 @@ from .._response import (
 from .._base_client import (
     make_request_options,
 )
-from ..types.embedding_create_response import EmbeddingCreateResponse
+from ..types.embeddings import Embeddings
 
 __all__ = ["EmbeddingsResource", "AsyncEmbeddingsResource"]
 
@@ -52,7 +52,7 @@ class EmbeddingsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EmbeddingCreateResponse:
+    ) -> Embeddings:
         """
         Creates an embedding vector representing the input text.
 
@@ -94,7 +94,7 @@ class EmbeddingsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EmbeddingCreateResponse,
+            cast_to=Embeddings,
         )
 
 
@@ -121,7 +121,7 @@ class AsyncEmbeddingsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EmbeddingCreateResponse:
+    ) -> Embeddings:
         """
         Creates an embedding vector representing the input text.
 
@@ -163,7 +163,7 @@ class AsyncEmbeddingsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EmbeddingCreateResponse,
+            cast_to=Embeddings,
         )
 
 
