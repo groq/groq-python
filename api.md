@@ -1,3 +1,15 @@
+# Embeddings
+
+Types:
+
+```python
+from groq.types import EmbeddingCreateResponse
+```
+
+Methods:
+
+- <code title="post /openai/v1/embeddings">client.embeddings.<a href="./src/groq/resources/embeddings.py">create</a>(\*\*<a href="src/groq/types/embedding_create_params.py">params</a>) -> <a href="./src/groq/types/embedding_create_response.py">EmbeddingCreateResponse</a></code>
+
 # Chat
 
 ## Completions
