@@ -46,6 +46,7 @@ __all__ = [
 
 
 class Groq(SyncAPIClient):
+    embeddings: resources.EmbeddingsResource
     chat: resources.ChatResource
     audio: resources.AudioResource
     models: resources.ModelsResource
@@ -106,6 +107,7 @@ class Groq(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.embeddings = resources.EmbeddingsResource(self)
         self.chat = resources.ChatResource(self)
         self.audio = resources.AudioResource(self)
         self.models = resources.ModelsResource(self)
@@ -218,6 +220,7 @@ class Groq(SyncAPIClient):
 
 
 class AsyncGroq(AsyncAPIClient):
+    embeddings: resources.AsyncEmbeddingsResource
     chat: resources.AsyncChatResource
     audio: resources.AsyncAudioResource
     models: resources.AsyncModelsResource
@@ -278,6 +281,7 @@ class AsyncGroq(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.embeddings = resources.AsyncEmbeddingsResource(self)
         self.chat = resources.AsyncChatResource(self)
         self.audio = resources.AsyncAudioResource(self)
         self.models = resources.AsyncModelsResource(self)
@@ -391,6 +395,7 @@ class AsyncGroq(AsyncAPIClient):
 
 class GroqWithRawResponse:
     def __init__(self, client: Groq) -> None:
+        self.embeddings = resources.EmbeddingsResourceWithRawResponse(client.embeddings)
         self.chat = resources.ChatResourceWithRawResponse(client.chat)
         self.audio = resources.AudioResourceWithRawResponse(client.audio)
         self.models = resources.ModelsResourceWithRawResponse(client.models)
@@ -398,6 +403,7 @@ class GroqWithRawResponse:
 
 class AsyncGroqWithRawResponse:
     def __init__(self, client: AsyncGroq) -> None:
+        self.embeddings = resources.AsyncEmbeddingsResourceWithRawResponse(client.embeddings)
         self.chat = resources.AsyncChatResourceWithRawResponse(client.chat)
         self.audio = resources.AsyncAudioResourceWithRawResponse(client.audio)
         self.models = resources.AsyncModelsResourceWithRawResponse(client.models)
@@ -405,6 +411,7 @@ class AsyncGroqWithRawResponse:
 
 class GroqWithStreamedResponse:
     def __init__(self, client: Groq) -> None:
+        self.embeddings = resources.EmbeddingsResourceWithStreamingResponse(client.embeddings)
         self.chat = resources.ChatResourceWithStreamingResponse(client.chat)
         self.audio = resources.AudioResourceWithStreamingResponse(client.audio)
         self.models = resources.ModelsResourceWithStreamingResponse(client.models)
@@ -412,6 +419,7 @@ class GroqWithStreamedResponse:
 
 class AsyncGroqWithStreamedResponse:
     def __init__(self, client: AsyncGroq) -> None:
+        self.embeddings = resources.AsyncEmbeddingsResourceWithStreamingResponse(client.embeddings)
         self.chat = resources.AsyncChatResourceWithStreamingResponse(client.chat)
         self.audio = resources.AsyncAudioResourceWithStreamingResponse(client.audio)
         self.models = resources.AsyncModelsResourceWithStreamingResponse(client.models)
