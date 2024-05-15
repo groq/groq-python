@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Mapping, cast
+from typing import Any, Union, Mapping, cast
 from typing_extensions import Literal
 
 import httpx
@@ -26,7 +26,7 @@ from ...types.audio import translation_create_params
 from ..._base_client import (
     make_request_options,
 )
-from ...types.translation import Translation
+from ...types.audio.translation_create_response import TranslationCreateResponse
 
 __all__ = ["TranslationsResource", "AsyncTranslationsResource"]
 
@@ -54,7 +54,7 @@ class TranslationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Translation:
+    ) -> TranslationCreateResponse:
         """
         Translates audio into English.
 
@@ -100,14 +100,19 @@ class TranslationsResource(SyncAPIResource):
             # sent to the server will contain a `boundary` parameter, e.g.
             # multipart/form-data; boundary=---abc--
             extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-        return self._post(
-            "/openai/v1/audio/translations",
-            body=maybe_transform(body, translation_create_params.TranslationCreateParams),
-            files=files,
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+        return cast(
+            TranslationCreateResponse,
+            self._post(
+                "/openai/v1/audio/translations",
+                body=maybe_transform(body, translation_create_params.TranslationCreateParams),
+                files=files,
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, TranslationCreateResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=Translation,
         )
 
 
@@ -134,7 +139,7 @@ class AsyncTranslationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Translation:
+    ) -> TranslationCreateResponse:
         """
         Translates audio into English.
 
@@ -180,14 +185,19 @@ class AsyncTranslationsResource(AsyncAPIResource):
             # sent to the server will contain a `boundary` parameter, e.g.
             # multipart/form-data; boundary=---abc--
             extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-        return await self._post(
-            "/openai/v1/audio/translations",
-            body=await async_maybe_transform(body, translation_create_params.TranslationCreateParams),
-            files=files,
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+        return cast(
+            TranslationCreateResponse,
+            await self._post(
+                "/openai/v1/audio/translations",
+                body=await async_maybe_transform(body, translation_create_params.TranslationCreateParams),
+                files=files,
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, TranslationCreateResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=Translation,
         )
 
 
