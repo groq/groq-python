@@ -89,7 +89,7 @@ class TestCompletions:
             response_format={"type": "string"},
             seed=0,
             stop="\n",
-            stream=True,
+            stream=False,
             temperature=0,
             tool_choice="none",
             tools=[
@@ -252,7 +252,7 @@ class TestAsyncCompletions:
             response_format={"type": "string"},
             seed=0,
             stop="\n",
-            stream=True,
+            stream=False,
             temperature=0,
             tool_choice="none",
             tools=[
