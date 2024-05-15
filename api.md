@@ -3,12 +3,12 @@
 Types:
 
 ```python
-from groq.types import Embeddings
+from groq.types import CreateEmbeddingResponse, Embedding, Usage
 ```
 
 Methods:
 
-- <code title="post /openai/v1/embeddings">client.embeddings.<a href="./src/groq/resources/embeddings.py">create</a>(\*\*<a href="src/groq/types/embedding_create_params.py">params</a>) -> <a href="./src/groq/types/embeddings.py">Embeddings</a></code>
+- <code title="post /openai/v1/embeddings">client.embeddings.<a href="./src/groq/resources/embeddings.py">create</a>(\*\*<a href="src/groq/types/embedding_create_params.py">params</a>) -> <a href="./src/groq/types/create_embedding_response.py">CreateEmbeddingResponse</a></code>
 
 # Chat
 
