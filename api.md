@@ -3,7 +3,7 @@
 Types:
 
 ```python
-from groq.types import CreateEmbeddingResponse, Embedding, Usage
+from groq.types import CreateEmbeddingResponse, Embedding
 ```
 
 Methods:
