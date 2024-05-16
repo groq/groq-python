@@ -19,17 +19,17 @@ from .._base_client import (
 )
 from ..types.model_list import ModelList
 
-__all__ = ["ModelsResource", "AsyncModelsResource"]
+__all__ = ["Models", "AsyncModels"]
 
 
-class ModelsResource(SyncAPIResource):
+class Models(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ModelsResourceWithRawResponse:
-        return ModelsResourceWithRawResponse(self)
+    def with_raw_response(self) -> ModelsWithRawResponse:
+        return ModelsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ModelsResourceWithStreamingResponse:
-        return ModelsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> ModelsWithStreamingResponse:
+        return ModelsWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -118,14 +118,14 @@ class ModelsResource(SyncAPIResource):
         )
 
 
-class AsyncModelsResource(AsyncAPIResource):
+class AsyncModels(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncModelsResourceWithRawResponse:
-        return AsyncModelsResourceWithRawResponse(self)
+    def with_raw_response(self) -> AsyncModelsWithRawResponse:
+        return AsyncModelsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncModelsResourceWithStreamingResponse:
-        return AsyncModelsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncModelsWithStreamingResponse:
+        return AsyncModelsWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -214,8 +214,8 @@ class AsyncModelsResource(AsyncAPIResource):
         )
 
 
-class ModelsResourceWithRawResponse:
-    def __init__(self, models: ModelsResource) -> None:
+class ModelsWithRawResponse:
+    def __init__(self, models: Models) -> None:
         self._models = models
 
         self.retrieve = to_raw_response_wrapper(
@@ -229,8 +229,8 @@ class ModelsResourceWithRawResponse:
         )
 
 
-class AsyncModelsResourceWithRawResponse:
-    def __init__(self, models: AsyncModelsResource) -> None:
+class AsyncModelsWithRawResponse:
+    def __init__(self, models: AsyncModels) -> None:
         self._models = models
 
         self.retrieve = async_to_raw_response_wrapper(
@@ -244,8 +244,8 @@ class AsyncModelsResourceWithRawResponse:
         )
 
 
-class ModelsResourceWithStreamingResponse:
-    def __init__(self, models: ModelsResource) -> None:
+class ModelsWithStreamingResponse:
+    def __init__(self, models: Models) -> None:
         self._models = models
 
         self.retrieve = to_streamed_response_wrapper(
@@ -259,8 +259,8 @@ class ModelsResourceWithStreamingResponse:
         )
 
 
-class AsyncModelsResourceWithStreamingResponse:
-    def __init__(self, models: AsyncModelsResource) -> None:
+class AsyncModelsWithStreamingResponse:
+    def __init__(self, models: AsyncModels) -> None:
         self._models = models
 
         self.retrieve = async_to_streamed_response_wrapper(
