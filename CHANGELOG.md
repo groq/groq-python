@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.6.0 (2024-05-16)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/groq/groq-python/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#39](https://github.com/groq/groq-python/issues/39)) ([53a8b27](https://github.com/groq/groq-python/commit/53a8b27365c085227e449812779c5bafadada9fb))
+* **api:** OpenAPI spec update via Stainless API ([#45](https://github.com/groq/groq-python/issues/45)) ([18bce01](https://github.com/groq/groq-python/commit/18bce01c835fbc0485ef78f12b28caead37d15c4))
+* **api:** update via SDK Studio ([#35](https://github.com/groq/groq-python/issues/35)) ([5ca3b78](https://github.com/groq/groq-python/commit/5ca3b785626145a87a27d64a4a4c3eae1b1fa8de))
+* **api:** update via SDK Studio ([#38](https://github.com/groq/groq-python/issues/38)) ([dc73eeb](https://github.com/groq/groq-python/commit/dc73eeb92a441123596b3f3420a757074ee62345))
+* **api:** update via SDK Studio ([#40](https://github.com/groq/groq-python/issues/40)) ([7227816](https://github.com/groq/groq-python/commit/7227816b92397d913f8aeceda64127e2db99f720))
+* **api:** update via SDK Studio ([#41](https://github.com/groq/groq-python/issues/41)) ([3fdb317](https://github.com/groq/groq-python/commit/3fdb31786699d3298d5064faac77e26dbc7852d8))
+* **api:** update via SDK Studio ([#42](https://github.com/groq/groq-python/issues/42)) ([d270e51](https://github.com/groq/groq-python/commit/d270e51d63edc138b0f0afa0b53c2f84a69b1f73))
+* **api:** update via SDK Studio ([#43](https://github.com/groq/groq-python/issues/43)) ([0e04381](https://github.com/groq/groq-python/commit/0e043816e5cbcdf5def7583d20312c6f5e29808f))
+* **api:** update via SDK Studio ([#44](https://github.com/groq/groq-python/issues/44)) ([3807b4c](https://github.com/groq/groq-python/commit/3807b4c67981aec711d3e60e57ec0e5e9493f8a0))
+* **api:** update via SDK Studio ([#46](https://github.com/groq/groq-python/issues/46)) ([ed1ea2a](https://github.com/groq/groq-python/commit/ed1ea2a99f95d4d353c3dd9baf7fc1c5d37cc20a))
+
+
+### Chores
+
+* **examples:** embedding example ([961159c](https://github.com/groq/groq-python/commit/961159c9c83a21cd9631af4802e4b538ebbbb186))
+* patch streaming ([c8eaad3](https://github.com/groq/groq-python/commit/c8eaad35abe33b692e029495157948db3a09af3c))
+
 ## 0.5.0 (2024-04-11)
 
 Full Changelog: [v0.4.2...v0.5.0](https://github.com/groq/groq-python/compare/v0.4.2...v0.5.0)
