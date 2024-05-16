@@ -26,12 +26,6 @@ Methods:
 
 # Audio
 
-Types:
-
-```python
-from groq.types import Translation
-```
-
 ## Transcriptions
 
 Types:
@@ -49,7 +43,7 @@ Methods:
 Types:
 
 ```python
-from groq.types.audio import TranslationCreateResponse
+from groq.types.audio import Translation, TranslationCreateResponse
 ```
 
 Methods:
