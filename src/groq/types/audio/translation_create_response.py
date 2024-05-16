@@ -3,7 +3,7 @@
 from typing import List, Union, Optional
 
 from ..._models import BaseModel
-from ..translation import Translation
+from .translation import Translation
 
 __all__ = [
     "TranslationCreateResponse",

@@ -3,13 +3,17 @@
 from __future__ import annotations
 
 from typing import Dict, List, Union, Iterable, Optional
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
 __all__ = [
     "CompletionCreateParams",
     "Message",
+    "MessageContentUnionMember1",
+    "MessageContentUnionMember1TypesChatCompletionRequestMessageContentPartText",
+    "MessageContentUnionMember1TypesChatCompletionRequestMessageContentPartImage",
+    "MessageContentUnionMember1TypesChatCompletionRequestMessageContentPartImageImageURL",
     "MessageToolCall",
     "MessageToolCallFunction",
     "ResponseFormat",
@@ -63,6 +67,35 @@ class CompletionCreateParams(TypedDict, total=False):
     user: str
 
 
+class MessageContentUnionMember1TypesChatCompletionRequestMessageContentPartText(TypedDict, total=False):
+    text: Required[str]
+    """The text content."""
+
+    type: Required[Literal["text"]]
+    """The type of the content part."""
+
+
+class MessageContentUnionMember1TypesChatCompletionRequestMessageContentPartImageImageURL(TypedDict, total=False):
+    url: Required[str]
+    """Either a URL of the image or the base64 encoded image data."""
+
+    detail: Literal["auto", "low", "high"]
+    """Specifies the detail level of the image."""
+
+
+class MessageContentUnionMember1TypesChatCompletionRequestMessageContentPartImage(TypedDict, total=False):
+    image_url: Required[MessageContentUnionMember1TypesChatCompletionRequestMessageContentPartImageImageURL]
+
+    type: Required[Literal["image_url"]]
+    """The type of the content part."""
+
+
+MessageContentUnionMember1 = Union[
+    MessageContentUnionMember1TypesChatCompletionRequestMessageContentPartText,
+    MessageContentUnionMember1TypesChatCompletionRequestMessageContentPartImage,
+]
+
+
 class MessageToolCallFunction(TypedDict, total=False):
     arguments: str
 
@@ -78,7 +111,7 @@ class MessageToolCall(TypedDict, total=False):
 
 
 class Message(TypedDict, total=False):
-    content: Required[str]
+    content: Required[Union[str, Iterable[MessageContentUnionMember1]]]
 
     role: Required[str]
 
