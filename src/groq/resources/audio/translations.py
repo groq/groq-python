@@ -28,17 +28,17 @@ from ..._base_client import (
 )
 from ...types.audio.translation_create_response import TranslationCreateResponse
 
-__all__ = ["TranslationsResource", "AsyncTranslationsResource"]
+__all__ = ["Translations", "AsyncTranslations"]
 
 
-class TranslationsResource(SyncAPIResource):
+class Translations(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TranslationsResourceWithRawResponse:
-        return TranslationsResourceWithRawResponse(self)
+    def with_raw_response(self) -> TranslationsWithRawResponse:
+        return TranslationsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TranslationsResourceWithStreamingResponse:
-        return TranslationsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> TranslationsWithStreamingResponse:
+        return TranslationsWithStreamingResponse(self)
 
     def create(
         self,
@@ -116,14 +116,14 @@ class TranslationsResource(SyncAPIResource):
         )
 
 
-class AsyncTranslationsResource(AsyncAPIResource):
+class AsyncTranslations(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncTranslationsResourceWithRawResponse:
-        return AsyncTranslationsResourceWithRawResponse(self)
+    def with_raw_response(self) -> AsyncTranslationsWithRawResponse:
+        return AsyncTranslationsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncTranslationsResourceWithStreamingResponse:
-        return AsyncTranslationsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncTranslationsWithStreamingResponse:
+        return AsyncTranslationsWithStreamingResponse(self)
 
     async def create(
         self,
@@ -201,8 +201,8 @@ class AsyncTranslationsResource(AsyncAPIResource):
         )
 
 
-class TranslationsResourceWithRawResponse:
-    def __init__(self, translations: TranslationsResource) -> None:
+class TranslationsWithRawResponse:
+    def __init__(self, translations: Translations) -> None:
         self._translations = translations
 
         self.create = to_raw_response_wrapper(
@@ -210,8 +210,8 @@ class TranslationsResourceWithRawResponse:
         )
 
 
-class AsyncTranslationsResourceWithRawResponse:
-    def __init__(self, translations: AsyncTranslationsResource) -> None:
+class AsyncTranslationsWithRawResponse:
+    def __init__(self, translations: AsyncTranslations) -> None:
         self._translations = translations
 
         self.create = async_to_raw_response_wrapper(
@@ -219,8 +219,8 @@ class AsyncTranslationsResourceWithRawResponse:
         )
 
 
-class TranslationsResourceWithStreamingResponse:
-    def __init__(self, translations: TranslationsResource) -> None:
+class TranslationsWithStreamingResponse:
+    def __init__(self, translations: Translations) -> None:
         self._translations = translations
 
         self.create = to_streamed_response_wrapper(
@@ -228,8 +228,8 @@ class TranslationsResourceWithStreamingResponse:
         )
 
 
-class AsyncTranslationsResourceWithStreamingResponse:
-    def __init__(self, translations: AsyncTranslationsResource) -> None:
+class AsyncTranslationsWithStreamingResponse:
+    def __init__(self, translations: AsyncTranslations) -> None:
         self._translations = translations
 
         self.create = async_to_streamed_response_wrapper(
