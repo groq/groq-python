@@ -26,17 +26,17 @@ from .._base_client import (
 )
 from ..types.create_embedding_response import CreateEmbeddingResponse
 
-__all__ = ["EmbeddingsResource", "AsyncEmbeddingsResource"]
+__all__ = ["Embeddings", "AsyncEmbeddings"]
 
 
-class EmbeddingsResource(SyncAPIResource):
+class Embeddings(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> EmbeddingsResourceWithRawResponse:
-        return EmbeddingsResourceWithRawResponse(self)
+    def with_raw_response(self) -> EmbeddingsWithRawResponse:
+        return EmbeddingsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> EmbeddingsResourceWithStreamingResponse:
-        return EmbeddingsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> EmbeddingsWithStreamingResponse:
+        return EmbeddingsWithStreamingResponse(self)
 
     def create(
         self,
@@ -98,14 +98,14 @@ class EmbeddingsResource(SyncAPIResource):
         )
 
 
-class AsyncEmbeddingsResource(AsyncAPIResource):
+class AsyncEmbeddings(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncEmbeddingsResourceWithRawResponse:
-        return AsyncEmbeddingsResourceWithRawResponse(self)
+    def with_raw_response(self) -> AsyncEmbeddingsWithRawResponse:
+        return AsyncEmbeddingsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncEmbeddingsResourceWithStreamingResponse:
-        return AsyncEmbeddingsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncEmbeddingsWithStreamingResponse:
+        return AsyncEmbeddingsWithStreamingResponse(self)
 
     async def create(
         self,
@@ -167,8 +167,8 @@ class AsyncEmbeddingsResource(AsyncAPIResource):
         )
 
 
-class EmbeddingsResourceWithRawResponse:
-    def __init__(self, embeddings: EmbeddingsResource) -> None:
+class EmbeddingsWithRawResponse:
+    def __init__(self, embeddings: Embeddings) -> None:
         self._embeddings = embeddings
 
         self.create = to_raw_response_wrapper(
@@ -176,8 +176,8 @@ class EmbeddingsResourceWithRawResponse:
         )
 
 
-class AsyncEmbeddingsResourceWithRawResponse:
-    def __init__(self, embeddings: AsyncEmbeddingsResource) -> None:
+class AsyncEmbeddingsWithRawResponse:
+    def __init__(self, embeddings: AsyncEmbeddings) -> None:
         self._embeddings = embeddings
 
         self.create = async_to_raw_response_wrapper(
@@ -185,8 +185,8 @@ class AsyncEmbeddingsResourceWithRawResponse:
         )
 
 
-class EmbeddingsResourceWithStreamingResponse:
-    def __init__(self, embeddings: EmbeddingsResource) -> None:
+class EmbeddingsWithStreamingResponse:
+    def __init__(self, embeddings: Embeddings) -> None:
         self._embeddings = embeddings
 
         self.create = to_streamed_response_wrapper(
@@ -194,8 +194,8 @@ class EmbeddingsResourceWithStreamingResponse:
         )
 
 
-class AsyncEmbeddingsResourceWithStreamingResponse:
-    def __init__(self, embeddings: AsyncEmbeddingsResource) -> None:
+class AsyncEmbeddingsWithStreamingResponse:
+    def __init__(self, embeddings: AsyncEmbeddings) -> None:
         self._embeddings = embeddings
 
         self.create = async_to_streamed_response_wrapper(

@@ -28,17 +28,17 @@ from ..._base_client import (
 )
 from ...types.audio.transcription_create_response import TranscriptionCreateResponse
 
-__all__ = ["TranscriptionsResource", "AsyncTranscriptionsResource"]
+__all__ = ["Transcriptions", "AsyncTranscriptions"]
 
 
-class TranscriptionsResource(SyncAPIResource):
+class Transcriptions(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TranscriptionsResourceWithRawResponse:
-        return TranscriptionsResourceWithRawResponse(self)
+    def with_raw_response(self) -> TranscriptionsWithRawResponse:
+        return TranscriptionsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TranscriptionsResourceWithStreamingResponse:
-        return TranscriptionsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> TranscriptionsWithStreamingResponse:
+        return TranscriptionsWithStreamingResponse(self)
 
     def create(
         self,
@@ -131,14 +131,14 @@ class TranscriptionsResource(SyncAPIResource):
         )
 
 
-class AsyncTranscriptionsResource(AsyncAPIResource):
+class AsyncTranscriptions(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncTranscriptionsResourceWithRawResponse:
-        return AsyncTranscriptionsResourceWithRawResponse(self)
+    def with_raw_response(self) -> AsyncTranscriptionsWithRawResponse:
+        return AsyncTranscriptionsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncTranscriptionsResourceWithStreamingResponse:
-        return AsyncTranscriptionsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncTranscriptionsWithStreamingResponse:
+        return AsyncTranscriptionsWithStreamingResponse(self)
 
     async def create(
         self,
@@ -231,8 +231,8 @@ class AsyncTranscriptionsResource(AsyncAPIResource):
         )
 
 
-class TranscriptionsResourceWithRawResponse:
-    def __init__(self, transcriptions: TranscriptionsResource) -> None:
+class TranscriptionsWithRawResponse:
+    def __init__(self, transcriptions: Transcriptions) -> None:
         self._transcriptions = transcriptions
 
         self.create = to_raw_response_wrapper(
@@ -240,8 +240,8 @@ class TranscriptionsResourceWithRawResponse:
         )
 
 
-class AsyncTranscriptionsResourceWithRawResponse:
-    def __init__(self, transcriptions: AsyncTranscriptionsResource) -> None:
+class AsyncTranscriptionsWithRawResponse:
+    def __init__(self, transcriptions: AsyncTranscriptions) -> None:
         self._transcriptions = transcriptions
 
         self.create = async_to_raw_response_wrapper(
@@ -249,8 +249,8 @@ class AsyncTranscriptionsResourceWithRawResponse:
         )
 
 
-class TranscriptionsResourceWithStreamingResponse:
-    def __init__(self, transcriptions: TranscriptionsResource) -> None:
+class TranscriptionsWithStreamingResponse:
+    def __init__(self, transcriptions: Transcriptions) -> None:
         self._transcriptions = transcriptions
 
         self.create = to_streamed_response_wrapper(
@@ -258,8 +258,8 @@ class TranscriptionsResourceWithStreamingResponse:
         )
 
 
-class AsyncTranscriptionsResourceWithStreamingResponse:
-    def __init__(self, transcriptions: AsyncTranscriptionsResource) -> None:
+class AsyncTranscriptionsWithStreamingResponse:
+    def __init__(self, transcriptions: AsyncTranscriptions) -> None:
         self._transcriptions = transcriptions
 
         self.create = async_to_streamed_response_wrapper(

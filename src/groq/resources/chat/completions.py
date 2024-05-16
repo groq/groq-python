@@ -28,17 +28,17 @@ from ..._base_client import (
 from ...lib.chat_completion_chunk import ChatCompletionChunk
 from ...types.chat.chat_completion import ChatCompletion
 
-__all__ = ["CompletionsResource", "AsyncCompletionsResource"]
+__all__ = ["Completions", "AsyncCompletions"]
 
 
-class CompletionsResource(SyncAPIResource):
+class Completions(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> CompletionsResourceWithRawResponse:
-        return CompletionsResourceWithRawResponse(self)
+    def with_raw_response(self) -> CompletionsWithRawResponse:
+        return CompletionsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> CompletionsResourceWithStreamingResponse:
-        return CompletionsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> CompletionsWithStreamingResponse:
+        return CompletionsWithStreamingResponse(self)
 
     @overload
     def create(
@@ -210,14 +210,14 @@ class CompletionsResource(SyncAPIResource):
         )
 
 
-class AsyncCompletionsResource(AsyncAPIResource):
+class AsyncCompletions(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncCompletionsResourceWithRawResponse:
-        return AsyncCompletionsResourceWithRawResponse(self)
+    def with_raw_response(self) -> AsyncCompletionsWithRawResponse:
+        return AsyncCompletionsWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncCompletionsResourceWithStreamingResponse:
-        return AsyncCompletionsResourceWithStreamingResponse(self)
+    def with_streaming_response(self) -> AsyncCompletionsWithStreamingResponse:
+        return AsyncCompletionsWithStreamingResponse(self)
 
     @overload
     async def create(
@@ -389,8 +389,8 @@ class AsyncCompletionsResource(AsyncAPIResource):
         )
 
 
-class CompletionsResourceWithRawResponse:
-    def __init__(self, completions: CompletionsResource) -> None:
+class CompletionsWithRawResponse:
+    def __init__(self, completions: Completions) -> None:
         self._completions = completions
 
         self.create = to_raw_response_wrapper(
@@ -398,8 +398,8 @@ class CompletionsResourceWithRawResponse:
         )
 
 
-class AsyncCompletionsResourceWithRawResponse:
-    def __init__(self, completions: AsyncCompletionsResource) -> None:
+class AsyncCompletionsWithRawResponse:
+    def __init__(self, completions: AsyncCompletions) -> None:
         self._completions = completions
 
         self.create = async_to_raw_response_wrapper(
@@ -407,8 +407,8 @@ class AsyncCompletionsResourceWithRawResponse:
         )
 
 
-class CompletionsResourceWithStreamingResponse:
-    def __init__(self, completions: CompletionsResource) -> None:
+class CompletionsWithStreamingResponse:
+    def __init__(self, completions: Completions) -> None:
         self._completions = completions
 
         self.create = to_streamed_response_wrapper(
@@ -416,8 +416,8 @@ class CompletionsResourceWithStreamingResponse:
         )
 
 
-class AsyncCompletionsResourceWithStreamingResponse:
-    def __init__(self, completions: AsyncCompletionsResource) -> None:
+class AsyncCompletionsWithStreamingResponse:
+    def __init__(self, completions: AsyncCompletions) -> None:
         self._completions = completions
 
         self.create = async_to_streamed_response_wrapper(
