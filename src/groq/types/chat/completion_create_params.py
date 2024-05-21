@@ -396,28 +396,28 @@ class ResponseFormat(TypedDict, total=False):
 
 
 class ToolChoiceChatToolChoiceFunction(TypedDict, total=False):
-    name: str
+    name: Required[str]
     """The name of the function to call."""
 
 
 class ToolChoiceChatToolChoice(TypedDict, total=False):
-    function: ToolChoiceChatToolChoiceFunction
+    function: Required[ToolChoiceChatToolChoiceFunction]
 
-    type: str
+    type: Required[Literal["function"]]
 
 
 ToolChoice = Union[Literal["none", "auto"], ToolChoiceChatToolChoice]
 
 
 class ToolFunction(TypedDict, total=False):
-    description: str
+    name: Required[str]
 
-    name: str
+    description: str
 
     parameters: Dict[str, object]
 
 
 class Tool(TypedDict, total=False):
-    function: ToolFunction
+    function: Required[ToolFunction]
 
-    type: str
+    type: Required[Literal["function"]]

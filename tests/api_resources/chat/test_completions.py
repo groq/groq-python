@@ -99,7 +99,7 @@ class TestCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
                 {
                     "function": {
@@ -107,7 +107,7 @@ class TestCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
                 {
                     "function": {
@@ -115,7 +115,7 @@ class TestCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
             ],
             top_logprobs=0,
@@ -262,7 +262,7 @@ class TestAsyncCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
                 {
                     "function": {
@@ -270,7 +270,7 @@ class TestAsyncCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
                 {
                     "function": {
@@ -278,7 +278,7 @@ class TestAsyncCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
             ],
             top_logprobs=0,

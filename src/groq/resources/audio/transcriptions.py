@@ -47,7 +47,7 @@ class Transcriptions(SyncAPIResource):
         model: Union[str, Literal["whisper-large-v3"]],
         language: str | NotGiven = NOT_GIVEN,
         prompt: str | NotGiven = NOT_GIVEN,
-        response_format: Literal["json", "text", "srt", "verbose_json", "vtt"] | NotGiven = NOT_GIVEN,
+        response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         timestamp_granularities: List[Literal["word", "segment"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -75,8 +75,8 @@ class Transcriptions(SyncAPIResource):
               segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the
               audio language.
 
-          response_format: The format of the transcript output, in one of these options: `json`, `text`,
-              `srt`, `verbose_json`, or `vtt`.
+          response_format: The format of the transcript output, in one of these options: `json`, `text`, or
+              `verbose_json`.
 
           temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the
               output more random, while lower values like 0.2 will make it more focused and
@@ -147,7 +147,7 @@ class AsyncTranscriptions(AsyncAPIResource):
         model: Union[str, Literal["whisper-large-v3"]],
         language: str | NotGiven = NOT_GIVEN,
         prompt: str | NotGiven = NOT_GIVEN,
-        response_format: Literal["json", "text", "srt", "verbose_json", "vtt"] | NotGiven = NOT_GIVEN,
+        response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         timestamp_granularities: List[Literal["word", "segment"]] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -175,8 +175,8 @@ class AsyncTranscriptions(AsyncAPIResource):
               segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the
               audio language.
 
-          response_format: The format of the transcript output, in one of these options: `json`, `text`,
-              `srt`, `verbose_json`, or `vtt`.
+          response_format: The format of the transcript output, in one of these options: `json`, `text`, or
+              `verbose_json`.
 
           temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the
               output more random, while lower values like 0.2 will make it more focused and
