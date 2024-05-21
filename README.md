@@ -37,7 +37,7 @@ chat_completion = client.chat.completions.create(
     ],
     model="mixtral-8x7b-32768",
 )
-print(chat_completion.choices_0.message.content)
+print(chat_completion.choices[0].message.content)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -66,7 +66,7 @@ async def main() -> None:
         ],
         model="mixtral-8x7b-32768",
     )
-    print(chat_completion.choices_0.message.content)
+    print(chat_completion.choices[0].message.content)
 
 
 asyncio.run(main())
