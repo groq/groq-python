@@ -13,11 +13,11 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..types.model import Model
 from .._base_client import (
     make_request_options,
 )
-from ..types.model_list_response import ModelListResponse
-from ..types.model_retrieve_response import ModelRetrieveResponse
+from ..types.model_list import ModelList
 
 __all__ = ["Models", "AsyncModels"]
 
@@ -41,7 +41,7 @@ class Models(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ModelRetrieveResponse:
+    ) -> Model:
         """
         Get a specific model
 
@@ -61,7 +61,7 @@ class Models(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ModelRetrieveResponse,
+            cast_to=Model,
         )
 
     def list(
@@ -73,14 +73,14 @@ class Models(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ModelListResponse:
+    ) -> ModelList:
         """get all available models"""
         return self._get(
             "/openai/v1/models",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ModelListResponse,
+            cast_to=ModelList,
         )
 
     def delete(
@@ -137,7 +137,7 @@ class AsyncModels(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ModelRetrieveResponse:
+    ) -> Model:
         """
         Get a specific model
 
@@ -157,7 +157,7 @@ class AsyncModels(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ModelRetrieveResponse,
+            cast_to=Model,
         )
 
     async def list(
@@ -169,14 +169,14 @@ class AsyncModels(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ModelListResponse:
+    ) -> ModelList:
         """get all available models"""
         return await self._get(
             "/openai/v1/models",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ModelListResponse,
+            cast_to=ModelList,
         )
 
     async def delete(
