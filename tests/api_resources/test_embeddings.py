@@ -21,7 +21,7 @@ class TestEmbeddings:
     def test_method_create(self, client: Groq) -> None:
         embedding = client.embeddings.create(
             input="The quick brown fox jumped over the lazy dog",
-            model="nomic-embed-text-v1.5",
+            model="nomic",
         )
         assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
@@ -29,8 +29,7 @@ class TestEmbeddings:
     def test_method_create_with_all_params(self, client: Groq) -> None:
         embedding = client.embeddings.create(
             input="The quick brown fox jumped over the lazy dog",
-            model="nomic-embed-text-v1.5",
-            dimensions=1,
+            model="nomic",
             encoding_format="float",
             user="string",
         )
@@ -40,7 +39,7 @@ class TestEmbeddings:
     def test_raw_response_create(self, client: Groq) -> None:
         response = client.embeddings.with_raw_response.create(
             input="The quick brown fox jumped over the lazy dog",
-            model="nomic-embed-text-v1.5",
+            model="nomic",
         )
 
         assert response.is_closed is True
@@ -52,7 +51,7 @@ class TestEmbeddings:
     def test_streaming_response_create(self, client: Groq) -> None:
         with client.embeddings.with_streaming_response.create(
             input="The quick brown fox jumped over the lazy dog",
-            model="nomic-embed-text-v1.5",
+            model="nomic",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -70,7 +69,7 @@ class TestAsyncEmbeddings:
     async def test_method_create(self, async_client: AsyncGroq) -> None:
         embedding = await async_client.embeddings.create(
             input="The quick brown fox jumped over the lazy dog",
-            model="nomic-embed-text-v1.5",
+            model="nomic",
         )
         assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
@@ -78,8 +77,7 @@ class TestAsyncEmbeddings:
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
         embedding = await async_client.embeddings.create(
             input="The quick brown fox jumped over the lazy dog",
-            model="nomic-embed-text-v1.5",
-            dimensions=1,
+            model="nomic",
             encoding_format="float",
             user="string",
         )
@@ -89,7 +87,7 @@ class TestAsyncEmbeddings:
     async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
         response = await async_client.embeddings.with_raw_response.create(
             input="The quick brown fox jumped over the lazy dog",
-            model="nomic-embed-text-v1.5",
+            model="nomic",
         )
 
         assert response.is_closed is True
@@ -101,7 +99,7 @@ class TestAsyncEmbeddings:
     async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
         async with async_client.embeddings.with_streaming_response.create(
             input="The quick brown fox jumped over the lazy dog",
-            model="nomic-embed-text-v1.5",
+            model="nomic",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

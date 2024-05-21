@@ -20,11 +20,8 @@ class EmbeddingCreateParams(TypedDict, total=False):
     model: Required[str]
     """ID of the model to use."""
 
-    dimensions: int
-    """The number of dimensions to return the embeddings in."""
-
     encoding_format: Literal["float", "base64"]
-    """The format to return the embeddings in."""
+    """The format to return the embeddings in. Can only be `float` or `base64`."""
 
     user: Optional[str]
     """
