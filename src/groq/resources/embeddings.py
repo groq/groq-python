@@ -43,7 +43,6 @@ class Embeddings(SyncAPIResource):
         *,
         input: Union[str, List[str]],
         model: str,
-        dimensions: int | NotGiven = NOT_GIVEN,
         encoding_format: Literal["float", "base64"] | NotGiven = NOT_GIVEN,
         user: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -64,9 +63,7 @@ class Embeddings(SyncAPIResource):
 
           model: ID of the model to use.
 
-          dimensions: The number of dimensions to return the embeddings in.
-
-          encoding_format: The format to return the embeddings in.
+          encoding_format: The format to return the embeddings in. Can only be `float` or `base64`.
 
           user: A unique identifier representing your end-user, which can help us monitor and
               detect abuse.
@@ -85,7 +82,6 @@ class Embeddings(SyncAPIResource):
                 {
                     "input": input,
                     "model": model,
-                    "dimensions": dimensions,
                     "encoding_format": encoding_format,
                     "user": user,
                 },
@@ -112,7 +108,6 @@ class AsyncEmbeddings(AsyncAPIResource):
         *,
         input: Union[str, List[str]],
         model: str,
-        dimensions: int | NotGiven = NOT_GIVEN,
         encoding_format: Literal["float", "base64"] | NotGiven = NOT_GIVEN,
         user: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -133,9 +128,7 @@ class AsyncEmbeddings(AsyncAPIResource):
 
           model: ID of the model to use.
 
-          dimensions: The number of dimensions to return the embeddings in.
-
-          encoding_format: The format to return the embeddings in.
+          encoding_format: The format to return the embeddings in. Can only be `float` or `base64`.
 
           user: A unique identifier representing your end-user, which can help us monitor and
               detect abuse.
@@ -154,7 +147,6 @@ class AsyncEmbeddings(AsyncAPIResource):
                 {
                     "input": input,
                     "model": model,
-                    "dimensions": dimensions,
                     "encoding_format": encoding_format,
                     "user": user,
                 },
