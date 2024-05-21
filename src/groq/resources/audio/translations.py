@@ -68,8 +68,8 @@ class Translations(SyncAPIResource):
               segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in
               English.
 
-          response_format: The format of the transcript output, in one of these options: `json`, `text`,
-              `verbose_json`, or `vtt`.
+          response_format: The format of the transcript output, in one of these options: `json`, `text`, or
+              `verbose_json`.
 
           temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the
               output more random, while lower values like 0.2 will make it more focused and
@@ -153,8 +153,8 @@ class AsyncTranslations(AsyncAPIResource):
               segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in
               English.
 
-          response_format: The format of the transcript output, in one of these options: `json`, `text`,
-              `verbose_json`, or `vtt`.
+          response_format: The format of the transcript output, in one of these options: `json`, `text`, or
+              `verbose_json`.
 
           temperature: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the
               output more random, while lower values like 0.2 will make it more focused and

@@ -29,8 +29,8 @@ class TranslationCreateParams(TypedDict, total=False):
 
     response_format: Literal["json", "text", "verbose_json"]
     """
-    The format of the transcript output, in one of these options: `json`, `text`,
-    `verbose_json`, or `vtt`.
+    The format of the transcript output, in one of these options: `json`, `text`, or
+    `verbose_json`.
     """
 
     temperature: float
