@@ -31,7 +31,7 @@ class TestTranslations:
             file=b"raw file contents",
             model="whisper-1",
             prompt="string",
-            response_format="string",
+            response_format="json",
             temperature=0,
         )
         assert_matches_type(TranslationCreateResponse, translation, path=["response"])
@@ -80,7 +80,7 @@ class TestAsyncTranslations:
             file=b"raw file contents",
             model="whisper-1",
             prompt="string",
-            response_format="string",
+            response_format="json",
             temperature=0,
         )
         assert_matches_type(TranslationCreateResponse, translation, path=["response"])

@@ -23,15 +23,15 @@ class TestCompletions:
             messages=[
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
             ],
             model="string",
@@ -44,120 +44,54 @@ class TestCompletions:
             messages=[
                 {
                     "content": "string",
+                    "role": "system",
                     "name": "string",
-                    "role": "string",
                     "tool_call_id": "string",
-                    "tool_calls": [
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                    ],
                 },
                 {
                     "content": "string",
+                    "role": "system",
                     "name": "string",
-                    "role": "string",
                     "tool_call_id": "string",
-                    "tool_calls": [
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                    ],
                 },
                 {
                     "content": "string",
+                    "role": "system",
                     "name": "string",
-                    "role": "string",
                     "tool_call_id": "string",
-                    "tool_calls": [
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                    ],
                 },
             ],
             model="string",
-            frequency_penalty=0,
+            frequency_penalty=-2,
+            function_call="none",
+            functions=[
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+            ],
             logit_bias={"foo": 0},
             logprobs=True,
             max_tokens=0,
-            n=0,
-            presence_penalty=0,
+            n=1,
+            presence_penalty=-2,
             response_format={"type": "string"},
             seed=0,
             stop="\n",
             stream=True,
             temperature=0,
-            tool_choice={
-                "string": "string",
-                "tool_choice": {
-                    "function": {"name": "string"},
-                    "type": "string",
-                },
-            },
+            tool_choice="none",
             tools=[
                 {
                     "function": {
@@ -165,7 +99,7 @@ class TestCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
                 {
                     "function": {
@@ -173,7 +107,7 @@ class TestCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
                 {
                     "function": {
@@ -181,7 +115,7 @@ class TestCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
             ],
             top_logprobs=0,
@@ -196,15 +130,15 @@ class TestCompletions:
             messages=[
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
             ],
             model="string",
@@ -221,15 +155,15 @@ class TestCompletions:
             messages=[
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
             ],
             model="string",
@@ -252,15 +186,15 @@ class TestAsyncCompletions:
             messages=[
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
             ],
             model="string",
@@ -273,120 +207,54 @@ class TestAsyncCompletions:
             messages=[
                 {
                     "content": "string",
+                    "role": "system",
                     "name": "string",
-                    "role": "string",
                     "tool_call_id": "string",
-                    "tool_calls": [
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                    ],
                 },
                 {
                     "content": "string",
+                    "role": "system",
                     "name": "string",
-                    "role": "string",
                     "tool_call_id": "string",
-                    "tool_calls": [
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                    ],
                 },
                 {
                     "content": "string",
+                    "role": "system",
                     "name": "string",
-                    "role": "string",
                     "tool_call_id": "string",
-                    "tool_calls": [
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                        {
-                            "function": {
-                                "arguments": "string",
-                                "name": "string",
-                            },
-                            "id": "string",
-                            "type": "string",
-                        },
-                    ],
                 },
             ],
             model="string",
-            frequency_penalty=0,
+            frequency_penalty=-2,
+            function_call="none",
+            functions=[
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+            ],
             logit_bias={"foo": 0},
             logprobs=True,
             max_tokens=0,
-            n=0,
-            presence_penalty=0,
+            n=1,
+            presence_penalty=-2,
             response_format={"type": "string"},
             seed=0,
             stop="\n",
             stream=True,
             temperature=0,
-            tool_choice={
-                "string": "string",
-                "tool_choice": {
-                    "function": {"name": "string"},
-                    "type": "string",
-                },
-            },
+            tool_choice="none",
             tools=[
                 {
                     "function": {
@@ -394,7 +262,7 @@ class TestAsyncCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
                 {
                     "function": {
@@ -402,7 +270,7 @@ class TestAsyncCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
                 {
                     "function": {
@@ -410,7 +278,7 @@ class TestAsyncCompletions:
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "string",
+                    "type": "function",
                 },
             ],
             top_logprobs=0,
@@ -425,15 +293,15 @@ class TestAsyncCompletions:
             messages=[
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
             ],
             model="string",
@@ -450,15 +318,15 @@ class TestAsyncCompletions:
             messages=[
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
                 {
                     "content": "string",
-                    "role": "string",
+                    "role": "system",
                 },
             ],
             model="string",

@@ -27,10 +27,10 @@ class TranslationCreateParams(TypedDict, total=False):
     The [prompt](/docs/guides/speech-to-text/prompting) should be in English.
     """
 
-    response_format: str
+    response_format: Literal["json", "text", "verbose_json"]
     """
-    The format of the transcript output, in one of these options: `json`, `text`,
-    `srt`, `verbose_json`, or `vtt`.
+    The format of the transcript output, in one of these options: `json`, `text`, or
+    `verbose_json`.
     """
 
     temperature: float
