@@ -4,6 +4,14 @@
 from groq.types import ErrorObject, FunctionDefinition, FunctionParameters
 ```
 
+# Completions
+
+Types:
+
+```python
+from groq.types import CompletionUsage
+```
+
 # Chat
 
 ## Completions
