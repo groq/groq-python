@@ -17,7 +17,7 @@ class EmbeddingCreateParams(TypedDict, total=False):
     cannot be an empty string, and any array must be 2048 dimensions or less.
     """
 
-    model: Required[str]
+    model: Required[Union[str, Literal["nomic-embed-text-v1_5"]]]
     """ID of the model to use."""
 
     encoding_format: Literal["float", "base64"]

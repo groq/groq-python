@@ -25,8 +25,8 @@ __all__ = [
     "Function",
     "ResponseFormat",
     "ToolChoice",
-    "ToolChoiceChatToolChoice",
-    "ToolChoiceChatToolChoiceFunction",
+    "ToolChoiceChatCompletionNamedToolChoice",
+    "ToolChoiceChatCompletionNamedToolChoiceFunction",
     "Tool",
     "ToolFunction",
 ]
@@ -36,7 +36,7 @@ class CompletionCreateParams(TypedDict, total=False):
     messages: Required[Iterable[Message]]
     """A list of messages comprising the conversation so far."""
 
-    model: Required[str]
+    model: Required[Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]]]
     """ID of the model to use.
 
     For details on which models are compatible with the Chat API, see available
@@ -106,22 +106,19 @@ class CompletionCreateParams(TypedDict, total=False):
     response_format: Optional[ResponseFormat]
     """An object specifying the format that the model must output.
 
-    Setting to `{ "type": "json" }` enables JSON mode, which guarantees the message
-    the model generates is valid JSON.
+    Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
+    message the model generates is valid JSON.
 
-    Important: when using JSON mode, you must also instruct the model to produce
-    JSON yourself via a system or user message. Without this, the model may generate
-    an unending stream of whitespace until the generation reaches the token limit,
-    resulting in a long-running and seemingly "stuck" request. Also note that the
-    message content may be partially cut off if finish_reason="length", which
-    indicates the generation exceeded max_tokens or the conversation exceeded the
-    max context length.
+    **Important:** when using JSON mode, you **must** also instruct the model to
+    produce JSON yourself via a system or user message.
     """
 
     seed: Optional[int]
     """
-    If specified, our system will sample deterministically, such that repeated
-    requests with the same seed and parameters will return the same result.
+    If specified, our system will make a best effort to sample deterministically,
+    such that repeated requests with the same `seed` and parameters should return
+    the same result. Determinism is not guaranteed, and you should refer to the
+    `system_fingerprint` response parameter to monitor changes in the backend.
     """
 
     stop: Union[Optional[str], List[str], None]
@@ -133,9 +130,10 @@ class CompletionCreateParams(TypedDict, total=False):
     stream: Optional[bool]
     """If set, partial message deltas will be sent.
 
-    Tokens will be sent as data-only server-sent events as they become available,
-    with the stream terminated by a data: [DONE].
-    [Example code](/docs/text-chat#streaming-a-chat-completion).
+    Tokens will be sent as data-only
+    [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+    as they become available, with the stream terminated by a `data: [DONE]`
+    message. [Example code](/docs/text-chat#streaming-a-chat-completion).
     """
 
     temperature: Optional[float]
@@ -147,11 +145,16 @@ class CompletionCreateParams(TypedDict, total=False):
     """
 
     tool_choice: Optional[ToolChoice]
-    """Controls which (if any) function is called by the model.
-
-    Specifying a particular function via a structured object like
+    """
+    Controls which (if any) tool is called by the model. `none` means the model will
+    not call any tool and instead generates a message. `auto` means the model can
+    pick between generating a message or calling one or more tools. `required` means
+    the model must call one or more tools. Specifying a particular tool via
     `{"type": "function", "function": {"name": "my_function"}}` forces the model to
-    call that function.
+    call that tool.
+
+    `none` is the default when no tools are present. `auto` is the default if tools
+    are present.
     """
 
     tools: Optional[Iterable[Tool]]
@@ -199,8 +202,6 @@ class MessageChatCompletionRequestSystemMessage(TypedDict, total=False):
     role.
     """
 
-    tool_call_id: Optional[str]
-
 
 class MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartText(
     TypedDict, total=False
@@ -246,14 +247,12 @@ class MessageChatCompletionRequestUserMessage(TypedDict, total=False):
     role: Required[Literal["user"]]
     """The role of the messages author, in this case `user`."""
 
-    name: Optional[str]
+    name: str
     """An optional name for the participant.
 
     Provides the model information to differentiate between participants of the same
     role.
     """
-
-    tool_call_id: Optional[str]
 
 
 class MessageChatCompletionRequestAssistantMessageFunctionCall(TypedDict, total=False):
@@ -317,8 +316,6 @@ class MessageChatCompletionRequestAssistantMessage(TypedDict, total=False):
     role.
     """
 
-    tool_call_id: Optional[str]
-
     tool_calls: Iterable[MessageChatCompletionRequestAssistantMessageToolCall]
     """The tool calls generated by the model, such as function calls."""
 
@@ -333,8 +330,6 @@ class MessageChatCompletionRequestToolMessage(TypedDict, total=False):
     tool_call_id: Required[str]
     """Tool call that this message is responding to."""
 
-    name: Optional[str]
-
 
 class MessageChatCompletionRequestFunctionMessage(TypedDict, total=False):
     content: Required[Optional[str]]
@@ -345,8 +340,6 @@ class MessageChatCompletionRequestFunctionMessage(TypedDict, total=False):
 
     role: Required[Literal["function"]]
     """The role of the messages author, in this case `function`."""
-
-    tool_call_id: Optional[str]
 
 
 Message = Union[
@@ -392,32 +385,52 @@ class Function(TypedDict, total=False):
 
 
 class ResponseFormat(TypedDict, total=False):
-    type: str
+    type: Literal["text", "json_object"]
+    """Must be one of `text` or `json_object`."""
 
 
-class ToolChoiceChatToolChoiceFunction(TypedDict, total=False):
+class ToolChoiceChatCompletionNamedToolChoiceFunction(TypedDict, total=False):
     name: Required[str]
     """The name of the function to call."""
 
 
-class ToolChoiceChatToolChoice(TypedDict, total=False):
-    function: Required[ToolChoiceChatToolChoiceFunction]
+class ToolChoiceChatCompletionNamedToolChoice(TypedDict, total=False):
+    function: Required[ToolChoiceChatCompletionNamedToolChoiceFunction]
 
     type: Required[Literal["function"]]
+    """The type of the tool. Currently, only `function` is supported."""
 
 
-ToolChoice = Union[Literal["none", "auto"], ToolChoiceChatToolChoice]
+ToolChoice = Union[Literal["none", "auto"], ToolChoiceChatCompletionNamedToolChoice]
 
 
 class ToolFunction(TypedDict, total=False):
     name: Required[str]
+    """The name of the function to be called.
+
+    Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length
+    of 64.
+    """
 
     description: str
+    """
+    A description of what the function does, used by the model to choose when and
+    how to call the function.
+    """
 
     parameters: Dict[str, object]
+    """The parameters the functions accepts, described as a JSON Schema object.
+
+    See the [guide](/docs/guides/text-generation/function-calling) for examples, and
+    the [JSON Schema reference](https://json-schema.org/understanding-json-schema/)
+    for documentation about the format.
+
+    Omitting `parameters` defines a function with an empty parameter list.
+    """
 
 
 class Tool(TypedDict, total=False):
     function: Required[ToolFunction]
 
     type: Required[Literal["function"]]
+    """The type of the tool. Currently, only `function` is supported."""
