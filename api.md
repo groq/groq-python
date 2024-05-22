@@ -19,10 +19,10 @@ Types:
 ```python
 from groq.types.chat import (
     ChatCompletion,
+    ChatCompletionMessage,
     ChatCompletionContentPart,
     ChatCompletionContentPartImage,
     ChatCompletionContentPartText,
-    ChatCompletionMessage,
 )
 ```
 
