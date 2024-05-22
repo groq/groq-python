@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
-from typing_extensions import Literal
+from typing import List, Optional
 
 from .model import Model
 from .._models import BaseModel
@@ -10,6 +9,6 @@ __all__ = ["ModelListResponse"]
 
 
 class ModelListResponse(BaseModel):
-    data: List[Model]
+    data: Optional[List[Model]] = None
 
-    object: Literal["list"]
+    object: Optional[str] = None
