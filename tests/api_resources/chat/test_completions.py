@@ -9,7 +9,7 @@ import pytest
 
 from groq import Groq, AsyncGroq
 from tests.utils import assert_matches_type
-from groq.types.chat import ChatCompletion
+from groq.types.chat import CompletionCreateResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -24,19 +24,11 @@ class TestCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
+                }
             ],
             model="string",
         )
-        assert_matches_type(ChatCompletion, completion, path=["response"])
+        assert_matches_type(CompletionCreateResponse, completion, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Groq) -> None:
@@ -46,20 +38,7 @@ class TestCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
-                    "tool_call_id": "string",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                    "name": "string",
-                    "tool_call_id": "string",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                    "name": "string",
-                    "tool_call_id": "string",
-                },
+                }
             ],
             model="string",
             frequency_penalty=-2,
@@ -69,60 +48,50 @@ class TestCompletions:
                     "description": "string",
                     "name": "string",
                     "parameters": {"foo": "bar"},
-                },
-                {
-                    "description": "string",
-                    "name": "string",
-                    "parameters": {"foo": "bar"},
-                },
-                {
-                    "description": "string",
-                    "name": "string",
-                    "parameters": {"foo": "bar"},
-                },
+                }
             ],
             logit_bias={"foo": 0},
             logprobs=True,
             max_tokens=0,
             n=1,
             presence_penalty=-2,
-            response_format={"type": "string"},
+            response_format={"type": "json_object"},
             seed=0,
             stop="\n",
             stream=True,
-            temperature=0,
+            temperature=1,
             tool_choice="none",
             tools=[
                 {
+                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "function",
                 },
                 {
+                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "function",
                 },
                 {
+                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "function",
                 },
             ],
             top_logprobs=0,
-            top_p=0,
+            top_p=1,
             user="string",
         )
-        assert_matches_type(ChatCompletion, completion, path=["response"])
+        assert_matches_type(CompletionCreateResponse, completion, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Groq) -> None:
@@ -131,15 +100,7 @@ class TestCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
+                }
             ],
             model="string",
         )
@@ -147,7 +108,7 @@ class TestCompletions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         completion = response.parse()
-        assert_matches_type(ChatCompletion, completion, path=["response"])
+        assert_matches_type(CompletionCreateResponse, completion, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Groq) -> None:
@@ -156,15 +117,7 @@ class TestCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
+                }
             ],
             model="string",
         ) as response:
@@ -172,7 +125,7 @@ class TestCompletions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             completion = response.parse()
-            assert_matches_type(ChatCompletion, completion, path=["response"])
+            assert_matches_type(CompletionCreateResponse, completion, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -187,19 +140,11 @@ class TestAsyncCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
+                }
             ],
             model="string",
         )
-        assert_matches_type(ChatCompletion, completion, path=["response"])
+        assert_matches_type(CompletionCreateResponse, completion, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
@@ -209,20 +154,7 @@ class TestAsyncCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
-                    "tool_call_id": "string",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                    "name": "string",
-                    "tool_call_id": "string",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                    "name": "string",
-                    "tool_call_id": "string",
-                },
+                }
             ],
             model="string",
             frequency_penalty=-2,
@@ -232,60 +164,50 @@ class TestAsyncCompletions:
                     "description": "string",
                     "name": "string",
                     "parameters": {"foo": "bar"},
-                },
-                {
-                    "description": "string",
-                    "name": "string",
-                    "parameters": {"foo": "bar"},
-                },
-                {
-                    "description": "string",
-                    "name": "string",
-                    "parameters": {"foo": "bar"},
-                },
+                }
             ],
             logit_bias={"foo": 0},
             logprobs=True,
             max_tokens=0,
             n=1,
             presence_penalty=-2,
-            response_format={"type": "string"},
+            response_format={"type": "json_object"},
             seed=0,
             stop="\n",
             stream=True,
-            temperature=0,
+            temperature=1,
             tool_choice="none",
             tools=[
                 {
+                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "function",
                 },
                 {
+                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "function",
                 },
                 {
+                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "function",
                 },
             ],
             top_logprobs=0,
-            top_p=0,
+            top_p=1,
             user="string",
         )
-        assert_matches_type(ChatCompletion, completion, path=["response"])
+        assert_matches_type(CompletionCreateResponse, completion, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
@@ -294,15 +216,7 @@ class TestAsyncCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
+                }
             ],
             model="string",
         )
@@ -310,7 +224,7 @@ class TestAsyncCompletions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         completion = await response.parse()
-        assert_matches_type(ChatCompletion, completion, path=["response"])
+        assert_matches_type(CompletionCreateResponse, completion, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
@@ -319,15 +233,7 @@ class TestAsyncCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
-                {
-                    "content": "string",
-                    "role": "system",
-                },
+                }
             ],
             model="string",
         ) as response:
@@ -335,6 +241,6 @@ class TestAsyncCompletions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             completion = await response.parse()
-            assert_matches_type(ChatCompletion, completion, path=["response"])
+            assert_matches_type(CompletionCreateResponse, completion, path=["response"])
 
         assert cast(Any, response.is_closed) is True

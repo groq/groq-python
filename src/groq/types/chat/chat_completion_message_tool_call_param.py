@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["ChatCompletionMessageToolCallParam"]
@@ -17,5 +16,3 @@ class ChatCompletionMessageToolCallParam(TypedDict, total=False):
 
     tool_call_id: Required[str]
     """Tool call that this message is responding to."""
-
-    name: Optional[str]

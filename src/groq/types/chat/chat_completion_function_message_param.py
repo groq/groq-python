@@ -17,5 +17,3 @@ class ChatCompletionFunctionMessageParam(TypedDict, total=False):
 
     role: Required[Literal["function"]]
     """The role of the messages author, in this case `function`."""
-
-    tool_call_id: Optional[str]
