@@ -58,7 +58,7 @@ class TestCompletions:
             response_format={"type": "json_object"},
             seed=0,
             stop="\n",
-            stream=True,
+            stream=False,
             temperature=1,
             tool_choice="none",
             tools=[
@@ -174,7 +174,7 @@ class TestAsyncCompletions:
             response_format={"type": "json_object"},
             seed=0,
             stop="\n",
-            stream=True,
+            stream=False,
             temperature=1,
             tool_choice="none",
             tools=[
