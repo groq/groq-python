@@ -6,11 +6,11 @@ from typing import Dict, List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from .chat_completion_message_param import ChatCompletionMessageParam
+from .chat_completion_function_call_option_param import ChatCompletionFunctionCallOptionParam
 
 __all__ = [
     "CompletionCreateParams",
     "FunctionCall",
-    "FunctionCallChatCompletionFunctionCallOption",
     "Function",
     "ResponseFormat",
     "ToolChoice",
@@ -174,12 +174,7 @@ class CompletionCreateParams(TypedDict, total=False):
     """
 
 
-class FunctionCallChatCompletionFunctionCallOption(TypedDict, total=False):
-    name: Required[str]
-    """The name of the function to call."""
-
-
-FunctionCall = Union[Literal["none", "auto"], FunctionCallChatCompletionFunctionCallOption]
+FunctionCall = Union[Literal["none", "auto"], ChatCompletionFunctionCallOptionParam]
 
 
 class Function(TypedDict, total=False):
