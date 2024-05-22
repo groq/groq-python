@@ -30,7 +30,7 @@ client = Groq(
     api_key="My API Key",
 )
 
-completion_create_response = client.chat.completions.create(
+chat_completion = client.chat.completions.create(
     messages=[
         {
             "role": "user",
@@ -39,7 +39,7 @@ completion_create_response = client.chat.completions.create(
     ],
     model="llama3-8b-8192",
 )
-print(completion_create_response.choices_0.message.content)
+print(chat_completion.choices_0.message.content)
 ```
 
 ## Async usage
@@ -56,7 +56,7 @@ client = AsyncGroq(
 
 
 async def main() -> None:
-    completion_create_response = await client.chat.completions.create(
+    chat_completion = await client.chat.completions.create(
         messages=[
             {
                 "role": "user",
@@ -65,7 +65,7 @@ async def main() -> None:
         ],
         model="llama3-8b-8192",
     )
-    print(completion_create_response.choices_0.message.content)
+    print(chat_completion.choices_0.message.content)
 
 
 asyncio.run(main())

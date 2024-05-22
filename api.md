@@ -4,18 +4,6 @@
 from groq.types import ErrorObject, FunctionDefinition, FunctionParameters
 ```
 
-# Embeddings
-
-Types:
-
-```python
-from groq.types import CreateEmbeddingResponse, Embedding
-```
-
-Methods:
-
-- <code title="post /openai/v1/embeddings">client.embeddings.<a href="./src/groq/resources/embeddings.py">create</a>(\*\*<a href="src/groq/types/embedding_create_params.py">params</a>) -> <a href="./src/groq/types/create_embedding_response.py">CreateEmbeddingResponse</a></code>
-
 # Chat
 
 ## Completions
@@ -24,6 +12,7 @@ Types:
 
 ```python
 from groq.types.chat import (
+    ChatCompletion,
     ChatCompletionAssistantMessageParam,
     ChatCompletionContentPart,
     ChatCompletionContentPartImage,
@@ -37,16 +26,28 @@ from groq.types.chat import (
     ChatCompletionRole,
     ChatCompletionSystemMessageParam,
     ChatCompletionTokenLogprob,
+    ChatCompletionTool,
     ChatCompletionToolChoiceOption,
     ChatCompletionToolMessageParam,
     ChatCompletionUserMessageParam,
-    CompletionCreateResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /openai/v1/chat/completions">client.chat.completions.<a href="./src/groq/resources/chat/completions.py">create</a>(\*\*<a href="src/groq/types/chat/completion_create_params.py">params</a>) -> <a href="./src/groq/types/chat/completion_create_response.py">CompletionCreateResponse</a></code>
+- <code title="post /openai/v1/chat/completions">client.chat.completions.<a href="./src/groq/resources/chat/completions.py">create</a>(\*\*<a href="src/groq/types/chat/completion_create_params.py">params</a>) -> <a href="./src/groq/types/chat/chat_completion.py">ChatCompletion</a></code>
+
+# Embeddings
+
+Types:
+
+```python
+from groq.types import CreateEmbeddingResponse, Embedding
+```
+
+Methods:
+
+- <code title="post /openai/v1/embeddings">client.embeddings.<a href="./src/groq/resources/embeddings.py">create</a>(\*\*<a href="src/groq/types/embedding_create_params.py">params</a>) -> <a href="./src/groq/types/create_embedding_response.py">CreateEmbeddingResponse</a></code>
 
 # Audio
 
