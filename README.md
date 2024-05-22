@@ -26,9 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 ```python
 from groq import Groq
 
-client = Groq(
-    api_key="My API Key",
-)
+client = Groq()
 
 chat_completion = client.chat.completions.create(
     messages=[
@@ -42,6 +40,11 @@ chat_completion = client.chat.completions.create(
 print(chat_completion.choices_0.message.content)
 ```
 
+While you can provide an `api_key` keyword argument,
+we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
+to add `GROQ_API_KEY="My API Key"` to your `.env` file
+so that your API Key is not stored in source control.
+
 ## Async usage
 
 Simply import `AsyncGroq` instead of `Groq` and use `await` with each API call:
@@ -50,9 +53,7 @@ Simply import `AsyncGroq` instead of `Groq` and use `await` with each API call:
 import asyncio
 from groq import AsyncGroq
 
-client = AsyncGroq(
-    api_key="My API Key",
-)
+client = AsyncGroq()
 
 
 async def main() -> None:
@@ -95,9 +96,7 @@ All errors inherit from `groq.APIError`.
 import groq
 from groq import Groq
 
-client = Groq(
-    api_key="My API Key",
-)
+client = Groq()
 
 try:
     client.chat.completions.create(
@@ -152,7 +151,6 @@ from groq import Groq
 client = Groq(
     # default is 2
     max_retries=0,
-    api_key="My API Key",
 )
 
 # Or, configure per-request:
@@ -183,13 +181,11 @@ from groq import Groq
 client = Groq(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
-    api_key="My API Key",
 )
 
 # More granular control:
 client = Groq(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
-    api_key="My API Key",
 )
 
 # Override per-request:
@@ -243,9 +239,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from groq import Groq
 
-client = Groq(
-    api_key="My API Key",
-)
+client = Groq()
 response = client.chat.completions.with_raw_response.create(
     messages=[{
         "role": "system",
@@ -347,7 +341,6 @@ client = Groq(
         proxies="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
-    api_key="My API Key",
 )
 ```
 
