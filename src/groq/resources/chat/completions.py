@@ -24,6 +24,7 @@ from ..._base_client import (
     make_request_options,
 )
 from ...types.chat.chat_completion import ChatCompletion
+from ...types.chat.chat_completion_message_param import ChatCompletionMessageParam
 
 __all__ = ["Completions", "AsyncCompletions"]
 
@@ -40,7 +41,7 @@ class Completions(SyncAPIResource):
     def create(
         self,
         *,
-        messages: Iterable[completion_create_params.Message],
+        messages: Iterable[ChatCompletionMessageParam],
         model: str,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
@@ -218,7 +219,7 @@ class AsyncCompletions(AsyncAPIResource):
     async def create(
         self,
         *,
-        messages: Iterable[completion_create_params.Message],
+        messages: Iterable[ChatCompletionMessageParam],
         model: str,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,

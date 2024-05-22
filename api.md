@@ -17,7 +17,13 @@ Methods:
 Types:
 
 ```python
-from groq.types.chat import ChatCompletion
+from groq.types.chat import (
+    ChatCompletion,
+    ChatCompletionContentPart,
+    ChatCompletionContentPartImage,
+    ChatCompletionContentPartText,
+    ChatCompletionMessage,
+)
 ```
 
 Methods:
