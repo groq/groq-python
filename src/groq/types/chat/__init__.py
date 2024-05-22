@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+from .chat_completion import ChatCompletion as ChatCompletion
 from .chat_completion_role import ChatCompletionRole as ChatCompletionRole
 from .chat_completion_message import ChatCompletionMessage as ChatCompletionMessage
 from .completion_create_params import CompletionCreateParams as CompletionCreateParams
-from .completion_create_response import CompletionCreateResponse as CompletionCreateResponse
+from .chat_completion_tool_param import ChatCompletionToolParam as ChatCompletionToolParam
 from .chat_completion_message_param import ChatCompletionMessageParam as ChatCompletionMessageParam
 from .chat_completion_token_logprob import ChatCompletionTokenLogprob as ChatCompletionTokenLogprob
 from .chat_completion_content_part_param import ChatCompletionContentPartParam as ChatCompletionContentPartParam

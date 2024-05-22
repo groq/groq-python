@@ -6,11 +6,12 @@ from typing import Dict, List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from ...types import shared_params
+from .chat_completion_tool_param import ChatCompletionToolParam
 from .chat_completion_message_param import ChatCompletionMessageParam
 from .chat_completion_tool_choice_option_param import ChatCompletionToolChoiceOptionParam
 from .chat_completion_function_call_option_param import ChatCompletionFunctionCallOptionParam
 
-__all__ = ["CompletionCreateParams", "FunctionCall", "Function", "ResponseFormat", "Tool"]
+__all__ = ["CompletionCreateParams", "FunctionCall", "Function", "ResponseFormat"]
 
 
 class CompletionCreateParams(TypedDict, total=False):
@@ -138,7 +139,7 @@ class CompletionCreateParams(TypedDict, total=False):
     are present.
     """
 
-    tools: Optional[Iterable[Tool]]
+    tools: Optional[Iterable[ChatCompletionToolParam]]
     """A list of tools the model may call.
 
     Currently, only functions are supported as a tool. Use this to provide a list of
@@ -200,10 +201,3 @@ class Function(TypedDict, total=False):
 class ResponseFormat(TypedDict, total=False):
     type: Literal["text", "json_object"]
     """Must be one of `text` or `json_object`."""
-
-
-class Tool(TypedDict, total=False):
-    function: Required[shared_params.FunctionDefinition]
-
-    type: Required[Literal["function"]]
-    """The type of the tool. Currently, only `function` is supported."""

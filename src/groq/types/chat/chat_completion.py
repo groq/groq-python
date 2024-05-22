@@ -7,7 +7,7 @@ from ..._models import BaseModel
 from .chat_completion_message import ChatCompletionMessage
 from .chat_completion_token_logprob import ChatCompletionTokenLogprob
 
-__all__ = ["CompletionCreateResponse", "Choice", "ChoiceLogprobs", "Usage"]
+__all__ = ["ChatCompletion", "Choice", "ChoiceLogprobs", "Usage"]
 
 
 class ChoiceLogprobs(BaseModel):
@@ -54,7 +54,7 @@ class Usage(BaseModel):
     """Number of tokens in the prompt."""
 
 
-class CompletionCreateResponse(BaseModel):
+class ChatCompletion(BaseModel):
     id: str
     """A unique identifier for the chat completion."""
 
