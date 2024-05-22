@@ -1,3 +1,9 @@
+# Shared Types
+
+```python
+from groq.types import FunctionParameters
+```
+
 # Embeddings
 
 Types:
