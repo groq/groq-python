@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -18,6 +18,7 @@ from .._base_client import (
     make_request_options,
 )
 from ..types.model_list_response import ModelListResponse
+from ..types.model_delete_response import ModelDeleteResponse
 
 __all__ = ["Models", "AsyncModels"]
 
@@ -93,7 +94,7 @@ class Models(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ModelDeleteResponse:
         """
         Delete a model
 
@@ -108,13 +109,12 @@ class Models(SyncAPIResource):
         """
         if not model:
             raise ValueError(f"Expected a non-empty value for `model` but received {model!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             f"/openai/v1/models/{model}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=ModelDeleteResponse,
         )
 
 
@@ -189,7 +189,7 @@ class AsyncModels(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> ModelDeleteResponse:
         """
         Delete a model
 
@@ -204,13 +204,12 @@ class AsyncModels(AsyncAPIResource):
         """
         if not model:
             raise ValueError(f"Expected a non-empty value for `model` but received {model!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             f"/openai/v1/models/{model}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=ModelDeleteResponse,
         )
 
 
