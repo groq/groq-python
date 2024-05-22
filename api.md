@@ -17,12 +17,12 @@ Methods:
 Types:
 
 ```python
-from groq.types.chat import CompletionCreateResponse
+from groq.types.chat import ChatCompletion
 ```
 
 Methods:
 
-- <code title="post /openai/v1/chat/completions">client.chat.completions.<a href="./src/groq/resources/chat/completions.py">create</a>(\*\*<a href="src/groq/types/chat/completion_create_params.py">params</a>) -> <a href="./src/groq/types/chat/completion_create_response.py">CompletionCreateResponse</a></code>
+- <code title="post /openai/v1/chat/completions">client.chat.completions.<a href="./src/groq/resources/chat/completions.py">create</a>(\*\*<a href="src/groq/types/chat/completion_create_params.py">params</a>) -> <a href="./src/groq/types/chat/chat_completion.py">ChatCompletion</a></code>
 
 # Audio
 
