@@ -5,7 +5,7 @@ from typing import List, Optional
 from ..._models import BaseModel
 
 __all__ = [
-    "CompletionCreateResponse",
+    "ChatCompletion",
     "Choice",
     "ChoiceLogprobs",
     "ChoiceLogprobsContent",
@@ -87,7 +87,7 @@ class Usage(BaseModel):
     total_tokens: Optional[int] = None
 
 
-class CompletionCreateResponse(BaseModel):
+class ChatCompletion(BaseModel):
     choices: List[Choice]
 
     id: Optional[str] = None
