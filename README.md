@@ -24,9 +24,13 @@ pip install groq
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from groq import Groq
 
-client = Groq()
+client = Groq(
+    # This is the default and can be omitted
+    api_key=os.environ.get("GROQ_API_KEY"),
+)
 
 chat_completion = client.chat.completions.create(
     messages=[
@@ -35,9 +39,9 @@ chat_completion = client.chat.completions.create(
             "content": "Explain the importance of low latency LLMs",
         }
     ],
-    model="mixtral-8x7b-32768",
+    model="llama3-8b-8192",
 )
-print(chat_completion.choices[0].message.content)
+print(chat_completion.choices_0.message.content)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -50,10 +54,14 @@ so that your API Key is not stored in source control.
 Simply import `AsyncGroq` instead of `Groq` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from groq import AsyncGroq
 
-client = AsyncGroq()
+client = AsyncGroq(
+    # This is the default and can be omitted
+    api_key=os.environ.get("GROQ_API_KEY"),
+)
 
 
 async def main() -> None:
@@ -64,9 +72,9 @@ async def main() -> None:
                 "content": "Explain the importance of low latency LLMs",
             }
         ],
-        model="mixtral-8x7b-32768",
+        model="llama3-8b-8192",
     )
-    print(chat_completion.choices[0].message.content)
+    print(chat_completion.choices_0.message.content)
 
 
 asyncio.run(main())
@@ -110,7 +118,7 @@ try:
                 "content": "Explain the importance of low latency LLMs",
             },
         ],
-        model="mixtral-8x7b-32768",
+        model="llama3-8b-8192",
     )
 except groq.APIConnectionError as e:
     print("The server could not be reached")
@@ -165,7 +173,7 @@ client.with_options(max_retries=5).chat.completions.create(
             "content": "Explain the importance of low latency LLMs",
         },
     ],
-    model="mixtral-8x7b-32768",
+    model="llama3-8b-8192",
 )
 ```
 
@@ -200,7 +208,7 @@ client.with_options(timeout=5.0).chat.completions.create(
             "content": "Explain the importance of low latency LLMs",
         },
     ],
-    model="mixtral-8x7b-32768",
+    model="llama3-8b-8192",
 )
 ```
 
@@ -248,7 +256,7 @@ response = client.chat.completions.with_raw_response.create(
         "role": "user",
         "content": "Explain the importance of low latency LLMs",
     }],
-    model="mixtral-8x7b-32768",
+    model="llama3-8b-8192",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -278,7 +286,7 @@ with client.chat.completions.with_streaming_response.create(
             "content": "Explain the importance of low latency LLMs",
         },
     ],
-    model="mixtral-8x7b-32768",
+    model="llama3-8b-8192",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
