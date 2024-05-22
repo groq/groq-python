@@ -24,9 +24,13 @@ pip install groq
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from groq import Groq
 
-client = Groq()
+client = Groq(
+    # This is the default and can be omitted
+    api_key=os.environ.get("GROQ_API_KEY"),
+)
 
 chat_completion = client.chat.completions.create(
     messages=[
@@ -50,10 +54,14 @@ so that your API Key is not stored in source control.
 Simply import `AsyncGroq` instead of `Groq` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from groq import AsyncGroq
 
-client = AsyncGroq()
+client = AsyncGroq(
+    # This is the default and can be omitted
+    api_key=os.environ.get("GROQ_API_KEY"),
+)
 
 
 async def main() -> None:
