@@ -5,38 +5,20 @@ from __future__ import annotations
 from typing import Dict, List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = [
-    "CompletionCreateParams",
-    "Message",
-    "MessageChatCompletionRequestSystemMessage",
-    "MessageChatCompletionRequestUserMessage",
-    "MessageChatCompletionRequestUserMessageContentArrayOfContentPart",
-    "MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartText",
-    "MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartImage",
-    "MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartImageImageURL",
-    "MessageChatCompletionRequestAssistantMessage",
-    "MessageChatCompletionRequestAssistantMessageFunctionCall",
-    "MessageChatCompletionRequestAssistantMessageToolCall",
-    "MessageChatCompletionRequestAssistantMessageToolCallFunction",
-    "MessageChatCompletionRequestToolMessage",
-    "MessageChatCompletionRequestFunctionMessage",
-    "FunctionCall",
-    "FunctionCallChatCompletionFunctionCallOption",
-    "Function",
-    "ResponseFormat",
-    "ToolChoice",
-    "ToolChoiceChatToolChoice",
-    "ToolChoiceChatToolChoiceFunction",
-    "Tool",
-    "ToolFunction",
-]
+from ...types import shared_params
+from .chat_completion_tool_param import ChatCompletionToolParam
+from .chat_completion_message_param import ChatCompletionMessageParam
+from .chat_completion_tool_choice_option_param import ChatCompletionToolChoiceOptionParam
+from .chat_completion_function_call_option_param import ChatCompletionFunctionCallOptionParam
+
+__all__ = ["CompletionCreateParams", "FunctionCall", "Function", "ResponseFormat"]
 
 
 class CompletionCreateParams(TypedDict, total=False):
-    messages: Required[Iterable[Message]]
+    messages: Required[Iterable[ChatCompletionMessageParam]]
     """A list of messages comprising the conversation so far."""
 
-    model: Required[str]
+    model: Required[Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]]]
     """ID of the model to use.
 
     For details on which models are compatible with the Chat API, see available
@@ -106,22 +88,19 @@ class CompletionCreateParams(TypedDict, total=False):
     response_format: Optional[ResponseFormat]
     """An object specifying the format that the model must output.
 
-    Setting to `{ "type": "json" }` enables JSON mode, which guarantees the message
-    the model generates is valid JSON.
+    Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
+    message the model generates is valid JSON.
 
-    Important: when using JSON mode, you must also instruct the model to produce
-    JSON yourself via a system or user message. Without this, the model may generate
-    an unending stream of whitespace until the generation reaches the token limit,
-    resulting in a long-running and seemingly "stuck" request. Also note that the
-    message content may be partially cut off if finish_reason="length", which
-    indicates the generation exceeded max_tokens or the conversation exceeded the
-    max context length.
+    **Important:** when using JSON mode, you **must** also instruct the model to
+    produce JSON yourself via a system or user message.
     """
 
     seed: Optional[int]
     """
-    If specified, our system will sample deterministically, such that repeated
-    requests with the same seed and parameters will return the same result.
+    If specified, our system will make a best effort to sample deterministically,
+    such that repeated requests with the same `seed` and parameters should return
+    the same result. Determinism is not guaranteed, and you should refer to the
+    `system_fingerprint` response parameter to monitor changes in the backend.
     """
 
     stop: Union[Optional[str], List[str], None]
@@ -133,9 +112,10 @@ class CompletionCreateParams(TypedDict, total=False):
     stream: Optional[bool]
     """If set, partial message deltas will be sent.
 
-    Tokens will be sent as data-only server-sent events as they become available,
-    with the stream terminated by a data: [DONE].
-    [Example code](/docs/text-chat#streaming-a-chat-completion).
+    Tokens will be sent as data-only
+    [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+    as they become available, with the stream terminated by a `data: [DONE]`
+    message. [Example code](/docs/text-chat#streaming-a-chat-completion).
     """
 
     temperature: Optional[float]
@@ -146,15 +126,20 @@ class CompletionCreateParams(TypedDict, total=False):
     this or top_p but not both
     """
 
-    tool_choice: Optional[ToolChoice]
-    """Controls which (if any) function is called by the model.
-
-    Specifying a particular function via a structured object like
+    tool_choice: Optional[ChatCompletionToolChoiceOptionParam]
+    """
+    Controls which (if any) tool is called by the model. `none` means the model will
+    not call any tool and instead generates a message. `auto` means the model can
+    pick between generating a message or calling one or more tools. `required` means
+    the model must call one or more tools. Specifying a particular tool via
     `{"type": "function", "function": {"name": "my_function"}}` forces the model to
-    call that function.
+    call that tool.
+
+    `none` is the default when no tools are present. `auto` is the default if tools
+    are present.
     """
 
-    tools: Optional[Iterable[Tool]]
+    tools: Optional[Iterable[ChatCompletionToolParam]]
     """A list of tools the model may call.
 
     Currently, only functions are supported as a tool. Use this to provide a list of
@@ -185,185 +170,7 @@ class CompletionCreateParams(TypedDict, total=False):
     """
 
 
-class MessageChatCompletionRequestSystemMessage(TypedDict, total=False):
-    content: Required[str]
-    """The contents of the system message."""
-
-    role: Required[Literal["system"]]
-    """The role of the messages author, in this case `system`."""
-
-    name: str
-    """An optional name for the participant.
-
-    Provides the model information to differentiate between participants of the same
-    role.
-    """
-
-    tool_call_id: Optional[str]
-
-
-class MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartText(
-    TypedDict, total=False
-):
-    text: Required[str]
-    """The text content."""
-
-    type: Required[Literal["text"]]
-    """The type of the content part."""
-
-
-class MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartImageImageURL(
-    TypedDict, total=False
-):
-    url: Required[str]
-    """Either a URL of the image or the base64 encoded image data."""
-
-    detail: Literal["auto", "low", "high"]
-    """Specifies the detail level of the image."""
-
-
-class MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartImage(
-    TypedDict, total=False
-):
-    image_url: Required[
-        MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartImageImageURL
-    ]
-
-    type: Required[Literal["image_url"]]
-    """The type of the content part."""
-
-
-MessageChatCompletionRequestUserMessageContentArrayOfContentPart = Union[
-    MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartText,
-    MessageChatCompletionRequestUserMessageContentArrayOfContentPartChatCompletionRequestMessageContentPartImage,
-]
-
-
-class MessageChatCompletionRequestUserMessage(TypedDict, total=False):
-    content: Required[Union[str, Iterable[MessageChatCompletionRequestUserMessageContentArrayOfContentPart]]]
-    """The contents of the user message."""
-
-    role: Required[Literal["user"]]
-    """The role of the messages author, in this case `user`."""
-
-    name: Optional[str]
-    """An optional name for the participant.
-
-    Provides the model information to differentiate between participants of the same
-    role.
-    """
-
-    tool_call_id: Optional[str]
-
-
-class MessageChatCompletionRequestAssistantMessageFunctionCall(TypedDict, total=False):
-    arguments: Required[str]
-    """
-    The arguments to call the function with, as generated by the model in JSON
-    format. Note that the model does not always generate valid JSON, and may
-    hallucinate parameters not defined by your function schema. Validate the
-    arguments in your code before calling your function.
-    """
-
-    name: Required[str]
-    """The name of the function to call."""
-
-
-class MessageChatCompletionRequestAssistantMessageToolCallFunction(TypedDict, total=False):
-    arguments: Required[str]
-    """
-    The arguments to call the function with, as generated by the model in JSON
-    format. Note that the model does not always generate valid JSON, and may
-    hallucinate parameters not defined by your function schema. Validate the
-    arguments in your code before calling your function.
-    """
-
-    name: Required[str]
-    """The name of the function to call."""
-
-
-class MessageChatCompletionRequestAssistantMessageToolCall(TypedDict, total=False):
-    id: Required[str]
-    """The ID of the tool call."""
-
-    function: Required[MessageChatCompletionRequestAssistantMessageToolCallFunction]
-    """The function that the model called."""
-
-    type: Required[Literal["function"]]
-    """The type of the tool. Currently, only `function` is supported."""
-
-
-class MessageChatCompletionRequestAssistantMessage(TypedDict, total=False):
-    role: Required[Literal["assistant"]]
-    """The role of the messages author, in this case `assistant`."""
-
-    content: Optional[str]
-    """The contents of the assistant message.
-
-    Required unless `tool_calls` or `function_call` is specified.
-    """
-
-    function_call: MessageChatCompletionRequestAssistantMessageFunctionCall
-    """Deprecated and replaced by `tool_calls`.
-
-    The name and arguments of a function that should be called, as generated by the
-    model.
-    """
-
-    name: str
-    """An optional name for the participant.
-
-    Provides the model information to differentiate between participants of the same
-    role.
-    """
-
-    tool_call_id: Optional[str]
-
-    tool_calls: Iterable[MessageChatCompletionRequestAssistantMessageToolCall]
-    """The tool calls generated by the model, such as function calls."""
-
-
-class MessageChatCompletionRequestToolMessage(TypedDict, total=False):
-    content: Required[str]
-    """The contents of the tool message."""
-
-    role: Required[Literal["tool"]]
-    """The role of the messages author, in this case `tool`."""
-
-    tool_call_id: Required[str]
-    """Tool call that this message is responding to."""
-
-    name: Optional[str]
-
-
-class MessageChatCompletionRequestFunctionMessage(TypedDict, total=False):
-    content: Required[Optional[str]]
-    """The contents of the function message."""
-
-    name: Required[str]
-    """The name of the function to call."""
-
-    role: Required[Literal["function"]]
-    """The role of the messages author, in this case `function`."""
-
-    tool_call_id: Optional[str]
-
-
-Message = Union[
-    MessageChatCompletionRequestSystemMessage,
-    MessageChatCompletionRequestUserMessage,
-    MessageChatCompletionRequestAssistantMessage,
-    MessageChatCompletionRequestToolMessage,
-    MessageChatCompletionRequestFunctionMessage,
-]
-
-
-class FunctionCallChatCompletionFunctionCallOption(TypedDict, total=False):
-    name: Required[str]
-    """The name of the function to call."""
-
-
-FunctionCall = Union[Literal["none", "auto"], FunctionCallChatCompletionFunctionCallOption]
+FunctionCall = Union[Literal["none", "auto"], ChatCompletionFunctionCallOptionParam]
 
 
 class Function(TypedDict, total=False):
@@ -380,7 +187,7 @@ class Function(TypedDict, total=False):
     how to call the function.
     """
 
-    parameters: Dict[str, object]
+    parameters: shared_params.FunctionParameters
     """The parameters the functions accepts, described as a JSON Schema object.
 
     See the [guide](/docs/guides/text-generation/function-calling) for examples, and
@@ -392,32 +199,5 @@ class Function(TypedDict, total=False):
 
 
 class ResponseFormat(TypedDict, total=False):
-    type: str
-
-
-class ToolChoiceChatToolChoiceFunction(TypedDict, total=False):
-    name: Required[str]
-    """The name of the function to call."""
-
-
-class ToolChoiceChatToolChoice(TypedDict, total=False):
-    function: Required[ToolChoiceChatToolChoiceFunction]
-
-    type: Required[Literal["function"]]
-
-
-ToolChoice = Union[Literal["none", "auto"], ToolChoiceChatToolChoice]
-
-
-class ToolFunction(TypedDict, total=False):
-    name: Required[str]
-
-    description: str
-
-    parameters: Dict[str, object]
-
-
-class Tool(TypedDict, total=False):
-    function: Required[ToolFunction]
-
-    type: Required[Literal["function"]]
+    type: Literal["text", "json_object"]
+    """Must be one of `text` or `json_object`."""

@@ -19,7 +19,7 @@ from pydantic import ValidationError
 from groq import Groq, AsyncGroq, APIResponseValidationError
 from groq._models import BaseModel, FinalRequestOptions
 from groq._constants import RAW_RESPONSE_HEADER
-from groq._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from groq._exceptions import GroqError, APIStatusError, APITimeoutError, APIResponseValidationError
 from groq._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
 
 from .utils import update_env
@@ -314,6 +314,15 @@ class TestGroq:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+    def test_validate_headers(self) -> None:
+        client = Groq(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {api_key}"
+
+        with pytest.raises(GroqError):
+            client2 = Groq(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Groq(
@@ -700,7 +709,7 @@ class TestGroq:
                                 "content": "Explain the importance of low latency LLMs",
                             },
                         ],
-                        model="mixtral-8x7b-32768",
+                        model="llama3-8b-8192",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -730,7 +739,7 @@ class TestGroq:
                                 "content": "Explain the importance of low latency LLMs",
                             },
                         ],
-                        model="mixtral-8x7b-32768",
+                        model="llama3-8b-8192",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1018,6 +1027,15 @@ class TestAsyncGroq:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+    def test_validate_headers(self) -> None:
+        client = AsyncGroq(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {api_key}"
+
+        with pytest.raises(GroqError):
+            client2 = AsyncGroq(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncGroq(
@@ -1408,7 +1426,7 @@ class TestAsyncGroq:
                                 "content": "Explain the importance of low latency LLMs",
                             },
                         ],
-                        model="mixtral-8x7b-32768",
+                        model="llama3-8b-8192",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1438,7 +1456,7 @@ class TestAsyncGroq:
                                 "content": "Explain the importance of low latency LLMs",
                             },
                         ],
-                        model="mixtral-8x7b-32768",
+                        model="llama3-8b-8192",
                     ),
                 ),
                 cast_to=httpx.Response,
