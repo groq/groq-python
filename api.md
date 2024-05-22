@@ -26,6 +26,10 @@ from groq.types.chat import (
     ChatCompletionFunctionCallOption,
     ChatCompletionFunctionMessageParam,
     ChatCompletionMessageParam,
+    ChatCompletionMessageToolCall,
+    ChatCompletionSystemMessageParam,
+    ChatCompletionToolMessageParam,
+    ChatCompletionUserMessageParam,
 )
 ```
 
