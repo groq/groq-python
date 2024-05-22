@@ -17,8 +17,8 @@ from ..types.model import Model
 from .._base_client import (
     make_request_options,
 )
+from ..types.model_deleted import ModelDeleted
 from ..types.model_list_response import ModelListResponse
-from ..types.model_delete_response import ModelDeleteResponse
 
 __all__ = ["Models", "AsyncModels"]
 
@@ -94,7 +94,7 @@ class Models(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ModelDeleteResponse:
+    ) -> ModelDeleted:
         """
         Delete a model
 
@@ -114,7 +114,7 @@ class Models(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ModelDeleteResponse,
+            cast_to=ModelDeleted,
         )
 
 
@@ -189,7 +189,7 @@ class AsyncModels(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ModelDeleteResponse:
+    ) -> ModelDeleted:
         """
         Delete a model
 
@@ -209,7 +209,7 @@ class AsyncModels(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ModelDeleteResponse,
+            cast_to=ModelDeleted,
         )
 
 

@@ -9,8 +9,8 @@ from .shared import (
     FunctionParameters as FunctionParameters,
 )
 from .embedding import Embedding as Embedding
+from .model_deleted import ModelDeleted as ModelDeleted
 from .completion_usage import CompletionUsage as CompletionUsage
 from .model_list_response import ModelListResponse as ModelListResponse
-from .model_delete_response import ModelDeleteResponse as ModelDeleteResponse
 from .embedding_create_params import EmbeddingCreateParams as EmbeddingCreateParams
 from .create_embedding_response import CreateEmbeddingResponse as CreateEmbeddingResponse

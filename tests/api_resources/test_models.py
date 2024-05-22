@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from groq import Groq, AsyncGroq
-from groq.types import Model, ModelListResponse, ModelDeleteResponse
+from groq.types import Model, ModelDeleted, ModelListResponse
 from tests.utils import assert_matches_type
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -85,7 +85,7 @@ class TestModels:
         model = client.models.delete(
             "string",
         )
-        assert_matches_type(ModelDeleteResponse, model, path=["response"])
+        assert_matches_type(ModelDeleted, model, path=["response"])
 
     @parametrize
     def test_raw_response_delete(self, client: Groq) -> None:
@@ -96,7 +96,7 @@ class TestModels:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         model = response.parse()
-        assert_matches_type(ModelDeleteResponse, model, path=["response"])
+        assert_matches_type(ModelDeleted, model, path=["response"])
 
     @parametrize
     def test_streaming_response_delete(self, client: Groq) -> None:
@@ -107,7 +107,7 @@ class TestModels:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             model = response.parse()
-            assert_matches_type(ModelDeleteResponse, model, path=["response"])
+            assert_matches_type(ModelDeleted, model, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -190,7 +190,7 @@ class TestAsyncModels:
         model = await async_client.models.delete(
             "string",
         )
-        assert_matches_type(ModelDeleteResponse, model, path=["response"])
+        assert_matches_type(ModelDeleted, model, path=["response"])
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGroq) -> None:
@@ -201,7 +201,7 @@ class TestAsyncModels:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         model = await response.parse()
-        assert_matches_type(ModelDeleteResponse, model, path=["response"])
+        assert_matches_type(ModelDeleted, model, path=["response"])
 
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGroq) -> None:
@@ -212,7 +212,7 @@ class TestAsyncModels:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             model = await response.parse()
-            assert_matches_type(ModelDeleteResponse, model, path=["response"])
+            assert_matches_type(ModelDeleted, model, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

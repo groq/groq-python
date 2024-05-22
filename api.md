@@ -88,11 +88,11 @@ Methods:
 Types:
 
 ```python
-from groq.types import Model, ModelListResponse, ModelDeleteResponse
+from groq.types import Model, ModelDeleted, ModelListResponse
 ```
 
 Methods:
 
 - <code title="get /openai/v1/models/{model}">client.models.<a href="./src/groq/resources/models.py">retrieve</a>(model) -> <a href="./src/groq/types/model.py">Model</a></code>
 - <code title="get /openai/v1/models">client.models.<a href="./src/groq/resources/models.py">list</a>() -> <a href="./src/groq/types/model_list_response.py">ModelListResponse</a></code>
-- <code title="delete /openai/v1/models/{model}">client.models.<a href="./src/groq/resources/models.py">delete</a>(model) -> <a href="./src/groq/types/model_delete_response.py">ModelDeleteResponse</a></code>
+- <code title="delete /openai/v1/models/{model}">client.models.<a href="./src/groq/resources/models.py">delete</a>(model) -> <a href="./src/groq/types/model_deleted.py">ModelDeleted</a></code>
