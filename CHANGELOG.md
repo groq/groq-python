@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.7.0 (2024-05-22)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/groq/groq-python/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** Improve types ([e46d3ed](https://github.com/groq/groq-python/commit/e46d3ed8591ef543a6f50c4443825fd547b74ab4))
+
+
+### Chores
+
+* fix array indices in README examples ([bacc106](https://github.com/groq/groq-python/commit/bacc10611d74ae9369093bbf44a451182b82e253))
+* patch streaming ([9287ee7](https://github.com/groq/groq-python/commit/9287ee77e505187bb504729fad95edde41663ad0))
+
 ## 0.6.0 (2024-05-16)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/groq/groq-python/compare/v0.5.0...v0.6.0)
