@@ -42,7 +42,7 @@ class Embeddings(SyncAPIResource):
         self,
         *,
         input: Union[str, List[str]],
-        model: Union[str, Literal["nomic-embed-text-v1_5"]],
+        model: str,
         encoding_format: Literal["float", "base64"] | NotGiven = NOT_GIVEN,
         user: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -107,7 +107,7 @@ class AsyncEmbeddings(AsyncAPIResource):
         self,
         *,
         input: Union[str, List[str]],
-        model: Union[str, Literal["nomic-embed-text-v1_5"]],
+        model: str,
         encoding_format: Literal["float", "base64"] | NotGiven = NOT_GIVEN,
         user: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

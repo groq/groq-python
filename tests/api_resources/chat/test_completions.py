@@ -24,7 +24,15 @@ class TestCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                }
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
             ],
             model="string",
         )
@@ -38,7 +46,20 @@ class TestCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
-                }
+                    "tool_call_id": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                    "name": "string",
+                    "tool_call_id": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                    "name": "string",
+                    "tool_call_id": "string",
+                },
             ],
             model="string",
             frequency_penalty=-2,
@@ -48,47 +69,57 @@ class TestCompletions:
                     "description": "string",
                     "name": "string",
                     "parameters": {"foo": "bar"},
-                }
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
             ],
             logit_bias={"foo": 0},
             logprobs=True,
             max_tokens=0,
             n=1,
             presence_penalty=-2,
-            response_format={"type": "json_object"},
+            response_format={"type": "string"},
             seed=0,
             stop="\n",
             stream=True,
-            temperature=1,
+            temperature=0,
             tool_choice="none",
             tools=[
                 {
-                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
                 {
-                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
                 {
-                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
             ],
             top_logprobs=0,
-            top_p=1,
+            top_p=0,
             user="string",
         )
         assert_matches_type(CompletionCreateResponse, completion, path=["response"])
@@ -100,7 +131,15 @@ class TestCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                }
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
             ],
             model="string",
         )
@@ -117,7 +156,15 @@ class TestCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                }
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
             ],
             model="string",
         ) as response:
@@ -140,7 +187,15 @@ class TestAsyncCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                }
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
             ],
             model="string",
         )
@@ -154,7 +209,20 @@ class TestAsyncCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
-                }
+                    "tool_call_id": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                    "name": "string",
+                    "tool_call_id": "string",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                    "name": "string",
+                    "tool_call_id": "string",
+                },
             ],
             model="string",
             frequency_penalty=-2,
@@ -164,47 +232,57 @@ class TestAsyncCompletions:
                     "description": "string",
                     "name": "string",
                     "parameters": {"foo": "bar"},
-                }
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
             ],
             logit_bias={"foo": 0},
             logprobs=True,
             max_tokens=0,
             n=1,
             presence_penalty=-2,
-            response_format={"type": "json_object"},
+            response_format={"type": "string"},
             seed=0,
             stop="\n",
             stream=True,
-            temperature=1,
+            temperature=0,
             tool_choice="none",
             tools=[
                 {
-                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
                 {
-                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
                 {
-                    "type": "function",
                     "function": {
                         "description": "string",
                         "name": "string",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
             ],
             top_logprobs=0,
-            top_p=1,
+            top_p=0,
             user="string",
         )
         assert_matches_type(CompletionCreateResponse, completion, path=["response"])
@@ -216,7 +294,15 @@ class TestAsyncCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                }
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
             ],
             model="string",
         )
@@ -233,7 +319,15 @@ class TestAsyncCompletions:
                 {
                     "content": "string",
                     "role": "system",
-                }
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
+                {
+                    "content": "string",
+                    "role": "system",
+                },
             ],
             model="string",
         ) as response:

@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing_extensions import Literal
+from typing import Optional
 
 from .._models import BaseModel
 
@@ -8,14 +8,10 @@ __all__ = ["Model"]
 
 
 class Model(BaseModel):
-    id: str
-    """The model identifier, which can be referenced in the API endpoints."""
+    id: Optional[str] = None
 
-    created: int
-    """The Unix timestamp (in seconds) when the model was created."""
+    created: Optional[int] = None
 
-    object: Literal["model"]
-    """The object type, which is always "model"."""
+    object: Optional[str] = None
 
-    owned_by: str
-    """The organization that owns the model."""
+    owned_by: Optional[str] = None
