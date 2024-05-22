@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, List, Union, Iterable, Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -23,7 +24,7 @@ from ...types.chat import completion_create_params
 from ..._base_client import (
     make_request_options,
 )
-from ...types.chat.chat_completion import ChatCompletion
+from ...types.chat.completion_create_response import CompletionCreateResponse
 
 __all__ = ["Completions", "AsyncCompletions"]
 
@@ -41,7 +42,7 @@ class Completions(SyncAPIResource):
         self,
         *,
         messages: Iterable[completion_create_params.Message],
-        model: str,
+        model: Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]],
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
@@ -66,7 +67,7 @@ class Completions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ChatCompletion:
+    ) -> CompletionCreateResponse:
         """
         Creates a model response for the given chat conversation.
 
@@ -116,36 +117,39 @@ class Completions(SyncAPIResource):
 
           response_format: An object specifying the format that the model must output.
 
-              Setting to `{ "type": "json" }` enables JSON mode, which guarantees the message
-              the model generates is valid JSON.
+              Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
+              message the model generates is valid JSON.
 
-              Important: when using JSON mode, you must also instruct the model to produce
-              JSON yourself via a system or user message. Without this, the model may generate
-              an unending stream of whitespace until the generation reaches the token limit,
-              resulting in a long-running and seemingly "stuck" request. Also note that the
-              message content may be partially cut off if finish_reason="length", which
-              indicates the generation exceeded max_tokens or the conversation exceeded the
-              max context length.
+              **Important:** when using JSON mode, you **must** also instruct the model to
+              produce JSON yourself via a system or user message.
 
-          seed: If specified, our system will sample deterministically, such that repeated
-              requests with the same seed and parameters will return the same result.
+          seed: If specified, our system will make a best effort to sample deterministically,
+              such that repeated requests with the same `seed` and parameters should return
+              the same result. Determinism is not guaranteed, and you should refer to the
+              `system_fingerprint` response parameter to monitor changes in the backend.
 
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
 
           stream: If set, partial message deltas will be sent. Tokens will be sent as data-only
-              server-sent events as they become available, with the stream terminated by a
-              data: [DONE]. [Example code](/docs/text-chat#streaming-a-chat-completion).
+              [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+              as they become available, with the stream terminated by a `data: [DONE]`
+              message. [Example code](/docs/text-chat#streaming-a-chat-completion).
 
           temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
               make the output more random, while lower values like 0.2 will make it more
               focused and deterministic. We generally recommend altering this or top_p but not
               both
 
-          tool_choice: Controls which (if any) function is called by the model. Specifying a particular
-              function via a structured object like
+          tool_choice: Controls which (if any) tool is called by the model. `none` means the model will
+              not call any tool and instead generates a message. `auto` means the model can
+              pick between generating a message or calling one or more tools. `required` means
+              the model must call one or more tools. Specifying a particular tool via
               `{"type": "function", "function": {"name": "my_function"}}` forces the model to
-              call that function.
+              call that tool.
+
+              `none` is the default when no tools are present. `auto` is the default if tools
+              are present.
 
           tools: A list of tools the model may call. Currently, only functions are supported as a
               tool. Use this to provide a list of functions the model may generate JSON inputs
@@ -202,7 +206,7 @@ class Completions(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ChatCompletion,
+            cast_to=CompletionCreateResponse,
         )
 
 
@@ -219,7 +223,7 @@ class AsyncCompletions(AsyncAPIResource):
         self,
         *,
         messages: Iterable[completion_create_params.Message],
-        model: str,
+        model: Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]],
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
@@ -244,7 +248,7 @@ class AsyncCompletions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ChatCompletion:
+    ) -> CompletionCreateResponse:
         """
         Creates a model response for the given chat conversation.
 
@@ -294,36 +298,39 @@ class AsyncCompletions(AsyncAPIResource):
 
           response_format: An object specifying the format that the model must output.
 
-              Setting to `{ "type": "json" }` enables JSON mode, which guarantees the message
-              the model generates is valid JSON.
+              Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
+              message the model generates is valid JSON.
 
-              Important: when using JSON mode, you must also instruct the model to produce
-              JSON yourself via a system or user message. Without this, the model may generate
-              an unending stream of whitespace until the generation reaches the token limit,
-              resulting in a long-running and seemingly "stuck" request. Also note that the
-              message content may be partially cut off if finish_reason="length", which
-              indicates the generation exceeded max_tokens or the conversation exceeded the
-              max context length.
+              **Important:** when using JSON mode, you **must** also instruct the model to
+              produce JSON yourself via a system or user message.
 
-          seed: If specified, our system will sample deterministically, such that repeated
-              requests with the same seed and parameters will return the same result.
+          seed: If specified, our system will make a best effort to sample deterministically,
+              such that repeated requests with the same `seed` and parameters should return
+              the same result. Determinism is not guaranteed, and you should refer to the
+              `system_fingerprint` response parameter to monitor changes in the backend.
 
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
 
           stream: If set, partial message deltas will be sent. Tokens will be sent as data-only
-              server-sent events as they become available, with the stream terminated by a
-              data: [DONE]. [Example code](/docs/text-chat#streaming-a-chat-completion).
+              [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+              as they become available, with the stream terminated by a `data: [DONE]`
+              message. [Example code](/docs/text-chat#streaming-a-chat-completion).
 
           temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
               make the output more random, while lower values like 0.2 will make it more
               focused and deterministic. We generally recommend altering this or top_p but not
               both
 
-          tool_choice: Controls which (if any) function is called by the model. Specifying a particular
-              function via a structured object like
+          tool_choice: Controls which (if any) tool is called by the model. `none` means the model will
+              not call any tool and instead generates a message. `auto` means the model can
+              pick between generating a message or calling one or more tools. `required` means
+              the model must call one or more tools. Specifying a particular tool via
               `{"type": "function", "function": {"name": "my_function"}}` forces the model to
-              call that function.
+              call that tool.
+
+              `none` is the default when no tools are present. `auto` is the default if tools
+              are present.
 
           tools: A list of tools the model may call. Currently, only functions are supported as a
               tool. Use this to provide a list of functions the model may generate JSON inputs
@@ -380,7 +387,7 @@ class AsyncCompletions(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ChatCompletion,
+            cast_to=CompletionCreateResponse,
         )
 
 
