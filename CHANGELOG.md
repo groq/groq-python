@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.8.0 (2024-05-22)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/groq/groq-python/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** Define OpenAI-compatible models ([bc1bb7b](https://github.com/groq/groq-python/commit/bc1bb7b272ff424ec8eeb2b488a30940263c8fa5))
+
+
+### Chores
+
+* fix array indices in README examples ([5056621](https://github.com/groq/groq-python/commit/505662127635c4a3d77b57a8bbb3a8361227a02f))
+* patch streaming ([9dcba61](https://github.com/groq/groq-python/commit/9dcba614f7a41975df4e0486b6b497653a482dbc))
+
 ## 0.5.0 (2024-04-11)
 
 Full Changelog: [v0.4.2...v0.5.0](https://github.com/groq/groq-python/compare/v0.4.2...v0.5.0)
