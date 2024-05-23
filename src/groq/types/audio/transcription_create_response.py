@@ -3,19 +3,14 @@
 from typing import List, Union, Optional
 
 from ..._models import BaseModel
+from .transcription import Transcription
 
 __all__ = [
     "TranscriptionCreateResponse",
-    "CreateTranscriptionResponseJson",
     "CreateTranscriptionResponseVerboseJson",
     "CreateTranscriptionResponseVerboseJsonSegment",
     "CreateTranscriptionResponseVerboseJsonWord",
 ]
-
-
-class CreateTranscriptionResponseJson(BaseModel):
-    text: str
-    """The transcribed text."""
 
 
 class CreateTranscriptionResponseVerboseJsonSegment(BaseModel):
@@ -88,4 +83,4 @@ class CreateTranscriptionResponseVerboseJson(BaseModel):
     """Extracted words and their corresponding timestamps."""
 
 
-TranscriptionCreateResponse = Union[CreateTranscriptionResponseJson, CreateTranscriptionResponseVerboseJson]
+TranscriptionCreateResponse = Union[Transcription, CreateTranscriptionResponseVerboseJson]
