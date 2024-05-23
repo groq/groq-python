@@ -56,6 +56,7 @@ class Completions(SyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
+        parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
@@ -89,6 +90,7 @@ class Completions(SyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
+        parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
@@ -122,6 +124,7 @@ class Completions(SyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
+        parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
@@ -212,8 +215,8 @@ class Completions(SyncAPIResource):
               context length.
 
           n: How many chat completion choices to generate for each input message. Note that
-              you will be charged based on the number of generated tokens across all of the
-              choices. Keep `n` as `1` to minimize costs.
+              the current moment, only n=1 is supported. Other values will result in a 400
+              response.
 
           presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
               whether they appear in the text so far, increasing the model's likelihood to
@@ -338,6 +341,7 @@ class AsyncCompletions(AsyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
+        parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
@@ -371,6 +375,7 @@ class AsyncCompletions(AsyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
+        parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
@@ -404,6 +409,7 @@ class AsyncCompletions(AsyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
+        parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
@@ -494,8 +500,8 @@ class AsyncCompletions(AsyncAPIResource):
               context length.
 
           n: How many chat completion choices to generate for each input message. Note that
-              you will be charged based on the number of generated tokens across all of the
-              choices. Keep `n` as `1` to minimize costs.
+              the current moment, only n=1 is supported. Other values will result in a 400
+              response.
 
           presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
               whether they appear in the text so far, increasing the model's likelihood to

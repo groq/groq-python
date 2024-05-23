@@ -17,3 +17,6 @@ class ChatCompletionFunctionMessageParam(TypedDict, total=False):
 
     role: Required[Literal["function"]]
     """The role of the messages author, in this case `function`."""
+
+    tool_call_id: Optional[str]
+    """DO NOT USE. This field is present because OpenAI allows it and users send it."""
