@@ -38,6 +38,7 @@ class TestCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
+                    "tool_call_id": "string",
                 }
             ],
             model="string",
@@ -48,7 +49,17 @@ class TestCompletions:
                     "description": "string",
                     "name": "string",
                     "parameters": {"foo": "bar"},
-                }
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
             ],
             logit_bias={"foo": 0},
             logprobs=True,
@@ -154,6 +165,7 @@ class TestAsyncCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
+                    "tool_call_id": "string",
                 }
             ],
             model="string",
@@ -164,7 +176,17 @@ class TestAsyncCompletions:
                     "description": "string",
                     "name": "string",
                     "parameters": {"foo": "bar"},
-                }
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
+                {
+                    "description": "string",
+                    "name": "string",
+                    "parameters": {"foo": "bar"},
+                },
             ],
             logit_bias={"foo": 0},
             logprobs=True,
