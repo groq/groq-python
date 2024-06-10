@@ -74,8 +74,8 @@ class CompletionCreateParams(TypedDict, total=False):
     n: Optional[int]
     """How many chat completion choices to generate for each input message.
 
-    Note that you will be charged based on the number of generated tokens across all
-    of the choices. Keep `n` as `1` to minimize costs.
+    Note that the current moment, only n=1 is supported. Other values will result in
+    a 400 response.
     """
 
     presence_penalty: Optional[float]
@@ -170,7 +170,7 @@ class CompletionCreateParams(TypedDict, total=False):
     """
 
 
-FunctionCall = Union[Literal["none", "auto"], ChatCompletionFunctionCallOptionParam]
+FunctionCall = Union[Literal["none", "auto", "required"], ChatCompletionFunctionCallOptionParam]
 
 
 class Function(TypedDict, total=False):
@@ -190,9 +190,9 @@ class Function(TypedDict, total=False):
     parameters: shared_params.FunctionParameters
     """The parameters the functions accepts, described as a JSON Schema object.
 
-    See the [guide](/docs/guides/text-generation/function-calling) for examples, and
-    the [JSON Schema reference](https://json-schema.org/understanding-json-schema/)
-    for documentation about the format.
+    See the docs on [tool use](/docs/tool-use) for examples, and the
+    [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for
+    documentation about the format.
 
     Omitting `parameters` defines a function with an empty parameter list.
     """

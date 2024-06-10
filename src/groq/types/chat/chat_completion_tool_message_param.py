@@ -16,3 +16,6 @@ class ChatCompletionToolMessageParam(TypedDict, total=False):
 
     tool_call_id: Required[str]
     """Tool call that this message is responding to."""
+
+    name: str
+    """DO NOT USE. This field is present because OpenAI allows it and userssend it."""
