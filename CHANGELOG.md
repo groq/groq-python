@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0 (2024-06-11)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/groq/groq-python/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** Fix audio transcription response formats ([88e3d61](https://github.com/groq/groq-python/commit/88e3d61ca46949ff32c14a39416e0d7278d80997))
+* **api:** Tool calling features ([c081730](https://github.com/groq/groq-python/commit/c0817302fb83b4a4f61397f79d51c214280a77ae))
+
 ## 0.8.0 (2024-05-22)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/groq/groq-python/compare/v0.7.0...v0.8.0)
