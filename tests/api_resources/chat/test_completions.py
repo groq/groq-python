@@ -38,7 +38,6 @@ class TestCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
-                    "tool_call_id": "string",
                 }
             ],
             model="string",
@@ -65,6 +64,7 @@ class TestCompletions:
             logprobs=True,
             max_tokens=0,
             n=1,
+            parallel_tool_calls=True,
             presence_penalty=-2,
             response_format={"type": "json_object"},
             seed=0,
@@ -165,7 +165,6 @@ class TestAsyncCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
-                    "tool_call_id": "string",
                 }
             ],
             model="string",
@@ -192,6 +191,7 @@ class TestAsyncCompletions:
             logprobs=True,
             max_tokens=0,
             n=1,
+            parallel_tool_calls=True,
             presence_penalty=-2,
             response_format={"type": "json_object"},
             seed=0,
