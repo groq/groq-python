@@ -78,6 +78,9 @@ class CompletionCreateParams(TypedDict, total=False):
     a 400 response.
     """
 
+    parallel_tool_calls: Optional[bool]
+    """Whether to enable parallel function calling during tool use."""
+
     presence_penalty: Optional[float]
     """Number between -2.0 and 2.0.
 
