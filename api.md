@@ -77,12 +77,12 @@ Methods:
 Types:
 
 ```python
-from groq.types.audio import Translation, TranslationCreateResponse
+from groq.types.audio import Translation
 ```
 
 Methods:
 
-- <code title="post /openai/v1/audio/translations">client.audio.translations.<a href="./src/groq/resources/audio/translations.py">create</a>(\*\*<a href="src/groq/types/audio/translation_create_params.py">params</a>) -> <a href="./src/groq/types/audio/translation_create_response.py">TranslationCreateResponse</a></code>
+- <code title="post /openai/v1/audio/translations">client.audio.translations.<a href="./src/groq/resources/audio/translations.py">create</a>(\*\*<a href="src/groq/types/audio/translation_create_params.py">params</a>) -> <a href="./src/groq/types/audio/translation.py">Translation</a></code>
 
 # Models
 
