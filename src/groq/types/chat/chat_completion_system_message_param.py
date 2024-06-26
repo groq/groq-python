@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["ChatCompletionSystemMessageParam"]
@@ -20,3 +21,6 @@ class ChatCompletionSystemMessageParam(TypedDict, total=False):
     Provides the model information to differentiate between participants of the same
     role.
     """
+
+    tool_call_id: Optional[str]
+    """DO NOT USE. This field is present because OpenAI allows it and userssend it."""
