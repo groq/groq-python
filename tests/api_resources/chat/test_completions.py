@@ -38,6 +38,7 @@ class TestCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
+                    "tool_call_id": "string",
                 }
             ],
             model="string",
@@ -165,6 +166,7 @@ class TestAsyncCompletions:
                     "content": "string",
                     "role": "system",
                     "name": "string",
+                    "tool_call_id": "string",
                 }
             ],
             model="string",

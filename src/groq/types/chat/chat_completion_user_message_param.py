@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from .chat_completion_content_part_param import ChatCompletionContentPartParam
@@ -23,3 +23,6 @@ class ChatCompletionUserMessageParam(TypedDict, total=False):
     Provides the model information to differentiate between participants of the same
     role.
     """
+
+    tool_call_id: Optional[str]
+    """DO NOT USE. This field is present because OpenAI allows it and userssend it."""
