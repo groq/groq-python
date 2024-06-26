@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.0 (2024-06-26)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/groq/groq-python/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** update via SDK Studio ([#94](https://github.com/groq/groq-python/issues/94)) ([2808c19](https://github.com/groq/groq-python/commit/2808c19d5729978ab6c4093b69cd9845cc75907e))
+* **api:** update via SDK Studio ([#97](https://github.com/groq/groq-python/issues/97)) ([97f8a0a](https://github.com/groq/groq-python/commit/97f8a0a2397deecd9134075a7fb44100b7c51611))
+
 ## 0.9.0 (2024-06-11)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/groq/groq-python/compare/v0.8.0...v0.9.0)
