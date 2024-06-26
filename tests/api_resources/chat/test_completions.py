@@ -71,6 +71,7 @@ class TestCompletions:
             seed=0,
             stop="\n",
             stream=True,
+            stream_options={"include_usage": True},
             temperature=1,
             tool_choice="none",
             tools=[
@@ -199,6 +200,7 @@ class TestAsyncCompletions:
             seed=0,
             stop="\n",
             stream=True,
+            stream_options={"include_usage": True},
             temperature=1,
             tool_choice="none",
             tools=[
