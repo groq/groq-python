@@ -58,6 +58,7 @@ dev-dependencies = [
     "nox",
     "dirty-equals>=0.6.0",
     "importlib-metadata>=6.7.0",
+    "rich>=13.7.1",
 
 ]
 
@@ -98,6 +99,21 @@ include = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/groq"]
+
+[tool.hatch.build.targets.sdist]
+# Basically everything except hidden files/directories (such as .github, .devcontainers, .python-version, etc)
+include = [
+  "/*.toml",
+  "/*.json",
+  "/*.lock",
+  "/*.md",
+  "/mypy.ini",
+  "/noxfile.py",
+  "bin/*",
+  "examples/*",
+  "src/*",
+  "tests/*",
+]
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/markdown"

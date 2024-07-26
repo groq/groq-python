@@ -20,14 +20,14 @@ class TestModels:
     @parametrize
     def test_method_retrieve(self, client: Groq) -> None:
         model = client.models.retrieve(
-            "string",
+            "model",
         )
         assert_matches_type(Model, model, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Groq) -> None:
         response = client.models.with_raw_response.retrieve(
-            "string",
+            "model",
         )
 
         assert response.is_closed is True
@@ -38,7 +38,7 @@ class TestModels:
     @parametrize
     def test_streaming_response_retrieve(self, client: Groq) -> None:
         with client.models.with_streaming_response.retrieve(
-            "string",
+            "model",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -83,14 +83,14 @@ class TestModels:
     @parametrize
     def test_method_delete(self, client: Groq) -> None:
         model = client.models.delete(
-            "string",
+            "model",
         )
         assert_matches_type(ModelDeleted, model, path=["response"])
 
     @parametrize
     def test_raw_response_delete(self, client: Groq) -> None:
         response = client.models.with_raw_response.delete(
-            "string",
+            "model",
         )
 
         assert response.is_closed is True
@@ -101,7 +101,7 @@ class TestModels:
     @parametrize
     def test_streaming_response_delete(self, client: Groq) -> None:
         with client.models.with_streaming_response.delete(
-            "string",
+            "model",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -125,14 +125,14 @@ class TestAsyncModels:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGroq) -> None:
         model = await async_client.models.retrieve(
-            "string",
+            "model",
         )
         assert_matches_type(Model, model, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGroq) -> None:
         response = await async_client.models.with_raw_response.retrieve(
-            "string",
+            "model",
         )
 
         assert response.is_closed is True
@@ -143,7 +143,7 @@ class TestAsyncModels:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGroq) -> None:
         async with async_client.models.with_streaming_response.retrieve(
-            "string",
+            "model",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -188,14 +188,14 @@ class TestAsyncModels:
     @parametrize
     async def test_method_delete(self, async_client: AsyncGroq) -> None:
         model = await async_client.models.delete(
-            "string",
+            "model",
         )
         assert_matches_type(ModelDeleted, model, path=["response"])
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGroq) -> None:
         response = await async_client.models.with_raw_response.delete(
-            "string",
+            "model",
         )
 
         assert response.is_closed is True
@@ -206,7 +206,7 @@ class TestAsyncModels:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGroq) -> None:
         async with async_client.models.with_streaming_response.delete(
-            "string",
+            "model",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
