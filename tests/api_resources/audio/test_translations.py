@@ -30,7 +30,7 @@ class TestTranslations:
         translation = client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
-            prompt="string",
+            prompt="prompt",
             response_format="json",
             temperature=0,
         )
@@ -79,7 +79,7 @@ class TestAsyncTranslations:
         translation = await async_client.audio.translations.create(
             file=b"raw file contents",
             model="whisper-1",
-            prompt="string",
+            prompt="prompt",
             response_format="json",
             temperature=0,
         )

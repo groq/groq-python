@@ -31,7 +31,7 @@ class TestEmbeddings:
             input="The quick brown fox jumped over the lazy dog",
             model="nomic-embed-text-v1_5",
             encoding_format="float",
-            user="string",
+            user="user",
         )
         assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 
@@ -79,7 +79,7 @@ class TestAsyncEmbeddings:
             input="The quick brown fox jumped over the lazy dog",
             model="nomic-embed-text-v1_5",
             encoding_format="float",
-            user="string",
+            user="user",
         )
         assert_matches_type(CreateEmbeddingResponse, embedding, path=["response"])
 

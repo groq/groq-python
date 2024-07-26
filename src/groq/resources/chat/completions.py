@@ -21,9 +21,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ...types.chat import completion_create_params
-from ..._base_client import (
-    make_request_options,
-)
+from ..._base_client import make_request_options
 from ...types.chat.chat_completion import ChatCompletion
 from ...types.chat.chat_completion_tool_param import ChatCompletionToolParam
 from ...types.chat.chat_completion_message_param import ChatCompletionMessageParam
