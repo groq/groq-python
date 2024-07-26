@@ -58,6 +58,7 @@ from ._types import (
     HttpxSendArgs,
     AsyncTransport,
     RequestOptions,
+    HttpxRequestFiles,
     ModelBuilderProtocol,
 )
 from ._utils import is_dict, is_list, asyncify, is_given, lru_cache, is_mapping
@@ -459,6 +460,7 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
         headers = self._build_headers(options)
         params = _merge_mappings(self.default_query, options.params)
         content_type = headers.get("Content-Type")
+        files = options.files
 
         # If the given Content-Type header is multipart/form-data then it
         # has to be removed so that httpx can generate the header with
@@ -472,13 +474,22 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
                 headers.pop("Content-Type")
 
             # As we are now sending multipart/form-data instead of application/json
-            # we need to tell httpx to use it, https://www.python-httpx.org/advanced/#multipart-file-encoding
+            # we need to tell httpx to use it, https://www.python-httpx.org/advanced/clients/#multipart-file-encoding
             if json_data:
                 if not is_dict(json_data):
                     raise TypeError(
                         f"Expected query input to be a dictionary for multipart requests but got {type(json_data)} instead."
                     )
                 kwargs["data"] = self._serialize_multipartform(json_data)
+
+            # httpx determines whether or not to send a "multipart/form-data"
+            # request based on the truthiness of the "files" argument.
+            # This gets around that issue by generating a dict value that
+            # evaluates to true.
+            #
+            # https://github.com/encode/httpx/discussions/2399#discussioncomment-3814186
+            if not files:
+                files = cast(HttpxRequestFiles, ForceMultipartDict())
 
         # TODO: report this error to httpx
         return self._client.build_request(  # pyright: ignore[reportUnknownMemberType]
@@ -492,7 +503,7 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
             # https://github.com/microsoft/pyright/issues/3526#event-6715453066
             params=self.qs.stringify(cast(Mapping[str, Any], params)) if params else None,
             json=json_data,
-            files=options.files,
+            files=files,
             **kwargs,
         )
 
@@ -868,9 +879,9 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
     def _prepare_options(
         self,
         options: FinalRequestOptions,  # noqa: ARG002
-    ) -> None:
+    ) -> FinalRequestOptions:
         """Hook for mutating the given options"""
-        return None
+        return options
 
     def _prepare_request(
         self,
@@ -944,8 +955,13 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         stream: bool,
         stream_cls: type[_StreamT] | None,
     ) -> ResponseT | _StreamT:
+        # create a copy of the options we were given so that if the
+        # options are mutated later & we then retry, the retries are
+        # given the original options
+        input_options = model_copy(options)
+
         cast_to = self._maybe_override_cast_to(cast_to, options)
-        self._prepare_options(options)
+        options = self._prepare_options(options)
 
         retries = self._remaining_retries(remaining_retries, options)
         request = self._build_request(options)
@@ -968,7 +984,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
 
             if retries > 0:
                 return self._retry_request(
-                    options,
+                    input_options,
                     cast_to,
                     retries,
                     stream=stream,
@@ -983,7 +999,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
 
             if retries > 0:
                 return self._retry_request(
-                    options,
+                    input_options,
                     cast_to,
                     retries,
                     stream=stream,
@@ -1011,7 +1027,7 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
             if retries > 0 and self._should_retry(err.response):
                 err.response.close()
                 return self._retry_request(
-                    options,
+                    input_options,
                     cast_to,
                     retries,
                     err.response.headers,
@@ -1426,9 +1442,9 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
     async def _prepare_options(
         self,
         options: FinalRequestOptions,  # noqa: ARG002
-    ) -> None:
+    ) -> FinalRequestOptions:
         """Hook for mutating the given options"""
-        return None
+        return options
 
     async def _prepare_request(
         self,
@@ -1507,8 +1523,13 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
             # execute it earlier while we are in an async context
             self._platform = await asyncify(get_platform)()
 
+        # create a copy of the options we were given so that if the
+        # options are mutated later & we then retry, the retries are
+        # given the original options
+        input_options = model_copy(options)
+
         cast_to = self._maybe_override_cast_to(cast_to, options)
-        await self._prepare_options(options)
+        options = await self._prepare_options(options)
 
         retries = self._remaining_retries(remaining_retries, options)
         request = self._build_request(options)
@@ -1529,7 +1550,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
 
             if retries > 0:
                 return await self._retry_request(
-                    options,
+                    input_options,
                     cast_to,
                     retries,
                     stream=stream,
@@ -1544,7 +1565,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
 
             if retries > 0:
                 return await self._retry_request(
-                    options,
+                    input_options,
                     cast_to,
                     retries,
                     stream=stream,
@@ -1567,7 +1588,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
             if retries > 0 and self._should_retry(err.response):
                 await err.response.aclose()
                 return await self._retry_request(
-                    options,
+                    input_options,
                     cast_to,
                     retries,
                     err.response.headers,
@@ -1861,6 +1882,11 @@ def make_request_options(
         options["post_parser"] = post_parser  # type: ignore
 
     return options
+
+
+class ForceMultipartDict(Dict[str, None]):
+    def __bool__(self) -> bool:
+        return True
 
 
 class OtherPlatform:

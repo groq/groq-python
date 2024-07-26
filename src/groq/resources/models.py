@@ -14,9 +14,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from ..types.model import Model
-from .._base_client import (
-    make_request_options,
-)
+from .._base_client import make_request_options
 from ..types.model_deleted import ModelDeleted
 from ..types.model_list_response import ModelListResponse
 

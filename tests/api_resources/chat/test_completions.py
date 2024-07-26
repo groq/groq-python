@@ -22,7 +22,7 @@ class TestCompletions:
         completion = client.chat.completions.create(
             messages=[
                 {
-                    "content": "string",
+                    "content": "content",
                     "role": "system",
                 }
             ],
@@ -35,10 +35,10 @@ class TestCompletions:
         completion = client.chat.completions.create(
             messages=[
                 {
-                    "content": "string",
+                    "content": "content",
                     "role": "system",
-                    "name": "string",
-                    "tool_call_id": "string",
+                    "name": "name",
+                    "tool_call_id": "tool_call_id",
                 }
             ],
             model="string",
@@ -46,18 +46,18 @@ class TestCompletions:
             function_call="none",
             functions=[
                 {
-                    "description": "string",
-                    "name": "string",
+                    "description": "description",
+                    "name": "name",
                     "parameters": {"foo": "bar"},
                 },
                 {
-                    "description": "string",
-                    "name": "string",
+                    "description": "description",
+                    "name": "name",
                     "parameters": {"foo": "bar"},
                 },
                 {
-                    "description": "string",
-                    "name": "string",
+                    "description": "description",
+                    "name": "name",
                     "parameters": {"foo": "bar"},
                 },
             ],
@@ -78,31 +78,31 @@ class TestCompletions:
                 {
                     "type": "function",
                     "function": {
-                        "description": "string",
-                        "name": "string",
+                        "description": "description",
+                        "name": "name",
                         "parameters": {"foo": "bar"},
                     },
                 },
                 {
                     "type": "function",
                     "function": {
-                        "description": "string",
-                        "name": "string",
+                        "description": "description",
+                        "name": "name",
                         "parameters": {"foo": "bar"},
                     },
                 },
                 {
                     "type": "function",
                     "function": {
-                        "description": "string",
-                        "name": "string",
+                        "description": "description",
+                        "name": "name",
                         "parameters": {"foo": "bar"},
                     },
                 },
             ],
             top_logprobs=0,
             top_p=1,
-            user="string",
+            user="user",
         )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
@@ -111,7 +111,7 @@ class TestCompletions:
         response = client.chat.completions.with_raw_response.create(
             messages=[
                 {
-                    "content": "string",
+                    "content": "content",
                     "role": "system",
                 }
             ],
@@ -128,7 +128,7 @@ class TestCompletions:
         with client.chat.completions.with_streaming_response.create(
             messages=[
                 {
-                    "content": "string",
+                    "content": "content",
                     "role": "system",
                 }
             ],
@@ -151,7 +151,7 @@ class TestAsyncCompletions:
         completion = await async_client.chat.completions.create(
             messages=[
                 {
-                    "content": "string",
+                    "content": "content",
                     "role": "system",
                 }
             ],
@@ -164,10 +164,10 @@ class TestAsyncCompletions:
         completion = await async_client.chat.completions.create(
             messages=[
                 {
-                    "content": "string",
+                    "content": "content",
                     "role": "system",
-                    "name": "string",
-                    "tool_call_id": "string",
+                    "name": "name",
+                    "tool_call_id": "tool_call_id",
                 }
             ],
             model="string",
@@ -175,18 +175,18 @@ class TestAsyncCompletions:
             function_call="none",
             functions=[
                 {
-                    "description": "string",
-                    "name": "string",
+                    "description": "description",
+                    "name": "name",
                     "parameters": {"foo": "bar"},
                 },
                 {
-                    "description": "string",
-                    "name": "string",
+                    "description": "description",
+                    "name": "name",
                     "parameters": {"foo": "bar"},
                 },
                 {
-                    "description": "string",
-                    "name": "string",
+                    "description": "description",
+                    "name": "name",
                     "parameters": {"foo": "bar"},
                 },
             ],
@@ -207,31 +207,31 @@ class TestAsyncCompletions:
                 {
                     "type": "function",
                     "function": {
-                        "description": "string",
-                        "name": "string",
+                        "description": "description",
+                        "name": "name",
                         "parameters": {"foo": "bar"},
                     },
                 },
                 {
                     "type": "function",
                     "function": {
-                        "description": "string",
-                        "name": "string",
+                        "description": "description",
+                        "name": "name",
                         "parameters": {"foo": "bar"},
                     },
                 },
                 {
                     "type": "function",
                     "function": {
-                        "description": "string",
-                        "name": "string",
+                        "description": "description",
+                        "name": "name",
                         "parameters": {"foo": "bar"},
                     },
                 },
             ],
             top_logprobs=0,
             top_p=1,
-            user="string",
+            user="user",
         )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
@@ -240,7 +240,7 @@ class TestAsyncCompletions:
         response = await async_client.chat.completions.with_raw_response.create(
             messages=[
                 {
-                    "content": "string",
+                    "content": "content",
                     "role": "system",
                 }
             ],
@@ -257,7 +257,7 @@ class TestAsyncCompletions:
         async with async_client.chat.completions.with_streaming_response.create(
             messages=[
                 {
-                    "content": "string",
+                    "content": "content",
                     "role": "system",
                 }
             ],

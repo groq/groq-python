@@ -11,7 +11,7 @@
 -e file:.
 annotated-types==0.6.0
     # via pydantic
-anyio==4.1.0
+anyio==4.4.0
     # via groq
     # via httpx
 argcomplete==3.1.2
@@ -45,7 +45,11 @@ idna==3.4
 importlib-metadata==7.0.0
 iniconfig==2.0.0
     # via pytest
-mypy==1.7.1
+markdown-it-py==3.0.0
+    # via rich
+mdurl==0.1.2
+    # via markdown-it-py
+mypy==1.10.1
 mypy-extensions==1.0.0
     # via mypy
 nodeenv==1.8.0
@@ -64,6 +68,8 @@ pydantic==2.7.1
     # via groq
 pydantic-core==2.18.2
     # via pydantic
+pygments==2.18.0
+    # via rich
 pyright==1.1.364
 pytest==7.1.1
     # via pytest-asyncio
@@ -73,6 +79,7 @@ python-dateutil==2.8.2
 pytz==2023.3.post1
     # via dirty-equals
 respx==0.20.2
+rich==13.7.1
 ruff==0.1.9
 setuptools==68.2.2
     # via nodeenv
@@ -87,6 +94,7 @@ tomli==2.0.1
     # via mypy
     # via pytest
 typing-extensions==4.8.0
+    # via anyio
     # via groq
     # via mypy
     # via pydantic
