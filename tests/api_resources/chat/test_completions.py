@@ -46,18 +46,18 @@ class TestCompletions:
             function_call="none",
             functions=[
                 {
-                    "description": "description",
                     "name": "name",
+                    "description": "description",
                     "parameters": {"foo": "bar"},
                 },
                 {
-                    "description": "description",
                     "name": "name",
+                    "description": "description",
                     "parameters": {"foo": "bar"},
                 },
                 {
-                    "description": "description",
                     "name": "name",
+                    "description": "description",
                     "parameters": {"foo": "bar"},
                 },
             ],
@@ -67,7 +67,7 @@ class TestCompletions:
             n=1,
             parallel_tool_calls=True,
             presence_penalty=-2,
-            response_format={"type": "json_object"},
+            response_format={"type": "text"},
             seed=0,
             stop="\n",
             stream=True,
@@ -76,28 +76,28 @@ class TestCompletions:
             tool_choice="none",
             tools=[
                 {
-                    "type": "function",
                     "function": {
-                        "description": "description",
                         "name": "name",
+                        "description": "description",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
                 {
-                    "type": "function",
                     "function": {
-                        "description": "description",
                         "name": "name",
+                        "description": "description",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
                 {
-                    "type": "function",
                     "function": {
-                        "description": "description",
                         "name": "name",
+                        "description": "description",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
             ],
             top_logprobs=0,
@@ -175,18 +175,18 @@ class TestAsyncCompletions:
             function_call="none",
             functions=[
                 {
-                    "description": "description",
                     "name": "name",
+                    "description": "description",
                     "parameters": {"foo": "bar"},
                 },
                 {
-                    "description": "description",
                     "name": "name",
+                    "description": "description",
                     "parameters": {"foo": "bar"},
                 },
                 {
-                    "description": "description",
                     "name": "name",
+                    "description": "description",
                     "parameters": {"foo": "bar"},
                 },
             ],
@@ -196,7 +196,7 @@ class TestAsyncCompletions:
             n=1,
             parallel_tool_calls=True,
             presence_penalty=-2,
-            response_format={"type": "json_object"},
+            response_format={"type": "text"},
             seed=0,
             stop="\n",
             stream=True,
@@ -205,28 +205,28 @@ class TestAsyncCompletions:
             tool_choice="none",
             tools=[
                 {
-                    "type": "function",
                     "function": {
-                        "description": "description",
                         "name": "name",
+                        "description": "description",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
                 {
-                    "type": "function",
                     "function": {
-                        "description": "description",
                         "name": "name",
+                        "description": "description",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
                 {
-                    "type": "function",
                     "function": {
-                        "description": "description",
                         "name": "name",
+                        "description": "description",
                         "parameters": {"foo": "bar"},
                     },
+                    "type": "function",
                 },
             ],
             top_logprobs=0,
