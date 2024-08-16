@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from typing import Dict, List, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-from ...types import shared_params
 from .chat_completion_tool_param import ChatCompletionToolParam
 from .chat_completion_message_param import ChatCompletionMessageParam
+from ..shared_params.function_parameters import FunctionParameters
 from .chat_completion_tool_choice_option_param import ChatCompletionToolChoiceOptionParam
 from .chat_completion_function_call_option_param import ChatCompletionFunctionCallOptionParam
 
@@ -176,7 +176,7 @@ class CompletionCreateParams(TypedDict, total=False):
     """
 
 
-FunctionCall = Union[Literal["none", "auto", "required"], ChatCompletionFunctionCallOptionParam]
+FunctionCall: TypeAlias = Union[Literal["none", "auto", "required"], ChatCompletionFunctionCallOptionParam]
 
 
 class Function(TypedDict, total=False):
@@ -193,7 +193,7 @@ class Function(TypedDict, total=False):
     how to call the function.
     """
 
-    parameters: shared_params.FunctionParameters
+    parameters: FunctionParameters
     """The parameters the functions accepts, described as a JSON Schema object.
 
     See the docs on [tool use](/docs/tool-use) for examples, and the
