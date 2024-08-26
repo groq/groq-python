@@ -11,7 +11,7 @@ from .chat_completion_message_param import ChatCompletionMessageParam
 from .chat_completion_tool_choice_option_param import ChatCompletionToolChoiceOptionParam
 from .chat_completion_function_call_option_param import ChatCompletionFunctionCallOptionParam
 
-__all__ = ["CompletionCreateParams", "FunctionCall", "Function", "ResponseFormat"]
+__all__ = ["CompletionCreateParams", "FunctionCall", "Function", "ResponseFormat", "StreamOptions"]
 
 
 class CompletionCreateParams(TypedDict, total=False):
@@ -121,6 +121,9 @@ class CompletionCreateParams(TypedDict, total=False):
     message. [Example code](/docs/text-chat#streaming-a-chat-completion).
     """
 
+    stream_options: Optional[StreamOptions]
+    """Options for streaming response. Only set this when you set `stream: true`."""
+
     temperature: Optional[float]
     """What sampling temperature to use, between 0 and 2.
 
@@ -204,3 +207,8 @@ class Function(TypedDict, total=False):
 class ResponseFormat(TypedDict, total=False):
     type: Literal["text", "json_object"]
     """Must be one of `text` or `json_object`."""
+
+
+class StreamOptions(TypedDict, total=False):
+    include_usage: bool
+    """This field is unused"""
