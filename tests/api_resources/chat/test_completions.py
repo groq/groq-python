@@ -38,7 +38,6 @@ class TestCompletions:
                     "content": "content",
                     "role": "system",
                     "name": "name",
-                    "tool_call_id": "tool_call_id",
                 }
             ],
             model="string",
@@ -71,7 +70,6 @@ class TestCompletions:
             seed=0,
             stop="\n",
             stream=False,
-            stream_options={"include_usage": True},
             temperature=1,
             tool_choice="none",
             tools=[
@@ -167,7 +165,6 @@ class TestAsyncCompletions:
                     "content": "content",
                     "role": "system",
                     "name": "name",
-                    "tool_call_id": "tool_call_id",
                 }
             ],
             model="string",
@@ -200,7 +197,6 @@ class TestAsyncCompletions:
             seed=0,
             stop="\n",
             stream=False,
-            stream_options={"include_usage": True},
             temperature=1,
             tool_choice="none",
             tools=[
