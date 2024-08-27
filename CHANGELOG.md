@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.10.0 (2024-08-27)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/groq/groq-python/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#102](https://github.com/groq/groq-python/issues/102)) ([42a8621](https://github.com/groq/groq-python/commit/42a8621a8ca6fe2656ad449eb84c65dc86c2a119))
+* **api:** OpenAPI spec update via Stainless API ([#111](https://github.com/groq/groq-python/issues/111)) ([d860183](https://github.com/groq/groq-python/commit/d860183dae060f32c835179c4754386cb9543e76))
+* **api:** OpenAPI spec update via Stainless API ([#115](https://github.com/groq/groq-python/issues/115)) ([007affd](https://github.com/groq/groq-python/commit/007affd05241ff20e3c18c3523015c7a236dc9dd))
+* **api:** OpenAPI spec update via Stainless API ([#98](https://github.com/groq/groq-python/issues/98)) ([c3c42ec](https://github.com/groq/groq-python/commit/c3c42ec4cb928a9e1093b8bd4f4232119f73d45c))
+* **api:** update via SDK Studio ([#94](https://github.com/groq/groq-python/issues/94)) ([2808c19](https://github.com/groq/groq-python/commit/2808c19d5729978ab6c4093b69cd9845cc75907e))
+* **api:** update via SDK Studio ([#97](https://github.com/groq/groq-python/issues/97)) ([97f8a0a](https://github.com/groq/groq-python/commit/97f8a0a2397deecd9134075a7fb44100b7c51611))
+
+
+### Chores
+
+* **ci:** limit release doctor target branches ([#105](https://github.com/groq/groq-python/issues/105)) ([629f2d0](https://github.com/groq/groq-python/commit/629f2d02ac844bcfeee0df9025df657d5950345c))
+* **docs:** document how to do per-request http client customization ([#104](https://github.com/groq/groq-python/issues/104)) ([9334f8b](https://github.com/groq/groq-python/commit/9334f8bf89f9686263f150f94b83465045a73a53))
+* **internal:** codegen related update ([#103](https://github.com/groq/groq-python/issues/103)) ([7f92641](https://github.com/groq/groq-python/commit/7f92641ae9513913ab82eb1d36b799518c814238))
+* **internal:** codegen related update ([#112](https://github.com/groq/groq-python/issues/112)) ([4a94475](https://github.com/groq/groq-python/commit/4a94475d449f04882c06007798319fb1a23b5079))
+* **internal:** codegen related update ([#117](https://github.com/groq/groq-python/issues/117)) ([e4bc523](https://github.com/groq/groq-python/commit/e4bc52371263db69f1d2f37ea651c7400ca1f8f3))
+* **internal:** use different 32bit detection method ([#113](https://github.com/groq/groq-python/issues/113)) ([b7f33d6](https://github.com/groq/groq-python/commit/b7f33d6e22537b57f5bc155260ca10af0a0eeaec))
+* **tests:** update prism version ([#106](https://github.com/groq/groq-python/issues/106)) ([360ba04](https://github.com/groq/groq-python/commit/360ba0402f65e1579fc15a93b8f1b7254ee28a00))
+
 ## 0.9.0 (2024-06-11)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/groq/groq-python/compare/v0.8.0...v0.9.0)
