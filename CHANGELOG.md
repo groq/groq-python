@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.0 (2024-09-03)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/groq/groq-python/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **internal:** handle streaming error ([#119](https://github.com/groq/groq-python/issues/119)) ([3722579](https://github.com/groq/groq-python/commit/372257924bece8f8d1ffabe866af9d3eafbc6193))
+
 ## 0.10.0 (2024-08-27)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/groq/groq-python/compare/v0.9.0...v0.10.0)
