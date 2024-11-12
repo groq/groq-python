@@ -2,7 +2,7 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/groq.svg)](https://pypi.org/project/groq/)
 
-The Groq Python library provides convenient access to the Groq REST API from any Python 3.7+
+The Groq Python library provides convenient access to the Groq REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -28,8 +28,7 @@ import os
 from groq import Groq
 
 client = Groq(
-    # This is the default and can be omitted
-    api_key=os.environ.get("GROQ_API_KEY"),
+    api_key=os.environ.get("GROQ_API_KEY"),  # This is the default and can be omitted
 )
 
 chat_completion = client.chat.completions.create(
@@ -59,8 +58,7 @@ import asyncio
 from groq import AsyncGroq
 
 client = AsyncGroq(
-    # This is the default and can be omitted
-    api_key=os.environ.get("GROQ_API_KEY"),
+    api_key=os.environ.get("GROQ_API_KEY"),  # This is the default and can be omitted
 )
 
 
@@ -374,6 +372,21 @@ We take backwards-compatibility seriously and work hard to ensure you can rely o
 
 We are keen for your feedback; please open an [issue](https://www.github.com/groq/groq-python/issues) with questions, bugs, or suggestions.
 
+### Determining the installed version
+
+If you've upgraded to the latest version but aren't seeing any new features you were expecting then your python environment is likely still using an older version.
+
+You can determine the version that is being used at runtime with:
+
+```py
+import groq
+print(groq.__version__)
+```
+
 ## Requirements
 
-Python 3.7 or higher.
+Python 3.8 or higher.
+
+## Contributing
+
+See [the contributing documentation](./CONTRIBUTING.md).

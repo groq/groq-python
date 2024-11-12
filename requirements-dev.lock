@@ -16,8 +16,6 @@ anyio==4.4.0
     # via httpx
 argcomplete==3.1.2
     # via nox
-attrs==23.1.0
-    # via pytest
 certifi==2023.7.22
     # via httpcore
     # via httpx
@@ -28,8 +26,9 @@ distlib==0.3.7
     # via virtualenv
 distro==1.8.0
     # via groq
-exceptiongroup==1.1.3
+exceptiongroup==1.2.2
     # via anyio
+    # via pytest
 filelock==3.12.4
     # via virtualenv
 h11==0.14.0
@@ -49,7 +48,7 @@ markdown-it-py==3.0.0
     # via rich
 mdurl==0.1.2
     # via markdown-it-py
-mypy==1.10.1
+mypy==1.13.0
 mypy-extensions==1.0.0
     # via mypy
 nodeenv==1.8.0
@@ -60,27 +59,25 @@ packaging==23.2
     # via pytest
 platformdirs==3.11.0
     # via virtualenv
-pluggy==1.3.0
+pluggy==1.5.0
     # via pytest
-py==1.11.0
-    # via pytest
-pydantic==2.7.1
+pydantic==2.9.2
     # via groq
-pydantic-core==2.18.2
+pydantic-core==2.23.4
     # via pydantic
 pygments==2.18.0
     # via rich
-pyright==1.1.374
-pytest==7.1.1
+pyright==1.1.380
+pytest==8.3.3
     # via pytest-asyncio
-pytest-asyncio==0.21.1
+pytest-asyncio==0.24.0
 python-dateutil==2.8.2
     # via time-machine
 pytz==2023.3.post1
     # via dirty-equals
 respx==0.20.2
 rich==13.7.1
-ruff==0.5.6
+ruff==0.6.9
 setuptools==68.2.2
     # via nodeenv
 six==1.16.0
@@ -90,10 +87,10 @@ sniffio==1.3.0
     # via groq
     # via httpx
 time-machine==2.9.0
-tomli==2.0.1
+tomli==2.0.2
     # via mypy
     # via pytest
-typing-extensions==4.8.0
+typing-extensions==4.12.2
     # via anyio
     # via groq
     # via mypy

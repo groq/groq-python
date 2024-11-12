@@ -16,6 +16,7 @@ from typing import (
     overload,
 )
 from pathlib import Path
+from datetime import date, datetime
 from typing_extensions import TypeGuard
 
 import sniffio
@@ -363,12 +364,13 @@ def file_from_path(path: str) -> FileTypes:
 
 def get_required_header(headers: HeadersLike, header: str) -> str:
     lower_header = header.lower()
-    if isinstance(headers, Mapping):
-        for k, v in headers.items():
+    if is_mapping_t(headers):
+        # mypy doesn't understand the type narrowing here
+        for k, v in headers.items():  # type: ignore
             if k.lower() == lower_header and isinstance(v, str):
                 return v
 
-    """ to deal with the case where the header looks like Stainless-Event-Id """
+    # to deal with the case where the header looks like Stainless-Event-Id
     intercaps_header = re.sub(r"([^\w])(\w)", lambda pat: pat.group(1) + pat.group(2).upper(), header.capitalize())
 
     for normalized_header in [header, lower_header, header.upper(), intercaps_header]:
@@ -394,3 +396,19 @@ def lru_cache(*, maxsize: int | None = 128) -> Callable[[CallableT], CallableT]:
         maxsize=maxsize,
     )
     return cast(Any, wrapper)  # type: ignore[no-any-return]
+
+
+def json_safe(data: object) -> object:
+    """Translates a mapping / sequence recursively in the same fashion
+    as `pydantic` v2's `model_dump(mode="json")`.
+    """
+    if is_mapping(data):
+        return {json_safe(key): json_safe(value) for key, value in data.items()}
+
+    if is_iterable(data) and not isinstance(data, (str, bytes, bytearray)):
+        return [json_safe(item) for item in data]
+
+    if isinstance(data, (datetime, date)):
+        return data.isoformat()
+
+    return data
