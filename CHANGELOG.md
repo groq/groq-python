@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.12.0 (2024-11-12)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/groq/groq-python/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **api:** api update ([#127](https://github.com/groq/groq-python/issues/127)) ([2f20c22](https://github.com/groq/groq-python/commit/2f20c227860ec41c9255b5b7dd7d0af2dd98c7f9))
+* **api:** api update ([#129](https://github.com/groq/groq-python/issues/129)) ([41c4f28](https://github.com/groq/groq-python/commit/41c4f280afb004f41994d8456d63f21acd6da6a9))
+
+
+### Bug Fixes
+
+* GitHub Terraform: Create/Update .github/workflows/stale.yaml [skip ci] ([537cc49](https://github.com/groq/groq-python/commit/537cc4977b4fcc1c7679abcc9ca4ddf2fbafdcd2))
+
+
+### Chores
+
+* rebuild project due to codegen change ([#130](https://github.com/groq/groq-python/issues/130)) ([e08a00f](https://github.com/groq/groq-python/commit/e08a00f13f68b8041293f02064d7b6d692a07cd9))
+* rebuild project due to codegen change ([#131](https://github.com/groq/groq-python/issues/131)) ([8a3c31d](https://github.com/groq/groq-python/commit/8a3c31d2aa3cb855e6f1feef169be48447adca61))
+* rebuild project due to codegen change ([#132](https://github.com/groq/groq-python/issues/132)) ([8287ed4](https://github.com/groq/groq-python/commit/8287ed44c4a668484f4cfc068b86a2132ab19714))
+
 ## 0.11.0 (2024-09-03)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/groq/groq-python/compare/v0.10.0...v0.11.0)
