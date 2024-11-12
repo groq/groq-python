@@ -28,8 +28,7 @@ import os
 from groq import Groq
 
 client = Groq(
-    # This is the default and can be omitted
-    api_key=os.environ.get("GROQ_API_KEY"),
+    api_key=os.environ.get("GROQ_API_KEY"),  # This is the default and can be omitted
 )
 
 chat_completion = client.chat.completions.create(
@@ -59,8 +58,7 @@ import asyncio
 from groq import AsyncGroq
 
 client = AsyncGroq(
-    # This is the default and can be omitted
-    api_key=os.environ.get("GROQ_API_KEY"),
+    api_key=os.environ.get("GROQ_API_KEY"),  # This is the default and can be omitted
 )
 
 
