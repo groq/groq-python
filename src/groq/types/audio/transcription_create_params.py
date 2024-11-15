@@ -52,6 +52,7 @@ class TranscriptionCreateParams(TypedDict, total=False):
             "da",
             "hu",
             "ta",
+            "no",
             "th",
             "ur",
             "hr",
