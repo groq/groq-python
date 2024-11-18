@@ -48,17 +48,7 @@ class TestCompletions:
                     "name": "name",
                     "description": "description",
                     "parameters": {"foo": "bar"},
-                },
-                {
-                    "name": "name",
-                    "description": "description",
-                    "parameters": {"foo": "bar"},
-                },
-                {
-                    "name": "name",
-                    "description": "description",
-                    "parameters": {"foo": "bar"},
-                },
+                }
             ],
             logit_bias={"foo": 0},
             logprobs=True,
@@ -80,23 +70,7 @@ class TestCompletions:
                         "parameters": {"foo": "bar"},
                     },
                     "type": "function",
-                },
-                {
-                    "function": {
-                        "name": "name",
-                        "description": "description",
-                        "parameters": {"foo": "bar"},
-                    },
-                    "type": "function",
-                },
-                {
-                    "function": {
-                        "name": "name",
-                        "description": "description",
-                        "parameters": {"foo": "bar"},
-                    },
-                    "type": "function",
-                },
+                }
             ],
             top_logprobs=0,
             top_p=1,
@@ -175,17 +149,7 @@ class TestAsyncCompletions:
                     "name": "name",
                     "description": "description",
                     "parameters": {"foo": "bar"},
-                },
-                {
-                    "name": "name",
-                    "description": "description",
-                    "parameters": {"foo": "bar"},
-                },
-                {
-                    "name": "name",
-                    "description": "description",
-                    "parameters": {"foo": "bar"},
-                },
+                }
             ],
             logit_bias={"foo": 0},
             logprobs=True,
@@ -207,23 +171,7 @@ class TestAsyncCompletions:
                         "parameters": {"foo": "bar"},
                     },
                     "type": "function",
-                },
-                {
-                    "function": {
-                        "name": "name",
-                        "description": "description",
-                        "parameters": {"foo": "bar"},
-                    },
-                    "type": "function",
-                },
-                {
-                    "function": {
-                        "name": "name",
-                        "description": "description",
-                        "parameters": {"foo": "bar"},
-                    },
-                    "type": "function",
-                },
+                }
             ],
             top_logprobs=0,
             top_p=1,
