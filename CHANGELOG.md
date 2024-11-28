@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.13.0 (2024-11-28)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/groq/groq-python/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** api update ([#134](https://github.com/groq/groq-python/issues/134)) ([fde3a90](https://github.com/groq/groq-python/commit/fde3a90bf0d3d37dc46765198445becaf588ee96))
+
+
+### Bug Fixes
+
+* **client:** compat with new httpx 0.28.0 release ([#142](https://github.com/groq/groq-python/issues/142)) ([b8abf89](https://github.com/groq/groq-python/commit/b8abf8961949a9698c7eb666562acbaab15ce9ea))
+
+
+### Chores
+
+* **internal:** exclude mypy from running on tests ([#141](https://github.com/groq/groq-python/issues/141)) ([fb4456e](https://github.com/groq/groq-python/commit/fb4456e36a6630a3a07e9f1fec09ae335b0554d7))
+* **internal:** fix compat model_dump method when warnings are passed ([#138](https://github.com/groq/groq-python/issues/138)) ([91402fd](https://github.com/groq/groq-python/commit/91402fd2ac19b0be2ec1b360e541c891cb4d651f))
+* rebuild project due to codegen change ([#136](https://github.com/groq/groq-python/issues/136)) ([b79c1f9](https://github.com/groq/groq-python/commit/b79c1f96496074cc38c489f4b79fa63b871354b7))
+* rebuild project due to codegen change ([#137](https://github.com/groq/groq-python/issues/137)) ([2899a88](https://github.com/groq/groq-python/commit/2899a88502cb48aaf99fdc3a277c925ec1137583))
+* remove now unused `cached-property` dep ([#140](https://github.com/groq/groq-python/issues/140)) ([d001e95](https://github.com/groq/groq-python/commit/d001e95f7d3f8882eb741c87f66422ef6343260f))
+
+
+### Documentation
+
+* add info log level to readme ([#139](https://github.com/groq/groq-python/issues/139)) ([804a891](https://github.com/groq/groq-python/commit/804a8910914001d9e21cff974b281011979352f3))
+
 ## 0.12.0 (2024-11-12)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/groq/groq-python/compare/v0.11.0...v0.12.0)
