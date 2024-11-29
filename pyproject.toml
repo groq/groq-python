@@ -8,7 +8,7 @@ authors = [
 { name = "Groq", email = "support@groq.com" },
 ]
 dependencies = [
-    "httpx>=0.23.0, <1",
+    "httpx>=0.23.0, <0.28.0",
     "pydantic>=1.9.0, <3",
     "typing-extensions>=4.7, <5",
     "anyio>=3.5.0, <5",
