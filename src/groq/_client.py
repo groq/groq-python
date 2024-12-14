@@ -8,7 +8,7 @@ from typing_extensions import Self, override
 
 import httpx
 
-from . import _exceptions
+from . import resources, _exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
@@ -24,7 +24,6 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import models, embeddings
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GroqError, APIStatusError
 from ._base_client import (
@@ -32,17 +31,25 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.chat import chat
-from .resources.audio import audio
 
-__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Groq", "AsyncGroq", "Client", "AsyncClient"]
+__all__ = [
+    "Timeout",
+    "Transport",
+    "ProxiesTypes",
+    "RequestOptions",
+    "resources",
+    "Groq",
+    "AsyncGroq",
+    "Client",
+    "AsyncClient",
+]
 
 
 class Groq(SyncAPIClient):
-    chat: chat.Chat
-    embeddings: embeddings.Embeddings
-    audio: audio.Audio
-    models: models.Models
+    chat: resources.Chat
+    embeddings: resources.Embeddings
+    audio: resources.Audio
+    models: resources.Models
     with_raw_response: GroqWithRawResponse
     with_streaming_response: GroqWithStreamedResponse
 
@@ -100,10 +107,10 @@ class Groq(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.chat = chat.Chat(self)
-        self.embeddings = embeddings.Embeddings(self)
-        self.audio = audio.Audio(self)
-        self.models = models.Models(self)
+        self.chat = resources.Chat(self)
+        self.embeddings = resources.Embeddings(self)
+        self.audio = resources.Audio(self)
+        self.models = resources.Models(self)
         self.with_raw_response = GroqWithRawResponse(self)
         self.with_streaming_response = GroqWithStreamedResponse(self)
 
@@ -213,10 +220,10 @@ class Groq(SyncAPIClient):
 
 
 class AsyncGroq(AsyncAPIClient):
-    chat: chat.AsyncChat
-    embeddings: embeddings.AsyncEmbeddings
-    audio: audio.AsyncAudio
-    models: models.AsyncModels
+    chat: resources.AsyncChat
+    embeddings: resources.AsyncEmbeddings
+    audio: resources.AsyncAudio
+    models: resources.AsyncModels
     with_raw_response: AsyncGroqWithRawResponse
     with_streaming_response: AsyncGroqWithStreamedResponse
 
@@ -274,10 +281,10 @@ class AsyncGroq(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.chat = chat.AsyncChat(self)
-        self.embeddings = embeddings.AsyncEmbeddings(self)
-        self.audio = audio.AsyncAudio(self)
-        self.models = models.AsyncModels(self)
+        self.chat = resources.AsyncChat(self)
+        self.embeddings = resources.AsyncEmbeddings(self)
+        self.audio = resources.AsyncAudio(self)
+        self.models = resources.AsyncModels(self)
         self.with_raw_response = AsyncGroqWithRawResponse(self)
         self.with_streaming_response = AsyncGroqWithStreamedResponse(self)
 
@@ -388,34 +395,34 @@ class AsyncGroq(AsyncAPIClient):
 
 class GroqWithRawResponse:
     def __init__(self, client: Groq) -> None:
-        self.chat = chat.ChatWithRawResponse(client.chat)
-        self.embeddings = embeddings.EmbeddingsWithRawResponse(client.embeddings)
-        self.audio = audio.AudioWithRawResponse(client.audio)
-        self.models = models.ModelsWithRawResponse(client.models)
+        self.chat = resources.ChatWithRawResponse(client.chat)
+        self.embeddings = resources.EmbeddingsWithRawResponse(client.embeddings)
+        self.audio = resources.AudioWithRawResponse(client.audio)
+        self.models = resources.ModelsWithRawResponse(client.models)
 
 
 class AsyncGroqWithRawResponse:
     def __init__(self, client: AsyncGroq) -> None:
-        self.chat = chat.AsyncChatWithRawResponse(client.chat)
-        self.embeddings = embeddings.AsyncEmbeddingsWithRawResponse(client.embeddings)
-        self.audio = audio.AsyncAudioWithRawResponse(client.audio)
-        self.models = models.AsyncModelsWithRawResponse(client.models)
+        self.chat = resources.AsyncChatWithRawResponse(client.chat)
+        self.embeddings = resources.AsyncEmbeddingsWithRawResponse(client.embeddings)
+        self.audio = resources.AsyncAudioWithRawResponse(client.audio)
+        self.models = resources.AsyncModelsWithRawResponse(client.models)
 
 
 class GroqWithStreamedResponse:
     def __init__(self, client: Groq) -> None:
-        self.chat = chat.ChatWithStreamingResponse(client.chat)
-        self.embeddings = embeddings.EmbeddingsWithStreamingResponse(client.embeddings)
-        self.audio = audio.AudioWithStreamingResponse(client.audio)
-        self.models = models.ModelsWithStreamingResponse(client.models)
+        self.chat = resources.ChatWithStreamingResponse(client.chat)
+        self.embeddings = resources.EmbeddingsWithStreamingResponse(client.embeddings)
+        self.audio = resources.AudioWithStreamingResponse(client.audio)
+        self.models = resources.ModelsWithStreamingResponse(client.models)
 
 
 class AsyncGroqWithStreamedResponse:
     def __init__(self, client: AsyncGroq) -> None:
-        self.chat = chat.AsyncChatWithStreamingResponse(client.chat)
-        self.embeddings = embeddings.AsyncEmbeddingsWithStreamingResponse(client.embeddings)
-        self.audio = audio.AsyncAudioWithStreamingResponse(client.audio)
-        self.models = models.AsyncModelsWithStreamingResponse(client.models)
+        self.chat = resources.AsyncChatWithStreamingResponse(client.chat)
+        self.embeddings = resources.AsyncEmbeddingsWithStreamingResponse(client.embeddings)
+        self.audio = resources.AsyncAudioWithStreamingResponse(client.audio)
+        self.models = resources.AsyncModelsWithStreamingResponse(client.models)
 
 
 Client = Groq
