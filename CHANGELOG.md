@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.13.1 (2024-12-14)
+
+Full Changelog: [v0.13.0...v0.13.1](https://github.com/groq/groq-python/compare/v0.13.0...v0.13.1)
+
+### Chores
+
+* **internal:** add support for TypeAliasType ([#153](https://github.com/groq/groq-python/issues/153)) ([c5ca4fc](https://github.com/groq/groq-python/commit/c5ca4fc7c1ced7e49f06d05e67924f702e5e021d))
+* **internal:** bump pydantic dependency ([#150](https://github.com/groq/groq-python/issues/150)) ([63e5754](https://github.com/groq/groq-python/commit/63e5754857bcbc137350971520cf9997e4d78da3))
+* **internal:** bump pyright ([#145](https://github.com/groq/groq-python/issues/145)) ([8f2b3a0](https://github.com/groq/groq-python/commit/8f2b3a0d70dad49b652a61f549979c1c5125d9d4))
+* **internal:** bump pyright ([#152](https://github.com/groq/groq-python/issues/152)) ([75476cd](https://github.com/groq/groq-python/commit/75476cd26c33e48220ab8760e129cd3f70413df5))
+* **internal:** codegen related update ([#154](https://github.com/groq/groq-python/issues/154)) ([db44bd6](https://github.com/groq/groq-python/commit/db44bd6adfb1eddfee9ee06cc63d4c594713eebc))
+* **internal:** codegen related update ([#155](https://github.com/groq/groq-python/issues/155)) ([7f303c3](https://github.com/groq/groq-python/commit/7f303c31dbebfe97b97388ff7f29238fc917da43))
+* **internal:** updated imports ([#156](https://github.com/groq/groq-python/issues/156)) ([3f41c12](https://github.com/groq/groq-python/commit/3f41c12bd36e13eba37d2bd7fd4f3f595bda4602))
+* make the `Omit` type public ([#147](https://github.com/groq/groq-python/issues/147)) ([0613ae1](https://github.com/groq/groq-python/commit/0613ae1e9f9dede7cb951d2d0591017894576b3a))
+
+
+### Documentation
+
+* **readme:** fix http client proxies example ([#151](https://github.com/groq/groq-python/issues/151)) ([b858c4f](https://github.com/groq/groq-python/commit/b858c4f742bdd7aae79f17981cb9d3b001ed009b))
+
 ## 0.13.0 (2024-11-28)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/groq/groq-python/compare/v0.12.0...v0.13.0)
