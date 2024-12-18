@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.13.2 (2024-12-18)
+
+Full Changelog: [v0.13.1...v0.13.2](https://github.com/groq/groq-python/compare/v0.13.1...v0.13.2)
+
+### Chores
+
+* **internal:** codegen related update ([#158](https://github.com/groq/groq-python/issues/158)) ([85b5765](https://github.com/groq/groq-python/commit/85b5765b2b6cfa9560c763600699fd05f7b2a632))
+* **internal:** codegen related update ([#160](https://github.com/groq/groq-python/issues/160)) ([8b87c4d](https://github.com/groq/groq-python/commit/8b87c4d657e0a9d2296323eff6d298ec98b34b3e))
+* **internal:** fix some typos ([#162](https://github.com/groq/groq-python/issues/162)) ([32482ae](https://github.com/groq/groq-python/commit/32482ae691f24fdbd5c80282c597a299a48a247d))
+
+
+### Documentation
+
+* **readme:** example snippet for client context manager ([#161](https://github.com/groq/groq-python/issues/161)) ([b7bfd15](https://github.com/groq/groq-python/commit/b7bfd15768d60beb2059ab3d326bae1b19c6bf17))
+
 ## 0.13.1 (2024-12-14)
 
 Full Changelog: [v0.13.0...v0.13.1](https://github.com/groq/groq-python/compare/v0.13.0...v0.13.1)
