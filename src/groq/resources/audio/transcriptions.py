@@ -186,8 +186,7 @@ class Transcriptions(SyncAPIResource):
               improve accuracy and latency.
 
           prompt: An optional text to guide the model's style or continue a previous audio
-              segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the
-              audio language.
+              segment. The [prompt](/docs/speech-text) should match the audio language.
 
           response_format: The format of the transcript output, in one of these options: `json`, `text`, or
               `verbose_json`.
@@ -396,8 +395,7 @@ class AsyncTranscriptions(AsyncAPIResource):
               improve accuracy and latency.
 
           prompt: An optional text to guide the model's style or continue a previous audio
-              segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the
-              audio language.
+              segment. The [prompt](/docs/speech-text) should match the audio language.
 
           response_format: The format of the transcript output, in one of these options: `json`, `text`, or
               `verbose_json`.

@@ -136,8 +136,7 @@ class TranscriptionCreateParams(TypedDict, total=False):
     """An optional text to guide the model's style or continue a previous audio
     segment.
 
-    The [prompt](/docs/guides/speech-to-text/prompting) should match the audio
-    language.
+    The [prompt](/docs/speech-text) should match the audio language.
     """
 
     response_format: Literal["json", "text", "verbose_json"]
