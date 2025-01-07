@@ -106,6 +106,8 @@ class CompletionCreateParams(TypedDict, total=False):
     `system_fingerprint` response parameter to monitor changes in the backend.
     """
 
+    service_tier: Optional[Literal["on_demand", "flex"]]
+
     stop: Union[Optional[str], List[str], None]
     """Up to 4 sequences where the API will stop generating further tokens.
 
