@@ -106,7 +106,13 @@ class CompletionCreateParams(TypedDict, total=False):
     `system_fingerprint` response parameter to monitor changes in the backend.
     """
 
-    service_tier: Optional[Literal["on_demand", "flex"]]
+    service_tier: Optional[Literal["auto", "on_demand", "flex"]]
+    """The service tier to use for the request. Defaults to `on_demand`.
+
+    - `auto` will automatically select the highest tier available within the rate
+      limits of your organization.
+    - `flex` uses the flex tier, which will succeed or fail quickly.
+    """
 
     stop: Union[Optional[str], List[str], None]
     """Up to 4 sequences where the API will stop generating further tokens.
