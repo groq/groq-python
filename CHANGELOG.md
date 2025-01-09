@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.14.0 (2025-01-09)
+
+Full Changelog: [v0.13.1...v0.14.0](https://github.com/groq/groq-python/compare/v0.13.1...v0.14.0)
+
+### Features
+
+* **api:** api update ([#163](https://github.com/groq/groq-python/issues/163)) ([43a7a5b](https://github.com/groq/groq-python/commit/43a7a5b048b22f4a5edba53ec31b2b8967681708))
+* **api:** api update ([#167](https://github.com/groq/groq-python/issues/167)) ([5016206](https://github.com/groq/groq-python/commit/5016206e461c384806ac3c68b8dfab3d342ba93c))
+* **api:** api update ([#170](https://github.com/groq/groq-python/issues/170)) ([2b35e95](https://github.com/groq/groq-python/commit/2b35e952e12020116adc45e40007c3fd61db1bb7))
+
+
+### Bug Fixes
+
+* **client:** only call .close() when needed ([#169](https://github.com/groq/groq-python/issues/169)) ([6a0ec57](https://github.com/groq/groq-python/commit/6a0ec576de707ed90a4a536ff206e9ee07fc5a3a))
+
+
+### Chores
+
+* add missing isclass check ([#166](https://github.com/groq/groq-python/issues/166)) ([9cb1e72](https://github.com/groq/groq-python/commit/9cb1e727377c93c92d1bbd49f1c5b8613730c3a6))
+* **internal:** bump httpx dependency ([#168](https://github.com/groq/groq-python/issues/168)) ([c260ae9](https://github.com/groq/groq-python/commit/c260ae969caa5f4e7b48dd558802b933da98bed6))
+* **internal:** codegen related update ([#158](https://github.com/groq/groq-python/issues/158)) ([85b5765](https://github.com/groq/groq-python/commit/85b5765b2b6cfa9560c763600699fd05f7b2a632))
+* **internal:** codegen related update ([#160](https://github.com/groq/groq-python/issues/160)) ([8b87c4d](https://github.com/groq/groq-python/commit/8b87c4d657e0a9d2296323eff6d298ec98b34b3e))
+* **internal:** codegen related update ([#164](https://github.com/groq/groq-python/issues/164)) ([d7b6be5](https://github.com/groq/groq-python/commit/d7b6be5f4bba87002409330644045ba630856880))
+* **internal:** fix some typos ([#162](https://github.com/groq/groq-python/issues/162)) ([32482ae](https://github.com/groq/groq-python/commit/32482ae691f24fdbd5c80282c597a299a48a247d))
+
+
+### Documentation
+
+* **readme:** example snippet for client context manager ([#161](https://github.com/groq/groq-python/issues/161)) ([b7bfd15](https://github.com/groq/groq-python/commit/b7bfd15768d60beb2059ab3d326bae1b19c6bf17))
+
 ## 0.13.1 (2024-12-14)
 
 Full Changelog: [v0.13.0...v0.13.1](https://github.com/groq/groq-python/compare/v0.13.0...v0.13.1)
