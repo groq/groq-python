@@ -66,7 +66,7 @@ class Completions(SyncAPIResource):
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
-        service_tier: Optional[Literal["on_demand", "flex"]] | NotGiven = NOT_GIVEN,
+        service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
         stream: Optional[bool] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -143,6 +143,12 @@ class Completions(SyncAPIResource):
               such that repeated requests with the same `seed` and parameters should return
               the same result. Determinism is not guaranteed, and you should refer to the
               `system_fingerprint` response parameter to monitor changes in the backend.
+
+          service_tier: The service tier to use for the request. Defaults to `on_demand`.
+
+              - `auto` will automatically select the highest tier available within the rate
+                limits of your organization.
+              - `flex` uses the flex tier, which will succeed or fail quickly.
 
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
@@ -264,7 +270,7 @@ class AsyncCompletions(AsyncAPIResource):
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
-        service_tier: Optional[Literal["on_demand", "flex"]] | NotGiven = NOT_GIVEN,
+        service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
         stream: Optional[bool] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -341,6 +347,12 @@ class AsyncCompletions(AsyncAPIResource):
               such that repeated requests with the same `seed` and parameters should return
               the same result. Determinism is not guaranteed, and you should refer to the
               `system_fingerprint` response parameter to monitor changes in the backend.
+
+          service_tier: The service tier to use for the request. Defaults to `on_demand`.
+
+              - `auto` will automatically select the highest tier available within the rate
+                limits of your organization.
+              - `flex` uses the flex tier, which will succeed or fail quickly.
 
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
