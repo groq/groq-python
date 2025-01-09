@@ -1,6 +1,6 @@
 [project]
 name = "groq"
-version = "0.13.1"
+version = "0.14.0"
 description = "The official Python library for the groq API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -54,7 +54,7 @@ dev-dependencies = [
     "dirty-equals>=0.6.0",
     "importlib-metadata>=6.7.0",
     "rich>=13.7.1",
-    "nest_asyncio==1.6.0"
+    "nest_asyncio==1.6.0",
 ]
 
 [tool.rye.scripts]
