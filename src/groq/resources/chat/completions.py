@@ -63,6 +63,7 @@ class Completions(SyncAPIResource):
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
+        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -98,6 +99,7 @@ class Completions(SyncAPIResource):
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
+        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -133,6 +135,7 @@ class Completions(SyncAPIResource):
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
+        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -167,6 +170,7 @@ class Completions(SyncAPIResource):
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
+        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -224,9 +228,13 @@ class Completions(SyncAPIResource):
               probabilities of the output tokens or not. If true, returns the log
               probabilities of each output token returned in the `content` of `message`.
 
-          max_tokens: The maximum number of tokens that can be generated in the chat completion. The
+          max_completion_tokens: The maximum number of tokens that can be generated in the chat completion. The
               total length of input tokens and generated tokens is limited by the model's
               context length.
+
+          max_tokens: Deprecated in favor of `max_completion_tokens`. The maximum number of tokens
+              that can be generated in the chat completion. The total length of input tokens
+              and generated tokens is limited by the model's context length.
 
           n: How many chat completion choices to generate for each input message. Note that
               the current moment, only n=1 is supported. Other values will result in a 400
@@ -316,6 +324,7 @@ class Completions(SyncAPIResource):
                     "functions": functions,
                     "logit_bias": logit_bias,
                     "logprobs": logprobs,
+                    "max_completion_tokens": max_completion_tokens,
                     "max_tokens": max_tokens,
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
@@ -374,6 +383,7 @@ class AsyncCompletions(AsyncAPIResource):
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
+        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -409,6 +419,7 @@ class AsyncCompletions(AsyncAPIResource):
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
+        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -444,6 +455,7 @@ class AsyncCompletions(AsyncAPIResource):
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
+        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -478,6 +490,7 @@ class AsyncCompletions(AsyncAPIResource):
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
+        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -535,9 +548,13 @@ class AsyncCompletions(AsyncAPIResource):
               probabilities of the output tokens or not. If true, returns the log
               probabilities of each output token returned in the `content` of `message`.
 
-          max_tokens: The maximum number of tokens that can be generated in the chat completion. The
+          max_completion_tokens: The maximum number of tokens that can be generated in the chat completion. The
               total length of input tokens and generated tokens is limited by the model's
               context length.
+
+          max_tokens: Deprecated in favor of `max_completion_tokens`. The maximum number of tokens
+              that can be generated in the chat completion. The total length of input tokens
+              and generated tokens is limited by the model's context length.
 
           n: How many chat completion choices to generate for each input message. Note that
               the current moment, only n=1 is supported. Other values will result in a 400
@@ -627,6 +644,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "functions": functions,
                     "logit_bias": logit_bias,
                     "logprobs": logprobs,
+                    "max_completion_tokens": max_completion_tokens,
                     "max_tokens": max_tokens,
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
