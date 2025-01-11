@@ -64,11 +64,18 @@ class CompletionCreateParams(TypedDict, total=False):
     probabilities of each output token returned in the `content` of `message`.
     """
 
-    max_tokens: Optional[int]
+    max_completion_tokens: Optional[int]
     """The maximum number of tokens that can be generated in the chat completion.
 
     The total length of input tokens and generated tokens is limited by the model's
     context length.
+    """
+
+    max_tokens: Optional[int]
+    """
+    Deprecated in favor of `max_completion_tokens`. The maximum number of tokens
+    that can be generated in the chat completion. The total length of input tokens
+    and generated tokens is limited by the model's context length.
     """
 
     n: Optional[int]
