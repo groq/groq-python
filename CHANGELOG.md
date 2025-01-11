@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.15.0 (2025-01-11)
+
+Full Changelog: [v0.14.0...v0.15.0](https://github.com/groq/groq-python/compare/v0.14.0...v0.15.0)
+
+### Features
+
+* **api:** api update ([#175](https://github.com/groq/groq-python/issues/175)) ([61cffbc](https://github.com/groq/groq-python/commit/61cffbc78a279fd4ac04d338690925c4f19fa20a))
+
+
+### Bug Fixes
+
+* correctly handle deserialising `cls` fields ([#174](https://github.com/groq/groq-python/issues/174)) ([0b2e997](https://github.com/groq/groq-python/commit/0b2e997ce4dfad51b7d4d87c5fa5d376488b4d04))
+
+
+### Chores
+
+* **internal:** codegen related update ([#172](https://github.com/groq/groq-python/issues/172)) ([d6ecada](https://github.com/groq/groq-python/commit/d6ecadaa2433245acaa21bee0ea003e69a9bcb0a))
+
 ## 0.14.0 (2025-01-09)
 
 Full Changelog: [v0.13.1...v0.14.0](https://github.com/groq/groq-python/compare/v0.13.1...v0.14.0)
