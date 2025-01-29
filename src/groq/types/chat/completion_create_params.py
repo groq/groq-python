@@ -95,6 +95,9 @@ class CompletionCreateParams(TypedDict, total=False):
     far, increasing the model's likelihood to talk about new topics.
     """
 
+    reasoning_format: Optional[Literal["hidden", "raw", "parsed"]]
+    """Specifies how to output reasoning tokens"""
+
     response_format: Optional[ResponseFormat]
     """An object specifying the format that the model must output.
 
