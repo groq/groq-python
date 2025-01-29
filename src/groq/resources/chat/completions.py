@@ -65,6 +65,7 @@ class Completions(SyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
@@ -135,6 +136,8 @@ class Completions(SyncAPIResource):
           presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
+
+          reasoning_format: Specifies how to output reasoning tokens
 
           response_format: An object specifying the format that the model must output.
 
@@ -219,6 +222,7 @@ class Completions(SyncAPIResource):
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
+                    "reasoning_format": reasoning_format,
                     "response_format": response_format,
                     "seed": seed,
                     "service_tier": service_tier,
@@ -275,6 +279,7 @@ class AsyncCompletions(AsyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
@@ -345,6 +350,8 @@ class AsyncCompletions(AsyncAPIResource):
           presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
+
+          reasoning_format: Specifies how to output reasoning tokens
 
           response_format: An object specifying the format that the model must output.
 
@@ -429,6 +436,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
+                    "reasoning_format": reasoning_format,
                     "response_format": response_format,
                     "seed": seed,
                     "service_tier": service_tier,
