@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.16.0 (2025-01-29)
+
+Full Changelog: [v0.15.0...v0.16.0](https://github.com/groq/groq-python/compare/v0.15.0...v0.16.0)
+
+### Features
+
+* **api:** api update ([#183](https://github.com/groq/groq-python/issues/183)) ([a5cdbc5](https://github.com/groq/groq-python/commit/a5cdbc5af797bdb3aa9733c60f733e612d619ef5))
+
+
+### Chores
+
+* **internal:** codegen related update ([#177](https://github.com/groq/groq-python/issues/177)) ([01e6304](https://github.com/groq/groq-python/commit/01e63041c81099bf0fb64a372462be71767fb747))
+* **internal:** codegen related update ([#180](https://github.com/groq/groq-python/issues/180)) ([5c8db1a](https://github.com/groq/groq-python/commit/5c8db1a9795dfad7316a9c1e026386a0ad62e3db))
+* **internal:** minor formatting changes ([#182](https://github.com/groq/groq-python/issues/182)) ([2c4e409](https://github.com/groq/groq-python/commit/2c4e409fe047cb2cc9ca3805f79244c1fdbb7cf0))
+* **internal:** minor style changes ([#181](https://github.com/groq/groq-python/issues/181)) ([77c752a](https://github.com/groq/groq-python/commit/77c752ab1a635b675743baf02d4896439bc85a07))
+
+
+### Documentation
+
+* **raw responses:** fix duplicate `the` ([#179](https://github.com/groq/groq-python/issues/179)) ([a28cbd8](https://github.com/groq/groq-python/commit/a28cbd863d875954a0404ff1148da02cd131de98))
+
 ## 0.15.0 (2025-01-11)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/groq/groq-python/compare/v0.14.0...v0.15.0)
