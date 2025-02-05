@@ -97,3 +97,39 @@ Methods:
 - <code title="get /openai/v1/models/{model}">client.models.<a href="./src/groq/resources/models.py">retrieve</a>(model) -> <a href="./src/groq/types/model.py">Model</a></code>
 - <code title="get /openai/v1/models">client.models.<a href="./src/groq/resources/models.py">list</a>() -> <a href="./src/groq/types/model_list_response.py">ModelListResponse</a></code>
 - <code title="delete /openai/v1/models/{model}">client.models.<a href="./src/groq/resources/models.py">delete</a>(model) -> <a href="./src/groq/types/model_deleted.py">ModelDeleted</a></code>
+
+# Batches
+
+Types:
+
+```python
+from groq.types import BatchCreateResponse, BatchRetrieveResponse, BatchListResponse
+```
+
+Methods:
+
+- <code title="post /openai/v1/batches">client.batches.<a href="./src/groq/resources/batches.py">create</a>(\*\*<a href="src/groq/types/batch_create_params.py">params</a>) -> <a href="./src/groq/types/batch_create_response.py">BatchCreateResponse</a></code>
+- <code title="get /openai/v1/batches/{batch_id}">client.batches.<a href="./src/groq/resources/batches.py">retrieve</a>(batch_id) -> <a href="./src/groq/types/batch_retrieve_response.py">BatchRetrieveResponse</a></code>
+- <code title="get /openai/v1/batches">client.batches.<a href="./src/groq/resources/batches.py">list</a>() -> <a href="./src/groq/types/batch_list_response.py">BatchListResponse</a></code>
+
+# Files
+
+Types:
+
+```python
+from groq.types import (
+    FileCreateResponse,
+    FileListResponse,
+    FileDeleteResponse,
+    FileContentResponse,
+    FileInfoResponse,
+)
+```
+
+Methods:
+
+- <code title="post /openai/v1/files">client.files.<a href="./src/groq/resources/files.py">create</a>(\*\*<a href="src/groq/types/file_create_params.py">params</a>) -> <a href="./src/groq/types/file_create_response.py">FileCreateResponse</a></code>
+- <code title="get /openai/v1/files">client.files.<a href="./src/groq/resources/files.py">list</a>() -> <a href="./src/groq/types/file_list_response.py">FileListResponse</a></code>
+- <code title="delete /openai/v1/files/{file_id}">client.files.<a href="./src/groq/resources/files.py">delete</a>(file_id) -> <a href="./src/groq/types/file_delete_response.py">FileDeleteResponse</a></code>
+- <code title="get /openai/v1/files/{file_id}/content">client.files.<a href="./src/groq/resources/files.py">content</a>(file_id) -> str</code>
+- <code title="get /openai/v1/files/{file_id}">client.files.<a href="./src/groq/resources/files.py">info</a>(file_id) -> <a href="./src/groq/types/file_info_response.py">FileInfoResponse</a></code>
