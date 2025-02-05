@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import models, embeddings
+from .resources import files, models, batches, embeddings
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GroqError, APIStatusError
 from ._base_client import (
@@ -43,6 +43,8 @@ class Groq(SyncAPIClient):
     embeddings: embeddings.Embeddings
     audio: audio.Audio
     models: models.Models
+    batches: batches.Batches
+    files: files.Files
     with_raw_response: GroqWithRawResponse
     with_streaming_response: GroqWithStreamedResponse
 
@@ -104,6 +106,8 @@ class Groq(SyncAPIClient):
         self.embeddings = embeddings.Embeddings(self)
         self.audio = audio.Audio(self)
         self.models = models.Models(self)
+        self.batches = batches.Batches(self)
+        self.files = files.Files(self)
         self.with_raw_response = GroqWithRawResponse(self)
         self.with_streaming_response = GroqWithStreamedResponse(self)
 
@@ -217,6 +221,8 @@ class AsyncGroq(AsyncAPIClient):
     embeddings: embeddings.AsyncEmbeddings
     audio: audio.AsyncAudio
     models: models.AsyncModels
+    batches: batches.AsyncBatches
+    files: files.AsyncFiles
     with_raw_response: AsyncGroqWithRawResponse
     with_streaming_response: AsyncGroqWithStreamedResponse
 
@@ -278,6 +284,8 @@ class AsyncGroq(AsyncAPIClient):
         self.embeddings = embeddings.AsyncEmbeddings(self)
         self.audio = audio.AsyncAudio(self)
         self.models = models.AsyncModels(self)
+        self.batches = batches.AsyncBatches(self)
+        self.files = files.AsyncFiles(self)
         self.with_raw_response = AsyncGroqWithRawResponse(self)
         self.with_streaming_response = AsyncGroqWithStreamedResponse(self)
 
@@ -392,6 +400,8 @@ class GroqWithRawResponse:
         self.embeddings = embeddings.EmbeddingsWithRawResponse(client.embeddings)
         self.audio = audio.AudioWithRawResponse(client.audio)
         self.models = models.ModelsWithRawResponse(client.models)
+        self.batches = batches.BatchesWithRawResponse(client.batches)
+        self.files = files.FilesWithRawResponse(client.files)
 
 
 class AsyncGroqWithRawResponse:
@@ -400,6 +410,8 @@ class AsyncGroqWithRawResponse:
         self.embeddings = embeddings.AsyncEmbeddingsWithRawResponse(client.embeddings)
         self.audio = audio.AsyncAudioWithRawResponse(client.audio)
         self.models = models.AsyncModelsWithRawResponse(client.models)
+        self.batches = batches.AsyncBatchesWithRawResponse(client.batches)
+        self.files = files.AsyncFilesWithRawResponse(client.files)
 
 
 class GroqWithStreamedResponse:
@@ -408,6 +420,8 @@ class GroqWithStreamedResponse:
         self.embeddings = embeddings.EmbeddingsWithStreamingResponse(client.embeddings)
         self.audio = audio.AudioWithStreamingResponse(client.audio)
         self.models = models.ModelsWithStreamingResponse(client.models)
+        self.batches = batches.BatchesWithStreamingResponse(client.batches)
+        self.files = files.FilesWithStreamingResponse(client.files)
 
 
 class AsyncGroqWithStreamedResponse:
@@ -416,6 +430,8 @@ class AsyncGroqWithStreamedResponse:
         self.embeddings = embeddings.AsyncEmbeddingsWithStreamingResponse(client.embeddings)
         self.audio = audio.AsyncAudioWithStreamingResponse(client.audio)
         self.models = models.AsyncModelsWithStreamingResponse(client.models)
+        self.batches = batches.AsyncBatchesWithStreamingResponse(client.batches)
+        self.files = files.AsyncFilesWithStreamingResponse(client.files)
 
 
 Client = Groq
