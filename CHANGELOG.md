@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.18.0 (2025-02-05)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/groq/groq-python/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* **api:** Add batch API ([#191](https://github.com/groq/groq-python/issues/191)) ([367a744](https://github.com/groq/groq-python/commit/367a744f461ec82353b916c7d95224d9baa78737))
+
+
+### Chores
+
+* **internal:** bummp ruff dependency ([#190](https://github.com/groq/groq-python/issues/190)) ([61678fc](https://github.com/groq/groq-python/commit/61678fc5fd4eb42e42d88057934b6204d19086af))
+* **internal:** change default timeout to an int ([#188](https://github.com/groq/groq-python/issues/188)) ([348e152](https://github.com/groq/groq-python/commit/348e1526711e4d162379dcd80a9b201572508376))
+
 ## 0.17.0 (2025-02-03)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/groq/groq-python/compare/v0.16.0...v0.17.0)
