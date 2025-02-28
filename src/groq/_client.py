@@ -74,7 +74,7 @@ class Groq(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous groq client instance.
+        """Construct a new synchronous Groq client instance.
 
         This automatically infers the `api_key` argument from the `GROQ_API_KEY` environment variable if it is not provided.
         """
@@ -252,7 +252,7 @@ class AsyncGroq(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async groq client instance.
+        """Construct a new async AsyncGroq client instance.
 
         This automatically infers the `api_key` argument from the `GROQ_API_KEY` environment variable if it is not provided.
         """
