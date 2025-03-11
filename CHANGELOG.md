@@ -1,5 +1,43 @@
 # Changelog
 
+## 0.19.0 (2025-03-11)
+
+Full Changelog: [v0.18.0...v0.19.0](https://github.com/groq/groq-python/compare/v0.18.0...v0.19.0)
+
+### Features
+
+* **api:** manual updates ([#209](https://github.com/groq/groq-python/issues/209)) ([15e2dca](https://github.com/groq/groq-python/commit/15e2dca833561464c7f56b3b5ce4de2bb4a90dfe))
+* **client:** allow passing `NotGiven` for body ([#200](https://github.com/groq/groq-python/issues/200)) ([afa6c0f](https://github.com/groq/groq-python/commit/afa6c0fc0191cedbacf99a7c6ac662d888ba9ffd))
+* **client:** send `X-Stainless-Read-Timeout` header ([#193](https://github.com/groq/groq-python/issues/193)) ([e8911a4](https://github.com/groq/groq-python/commit/e8911a43d64861153306bd03cfdaa06670b335f5))
+
+
+### Bug Fixes
+
+* add reasoning field to ChoiceDelta class ([edfee3b](https://github.com/groq/groq-python/commit/edfee3b6c5976da372908fcb0cd02e91f5b0cea3))
+* asyncify on non-asyncio runtimes ([#198](https://github.com/groq/groq-python/issues/198)) ([49387fe](https://github.com/groq/groq-python/commit/49387fe83c2886f6c623f7718f041c0065829a2b))
+* **client:** mark some request bodies as optional ([afa6c0f](https://github.com/groq/groq-python/commit/afa6c0fc0191cedbacf99a7c6ac662d888ba9ffd))
+* GitHub Terraform: Create/Update .github/workflows/stale.yaml [skip ci] ([662763a](https://github.com/groq/groq-python/commit/662763a5eaf833226772dedb36f64cfd460901a1))
+* GitHub Terraform: Create/Update .github/workflows/stale.yaml [skip ci] ([5298ec1](https://github.com/groq/groq-python/commit/5298ec1a8c6f1b6958a217c95f6a8bb19e90bd28))
+
+
+### Chores
+
+* **api:** remove chat_completion_chunk to force a rebuild of it ([#208](https://github.com/groq/groq-python/issues/208)) ([01fb0d1](https://github.com/groq/groq-python/commit/01fb0d14e438eeaef6ab1518a0c49e5b5b8e7197))
+* **docs:** update client docstring ([#204](https://github.com/groq/groq-python/issues/204)) ([a0f4599](https://github.com/groq/groq-python/commit/a0f45996ff149e0ed6f1fc262eb7041297b4bd68))
+* **internal:** codegen related update ([#199](https://github.com/groq/groq-python/issues/199)) ([de2ac71](https://github.com/groq/groq-python/commit/de2ac71d68109c3b29e6de1ba97f2c7092881c42))
+* **internal:** fix devcontainers setup ([#201](https://github.com/groq/groq-python/issues/201)) ([af101ee](https://github.com/groq/groq-python/commit/af101ee282a335d9f7970a92a99f6b63db9aebd8))
+* **internal:** fix type traversing dictionary params ([#195](https://github.com/groq/groq-python/issues/195)) ([bcb0256](https://github.com/groq/groq-python/commit/bcb025668a8b7279b8dbfb79384b1a20b95cd57f))
+* **internal:** minor type handling changes ([#196](https://github.com/groq/groq-python/issues/196)) ([3ff53df](https://github.com/groq/groq-python/commit/3ff53df5cc754090a645babff1f3e5d636f9e71c))
+* **internal:** properly set __pydantic_private__ ([#202](https://github.com/groq/groq-python/issues/202)) ([07ec0c8](https://github.com/groq/groq-python/commit/07ec0c885d7998717a2702de08dd5f1a4ee397ec))
+* **internal:** remove unused http client options forwarding ([#205](https://github.com/groq/groq-python/issues/205)) ([12fdb59](https://github.com/groq/groq-python/commit/12fdb59dbcaa121710f5c5ea710ff0f14c8c6dce))
+* **internal:** update client tests ([#197](https://github.com/groq/groq-python/issues/197)) ([2f0d2c4](https://github.com/groq/groq-python/commit/2f0d2c475a11d7162dffbb31008f01b17b2c8ef4))
+
+
+### Documentation
+
+* revise readme docs about nested params ([#206](https://github.com/groq/groq-python/issues/206)) ([7b04f47](https://github.com/groq/groq-python/commit/7b04f472fa2a203cda9747308920974ed427f0ed))
+* update URLs from stainlessapi.com to stainless.com ([#203](https://github.com/groq/groq-python/issues/203)) ([a6c6fde](https://github.com/groq/groq-python/commit/a6c6fde2ae256469481a28b59beaed1ab1f61c96))
+
 ## 0.18.0 (2025-02-05)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/groq/groq-python/compare/v0.17.0...v0.18.0)
