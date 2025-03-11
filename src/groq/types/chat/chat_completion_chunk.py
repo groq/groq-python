@@ -68,6 +68,13 @@ class ChoiceDelta(BaseModel):
     model.
     """
 
+    reasoning: Optional[str] = None
+    """The model's reasoning for a response.
+
+    Only available for reasoning models when requests parameter reasoning_format has
+    value `parsed.
+    """
+
     role: Optional[Literal["system", "user", "assistant", "tool"]] = None
     """The role of the author of this message."""
 

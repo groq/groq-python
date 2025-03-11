@@ -23,10 +23,12 @@ from pydantic import ValidationError
 
 from groq import Groq, AsyncGroq, APIResponseValidationError
 from groq._types import Omit
+from groq._utils import maybe_transform
 from groq._models import BaseModel, FinalRequestOptions
 from groq._constants import RAW_RESPONSE_HEADER
 from groq._exceptions import GroqError, APIStatusError, APITimeoutError, APIResponseValidationError
 from groq._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
+from groq.types.chat.completion_create_params import CompletionCreateParams
 
 from .utils import update_env
 
@@ -706,18 +708,21 @@ class TestGroq:
                 "/openai/v1/chat/completions",
                 body=cast(
                     object,
-                    dict(
-                        messages=[
-                            {
-                                "role": "system",
-                                "content": "You are a helpful assistant.",
-                            },
-                            {
-                                "role": "user",
-                                "content": "Explain the importance of low latency LLMs",
-                            },
-                        ],
-                        model="llama3-8b-8192",
+                    maybe_transform(
+                        dict(
+                            messages=[
+                                {
+                                    "role": "system",
+                                    "content": "You are a helpful assistant.",
+                                },
+                                {
+                                    "role": "user",
+                                    "content": "Explain the importance of low latency LLMs",
+                                },
+                            ],
+                            model="llama3-8b-8192",
+                        ),
+                        CompletionCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -736,18 +741,21 @@ class TestGroq:
                 "/openai/v1/chat/completions",
                 body=cast(
                     object,
-                    dict(
-                        messages=[
-                            {
-                                "role": "system",
-                                "content": "You are a helpful assistant.",
-                            },
-                            {
-                                "role": "user",
-                                "content": "Explain the importance of low latency LLMs",
-                            },
-                        ],
-                        model="llama3-8b-8192",
+                    maybe_transform(
+                        dict(
+                            messages=[
+                                {
+                                    "role": "system",
+                                    "content": "You are a helpful assistant.",
+                                },
+                                {
+                                    "role": "user",
+                                    "content": "Explain the importance of low latency LLMs",
+                                },
+                            ],
+                            model="llama3-8b-8192",
+                        ),
+                        CompletionCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1526,18 +1534,21 @@ class TestAsyncGroq:
                 "/openai/v1/chat/completions",
                 body=cast(
                     object,
-                    dict(
-                        messages=[
-                            {
-                                "role": "system",
-                                "content": "You are a helpful assistant.",
-                            },
-                            {
-                                "role": "user",
-                                "content": "Explain the importance of low latency LLMs",
-                            },
-                        ],
-                        model="llama3-8b-8192",
+                    maybe_transform(
+                        dict(
+                            messages=[
+                                {
+                                    "role": "system",
+                                    "content": "You are a helpful assistant.",
+                                },
+                                {
+                                    "role": "user",
+                                    "content": "Explain the importance of low latency LLMs",
+                                },
+                            ],
+                            model="llama3-8b-8192",
+                        ),
+                        CompletionCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1556,18 +1567,21 @@ class TestAsyncGroq:
                 "/openai/v1/chat/completions",
                 body=cast(
                     object,
-                    dict(
-                        messages=[
-                            {
-                                "role": "system",
-                                "content": "You are a helpful assistant.",
-                            },
-                            {
-                                "role": "user",
-                                "content": "Explain the importance of low latency LLMs",
-                            },
-                        ],
-                        model="llama3-8b-8192",
+                    maybe_transform(
+                        dict(
+                            messages=[
+                                {
+                                    "role": "system",
+                                    "content": "You are a helpful assistant.",
+                                },
+                                {
+                                    "role": "user",
+                                    "content": "Explain the importance of low latency LLMs",
+                                },
+                            ],
+                            model="llama3-8b-8192",
+                        ),
+                        CompletionCreateParams,
                     ),
                 ),
                 cast_to=httpx.Response,
