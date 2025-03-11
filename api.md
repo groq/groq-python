@@ -22,6 +22,7 @@ Types:
 from groq.types.chat import (
     ChatCompletion,
     ChatCompletionAssistantMessageParam,
+    ChatCompletionChunk,
     ChatCompletionContentPart,
     ChatCompletionContentPartImage,
     ChatCompletionContentPartText,
