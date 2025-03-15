@@ -1,6 +1,6 @@
 [project]
 name = "groq"
-version = "0.19.0"
+version = "0.19.1"
 description = "The official Python library for the groq API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -36,7 +36,6 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/groq/groq-python"
 Repository = "https://github.com/groq/groq-python"
-
 
 
 [tool.rye]
@@ -151,7 +150,6 @@ reportImplicitOverride = true
 
 reportImportCycles = false
 reportPrivateUsage = false
-
 
 [tool.ruff]
 line-length = 120
