@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.19.1 (2025-03-15)
+
+Full Changelog: [v0.19.0...v0.19.1](https://github.com/groq/groq-python/compare/v0.19.0...v0.19.1)
+
+### Bug Fixes
+
+* **types:** handle more discriminated union shapes ([#215](https://github.com/groq/groq-python/issues/215)) ([5c72e94](https://github.com/groq/groq-python/commit/5c72e94d51f34b694a5e00665dcc76af72e5d1da))
+
+
+### Chores
+
+* **internal:** bump rye to 0.44.0 ([#214](https://github.com/groq/groq-python/issues/214)) ([66feae2](https://github.com/groq/groq-python/commit/66feae21c5762518bed3b1cc8f61ced4963d7ea3))
+* **internal:** codegen related update ([#213](https://github.com/groq/groq-python/issues/213)) ([7a16274](https://github.com/groq/groq-python/commit/7a1627444b004d3d5b9852739bec8376cbfc5a2c))
+* **internal:** remove extra empty newlines ([#211](https://github.com/groq/groq-python/issues/211)) ([4187fa1](https://github.com/groq/groq-python/commit/4187fa110ff477e8bb6b313ca3dd8d8227dffb84))
+
 ## 0.19.0 (2025-03-11)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/groq/groq-python/compare/v0.18.0...v0.19.0)
