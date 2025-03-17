@@ -52,11 +52,12 @@ class Translations(SyncAPIResource):
     def create(
         self,
         *,
-        file: FileTypes,
         model: Union[str, Literal["whisper-large-v3"]],
+        file: FileTypes | NotGiven = NOT_GIVEN,
         prompt: str | NotGiven = NOT_GIVEN,
         response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
+        url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -64,14 +65,15 @@ class Translations(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Translation:
-        """
-        Translates audio into English.
+        """Translates audio into English.
 
         Args:
+          model: ID of the model to use.
+
+        Only `whisper-large-v3` is currently available.
+
           file: The audio file object (not file name) translate, in one of these formats: flac,
               mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
-
-          model: ID of the model to use. Only `whisper-large-v3` is currently available.
 
           prompt: An optional text to guide the model's style or continue a previous audio
               segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in
@@ -86,6 +88,9 @@ class Translations(SyncAPIResource):
               [log probability](https://en.wikipedia.org/wiki/Log_probability) to
               automatically increase the temperature until certain thresholds are hit.
 
+          url: The audio URL to translate/transcribe (supports Base64URL). Either file of url
+              must be provided.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -96,11 +101,12 @@ class Translations(SyncAPIResource):
         """
         body = deepcopy_minimal(
             {
-                "file": file,
                 "model": model,
+                "file": file,
                 "prompt": prompt,
                 "response_format": response_format,
                 "temperature": temperature,
+                "url": url,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
@@ -142,11 +148,12 @@ class AsyncTranslations(AsyncAPIResource):
     async def create(
         self,
         *,
-        file: FileTypes,
         model: Union[str, Literal["whisper-large-v3"]],
+        file: FileTypes | NotGiven = NOT_GIVEN,
         prompt: str | NotGiven = NOT_GIVEN,
         response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
+        url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -154,14 +161,15 @@ class AsyncTranslations(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Translation:
-        """
-        Translates audio into English.
+        """Translates audio into English.
 
         Args:
+          model: ID of the model to use.
+
+        Only `whisper-large-v3` is currently available.
+
           file: The audio file object (not file name) translate, in one of these formats: flac,
               mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
-
-          model: ID of the model to use. Only `whisper-large-v3` is currently available.
 
           prompt: An optional text to guide the model's style or continue a previous audio
               segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in
@@ -176,6 +184,9 @@ class AsyncTranslations(AsyncAPIResource):
               [log probability](https://en.wikipedia.org/wiki/Log_probability) to
               automatically increase the temperature until certain thresholds are hit.
 
+          url: The audio URL to translate/transcribe (supports Base64URL). Either file of url
+              must be provided.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -186,11 +197,12 @@ class AsyncTranslations(AsyncAPIResource):
         """
         body = deepcopy_minimal(
             {
-                "file": file,
                 "model": model,
+                "file": file,
                 "prompt": prompt,
                 "response_format": response_format,
                 "temperature": temperature,
+                "url": url,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])

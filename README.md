@@ -122,8 +122,8 @@ from groq import Groq
 client = Groq()
 
 client.audio.transcriptions.create(
-    file=Path("/path/to/file"),
     model="whisper-large-v3",
+    file=Path("/path/to/file"),
 )
 ```
 

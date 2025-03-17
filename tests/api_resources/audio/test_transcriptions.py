@@ -20,7 +20,6 @@ class TestTranscriptions:
     @parametrize
     def test_method_create(self, client: Groq) -> None:
         transcription = client.audio.transcriptions.create(
-            file=b"raw file contents",
             model="whisper-large-v3",
         )
         assert_matches_type(Transcription, transcription, path=["response"])
@@ -28,20 +27,20 @@ class TestTranscriptions:
     @parametrize
     def test_method_create_with_all_params(self, client: Groq) -> None:
         transcription = client.audio.transcriptions.create(
-            file=b"raw file contents",
             model="whisper-large-v3",
+            file=b"raw file contents",
             language="string",
             prompt="prompt",
             response_format="json",
             temperature=0,
             timestamp_granularities=["word"],
+            url="url",
         )
         assert_matches_type(Transcription, transcription, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Groq) -> None:
         response = client.audio.transcriptions.with_raw_response.create(
-            file=b"raw file contents",
             model="whisper-large-v3",
         )
 
@@ -53,7 +52,6 @@ class TestTranscriptions:
     @parametrize
     def test_streaming_response_create(self, client: Groq) -> None:
         with client.audio.transcriptions.with_streaming_response.create(
-            file=b"raw file contents",
             model="whisper-large-v3",
         ) as response:
             assert not response.is_closed
@@ -71,7 +69,6 @@ class TestAsyncTranscriptions:
     @parametrize
     async def test_method_create(self, async_client: AsyncGroq) -> None:
         transcription = await async_client.audio.transcriptions.create(
-            file=b"raw file contents",
             model="whisper-large-v3",
         )
         assert_matches_type(Transcription, transcription, path=["response"])
@@ -79,20 +76,20 @@ class TestAsyncTranscriptions:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
         transcription = await async_client.audio.transcriptions.create(
-            file=b"raw file contents",
             model="whisper-large-v3",
+            file=b"raw file contents",
             language="string",
             prompt="prompt",
             response_format="json",
             temperature=0,
             timestamp_granularities=["word"],
+            url="url",
         )
         assert_matches_type(Transcription, transcription, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
         response = await async_client.audio.transcriptions.with_raw_response.create(
-            file=b"raw file contents",
             model="whisper-large-v3",
         )
 
@@ -104,7 +101,6 @@ class TestAsyncTranscriptions:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
         async with async_client.audio.transcriptions.with_streaming_response.create(
-            file=b"raw file contents",
             model="whisper-large-v3",
         ) as response:
             assert not response.is_closed
