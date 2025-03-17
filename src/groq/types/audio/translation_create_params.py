@@ -11,14 +11,14 @@ __all__ = ["TranslationCreateParams"]
 
 
 class TranslationCreateParams(TypedDict, total=False):
-    file: Required[FileTypes]
+    model: Required[Union[str, Literal["whisper-large-v3"]]]
+    """ID of the model to use. Only `whisper-large-v3` is currently available."""
+
+    file: FileTypes
     """
     The audio file object (not file name) translate, in one of these formats: flac,
     mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
     """
-
-    model: Required[Union[str, Literal["whisper-large-v3"]]]
-    """ID of the model to use. Only `whisper-large-v3` is currently available."""
 
     prompt: str
     """An optional text to guide the model's style or continue a previous audio
@@ -40,4 +40,10 @@ class TranslationCreateParams(TypedDict, total=False):
     0.2 will make it more focused and deterministic. If set to 0, the model will use
     [log probability](https://en.wikipedia.org/wiki/Log_probability) to
     automatically increase the temperature until certain thresholds are hit.
+    """
+
+    url: str
+    """The audio URL to translate/transcribe (supports Base64URL).
+
+    Either file of url must be provided.
     """
