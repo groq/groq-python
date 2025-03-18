@@ -60,6 +60,12 @@ Methods:
 
 # Audio
 
+## Speech
+
+Methods:
+
+- <code title="post /openai/v1/audio/speech">client.audio.speech.<a href="./src/groq/resources/audio/speech.py">create</a>(\*\*<a href="src/groq/types/audio/speech_create_params.py">params</a>) -> BinaryAPIResponse</code>
+
 ## Transcriptions
 
 Types:
