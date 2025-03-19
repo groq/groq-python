@@ -17,14 +17,8 @@ class SpeechCreateParams(TypedDict, total=False):
     voice: Required[str]
     """The voice to use when generating the audio."""
 
-    response_format: Literal["mp3", "opus", "aac", "flac", "wav", "pcm"]
-    """The format to audio in.
-
-    Supported formats are `mp3`, `opus`, `aac`, `flac`, `wav`, and `pcm`.
-    """
+    response_format: Literal["wav"]
+    """The format to audio in. Supported formats are `wav`."""
 
     speed: float
-    """The speed of the generated audio.
-
-    Select a value from `0.25` to `4.0`. `1.0` is the default.
-    """
+    """The speed of the generated audio. 1.0 is the only supported value."""
