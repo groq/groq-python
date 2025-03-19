@@ -55,7 +55,7 @@ class Speech(SyncAPIResource):
         input: str,
         model: str,
         voice: str,
-        response_format: Literal["mp3", "opus", "aac", "flac", "wav", "pcm"] | NotGiven = NOT_GIVEN,
+        response_format: Literal["wav"] | NotGiven = NOT_GIVEN,
         speed: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -74,11 +74,9 @@ class Speech(SyncAPIResource):
 
           voice: The voice to use when generating the audio.
 
-          response_format: The format to audio in. Supported formats are `mp3`, `opus`, `aac`, `flac`,
-              `wav`, and `pcm`.
+          response_format: The format to audio in. Supported formats are `wav`.
 
-          speed: The speed of the generated audio. Select a value from `0.25` to `4.0`. `1.0` is
-              the default.
+          speed: The speed of the generated audio. 1.0 is the only supported value.
 
           extra_headers: Send extra headers
 
@@ -134,7 +132,7 @@ class AsyncSpeech(AsyncAPIResource):
         input: str,
         model: str,
         voice: str,
-        response_format: Literal["mp3", "opus", "aac", "flac", "wav", "pcm"] | NotGiven = NOT_GIVEN,
+        response_format: Literal["wav"] | NotGiven = NOT_GIVEN,
         speed: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -153,11 +151,9 @@ class AsyncSpeech(AsyncAPIResource):
 
           voice: The voice to use when generating the audio.
 
-          response_format: The format to audio in. Supported formats are `mp3`, `opus`, `aac`, `flac`,
-              `wav`, and `pcm`.
+          response_format: The format to audio in. Supported formats are `wav`.
 
-          speed: The speed of the generated audio. Select a value from `0.25` to `4.0`. `1.0` is
-              the default.
+          speed: The speed of the generated audio. 1.0 is the only supported value.
 
           extra_headers: Send extra headers
 

@@ -45,8 +45,8 @@ class TestSpeech:
             input="input",
             model="model",
             voice="voice",
-            response_format="mp3",
-            speed=0.25,
+            response_format="wav",
+            speed=1,
         )
         assert speech.is_closed
         assert speech.json() == {"foo": "bar"}
@@ -113,8 +113,8 @@ class TestAsyncSpeech:
             input="input",
             model="model",
             voice="voice",
-            response_format="mp3",
-            speed=0.25,
+            response_format="wav",
+            speed=1,
         )
         assert speech.is_closed
         assert await speech.json() == {"foo": "bar"}
