@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.20.0 (2025-03-19)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/groq/groq-python/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** Add speech endpoint ([#219](https://github.com/groq/groq-python/issues/219)) ([f150801](https://github.com/groq/groq-python/commit/f150801968535bafe87794addf01ae4beaec8351))
+* **api:** api update ([#218](https://github.com/groq/groq-python/issues/218)) ([c124862](https://github.com/groq/groq-python/commit/c124862e24b820569a777c86a4e14c7e1c69fa2d))
+* **api:** api update ([#220](https://github.com/groq/groq-python/issues/220)) ([f4eeb8d](https://github.com/groq/groq-python/commit/f4eeb8d8be6a08b2432b3941d7c730d055447c4e))
+
+
+### Bug Fixes
+
+* **ci:** ensure pip is always available ([#216](https://github.com/groq/groq-python/issues/216)) ([085166c](https://github.com/groq/groq-python/commit/085166c1293b26bea8f09d5be4f11d3db9f18497))
+* **ci:** remove publishing patch ([#217](https://github.com/groq/groq-python/issues/217)) ([fb579e8](https://github.com/groq/groq-python/commit/fb579e87a36d153263ea01b566b4ed7fb967eaf5))
+* **types:** handle more discriminated union shapes ([#215](https://github.com/groq/groq-python/issues/215)) ([5c72e94](https://github.com/groq/groq-python/commit/5c72e94d51f34b694a5e00665dcc76af72e5d1da))
+
+
+### Chores
+
+* **internal:** bump rye to 0.44.0 ([#214](https://github.com/groq/groq-python/issues/214)) ([66feae2](https://github.com/groq/groq-python/commit/66feae21c5762518bed3b1cc8f61ced4963d7ea3))
+* **internal:** codegen related update ([#213](https://github.com/groq/groq-python/issues/213)) ([7a16274](https://github.com/groq/groq-python/commit/7a1627444b004d3d5b9852739bec8376cbfc5a2c))
+* **internal:** remove extra empty newlines ([#211](https://github.com/groq/groq-python/issues/211)) ([4187fa1](https://github.com/groq/groq-python/commit/4187fa110ff477e8bb6b313ca3dd8d8227dffb84))
+
 ## 0.19.0 (2025-03-11)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/groq/groq-python/compare/v0.18.0...v0.19.0)
