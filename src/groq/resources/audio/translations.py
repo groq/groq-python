@@ -88,8 +88,8 @@ class Translations(SyncAPIResource):
               [log probability](https://en.wikipedia.org/wiki/Log_probability) to
               automatically increase the temperature until certain thresholds are hit.
 
-          url: The audio URL to translate/transcribe (supports Base64URL). Either file of url
-              must be provided.
+          url: The audio URL to translate/transcribe (supports Base64URL). Either file or url
+              must be provided. When using the Batch API only url is supported.
 
           extra_headers: Send extra headers
 
@@ -184,8 +184,8 @@ class AsyncTranslations(AsyncAPIResource):
               [log probability](https://en.wikipedia.org/wiki/Log_probability) to
               automatically increase the temperature until certain thresholds are hit.
 
-          url: The audio URL to translate/transcribe (supports Base64URL). Either file of url
-              must be provided.
+          url: The audio URL to translate/transcribe (supports Base64URL). Either file or url
+              must be provided. When using the Batch API only url is supported.
 
           extra_headers: Send extra headers
 

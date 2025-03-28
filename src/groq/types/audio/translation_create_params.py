@@ -45,5 +45,6 @@ class TranslationCreateParams(TypedDict, total=False):
     url: str
     """The audio URL to translate/transcribe (supports Base64URL).
 
-    Either file of url must be provided.
+    Either file or url must be provided. When using the Batch API only url is
+    supported.
     """

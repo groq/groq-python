@@ -17,7 +17,8 @@ class TranscriptionCreateParams(TypedDict, total=False):
     file: FileTypes
     """
     The audio file object (not file name) to transcribe, in one of these formats:
-    flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
+    flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Either a file or a URL must
+    be provided. Note that the file field is not supported in Batch API requests.
     """
 
     language: Union[
@@ -164,7 +165,8 @@ class TranscriptionCreateParams(TypedDict, total=False):
     """
 
     url: str
-    """The audio URL to translate/transcribe (supports Base64URL).
-
-    Either file of url must be provided.
+    """
+    The audio URL to translate/transcribe (supports Base64URL). Either a file or a
+    URL must be provided. For Batch API requests, the URL field is required since
+    the file field is not supported.
     """
