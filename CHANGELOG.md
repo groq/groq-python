@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.21.0 (2025-04-01)
+
+Full Changelog: [v0.20.0...v0.21.0](https://github.com/groq/groq-python/compare/v0.20.0...v0.21.0)
+
+### Features
+
+* **api:** api update ([#224](https://github.com/groq/groq-python/issues/224)) ([94f29cf](https://github.com/groq/groq-python/commit/94f29cfa5a5873d46de380de98b3bb37aff78615))
+* **api:** api update ([#225](https://github.com/groq/groq-python/issues/225)) ([cdf668c](https://github.com/groq/groq-python/commit/cdf668c5b45ea5bef841f2e2da38664c09454a55))
+* **api:** manual updates ([#226](https://github.com/groq/groq-python/issues/226)) ([499e454](https://github.com/groq/groq-python/commit/499e4544aa45a25f333de8b34714dbaa5242dcbc))
+
+
+### Chores
+
+* fix typos ([#222](https://github.com/groq/groq-python/issues/222)) ([51bb8ad](https://github.com/groq/groq-python/commit/51bb8ad9c5826d72ecaa95bd00d36f86fc1b5b98))
+
 ## 0.20.0 (2025-03-19)
 
 Full Changelog: [v0.19.0...v0.20.0](https://github.com/groq/groq-python/compare/v0.19.0...v0.20.0)
