@@ -17,6 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestTranscriptions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip(reason="Unsupported either condition")
     @parametrize
     def test_method_create(self, client: Groq) -> None:
         transcription = client.audio.transcriptions.create(
@@ -24,6 +25,7 @@ class TestTranscriptions:
         )
         assert_matches_type(Transcription, transcription, path=["response"])
 
+    @pytest.mark.skip(reason="Unsupported either condition")
     @parametrize
     def test_method_create_with_all_params(self, client: Groq) -> None:
         transcription = client.audio.transcriptions.create(
@@ -38,6 +40,7 @@ class TestTranscriptions:
         )
         assert_matches_type(Transcription, transcription, path=["response"])
 
+    @pytest.mark.skip(reason="Unsupported either condition")
     @parametrize
     def test_raw_response_create(self, client: Groq) -> None:
         response = client.audio.transcriptions.with_raw_response.create(
@@ -49,6 +52,7 @@ class TestTranscriptions:
         transcription = response.parse()
         assert_matches_type(Transcription, transcription, path=["response"])
 
+    @pytest.mark.skip(reason="Unsupported either condition")
     @parametrize
     def test_streaming_response_create(self, client: Groq) -> None:
         with client.audio.transcriptions.with_streaming_response.create(
@@ -66,6 +70,7 @@ class TestTranscriptions:
 class TestAsyncTranscriptions:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip(reason="Unsupported either condition")
     @parametrize
     async def test_method_create(self, async_client: AsyncGroq) -> None:
         transcription = await async_client.audio.transcriptions.create(
@@ -73,6 +78,7 @@ class TestAsyncTranscriptions:
         )
         assert_matches_type(Transcription, transcription, path=["response"])
 
+    @pytest.mark.skip(reason="Unsupported either condition")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
         transcription = await async_client.audio.transcriptions.create(
@@ -87,6 +93,7 @@ class TestAsyncTranscriptions:
         )
         assert_matches_type(Transcription, transcription, path=["response"])
 
+    @pytest.mark.skip(reason="Unsupported either condition")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
         response = await async_client.audio.transcriptions.with_raw_response.create(
@@ -98,6 +105,7 @@ class TestAsyncTranscriptions:
         transcription = await response.parse()
         assert_matches_type(Transcription, transcription, path=["response"])
 
+    @pytest.mark.skip(reason="Unsupported either condition")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
         async with async_client.audio.transcriptions.with_streaming_response.create(
