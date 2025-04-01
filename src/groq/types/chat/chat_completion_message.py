@@ -6,7 +6,21 @@ from typing_extensions import Literal
 from ..._models import BaseModel
 from .chat_completion_message_tool_call import ChatCompletionMessageToolCall
 
-__all__ = ["ChatCompletionMessage", "FunctionCall"]
+__all__ = ["ChatCompletionMessage", "ExecutedTool", "FunctionCall"]
+
+
+class ExecutedTool(BaseModel):
+    arguments: str
+    """The arguments passed to the tool in JSON format."""
+
+    index: int
+    """The index of the executed tool."""
+
+    type: str
+    """The type of tool that was executed."""
+
+    output: Optional[str] = None
+    """The output returned by the tool."""
 
 
 class FunctionCall(BaseModel):
@@ -28,6 +42,12 @@ class ChatCompletionMessage(BaseModel):
 
     role: Literal["assistant"]
     """The role of the author of this message."""
+
+    executed_tools: Optional[List[ExecutedTool]] = None
+    """
+    A list of tools that were executed during the chat completion for compound AI
+    systems.
+    """
 
     function_call: Optional[FunctionCall] = None
     """Deprecated and replaced by `tool_calls`.
