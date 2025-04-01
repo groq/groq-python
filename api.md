@@ -109,7 +109,12 @@ Methods:
 Types:
 
 ```python
-from groq.types import BatchCreateResponse, BatchRetrieveResponse, BatchListResponse
+from groq.types import (
+    BatchCreateResponse,
+    BatchRetrieveResponse,
+    BatchListResponse,
+    BatchCancelResponse,
+)
 ```
 
 Methods:
@@ -117,6 +122,7 @@ Methods:
 - <code title="post /openai/v1/batches">client.batches.<a href="./src/groq/resources/batches.py">create</a>(\*\*<a href="src/groq/types/batch_create_params.py">params</a>) -> <a href="./src/groq/types/batch_create_response.py">BatchCreateResponse</a></code>
 - <code title="get /openai/v1/batches/{batch_id}">client.batches.<a href="./src/groq/resources/batches.py">retrieve</a>(batch_id) -> <a href="./src/groq/types/batch_retrieve_response.py">BatchRetrieveResponse</a></code>
 - <code title="get /openai/v1/batches">client.batches.<a href="./src/groq/resources/batches.py">list</a>() -> <a href="./src/groq/types/batch_list_response.py">BatchListResponse</a></code>
+- <code title="post /openai/v1/batches/{batch_id}/cancel">client.batches.<a href="./src/groq/resources/batches.py">cancel</a>(batch_id) -> <a href="./src/groq/types/batch_cancel_response.py">BatchCancelResponse</a></code>
 
 # Files
 

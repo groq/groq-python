@@ -23,6 +23,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.batch_list_response import BatchListResponse
+from ..types.batch_cancel_response import BatchCancelResponse
 from ..types.batch_create_response import BatchCreateResponse
 from ..types.batch_retrieve_response import BatchRetrieveResponse
 
@@ -159,6 +160,39 @@ class Batches(SyncAPIResource):
             cast_to=BatchListResponse,
         )
 
+    def cancel(
+        self,
+        batch_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BatchCancelResponse:
+        """
+        Cancels a batch.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not batch_id:
+            raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
+        return self._post(
+            f"/openai/v1/batches/{batch_id}/cancel",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BatchCancelResponse,
+        )
+
 
 class AsyncBatches(AsyncAPIResource):
     @cached_property
@@ -290,6 +324,39 @@ class AsyncBatches(AsyncAPIResource):
             cast_to=BatchListResponse,
         )
 
+    async def cancel(
+        self,
+        batch_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BatchCancelResponse:
+        """
+        Cancels a batch.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not batch_id:
+            raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
+        return await self._post(
+            f"/openai/v1/batches/{batch_id}/cancel",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BatchCancelResponse,
+        )
+
 
 class BatchesWithRawResponse:
     def __init__(self, batches: Batches) -> None:
@@ -303,6 +370,9 @@ class BatchesWithRawResponse:
         )
         self.list = to_raw_response_wrapper(
             batches.list,
+        )
+        self.cancel = to_raw_response_wrapper(
+            batches.cancel,
         )
 
 
@@ -319,6 +389,9 @@ class AsyncBatchesWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             batches.list,
         )
+        self.cancel = async_to_raw_response_wrapper(
+            batches.cancel,
+        )
 
 
 class BatchesWithStreamingResponse:
@@ -334,6 +407,9 @@ class BatchesWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             batches.list,
         )
+        self.cancel = to_streamed_response_wrapper(
+            batches.cancel,
+        )
 
 
 class AsyncBatchesWithStreamingResponse:
@@ -348,4 +424,7 @@ class AsyncBatchesWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             batches.list,
+        )
+        self.cancel = async_to_streamed_response_wrapper(
+            batches.cancel,
         )
