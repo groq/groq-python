@@ -19,6 +19,7 @@ from .batch_list_response import BatchListResponse as BatchListResponse
 from .model_list_response import ModelListResponse as ModelListResponse
 from .file_create_response import FileCreateResponse as FileCreateResponse
 from .file_delete_response import FileDeleteResponse as FileDeleteResponse
+from .batch_cancel_response import BatchCancelResponse as BatchCancelResponse
 from .batch_create_response import BatchCreateResponse as BatchCreateResponse
 from .file_content_response import FileContentResponse as FileContentResponse
 from .batch_retrieve_response import BatchRetrieveResponse as BatchRetrieveResponse
