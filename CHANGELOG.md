@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.22.0 (2025-04-02)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/groq/groq-python/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* **api:** add batch cancellation ([a5c3827](https://github.com/groq/groq-python/commit/a5c3827126e788d4f6822e63cda08eef43412d1b))
+
 ## 0.21.0 (2025-04-01)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/groq/groq-python/compare/v0.20.0...v0.21.0)
