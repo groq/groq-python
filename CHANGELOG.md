@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.22.1 (2025-04-04)
+
+Full Changelog: [v0.22.0...v0.22.1](https://github.com/groq/groq-python/compare/v0.22.0...v0.22.1)
+
+### Chores
+
+* **internal:** remove trailing character ([#233](https://github.com/groq/groq-python/issues/233)) ([2781f14](https://github.com/groq/groq-python/commit/2781f1439e025b088651520c6c24bdb6cec0568b))
+
 ## 0.22.0 (2025-04-02)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/groq/groq-python/compare/v0.21.0...v0.22.0)
