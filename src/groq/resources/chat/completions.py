@@ -62,6 +62,7 @@ class Completions(SyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -70,6 +71,7 @@ class Completions(SyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[bool] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -127,6 +129,8 @@ class Completions(SyncAPIResource):
               that can be generated in the chat completion. The total length of input tokens
               and generated tokens is limited by the model's context length.
 
+          metadata: This parameter is not currently supported.
+
           n: How many chat completion choices to generate for each input message. Note that
               the current moment, only n=1 is supported. Other values will result in a 400
               response.
@@ -160,6 +164,8 @@ class Completions(SyncAPIResource):
 
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
+
+          store: This parameter is not currently supported.
 
           stream: If set, partial message deltas will be sent. Tokens will be sent as data-only
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
@@ -219,6 +225,7 @@ class Completions(SyncAPIResource):
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
                     "max_tokens": max_tokens,
+                    "metadata": metadata,
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
@@ -227,6 +234,7 @@ class Completions(SyncAPIResource):
                     "seed": seed,
                     "service_tier": service_tier,
                     "stop": stop,
+                    "store": store,
                     "stream": stream,
                     "temperature": temperature,
                     "tool_choice": tool_choice,
@@ -276,6 +284,7 @@ class AsyncCompletions(AsyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -284,6 +293,7 @@ class AsyncCompletions(AsyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[bool] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -341,6 +351,8 @@ class AsyncCompletions(AsyncAPIResource):
               that can be generated in the chat completion. The total length of input tokens
               and generated tokens is limited by the model's context length.
 
+          metadata: This parameter is not currently supported.
+
           n: How many chat completion choices to generate for each input message. Note that
               the current moment, only n=1 is supported. Other values will result in a 400
               response.
@@ -374,6 +386,8 @@ class AsyncCompletions(AsyncAPIResource):
 
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
+
+          store: This parameter is not currently supported.
 
           stream: If set, partial message deltas will be sent. Tokens will be sent as data-only
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
@@ -433,6 +447,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
                     "max_tokens": max_tokens,
+                    "metadata": metadata,
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
@@ -441,6 +456,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "seed": seed,
                     "service_tier": service_tier,
                     "stop": stop,
+                    "store": store,
                     "stream": stream,
                     "temperature": temperature,
                     "tool_choice": tool_choice,
