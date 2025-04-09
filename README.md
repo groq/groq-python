@@ -106,7 +106,7 @@ chat_completion = client.chat.completions.create(
         }
     ],
     model="string",
-    response_format={"type": "text"},
+    response_format={"type": "json_object"},
 )
 print(chat_completion.response_format)
 ```
