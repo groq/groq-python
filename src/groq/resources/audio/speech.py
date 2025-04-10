@@ -70,9 +70,10 @@ class Speech(SyncAPIResource):
         Args:
           input: The text to generate audio for.
 
-          model: One of the available TTS models
+          model: One of the [available TTS models](/docs/text-to-speech).
 
-          voice: The voice to use when generating the audio.
+          voice: The voice to use when generating the audio. List of voices can be found
+              [here](/docs/text-to-speech).
 
           response_format: The format to audio in. Supported formats are `wav`.
 
@@ -86,7 +87,7 @@ class Speech(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        extra_headers = {"Accept": "audio/wav", **(extra_headers or {})}
         return self._post(
             "/openai/v1/audio/speech",
             body=maybe_transform(
@@ -147,9 +148,10 @@ class AsyncSpeech(AsyncAPIResource):
         Args:
           input: The text to generate audio for.
 
-          model: One of the available TTS models
+          model: One of the [available TTS models](/docs/text-to-speech).
 
-          voice: The voice to use when generating the audio.
+          voice: The voice to use when generating the audio. List of voices can be found
+              [here](/docs/text-to-speech).
 
           response_format: The format to audio in. Supported formats are `wav`.
 
@@ -163,7 +165,7 @@ class AsyncSpeech(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        extra_headers = {"Accept": "audio/wav", **(extra_headers or {})}
         return await self._post(
             "/openai/v1/audio/speech",
             body=await async_maybe_transform(
