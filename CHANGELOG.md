@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.23.0 (2025-04-11)
+
+Full Changelog: [v0.22.0...v0.23.0](https://github.com/groq/groq-python/compare/v0.22.0...v0.23.0)
+
+### Features
+
+* **api:** api update ([b1d6697](https://github.com/groq/groq-python/commit/b1d66973010bf3ba63b11744df08da6b8a770841))
+* **api:** api update ([98ef30e](https://github.com/groq/groq-python/commit/98ef30efd2e30716c732a62159f3f33f441f4b5f))
+
+
+### Chores
+
+* **internal:** expand CI branch coverage ([ed6a533](https://github.com/groq/groq-python/commit/ed6a5331f2a72de6487ec689992bebff4e89a25c))
+* **internal:** reduce CI branch coverage ([0139f63](https://github.com/groq/groq-python/commit/0139f63299b4f251b9cd9267ffdea4c809694d50))
+* **internal:** remove trailing character ([#233](https://github.com/groq/groq-python/issues/233)) ([2781f14](https://github.com/groq/groq-python/commit/2781f1439e025b088651520c6c24bdb6cec0568b))
+* **internal:** slight transform perf improvement ([#235](https://github.com/groq/groq-python/issues/235)) ([c67eeaa](https://github.com/groq/groq-python/commit/c67eeaabfc20960ad1c25eb425193009d9b6fc35))
+* slight wording improvement in README ([#237](https://github.com/groq/groq-python/issues/237)) ([fa001a3](https://github.com/groq/groq-python/commit/fa001a3e9228ea6b734a33394a14edf32f70c528))
+* **tests:** improve enum examples ([#236](https://github.com/groq/groq-python/issues/236)) ([6218620](https://github.com/groq/groq-python/commit/62186208c2c5971a7fc7ea0e4519ec7c002dc84f))
+
 ## 0.22.0 (2025-04-02)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/groq/groq-python/compare/v0.21.0...v0.22.0)
