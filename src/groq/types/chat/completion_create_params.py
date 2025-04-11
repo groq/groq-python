@@ -150,7 +150,7 @@ class CompletionCreateParams(TypedDict, total=False):
 
     Higher values like 0.8 will make the output more random, while lower values like
     0.2 will make it more focused and deterministic. We generally recommend altering
-    this or top_p but not both
+    this or top_p but not both.
     """
 
     tool_choice: Optional[ChatCompletionToolChoiceOptionParam]
