@@ -78,6 +78,9 @@ class CompletionCreateParams(TypedDict, total=False):
     and generated tokens is limited by the model's context length.
     """
 
+    metadata: Optional[Dict[str, str]]
+    """This parameter is not currently supported."""
+
     n: Optional[int]
     """How many chat completion choices to generate for each input message.
 
@@ -129,6 +132,9 @@ class CompletionCreateParams(TypedDict, total=False):
 
     The returned text will not contain the stop sequence.
     """
+
+    store: Optional[bool]
+    """This parameter is not currently supported."""
 
     stream: Optional[bool]
     """If set, partial message deltas will be sent.
