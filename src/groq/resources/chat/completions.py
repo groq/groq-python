@@ -294,7 +294,7 @@ class Completions(SyncAPIResource):
           temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
               make the output more random, while lower values like 0.2 will make it more
               focused and deterministic. We generally recommend altering this or top_p but not
-              both
+              both.
 
           tool_choice: Controls which (if any) tool is called by the model. `none` means the model will
               not call any tool and instead generates a message. `auto` means the model can
@@ -635,7 +635,7 @@ class AsyncCompletions(AsyncAPIResource):
           temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
               make the output more random, while lower values like 0.2 will make it more
               focused and deterministic. We generally recommend altering this or top_p but not
-              both
+              both.
 
           tool_choice: Controls which (if any) tool is called by the model. `none` means the model will
               not call any tool and instead generates a message. `auto` means the model can
