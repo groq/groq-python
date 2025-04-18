@@ -18,11 +18,23 @@ class CompletionCreateParams(TypedDict, total=False):
     messages: Required[Iterable[ChatCompletionMessageParam]]
     """A list of messages comprising the conversation so far."""
 
-    model: Required[Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]]]
+    model: Required[
+        Union[
+            str,
+            Literal[
+                "gemma2-9b-it",
+                "llama-3.3-70b-versatile",
+                "llama-3.1-8b-instant",
+                "llama-guard-3-8b",
+                "llama3-70b-8192",
+                "llama3-8b-8192",
+            ],
+        ]
+    ]
     """ID of the model to use.
 
     For details on which models are compatible with the Chat API, see available
-    [models](/docs/models)
+    [models](https://console.groq.com/docs/models)
     """
 
     frequency_penalty: Optional[float]
