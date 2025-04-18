@@ -173,7 +173,17 @@ class Completions(SyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]],
+        model: Union[
+            str,
+            Literal[
+                "gemma2-9b-it",
+                "llama-3.3-70b-versatile",
+                "llama-3.1-8b-instant",
+                "llama-guard-3-8b",
+                "llama3-70b-8192",
+                "llama3-8b-8192",
+            ],
+        ],
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
@@ -212,7 +222,7 @@ class Completions(SyncAPIResource):
           messages: A list of messages comprising the conversation so far.
 
           model: ID of the model to use. For details on which models are compatible with the Chat
-              API, see available [models](/docs/models)
+              API, see available [models](https://console.groq.com/docs/models)
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -514,7 +524,17 @@ class AsyncCompletions(AsyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]],
+        model: Union[
+            str,
+            Literal[
+                "gemma2-9b-it",
+                "llama-3.3-70b-versatile",
+                "llama-3.1-8b-instant",
+                "llama-guard-3-8b",
+                "llama3-70b-8192",
+                "llama3-8b-8192",
+            ],
+        ],
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
@@ -553,7 +573,7 @@ class AsyncCompletions(AsyncAPIResource):
           messages: A list of messages comprising the conversation so far.
 
           model: ID of the model to use. For details on which models are compatible with the Chat
-              API, see available [models](/docs/models)
+              API, see available [models](https://console.groq.com/docs/models)
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
