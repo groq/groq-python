@@ -12,10 +12,13 @@ class SpeechCreateParams(TypedDict, total=False):
     """The text to generate audio for."""
 
     model: Required[str]
-    """One of the available TTS models"""
+    """One of the [available TTS models](/docs/text-to-speech)."""
 
     voice: Required[str]
-    """The voice to use when generating the audio."""
+    """The voice to use when generating the audio.
+
+    List of voices can be found [here](/docs/text-to-speech).
+    """
 
     response_format: Literal["wav"]
     """The format to audio in. Supported formats are `wav`."""
