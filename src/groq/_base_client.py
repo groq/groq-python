@@ -98,7 +98,11 @@ _StreamT = TypeVar("_StreamT", bound=Stream[Any])
 _AsyncStreamT = TypeVar("_AsyncStreamT", bound=AsyncStream[Any])
 
 if TYPE_CHECKING:
-    from httpx._config import DEFAULT_TIMEOUT_CONFIG as HTTPX_DEFAULT_TIMEOUT
+    from httpx._config import (
+        DEFAULT_TIMEOUT_CONFIG,  # pyright: ignore[reportPrivateImportUsage]
+    )
+
+    HTTPX_DEFAULT_TIMEOUT = DEFAULT_TIMEOUT_CONFIG
 else:
     try:
         from httpx._config import DEFAULT_TIMEOUT_CONFIG as HTTPX_DEFAULT_TIMEOUT
@@ -115,6 +119,7 @@ class PageInfo:
 
     url: URL | NotGiven
     params: Query | NotGiven
+    json: Body | NotGiven
 
     @overload
     def __init__(
@@ -130,19 +135,30 @@ class PageInfo:
         params: Query,
     ) -> None: ...
 
+    @overload
+    def __init__(
+        self,
+        *,
+        json: Body,
+    ) -> None: ...
+
     def __init__(
         self,
         *,
         url: URL | NotGiven = NOT_GIVEN,
+        json: Body | NotGiven = NOT_GIVEN,
         params: Query | NotGiven = NOT_GIVEN,
     ) -> None:
         self.url = url
+        self.json = json
         self.params = params
 
     @override
     def __repr__(self) -> str:
         if self.url:
             return f"{self.__class__.__name__}(url={self.url})"
+        if self.json:
+            return f"{self.__class__.__name__}(json={self.json})"
         return f"{self.__class__.__name__}(params={self.params})"
 
 
@@ -189,6 +205,19 @@ class BasePage(GenericModel, Generic[_T]):
             url = info.url.copy_with(params=params)
             options.params = dict(url.params)
             options.url = str(url)
+            return options
+
+        if not isinstance(info.json, NotGiven):
+            if not is_mapping(info.json):
+                raise TypeError("Pagination is only supported with mappings")
+
+            if not options.json_data:
+                options.json_data = {**info.json}
+            else:
+                if not is_mapping(options.json_data):
+                    raise TypeError("Pagination is only supported with mappings")
+
+                options.json_data = {**options.json_data, **info.json}
             return options
 
         raise ValueError("Unexpected PageInfo state")
@@ -409,7 +438,8 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
 
         idempotency_header = self._idempotency_header
         if idempotency_header and options.method.lower() != "get" and idempotency_header not in headers:
-            headers[idempotency_header] = options.idempotency_key or self._idempotency_key()
+            options.idempotency_key = options.idempotency_key or self._idempotency_key()
+            headers[idempotency_header] = options.idempotency_key
 
         # Don't set these headers if they were already set or removed by the caller. We check
         # `custom_headers`, which can contain `Omit()`, instead of `headers` to account for the removal case.
@@ -943,6 +973,10 @@ class SyncAPIClient(BaseClient[httpx.Client, Stream[Any]]):
         request = self._build_request(options, retries_taken=retries_taken)
         self._prepare_request(request)
 
+        if options.idempotency_key:
+            # ensure the idempotency key is reused between requests
+            input_options.idempotency_key = options.idempotency_key
+
         kwargs: HttpxSendArgs = {}
         if self.custom_auth is not None:
             kwargs["auth"] = self.custom_auth
@@ -1474,6 +1508,10 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         remaining_retries = options.get_max_retries(self.max_retries) - retries_taken
         request = self._build_request(options, retries_taken=retries_taken)
         await self._prepare_request(request)
+
+        if options.idempotency_key:
+            # ensure the idempotency key is reused between requests
+            input_options.idempotency_key = options.idempotency_key
 
         kwargs: HttpxSendArgs = {}
         if self.custom_auth is not None:

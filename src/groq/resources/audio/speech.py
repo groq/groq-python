@@ -55,7 +55,7 @@ class Speech(SyncAPIResource):
         input: str,
         model: str,
         voice: str,
-        response_format: Literal["wav"] | NotGiven = NOT_GIVEN,
+        response_format: Literal["wav", "mp3"] | NotGiven = NOT_GIVEN,
         speed: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -70,11 +70,12 @@ class Speech(SyncAPIResource):
         Args:
           input: The text to generate audio for.
 
-          model: One of the available TTS models
+          model: One of the [available TTS models](/docs/text-to-speech).
 
-          voice: The voice to use when generating the audio.
+          voice: The voice to use when generating the audio. List of voices can be found
+              [here](/docs/text-to-speech).
 
-          response_format: The format to audio in. Supported formats are `wav`.
+          response_format: The format to audio in. Supported formats are `wav, mp3`.
 
           speed: The speed of the generated audio. 1.0 is the only supported value.
 
@@ -86,7 +87,7 @@ class Speech(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        extra_headers = {"Accept": "audio/wav", **(extra_headers or {})}
         return self._post(
             "/openai/v1/audio/speech",
             body=maybe_transform(
@@ -132,7 +133,7 @@ class AsyncSpeech(AsyncAPIResource):
         input: str,
         model: str,
         voice: str,
-        response_format: Literal["wav"] | NotGiven = NOT_GIVEN,
+        response_format: Literal["wav", "mp3"] | NotGiven = NOT_GIVEN,
         speed: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -147,11 +148,12 @@ class AsyncSpeech(AsyncAPIResource):
         Args:
           input: The text to generate audio for.
 
-          model: One of the available TTS models
+          model: One of the [available TTS models](/docs/text-to-speech).
 
-          voice: The voice to use when generating the audio.
+          voice: The voice to use when generating the audio. List of voices can be found
+              [here](/docs/text-to-speech).
 
-          response_format: The format to audio in. Supported formats are `wav`.
+          response_format: The format to audio in. Supported formats are `wav, mp3`.
 
           speed: The speed of the generated audio. 1.0 is the only supported value.
 
@@ -163,7 +165,7 @@ class AsyncSpeech(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
+        extra_headers = {"Accept": "audio/wav", **(extra_headers or {})}
         return await self._post(
             "/openai/v1/audio/speech",
             body=await async_maybe_transform(

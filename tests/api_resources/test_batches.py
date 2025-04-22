@@ -25,7 +25,7 @@ class TestBatches:
     @parametrize
     def test_method_create(self, client: Groq) -> None:
         batch = client.batches.create(
-            completion_window="24h",
+            completion_window="completion_window",
             endpoint="/v1/chat/completions",
             input_file_id="input_file_id",
         )
@@ -34,7 +34,7 @@ class TestBatches:
     @parametrize
     def test_method_create_with_all_params(self, client: Groq) -> None:
         batch = client.batches.create(
-            completion_window="24h",
+            completion_window="completion_window",
             endpoint="/v1/chat/completions",
             input_file_id="input_file_id",
             metadata={"foo": "string"},
@@ -44,7 +44,7 @@ class TestBatches:
     @parametrize
     def test_raw_response_create(self, client: Groq) -> None:
         response = client.batches.with_raw_response.create(
-            completion_window="24h",
+            completion_window="completion_window",
             endpoint="/v1/chat/completions",
             input_file_id="input_file_id",
         )
@@ -57,7 +57,7 @@ class TestBatches:
     @parametrize
     def test_streaming_response_create(self, client: Groq) -> None:
         with client.batches.with_streaming_response.create(
-            completion_window="24h",
+            completion_window="completion_window",
             endpoint="/v1/chat/completions",
             input_file_id="input_file_id",
         ) as response:
@@ -177,7 +177,7 @@ class TestAsyncBatches:
     @parametrize
     async def test_method_create(self, async_client: AsyncGroq) -> None:
         batch = await async_client.batches.create(
-            completion_window="24h",
+            completion_window="completion_window",
             endpoint="/v1/chat/completions",
             input_file_id="input_file_id",
         )
@@ -186,7 +186,7 @@ class TestAsyncBatches:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
         batch = await async_client.batches.create(
-            completion_window="24h",
+            completion_window="completion_window",
             endpoint="/v1/chat/completions",
             input_file_id="input_file_id",
             metadata={"foo": "string"},
@@ -196,7 +196,7 @@ class TestAsyncBatches:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
         response = await async_client.batches.with_raw_response.create(
-            completion_window="24h",
+            completion_window="completion_window",
             endpoint="/v1/chat/completions",
             input_file_id="input_file_id",
         )
@@ -209,7 +209,7 @@ class TestAsyncBatches:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
         async with async_client.batches.with_streaming_response.create(
-            completion_window="24h",
+            completion_window="completion_window",
             endpoint="/v1/chat/completions",
             input_file_id="input_file_id",
         ) as response:

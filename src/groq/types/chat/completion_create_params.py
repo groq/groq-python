@@ -18,11 +18,23 @@ class CompletionCreateParams(TypedDict, total=False):
     messages: Required[Iterable[ChatCompletionMessageParam]]
     """A list of messages comprising the conversation so far."""
 
-    model: Required[Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]]]
+    model: Required[
+        Union[
+            str,
+            Literal[
+                "gemma2-9b-it",
+                "llama-3.3-70b-versatile",
+                "llama-3.1-8b-instant",
+                "llama-guard-3-8b",
+                "llama3-70b-8192",
+                "llama3-8b-8192",
+            ],
+        ]
+    ]
     """ID of the model to use.
 
     For details on which models are compatible with the Chat API, see available
-    [models](/docs/models)
+    [models](https://console.groq.com/docs/models)
     """
 
     frequency_penalty: Optional[float]
@@ -78,6 +90,9 @@ class CompletionCreateParams(TypedDict, total=False):
     and generated tokens is limited by the model's context length.
     """
 
+    metadata: Optional[Dict[str, str]]
+    """This parameter is not currently supported."""
+
     n: Optional[int]
     """How many chat completion choices to generate for each input message.
 
@@ -130,6 +145,9 @@ class CompletionCreateParams(TypedDict, total=False):
     The returned text will not contain the stop sequence.
     """
 
+    store: Optional[bool]
+    """This parameter is not currently supported."""
+
     stream: Optional[bool]
     """If set, partial message deltas will be sent.
 
@@ -144,7 +162,7 @@ class CompletionCreateParams(TypedDict, total=False):
 
     Higher values like 0.8 will make the output more random, while lower values like
     0.2 will make it more focused and deterministic. We generally recommend altering
-    this or top_p but not both
+    this or top_p but not both.
     """
 
     tool_choice: Optional[ChatCompletionToolChoiceOptionParam]

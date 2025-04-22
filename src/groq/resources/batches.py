@@ -53,7 +53,7 @@ class Batches(SyncAPIResource):
     def create(
         self,
         *,
-        completion_window: Literal["24h"],
+        completion_window: str,
         endpoint: Literal["/v1/chat/completions"],
         input_file_id: str,
         metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
@@ -65,11 +65,12 @@ class Batches(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BatchCreateResponse:
         """
-        Creates and executes a batch from an uploaded file of requests
+        Creates and executes a batch from an uploaded file of requests.
+        [Learn more](/docs/batch).
 
         Args:
-          completion_window: The time frame within which the batch should be processed. Currently only `24h`
-              is supported.
+          completion_window: The time frame within which the batch should be processed. Durations from `24h`
+              to `7d` are supported.
 
           endpoint: The endpoint to be used for all requests in the batch. Currently
               `/v1/chat/completions` is supported.
@@ -217,7 +218,7 @@ class AsyncBatches(AsyncAPIResource):
     async def create(
         self,
         *,
-        completion_window: Literal["24h"],
+        completion_window: str,
         endpoint: Literal["/v1/chat/completions"],
         input_file_id: str,
         metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
@@ -229,11 +230,12 @@ class AsyncBatches(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BatchCreateResponse:
         """
-        Creates and executes a batch from an uploaded file of requests
+        Creates and executes a batch from an uploaded file of requests.
+        [Learn more](/docs/batch).
 
         Args:
-          completion_window: The time frame within which the batch should be processed. Currently only `24h`
-              is supported.
+          completion_window: The time frame within which the batch should be processed. Durations from `24h`
+              to `7d` are supported.
 
           endpoint: The endpoint to be used for all requests in the batch. Currently
               `/v1/chat/completions` is supported.

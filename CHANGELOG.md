@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.23.0 (2025-04-22)
+
+Full Changelog: [v0.22.0...v0.23.0](https://github.com/groq/groq-python/compare/v0.22.0...v0.23.0)
+
+### Features
+
+* **api:** api update ([f5cbd01](https://github.com/groq/groq-python/commit/f5cbd0148e81de278728b3b78a409ad752ec812b))
+* **api:** api update ([e7c5514](https://github.com/groq/groq-python/commit/e7c5514b3e4b60a6346500d30620ba9c49b7ac7e))
+* **api:** api update ([9d5b7c8](https://github.com/groq/groq-python/commit/9d5b7c8ba4249f57eb17d02c8e18aa46ad5f6d10))
+* **api:** api update ([73357e1](https://github.com/groq/groq-python/commit/73357e15c4ab1505e7f370ede8bd408883967e1b))
+* **api:** api update ([b1d6697](https://github.com/groq/groq-python/commit/b1d66973010bf3ba63b11744df08da6b8a770841))
+* **api:** api update ([98ef30e](https://github.com/groq/groq-python/commit/98ef30efd2e30716c732a62159f3f33f441f4b5f))
+
+
+### Bug Fixes
+
+* **perf:** optimize some hot paths ([b1bd305](https://github.com/groq/groq-python/commit/b1bd305b5b91fa8473661b061aa4c01a2c310249))
+* **perf:** skip traversing types for NotGiven values ([ea1b705](https://github.com/groq/groq-python/commit/ea1b705b27465710aaf482efc581df593d727864))
+
+
+### Chores
+
+* **client:** minor internal fixes ([68c2947](https://github.com/groq/groq-python/commit/68c2947a7eafe6265e8be5b38237e91615ecbe07))
+* **internal:** base client updates ([d83d3a7](https://github.com/groq/groq-python/commit/d83d3a79bd53b7adf6b0d36ec85940c4455c71fe))
+* **internal:** bump pyright version ([49dc519](https://github.com/groq/groq-python/commit/49dc51915a973284e1a5a335ba2663d534a8dad7))
+* **internal:** expand CI branch coverage ([ed6a533](https://github.com/groq/groq-python/commit/ed6a5331f2a72de6487ec689992bebff4e89a25c))
+* **internal:** reduce CI branch coverage ([0139f63](https://github.com/groq/groq-python/commit/0139f63299b4f251b9cd9267ffdea4c809694d50))
+* **internal:** remove trailing character ([#233](https://github.com/groq/groq-python/issues/233)) ([2781f14](https://github.com/groq/groq-python/commit/2781f1439e025b088651520c6c24bdb6cec0568b))
+* **internal:** slight transform perf improvement ([#235](https://github.com/groq/groq-python/issues/235)) ([c67eeaa](https://github.com/groq/groq-python/commit/c67eeaabfc20960ad1c25eb425193009d9b6fc35))
+* **internal:** update models test ([0ce3c37](https://github.com/groq/groq-python/commit/0ce3c379c8d3f8b1745d0d38e850cf2a7122d3e7))
+* **internal:** update pyright settings ([66d55ee](https://github.com/groq/groq-python/commit/66d55eeeac41543a0f0fb9f5bad52ecc46ad79f7))
+* slight wording improvement in README ([#237](https://github.com/groq/groq-python/issues/237)) ([fa001a3](https://github.com/groq/groq-python/commit/fa001a3e9228ea6b734a33394a14edf32f70c528))
+* **tests:** improve enum examples ([#236](https://github.com/groq/groq-python/issues/236)) ([6218620](https://github.com/groq/groq-python/commit/62186208c2c5971a7fc7ea0e4519ec7c002dc84f))
+
 ## 0.22.0 (2025-04-02)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/groq/groq-python/compare/v0.21.0...v0.22.0)

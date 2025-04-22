@@ -65,6 +65,7 @@ class Completions(SyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -73,6 +74,7 @@ class Completions(SyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -102,6 +104,7 @@ class Completions(SyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -110,6 +113,7 @@ class Completions(SyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Literal[True],
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -139,6 +143,7 @@ class Completions(SyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -147,6 +152,7 @@ class Completions(SyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: bool,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -167,7 +173,17 @@ class Completions(SyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]],
+        model: Union[
+            str,
+            Literal[
+                "gemma2-9b-it",
+                "llama-3.3-70b-versatile",
+                "llama-3.1-8b-instant",
+                "llama-guard-3-8b",
+                "llama3-70b-8192",
+                "llama3-8b-8192",
+            ],
+        ],
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
@@ -175,6 +191,7 @@ class Completions(SyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -183,6 +200,7 @@ class Completions(SyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -204,7 +222,7 @@ class Completions(SyncAPIResource):
           messages: A list of messages comprising the conversation so far.
 
           model: ID of the model to use. For details on which models are compatible with the Chat
-              API, see available [models](/docs/models)
+              API, see available [models](https://console.groq.com/docs/models)
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -240,6 +258,8 @@ class Completions(SyncAPIResource):
               that can be generated in the chat completion. The total length of input tokens
               and generated tokens is limited by the model's context length.
 
+          metadata: This parameter is not currently supported.
+
           n: How many chat completion choices to generate for each input message. Note that
               the current moment, only n=1 is supported. Other values will result in a 400
               response.
@@ -274,6 +294,8 @@ class Completions(SyncAPIResource):
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
 
+          store: This parameter is not currently supported.
+
           stream: If set, partial message deltas will be sent. Tokens will be sent as data-only
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
               as they become available, with the stream terminated by a `data: [DONE]`
@@ -282,7 +304,7 @@ class Completions(SyncAPIResource):
           temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
               make the output more random, while lower values like 0.2 will make it more
               focused and deterministic. We generally recommend altering this or top_p but not
-              both
+              both.
 
           tool_choice: Controls which (if any) tool is called by the model. `none` means the model will
               not call any tool and instead generates a message. `auto` means the model can
@@ -332,6 +354,7 @@ class Completions(SyncAPIResource):
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
                     "max_tokens": max_tokens,
+                    "metadata": metadata,
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
@@ -340,6 +363,7 @@ class Completions(SyncAPIResource):
                     "seed": seed,
                     "service_tier": service_tier,
                     "stop": stop,
+                    "store": store,
                     "stream": stream,
                     "temperature": temperature,
                     "tool_choice": tool_choice,
@@ -392,6 +416,7 @@ class AsyncCompletions(AsyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -400,6 +425,7 @@ class AsyncCompletions(AsyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -429,6 +455,7 @@ class AsyncCompletions(AsyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -437,6 +464,7 @@ class AsyncCompletions(AsyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Literal[True],
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -466,6 +494,7 @@ class AsyncCompletions(AsyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -474,6 +503,7 @@ class AsyncCompletions(AsyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: bool,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -494,7 +524,17 @@ class AsyncCompletions(AsyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]],
+        model: Union[
+            str,
+            Literal[
+                "gemma2-9b-it",
+                "llama-3.3-70b-versatile",
+                "llama-3.1-8b-instant",
+                "llama-guard-3-8b",
+                "llama3-70b-8192",
+                "llama3-8b-8192",
+            ],
+        ],
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
@@ -502,6 +542,7 @@ class AsyncCompletions(AsyncAPIResource):
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
         max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
+        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -510,6 +551,7 @@ class AsyncCompletions(AsyncAPIResource):
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
         tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
@@ -531,7 +573,7 @@ class AsyncCompletions(AsyncAPIResource):
           messages: A list of messages comprising the conversation so far.
 
           model: ID of the model to use. For details on which models are compatible with the Chat
-              API, see available [models](/docs/models)
+              API, see available [models](https://console.groq.com/docs/models)
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -567,6 +609,8 @@ class AsyncCompletions(AsyncAPIResource):
               that can be generated in the chat completion. The total length of input tokens
               and generated tokens is limited by the model's context length.
 
+          metadata: This parameter is not currently supported.
+
           n: How many chat completion choices to generate for each input message. Note that
               the current moment, only n=1 is supported. Other values will result in a 400
               response.
@@ -601,6 +645,8 @@ class AsyncCompletions(AsyncAPIResource):
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
 
+          store: This parameter is not currently supported.
+
           stream: If set, partial message deltas will be sent. Tokens will be sent as data-only
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
               as they become available, with the stream terminated by a `data: [DONE]`
@@ -609,7 +655,7 @@ class AsyncCompletions(AsyncAPIResource):
           temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
               make the output more random, while lower values like 0.2 will make it more
               focused and deterministic. We generally recommend altering this or top_p but not
-              both
+              both.
 
           tool_choice: Controls which (if any) tool is called by the model. `none` means the model will
               not call any tool and instead generates a message. `auto` means the model can
@@ -659,6 +705,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
                     "max_tokens": max_tokens,
+                    "metadata": metadata,
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
@@ -667,6 +714,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "seed": seed,
                     "service_tier": service_tier,
                     "stop": stop,
+                    "store": store,
                     "stream": stream,
                     "temperature": temperature,
                     "tool_choice": tool_choice,

@@ -1708,7 +1708,7 @@ class TestAsyncGroq:
         import threading
 
         from groq._utils import asyncify
-        from groq._base_client import get_platform 
+        from groq._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()
