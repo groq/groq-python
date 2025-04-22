@@ -18,10 +18,18 @@ from .._utils import (
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
+    BinaryAPIResponse,
+    AsyncBinaryAPIResponse,
+    StreamedBinaryAPIResponse,
+    AsyncStreamedBinaryAPIResponse,
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
+    to_custom_raw_response_wrapper,
     async_to_streamed_response_wrapper,
+    to_custom_streamed_response_wrapper,
+    async_to_custom_raw_response_wrapper,
+    async_to_custom_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
 from ..types.file_info_response import FileInfoResponse
@@ -169,7 +177,7 @@ class Files(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> BinaryAPIResponse:
         """
         Returns the contents of the specified file.
 
@@ -184,12 +192,13 @@ class Files(SyncAPIResource):
         """
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return self._get(
             f"/openai/v1/files/{file_id}/content",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=BinaryAPIResponse,
         )
 
     def info(
@@ -363,7 +372,7 @@ class AsyncFiles(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> str:
+    ) -> AsyncBinaryAPIResponse:
         """
         Returns the contents of the specified file.
 
@@ -378,12 +387,13 @@ class AsyncFiles(AsyncAPIResource):
         """
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
+        extra_headers = {"Accept": "application/octet-stream", **(extra_headers or {})}
         return await self._get(
             f"/openai/v1/files/{file_id}/content",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=str,
+            cast_to=AsyncBinaryAPIResponse,
         )
 
     async def info(
@@ -433,8 +443,9 @@ class FilesWithRawResponse:
         self.delete = to_raw_response_wrapper(
             files.delete,
         )
-        self.content = to_raw_response_wrapper(
+        self.content = to_custom_raw_response_wrapper(
             files.content,
+            BinaryAPIResponse,
         )
         self.info = to_raw_response_wrapper(
             files.info,
@@ -454,8 +465,9 @@ class AsyncFilesWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             files.delete,
         )
-        self.content = async_to_raw_response_wrapper(
+        self.content = async_to_custom_raw_response_wrapper(
             files.content,
+            AsyncBinaryAPIResponse,
         )
         self.info = async_to_raw_response_wrapper(
             files.info,
@@ -475,8 +487,9 @@ class FilesWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             files.delete,
         )
-        self.content = to_streamed_response_wrapper(
+        self.content = to_custom_streamed_response_wrapper(
             files.content,
+            StreamedBinaryAPIResponse,
         )
         self.info = to_streamed_response_wrapper(
             files.info,
@@ -496,8 +509,9 @@ class AsyncFilesWithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             files.delete,
         )
-        self.content = async_to_streamed_response_wrapper(
+        self.content = async_to_custom_streamed_response_wrapper(
             files.content,
+            AsyncStreamedBinaryAPIResponse,
         )
         self.info = async_to_streamed_response_wrapper(
             files.info,
