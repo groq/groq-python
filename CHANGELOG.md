@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.23.1 (2025-04-24)
+
+Full Changelog: [v0.23.0...v0.23.1](https://github.com/groq/groq-python/compare/v0.23.0...v0.23.1)
+
+### Bug Fixes
+
+* add executed_tools to streaming choicedelta ([fb26fbc](https://github.com/groq/groq-python/commit/fb26fbcd0b141a6d33b95beed870b8a814a02f12))
+* **pydantic v1:** more robust ModelField.annotation check ([40aaee2](https://github.com/groq/groq-python/commit/40aaee2cd755ab3e1c7a11b5744eecaa2c66b0b6))
+
+
+### Chores
+
+* broadly detect json family of content-type headers ([2411533](https://github.com/groq/groq-python/commit/24115339497fd35b19800abeca4d5527573f2807))
+* **ci:** add timeout thresholds for CI jobs ([aae4614](https://github.com/groq/groq-python/commit/aae461436e635710f2fccf3c45e7d66ab270958e))
+* **ci:** only use depot for staging repos ([b6d1b47](https://github.com/groq/groq-python/commit/b6d1b47c1c064c4af93ace21247edacd6bf1b913))
+* **internal:** codegen related update ([1da64f5](https://github.com/groq/groq-python/commit/1da64f5c788477d3a0d0514b2ef13e5edbbdda49))
+* **internal:** fix list file params ([a9b18de](https://github.com/groq/groq-python/commit/a9b18debf828ca3717c5cfd8085904d8bce70e57))
+* **internal:** import reformatting ([5068736](https://github.com/groq/groq-python/commit/506873683250e242bf05e3d99eca03a38257e082))
+* **internal:** minor formatting changes ([bc26d60](https://github.com/groq/groq-python/commit/bc26d603a592529f76502b52f313d1e36bbb2645))
+* **internal:** refactor retries to not use recursion ([488b9fe](https://github.com/groq/groq-python/commit/488b9fe0a8ae9267a40e545a7a4c265b461e841c))
+
 ## 0.23.0 (2025-04-22)
 
 Full Changelog: [v0.22.0...v0.23.0](https://github.com/groq/groq-python/compare/v0.22.0...v0.23.0)
