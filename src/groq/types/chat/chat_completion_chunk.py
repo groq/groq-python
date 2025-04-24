@@ -6,6 +6,7 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 from ..completion_usage import CompletionUsage
+from .chat_completion_message import ExecutedTool
 from .chat_completion_token_logprob import ChatCompletionTokenLogprob
 
 __all__ = [
@@ -80,6 +81,11 @@ class ChoiceDelta(BaseModel):
 
     tool_calls: Optional[List[ChoiceDeltaToolCall]] = None
 
+    executed_tools: Optional[List[ExecutedTool]] = None
+    """
+    A list of tools that were executed during the chat completion for compound AI
+    systems.
+    """
 
 class ChoiceLogprobs(BaseModel):
     content: Optional[List[ChatCompletionTokenLogprob]] = None
