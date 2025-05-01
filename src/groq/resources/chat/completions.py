@@ -181,9 +181,11 @@ class Completions(SyncAPIResource):
                 "llama3-8b-8192",
             ],
         ],
+        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
@@ -221,6 +223,9 @@ class Completions(SyncAPIResource):
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
 
+          exclude_domains: A list of domains to exclude from the search results when the model uses a web
+              search tool.
+
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
               repeat the same line verbatim.
@@ -239,6 +244,9 @@ class Completions(SyncAPIResource):
           functions: Deprecated in favor of `tools`.
 
               A list of functions the model may generate JSON inputs for.
+
+          include_domains: A list of domains to include in the search results when the model uses a web
+              search tool.
 
           logit_bias: This is not yet supported by any of our models. Modify the likelihood of
               specified tokens appearing in the completion.
@@ -344,9 +352,11 @@ class Completions(SyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
                     "functions": functions,
+                    "include_domains": include_domains,
                     "logit_bias": logit_bias,
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
@@ -532,9 +542,11 @@ class AsyncCompletions(AsyncAPIResource):
                 "llama3-8b-8192",
             ],
         ],
+        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
@@ -572,6 +584,9 @@ class AsyncCompletions(AsyncAPIResource):
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
 
+          exclude_domains: A list of domains to exclude from the search results when the model uses a web
+              search tool.
+
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
               repeat the same line verbatim.
@@ -590,6 +605,9 @@ class AsyncCompletions(AsyncAPIResource):
           functions: Deprecated in favor of `tools`.
 
               A list of functions the model may generate JSON inputs for.
+
+          include_domains: A list of domains to include in the search results when the model uses a web
+              search tool.
 
           logit_bias: This is not yet supported by any of our models. Modify the likelihood of
               specified tokens appearing in the completion.
@@ -695,9 +713,11 @@ class AsyncCompletions(AsyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
                     "functions": functions,
+                    "include_domains": include_domains,
                     "logit_bias": logit_bias,
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
