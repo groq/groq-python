@@ -41,6 +41,7 @@ class TestCompletions:
                 }
             ],
             model="string",
+            exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
             functions=[
@@ -50,6 +51,7 @@ class TestCompletions:
                     "parameters": {"foo": "bar"},
                 }
             ],
+            include_domains=["string"],
             logit_bias={"foo": 0},
             logprobs=True,
             max_completion_tokens=0,
@@ -147,6 +149,7 @@ class TestAsyncCompletions:
                 }
             ],
             model="string",
+            exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
             functions=[
@@ -156,6 +159,7 @@ class TestAsyncCompletions:
                     "parameters": {"foo": "bar"},
                 }
             ],
+            include_domains=["string"],
             logit_bias={"foo": 0},
             logprobs=True,
             max_completion_tokens=0,

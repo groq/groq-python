@@ -37,6 +37,12 @@ class CompletionCreateParams(TypedDict, total=False):
     [models](https://console.groq.com/docs/models)
     """
 
+    exclude_domains: Optional[List[str]]
+    """
+    A list of domains to exclude from the search results when the model uses a web
+    search tool.
+    """
+
     frequency_penalty: Optional[float]
     """Number between -2.0 and 2.0.
 
@@ -61,6 +67,12 @@ class CompletionCreateParams(TypedDict, total=False):
     """Deprecated in favor of `tools`.
 
     A list of functions the model may generate JSON inputs for.
+    """
+
+    include_domains: Optional[List[str]]
+    """
+    A list of domains to include in the search results when the model uses a web
+    search tool.
     """
 
     logit_bias: Optional[Dict[str, int]]

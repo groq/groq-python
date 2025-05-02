@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.24.0 (2025-05-02)
+
+Full Changelog: [v0.23.1...v0.24.0](https://github.com/groq/groq-python/compare/v0.23.1...v0.24.0)
+
+### Features
+
+* **api:** api update ([e65ff4d](https://github.com/groq/groq-python/commit/e65ff4d299fd612b6ce04e5cf5544b93bbc45297))
+
+
+### Bug Fixes
+
+* add include/exclude_domains to all chat completions overloads ([7616f4b](https://github.com/groq/groq-python/commit/7616f4b2e91db267a6afe0700511b324471f9983))
+
 ## 0.23.1 (2025-04-24)
 
 Full Changelog: [v0.23.0...v0.23.1](https://github.com/groq/groq-python/compare/v0.23.0...v0.23.1)
