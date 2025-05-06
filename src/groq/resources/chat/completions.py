@@ -283,13 +283,12 @@ class Completions(SyncAPIResource):
 
           reasoning_format: Specifies how to output reasoning tokens
 
-          response_format: An object specifying the format that the model must output.
-
-              Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
-              message the model generates is valid JSON.
-
-              **Important:** when using JSON mode, you **must** also instruct the model to
-              produce JSON yourself via a system or user message.
+          response_format: An object specifying the format that the model must output. Setting to
+              `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs
+              which ensures the model will match your supplied JSON schema. Setting to
+              `{ "type": "json_object" }` enables the older JSON mode, which ensures the
+              message the model generates is valid JSON. Using `json_schema` is preferred for
+              models that support it.
 
           seed: If specified, our system will make a best effort to sample deterministically,
               such that repeated requests with the same `seed` and parameters should return
@@ -650,13 +649,12 @@ class AsyncCompletions(AsyncAPIResource):
 
           reasoning_format: Specifies how to output reasoning tokens
 
-          response_format: An object specifying the format that the model must output.
-
-              Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
-              message the model generates is valid JSON.
-
-              **Important:** when using JSON mode, you **must** also instruct the model to
-              produce JSON yourself via a system or user message.
+          response_format: An object specifying the format that the model must output. Setting to
+              `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs
+              which ensures the model will match your supplied JSON schema. Setting to
+              `{ "type": "json_object" }` enables the older JSON mode, which ensures the
+              message the model generates is valid JSON. Using `json_schema` is preferred for
+              models that support it.
 
           seed: If specified, our system will make a best effort to sample deterministically,
               such that repeated requests with the same `seed` and parameters should return
