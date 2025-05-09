@@ -40,7 +40,7 @@ chat_completion = client.chat.completions.create(
     ],
     model="llama3-8b-8192",
 )
-print(chat_completion.choices[0].message.content)
+print(chat_completion.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -72,7 +72,7 @@ async def main() -> None:
         ],
         model="llama3-8b-8192",
     )
-    print(chat_completion.choices[0].message.content)
+    print(chat_completion.id)
 
 
 asyncio.run(main())
