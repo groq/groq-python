@@ -40,7 +40,7 @@ chat_completion = client.chat.completions.create(
     ],
     model="llama3-8b-8192",
 )
-print(chat_completion.choices[0].message.content)
+print(chat_completion.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -72,7 +72,7 @@ async def main() -> None:
         ],
         model="llama3-8b-8192",
     )
-    print(chat_completion.choices[0].message.content)
+    print(chat_completion.id)
 
 
 asyncio.run(main())
@@ -88,28 +88,6 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
-
-## Nested params
-
-Nested parameters are dictionaries, typed using `TypedDict`, for example:
-
-```python
-from groq import Groq
-
-client = Groq()
-
-chat_completion = client.chat.completions.create(
-    messages=[
-        {
-            "content": "content",
-            "role": "system",
-        }
-    ],
-    model="string",
-    response_format={"type": "json_object"},
-)
-print(chat_completion.response_format)
-```
 
 ## File uploads
 
