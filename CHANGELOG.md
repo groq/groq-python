@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.25.0 (2025-05-10)
+
+Full Changelog: [v0.24.0...v0.25.0](https://github.com/groq/groq-python/compare/v0.24.0...v0.25.0)
+
+### Features
+
+* **api:** api update ([1122aa0](https://github.com/groq/groq-python/commit/1122aa0662ec7af88799530de50f002645ccb5d0))
+
+
+### Bug Fixes
+
+* **package:** support direct resource imports ([82bfd68](https://github.com/groq/groq-python/commit/82bfd684a24d39e838e11612e060e3d6b1a4aac2))
+
+
+### Chores
+
+* **internal:** avoid errors for isinstance checks on proxies ([c6d4578](https://github.com/groq/groq-python/commit/c6d457878f231efba49f83a1c6f8cfd513b82cb9))
+* use lazy imports for resources ([46c8767](https://github.com/groq/groq-python/commit/46c87674696ba966576c063d6d6e3e53e0140f81))
+
+
+### Documentation
+
+* remove or fix invalid readme examples ([9d81d35](https://github.com/groq/groq-python/commit/9d81d352a3b1c0c7092444617f64b8096b05f08d))
+
 ## 0.24.0 (2025-05-02)
 
 Full Changelog: [v0.23.1...v0.24.0](https://github.com/groq/groq-python/compare/v0.23.1...v0.24.0)
