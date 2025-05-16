@@ -105,7 +105,7 @@ chat_completion = client.chat.completions.create(
             "role": "system",
         }
     ],
-    model="string",
+    model="meta-llama/llama-4-scout-17b-16e-instruct",
     search_settings={
         "exclude_domains": ["string"],
         "include_domains": ["string"],
@@ -126,7 +126,7 @@ from groq import Groq
 client = Groq()
 
 client.audio.transcriptions.create(
-    model="whisper-large-v3",
+    model="whisper-large-v3-turbo",
     file=Path("/path/to/file"),
 )
 ```

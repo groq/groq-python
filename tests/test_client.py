@@ -797,7 +797,7 @@ class TestGroq:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
         )
 
         assert response.retries_taken == failures_before_success
@@ -827,7 +827,7 @@ class TestGroq:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -859,7 +859,7 @@ class TestGroq:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
@@ -1624,7 +1624,7 @@ class TestAsyncGroq:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
         )
 
         assert response.retries_taken == failures_before_success
@@ -1657,7 +1657,7 @@ class TestAsyncGroq:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
             extra_headers={"x-stainless-retry-count": Omit()},
         )
 
@@ -1690,7 +1690,7 @@ class TestAsyncGroq:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
             extra_headers={"x-stainless-retry-count": "42"},
         )
 
