@@ -47,7 +47,7 @@ class Translations(SyncAPIResource):
     def create(
         self,
         *,
-        model: Union[str, Literal["whisper-large-v3"]],
+        model: Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]],
         file: FileTypes | NotGiven = NOT_GIVEN,
         prompt: str | NotGiven = NOT_GIVEN,
         response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
@@ -65,7 +65,8 @@ class Translations(SyncAPIResource):
         Args:
           model: ID of the model to use.
 
-        Only `whisper-large-v3` is currently available.
+        `whisper-large-v3` and `whisper-large-v3-turbo` are
+              currently available.
 
           file: The audio file object (not file name) translate, in one of these formats: flac,
               mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
@@ -143,7 +144,7 @@ class AsyncTranslations(AsyncAPIResource):
     async def create(
         self,
         *,
-        model: Union[str, Literal["whisper-large-v3"]],
+        model: Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]],
         file: FileTypes | NotGiven = NOT_GIVEN,
         prompt: str | NotGiven = NOT_GIVEN,
         response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
@@ -161,7 +162,8 @@ class AsyncTranslations(AsyncAPIResource):
         Args:
           model: ID of the model to use.
 
-        Only `whisper-large-v3` is currently available.
+        `whisper-large-v3` and `whisper-large-v3-turbo` are
+              currently available.
 
           file: The audio file object (not file name) translate, in one of these formats: flac,
               mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.

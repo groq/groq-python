@@ -11,7 +11,17 @@ from ..shared_params.function_parameters import FunctionParameters
 from .chat_completion_tool_choice_option_param import ChatCompletionToolChoiceOptionParam
 from .chat_completion_function_call_option_param import ChatCompletionFunctionCallOptionParam
 
-__all__ = ["CompletionCreateParams", "FunctionCall", "Function", "ResponseFormat"]
+__all__ = [
+    "CompletionCreateParams",
+    "FunctionCall",
+    "Function",
+    "ResponseFormat",
+    "ResponseFormatResponseFormatText",
+    "ResponseFormatResponseFormatJsonSchema",
+    "ResponseFormatResponseFormatJsonSchemaJsonSchema",
+    "ResponseFormatResponseFormatJsonObject",
+    "SearchSettings",
+]
 
 
 class CompletionCreateParams(TypedDict, total=False):
@@ -39,8 +49,8 @@ class CompletionCreateParams(TypedDict, total=False):
 
     exclude_domains: Optional[List[str]]
     """
-    A list of domains to exclude from the search results when the model uses a web
-    search tool.
+    Deprecated: Use search_settings.exclude_domains instead. A list of domains to
+    exclude from the search results when the model uses a web search tool.
     """
 
     frequency_penalty: Optional[float]
@@ -71,8 +81,8 @@ class CompletionCreateParams(TypedDict, total=False):
 
     include_domains: Optional[List[str]]
     """
-    A list of domains to include in the search results when the model uses a web
-    search tool.
+    Deprecated: Use search_settings.include_domains instead. A list of domains to
+    include in the search results when the model uses a web search tool.
     """
 
     logit_bias: Optional[Dict[str, int]]
@@ -128,12 +138,16 @@ class CompletionCreateParams(TypedDict, total=False):
     response_format: Optional[ResponseFormat]
     """An object specifying the format that the model must output.
 
-    Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
-    message the model generates is valid JSON.
-
-    **Important:** when using JSON mode, you **must** also instruct the model to
-    produce JSON yourself via a system or user message.
+    Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
+    Outputs which ensures the model will match your supplied JSON schema.
+    json_schema response format is only supported on llama 4 models. Setting to
+    `{ "type": "json_object" }` enables the older JSON mode, which ensures the
+    message the model generates is valid JSON. Using `json_schema` is preferred for
+    models that support it.
     """
+
+    search_settings: Optional[SearchSettings]
+    """Settings for web search functionality when the model uses a web search tool."""
 
     seed: Optional[int]
     """
@@ -249,6 +263,65 @@ class Function(TypedDict, total=False):
     """
 
 
-class ResponseFormat(TypedDict, total=False):
-    type: Literal["text", "json_object"]
-    """Must be one of `text` or `json_object`."""
+class ResponseFormatResponseFormatText(TypedDict, total=False):
+    type: Required[Literal["text"]]
+    """The type of response format being defined. Always `text`."""
+
+
+class ResponseFormatResponseFormatJsonSchemaJsonSchema(TypedDict, total=False):
+    name: Required[str]
+    """The name of the response format.
+
+    Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length
+    of 64.
+    """
+
+    description: str
+    """
+    A description of what the response format is for, used by the model to determine
+    how to respond in the format.
+    """
+
+    schema: Dict[str, object]
+    """
+    The schema for the response format, described as a JSON Schema object. Learn how
+    to build JSON schemas [here](https://json-schema.org/).
+    """
+
+    strict: Optional[bool]
+    """Whether to enable strict schema adherence when generating the output.
+
+    If set to true, the model will always follow the exact schema defined in the
+    `schema` field. Only a subset of JSON Schema is supported when `strict` is
+    `true`. To learn more, read the
+    [Structured Outputs guide](/docs/guides/structured-outputs).
+    """
+
+
+class ResponseFormatResponseFormatJsonSchema(TypedDict, total=False):
+    json_schema: Required[ResponseFormatResponseFormatJsonSchemaJsonSchema]
+    """Structured Outputs configuration options, including a JSON Schema."""
+
+    type: Required[Literal["json_schema"]]
+    """The type of response format being defined. Always `json_schema`."""
+
+
+class ResponseFormatResponseFormatJsonObject(TypedDict, total=False):
+    type: Required[Literal["json_object"]]
+    """The type of response format being defined. Always `json_object`."""
+
+
+ResponseFormat: TypeAlias = Union[
+    ResponseFormatResponseFormatText, ResponseFormatResponseFormatJsonSchema, ResponseFormatResponseFormatJsonObject
+]
+
+
+class SearchSettings(TypedDict, total=False):
+    exclude_domains: Optional[List[str]]
+    """A list of domains to exclude from the search results."""
+
+    include_domains: Optional[List[str]]
+    """A list of domains to include in the search results."""
+
+    include_images: Optional[bool]
+    """Whether to include images in the search results."""

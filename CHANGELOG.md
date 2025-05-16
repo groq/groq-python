@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.25.0 (2025-05-16)
+
+Full Changelog: [v0.24.0...v0.25.0](https://github.com/groq/groq-python/compare/v0.24.0...v0.25.0)
+
+### Features
+
+* **api:** api update ([385969a](https://github.com/groq/groq-python/commit/385969a478242c67dd07e510632ea1f168f743d8))
+* **api:** api update ([e3acb61](https://github.com/groq/groq-python/commit/e3acb618e09864829089575c51ec617b2f4b6975))
+* **api:** api update ([4bb39e5](https://github.com/groq/groq-python/commit/4bb39e59bbd317de95b3e1d896ab83ee41bc7b3e))
+* **api:** api update ([ce3c251](https://github.com/groq/groq-python/commit/ce3c2514e2e66557de3e583532743cb3806032a2))
+
+
+### Bug Fixes
+
+* add search settings to all chat completion overloads ([32a1731](https://github.com/groq/groq-python/commit/32a17310c3a481b4b6b7aaa1f742720c367864f5))
+* GitHub Terraform: Create/Update .github/workflows/stale.yaml [skip ci] ([a365e26](https://github.com/groq/groq-python/commit/a365e262f988103f5757ffd9054b822a72868586))
+* **package:** support direct resource imports ([3ee8779](https://github.com/groq/groq-python/commit/3ee87792c92196abba0a1c7d9400a34d95c58895))
+
+
+### Chores
+
+* **ci:** fix installation instructions ([454ff60](https://github.com/groq/groq-python/commit/454ff60a12d7e16127d87ef9c152b9e4a394246d))
+* **ci:** upload sdks to package manager ([1f464f8](https://github.com/groq/groq-python/commit/1f464f84bee361e07214e6b65a6727a1b5e0bc7b))
+* fix README example ([7a0f06a](https://github.com/groq/groq-python/commit/7a0f06aca6223dc04e146f1b75445a2a64ce409a))
+* **internal:** avoid errors for isinstance checks on proxies ([7a04964](https://github.com/groq/groq-python/commit/7a04964d964feaac9dfcf1f46dad1f63a5acf714))
+* use lazy imports for resources ([8c6351a](https://github.com/groq/groq-python/commit/8c6351a0215827dea34174978a78d06a528e6eef))
+
+
+### Documentation
+
+* remove or fix invalid readme examples ([4dc027a](https://github.com/groq/groq-python/commit/4dc027a35054db11eec6c8bfe1fd463b0c49db6e))
+
 ## 0.24.0 (2025-05-02)
 
 Full Changelog: [v0.23.1...v0.24.0](https://github.com/groq/groq-python/compare/v0.23.1...v0.24.0)

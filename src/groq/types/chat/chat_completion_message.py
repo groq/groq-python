@@ -6,7 +6,35 @@ from typing_extensions import Literal
 from ..._models import BaseModel
 from .chat_completion_message_tool_call import ChatCompletionMessageToolCall
 
-__all__ = ["ChatCompletionMessage", "ExecutedTool", "FunctionCall"]
+__all__ = [
+    "ChatCompletionMessage",
+    "ExecutedTool",
+    "ExecutedToolSearchResults",
+    "ExecutedToolSearchResultsResult",
+    "FunctionCall",
+]
+
+
+class ExecutedToolSearchResultsResult(BaseModel):
+    content: Optional[str] = None
+    """The content of the search result"""
+
+    score: Optional[float] = None
+    """The relevance score of the search result"""
+
+    title: Optional[str] = None
+    """The title of the search result"""
+
+    url: Optional[str] = None
+    """The URL of the search result"""
+
+
+class ExecutedToolSearchResults(BaseModel):
+    images: Optional[List[str]] = None
+    """List of image URLs returned by the search"""
+
+    results: Optional[List[ExecutedToolSearchResultsResult]] = None
+    """List of search results"""
 
 
 class ExecutedTool(BaseModel):
@@ -21,6 +49,9 @@ class ExecutedTool(BaseModel):
 
     output: Optional[str] = None
     """The output returned by the tool."""
+
+    search_results: Optional[ExecutedToolSearchResults] = None
+    """The search results returned by the tool, if applicable."""
 
 
 class FunctionCall(BaseModel):

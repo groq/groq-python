@@ -26,7 +26,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
         )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
@@ -40,7 +40,7 @@ class TestCompletions:
                     "name": "name",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
@@ -61,7 +61,12 @@ class TestCompletions:
             parallel_tool_calls=True,
             presence_penalty=-2,
             reasoning_format="hidden",
-            response_format={"type": "json_object"},
+            response_format={"type": "text"},
+            search_settings={
+                "exclude_domains": ["string"],
+                "include_domains": ["string"],
+                "include_images": True,
+            },
             seed=0,
             service_tier="auto",
             stop="\n",
@@ -94,7 +99,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
         )
 
         assert response.is_closed is True
@@ -111,7 +116,7 @@ class TestCompletions:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -134,7 +139,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
         )
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
@@ -148,7 +153,7 @@ class TestAsyncCompletions:
                     "name": "name",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
@@ -169,7 +174,12 @@ class TestAsyncCompletions:
             parallel_tool_calls=True,
             presence_penalty=-2,
             reasoning_format="hidden",
-            response_format={"type": "json_object"},
+            response_format={"type": "text"},
+            search_settings={
+                "exclude_domains": ["string"],
+                "include_domains": ["string"],
+                "include_images": True,
+            },
             seed=0,
             service_tier="auto",
             stop="\n",
@@ -202,7 +212,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
         )
 
         assert response.is_closed is True
@@ -219,7 +229,7 @@ class TestAsyncCompletions:
                     "role": "system",
                 }
             ],
-            model="string",
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

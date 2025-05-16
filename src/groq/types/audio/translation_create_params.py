@@ -11,8 +11,11 @@ __all__ = ["TranslationCreateParams"]
 
 
 class TranslationCreateParams(TypedDict, total=False):
-    model: Required[Union[str, Literal["whisper-large-v3"]]]
-    """ID of the model to use. Only `whisper-large-v3` is currently available."""
+    model: Required[Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]]]
+    """ID of the model to use.
+
+    `whisper-large-v3` and `whisper-large-v3-turbo` are currently available.
+    """
 
     file: FileTypes
     """

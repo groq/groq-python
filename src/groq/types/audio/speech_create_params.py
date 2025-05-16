@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Union
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["SpeechCreateParams"]
@@ -11,7 +12,7 @@ class SpeechCreateParams(TypedDict, total=False):
     input: Required[str]
     """The text to generate audio for."""
 
-    model: Required[str]
+    model: Required[Union[str, Literal["playai-tts", "playai-tts-arabic"]]]
     """One of the [available TTS models](/docs/text-to-speech)."""
 
     voice: Required[str]
