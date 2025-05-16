@@ -77,6 +77,7 @@ class Completions(SyncAPIResource):
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
+        search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
@@ -104,8 +105,8 @@ class Completions(SyncAPIResource):
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
 
-          exclude_domains: A list of domains to exclude from the search results when the model uses a web
-              search tool.
+          exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
+              exclude from the search results when the model uses a web search tool.
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -126,8 +127,8 @@ class Completions(SyncAPIResource):
 
               A list of functions the model may generate JSON inputs for.
 
-          include_domains: A list of domains to include in the search results when the model uses a web
-              search tool.
+          include_domains: Deprecated: Use search_settings.include_domains instead. A list of domains to
+              include in the search results when the model uses a web search tool.
 
           logit_bias: This is not yet supported by any of our models. Modify the likelihood of
               specified tokens appearing in the completion.
@@ -165,6 +166,8 @@ class Completions(SyncAPIResource):
               `{ "type": "json_object" }` enables the older JSON mode, which ensures the
               message the model generates is valid JSON. Using `json_schema` is preferred for
               models that support it.
+
+          search_settings: Settings for web search functionality when the model uses a web search tool.
 
           seed: If specified, our system will make a best effort to sample deterministically,
               such that repeated requests with the same `seed` and parameters should return
@@ -248,6 +251,7 @@ class Completions(SyncAPIResource):
                     "presence_penalty": presence_penalty,
                     "reasoning_format": reasoning_format,
                     "response_format": response_format,
+                    "search_settings": search_settings,
                     "seed": seed,
                     "service_tier": service_tier,
                     "stop": stop,
@@ -319,6 +323,7 @@ class AsyncCompletions(AsyncAPIResource):
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
+        search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
         stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
@@ -346,8 +351,8 @@ class AsyncCompletions(AsyncAPIResource):
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
 
-          exclude_domains: A list of domains to exclude from the search results when the model uses a web
-              search tool.
+          exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
+              exclude from the search results when the model uses a web search tool.
 
           frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
               existing frequency in the text so far, decreasing the model's likelihood to
@@ -368,8 +373,8 @@ class AsyncCompletions(AsyncAPIResource):
 
               A list of functions the model may generate JSON inputs for.
 
-          include_domains: A list of domains to include in the search results when the model uses a web
-              search tool.
+          include_domains: Deprecated: Use search_settings.include_domains instead. A list of domains to
+              include in the search results when the model uses a web search tool.
 
           logit_bias: This is not yet supported by any of our models. Modify the likelihood of
               specified tokens appearing in the completion.
@@ -407,6 +412,8 @@ class AsyncCompletions(AsyncAPIResource):
               `{ "type": "json_object" }` enables the older JSON mode, which ensures the
               message the model generates is valid JSON. Using `json_schema` is preferred for
               models that support it.
+
+          search_settings: Settings for web search functionality when the model uses a web search tool.
 
           seed: If specified, our system will make a best effort to sample deterministically,
               such that repeated requests with the same `seed` and parameters should return
@@ -490,6 +497,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "presence_penalty": presence_penalty,
                     "reasoning_format": reasoning_format,
                     "response_format": response_format,
+                    "search_settings": search_settings,
                     "seed": seed,
                     "service_tier": service_tier,
                     "stop": stop,

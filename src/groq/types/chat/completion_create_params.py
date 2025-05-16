@@ -20,6 +20,7 @@ __all__ = [
     "ResponseFormatResponseFormatJsonSchema",
     "ResponseFormatResponseFormatJsonSchemaJsonSchema",
     "ResponseFormatResponseFormatJsonObject",
+    "SearchSettings",
 ]
 
 
@@ -48,8 +49,8 @@ class CompletionCreateParams(TypedDict, total=False):
 
     exclude_domains: Optional[List[str]]
     """
-    A list of domains to exclude from the search results when the model uses a web
-    search tool.
+    Deprecated: Use search_settings.exclude_domains instead. A list of domains to
+    exclude from the search results when the model uses a web search tool.
     """
 
     frequency_penalty: Optional[float]
@@ -80,8 +81,8 @@ class CompletionCreateParams(TypedDict, total=False):
 
     include_domains: Optional[List[str]]
     """
-    A list of domains to include in the search results when the model uses a web
-    search tool.
+    Deprecated: Use search_settings.include_domains instead. A list of domains to
+    include in the search results when the model uses a web search tool.
     """
 
     logit_bias: Optional[Dict[str, int]]
@@ -144,6 +145,9 @@ class CompletionCreateParams(TypedDict, total=False):
     message the model generates is valid JSON. Using `json_schema` is preferred for
     models that support it.
     """
+
+    search_settings: Optional[SearchSettings]
+    """Settings for web search functionality when the model uses a web search tool."""
 
     seed: Optional[int]
     """
@@ -310,3 +314,14 @@ class ResponseFormatResponseFormatJsonObject(TypedDict, total=False):
 ResponseFormat: TypeAlias = Union[
     ResponseFormatResponseFormatText, ResponseFormatResponseFormatJsonSchema, ResponseFormatResponseFormatJsonObject
 ]
+
+
+class SearchSettings(TypedDict, total=False):
+    exclude_domains: Optional[List[str]]
+    """A list of domains to exclude from the search results."""
+
+    include_domains: Optional[List[str]]
+    """A list of domains to include in the search results."""
+
+    include_images: Optional[bool]
+    """Whether to include images in the search results."""
