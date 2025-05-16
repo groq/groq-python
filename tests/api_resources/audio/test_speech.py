@@ -28,9 +28,9 @@ class TestSpeech:
     def test_method_create(self, client: Groq, respx_mock: MockRouter) -> None:
         respx_mock.post("/openai/v1/audio/speech").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         speech = client.audio.speech.create(
-            input="input",
-            model="model",
-            voice="voice",
+            input="The quick brown fox jumped over the lazy dog",
+            model="playai-tts",
+            voice="Fritz-PlayAI",
         )
         assert speech.is_closed
         assert speech.json() == {"foo": "bar"}
@@ -42,9 +42,9 @@ class TestSpeech:
     def test_method_create_with_all_params(self, client: Groq, respx_mock: MockRouter) -> None:
         respx_mock.post("/openai/v1/audio/speech").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         speech = client.audio.speech.create(
-            input="input",
-            model="model",
-            voice="voice",
+            input="The quick brown fox jumped over the lazy dog",
+            model="playai-tts",
+            voice="Fritz-PlayAI",
             response_format="wav",
             speed=1,
         )
@@ -59,9 +59,9 @@ class TestSpeech:
         respx_mock.post("/openai/v1/audio/speech").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
 
         speech = client.audio.speech.with_raw_response.create(
-            input="input",
-            model="model",
-            voice="voice",
+            input="The quick brown fox jumped over the lazy dog",
+            model="playai-tts",
+            voice="Fritz-PlayAI",
         )
 
         assert speech.is_closed is True
@@ -74,9 +74,9 @@ class TestSpeech:
     def test_streaming_response_create(self, client: Groq, respx_mock: MockRouter) -> None:
         respx_mock.post("/openai/v1/audio/speech").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         with client.audio.speech.with_streaming_response.create(
-            input="input",
-            model="model",
-            voice="voice",
+            input="The quick brown fox jumped over the lazy dog",
+            model="playai-tts",
+            voice="Fritz-PlayAI",
         ) as speech:
             assert not speech.is_closed
             assert speech.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -96,9 +96,9 @@ class TestAsyncSpeech:
     async def test_method_create(self, async_client: AsyncGroq, respx_mock: MockRouter) -> None:
         respx_mock.post("/openai/v1/audio/speech").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         speech = await async_client.audio.speech.create(
-            input="input",
-            model="model",
-            voice="voice",
+            input="The quick brown fox jumped over the lazy dog",
+            model="playai-tts",
+            voice="Fritz-PlayAI",
         )
         assert speech.is_closed
         assert await speech.json() == {"foo": "bar"}
@@ -110,9 +110,9 @@ class TestAsyncSpeech:
     async def test_method_create_with_all_params(self, async_client: AsyncGroq, respx_mock: MockRouter) -> None:
         respx_mock.post("/openai/v1/audio/speech").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         speech = await async_client.audio.speech.create(
-            input="input",
-            model="model",
-            voice="voice",
+            input="The quick brown fox jumped over the lazy dog",
+            model="playai-tts",
+            voice="Fritz-PlayAI",
             response_format="wav",
             speed=1,
         )
@@ -127,9 +127,9 @@ class TestAsyncSpeech:
         respx_mock.post("/openai/v1/audio/speech").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
 
         speech = await async_client.audio.speech.with_raw_response.create(
-            input="input",
-            model="model",
-            voice="voice",
+            input="The quick brown fox jumped over the lazy dog",
+            model="playai-tts",
+            voice="Fritz-PlayAI",
         )
 
         assert speech.is_closed is True
@@ -142,9 +142,9 @@ class TestAsyncSpeech:
     async def test_streaming_response_create(self, async_client: AsyncGroq, respx_mock: MockRouter) -> None:
         respx_mock.post("/openai/v1/audio/speech").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
         async with async_client.audio.speech.with_streaming_response.create(
-            input="input",
-            model="model",
-            voice="voice",
+            input="The quick brown fox jumped over the lazy dog",
+            model="playai-tts",
+            voice="Fritz-PlayAI",
         ) as speech:
             assert not speech.is_closed
             assert speech.http_request.headers.get("X-Stainless-Lang") == "python"

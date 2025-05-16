@@ -47,7 +47,7 @@ class Transcriptions(SyncAPIResource):
     def create(
         self,
         *,
-        model: Union[str, Literal["whisper-large-v3"]],
+        model: Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]],
         file: FileTypes | NotGiven = NOT_GIVEN,
         language: Union[
             str,
@@ -171,7 +171,8 @@ class Transcriptions(SyncAPIResource):
         Transcribes audio into the input language.
 
         Args:
-          model: ID of the model to use. Only `whisper-large-v3` is currently available.
+          model: ID of the model to use. `whisper-large-v3` and `whisper-large-v3-turbo` are
+              currently available.
 
           file:
               The audio file object (not file name) to transcribe, in one of these formats:
@@ -263,7 +264,7 @@ class AsyncTranscriptions(AsyncAPIResource):
     async def create(
         self,
         *,
-        model: Union[str, Literal["whisper-large-v3"]],
+        model: Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]],
         file: FileTypes | NotGiven = NOT_GIVEN,
         language: Union[
             str,
@@ -387,7 +388,8 @@ class AsyncTranscriptions(AsyncAPIResource):
         Transcribes audio into the input language.
 
         Args:
-          model: ID of the model to use. Only `whisper-large-v3` is currently available.
+          model: ID of the model to use. `whisper-large-v3` and `whisper-large-v3-turbo` are
+              currently available.
 
           file:
               The audio file object (not file name) to transcribe, in one of these formats:

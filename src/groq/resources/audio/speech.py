@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Union
 from typing_extensions import Literal
 
 import httpx
@@ -50,7 +51,7 @@ class Speech(SyncAPIResource):
         self,
         *,
         input: str,
-        model: str,
+        model: Union[str, Literal["playai-tts", "playai-tts-arabic"]],
         voice: str,
         response_format: Literal["wav", "mp3"] | NotGiven = NOT_GIVEN,
         speed: float | NotGiven = NOT_GIVEN,
@@ -128,7 +129,7 @@ class AsyncSpeech(AsyncAPIResource):
         self,
         *,
         input: str,
-        model: str,
+        model: Union[str, Literal["playai-tts", "playai-tts-arabic"]],
         voice: str,
         response_format: Literal["wav", "mp3"] | NotGiven = NOT_GIVEN,
         speed: float | NotGiven = NOT_GIVEN,
