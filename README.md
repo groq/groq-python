@@ -89,6 +89,32 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from groq import Groq
+
+client = Groq()
+
+chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            "content": "content",
+            "role": "system",
+        }
+    ],
+    model="string",
+    search_settings={
+        "exclude_domains": ["string"],
+        "include_domains": ["string"],
+        "include_images": True,
+    },
+)
+print(chat_completion.search_settings)
+```
+
 ## File uploads
 
 Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
