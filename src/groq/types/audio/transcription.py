@@ -10,3 +10,5 @@ class Transcription(BaseModel):
     """The transcribed text."""
     words: Union[List[dict], None]
     """The words in the transcription depending on the granularity setting."""
+    segments: Union[List[dict], None]
+    """The segments in the transcription depending on the granularity setting."""
