@@ -293,8 +293,7 @@ class ResponseFormatResponseFormatJsonSchemaJsonSchema(TypedDict, total=False):
 
     If set to true, the model will always follow the exact schema defined in the
     `schema` field. Only a subset of JSON Schema is supported when `strict` is
-    `true`. To learn more, read the
-    [Structured Outputs guide](/docs/guides/structured-outputs).
+    `true`.
     """
 
 

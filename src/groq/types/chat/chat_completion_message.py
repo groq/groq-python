@@ -9,10 +9,19 @@ from .chat_completion_message_tool_call import ChatCompletionMessageToolCall
 __all__ = [
     "ChatCompletionMessage",
     "ExecutedTool",
+    "ExecutedToolCodeResult",
     "ExecutedToolSearchResults",
     "ExecutedToolSearchResultsResult",
     "FunctionCall",
 ]
+
+
+class ExecutedToolCodeResult(BaseModel):
+    png: Optional[str] = None
+    """Base64 encoded PNG image output from code execution"""
+
+    text: Optional[str] = None
+    """The text version of the code execution result"""
 
 
 class ExecutedToolSearchResultsResult(BaseModel):
@@ -46,6 +55,9 @@ class ExecutedTool(BaseModel):
 
     type: str
     """The type of tool that was executed."""
+
+    code_results: Optional[List[ExecutedToolCodeResult]] = None
+    """Array of code execution results"""
 
     output: Optional[str] = None
     """The output returned by the tool."""

@@ -21,8 +21,14 @@ class SpeechCreateParams(TypedDict, total=False):
     List of voices can be found [here](/docs/text-to-speech).
     """
 
-    response_format: Literal["wav", "mp3"]
-    """The format to audio in. Supported formats are `wav, mp3`."""
+    response_format: Literal["flac", "mp3", "mulaw", "ogg", "wav"]
+    """The format of the generated audio.
+
+    Supported formats are `flac, mp3, mulaw, ogg, wav`.
+    """
+
+    sample_rate: Literal[8000, 16000, 22050, 24000, 32000, 44100, 48000]
+    """The sample rate for generated audio"""
 
     speed: float
-    """The speed of the generated audio. 1.0 is the only supported value."""
+    """The speed of the generated audio."""
