@@ -53,7 +53,8 @@ class Speech(SyncAPIResource):
         input: str,
         model: Union[str, Literal["playai-tts", "playai-tts-arabic"]],
         voice: str,
-        response_format: Literal["wav", "mp3"] | NotGiven = NOT_GIVEN,
+        response_format: Literal["flac", "mp3", "mulaw", "ogg", "wav"] | NotGiven = NOT_GIVEN,
+        sample_rate: Literal[8000, 16000, 22050, 24000, 32000, 44100, 48000] | NotGiven = NOT_GIVEN,
         speed: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -73,9 +74,12 @@ class Speech(SyncAPIResource):
           voice: The voice to use when generating the audio. List of voices can be found
               [here](/docs/text-to-speech).
 
-          response_format: The format to audio in. Supported formats are `wav, mp3`.
+          response_format: The format of the generated audio. Supported formats are
+              `flac, mp3, mulaw, ogg, wav`.
 
-          speed: The speed of the generated audio. 1.0 is the only supported value.
+          sample_rate: The sample rate for generated audio
+
+          speed: The speed of the generated audio.
 
           extra_headers: Send extra headers
 
@@ -94,6 +98,7 @@ class Speech(SyncAPIResource):
                     "model": model,
                     "voice": voice,
                     "response_format": response_format,
+                    "sample_rate": sample_rate,
                     "speed": speed,
                 },
                 speech_create_params.SpeechCreateParams,
@@ -131,7 +136,8 @@ class AsyncSpeech(AsyncAPIResource):
         input: str,
         model: Union[str, Literal["playai-tts", "playai-tts-arabic"]],
         voice: str,
-        response_format: Literal["wav", "mp3"] | NotGiven = NOT_GIVEN,
+        response_format: Literal["flac", "mp3", "mulaw", "ogg", "wav"] | NotGiven = NOT_GIVEN,
+        sample_rate: Literal[8000, 16000, 22050, 24000, 32000, 44100, 48000] | NotGiven = NOT_GIVEN,
         speed: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -151,9 +157,12 @@ class AsyncSpeech(AsyncAPIResource):
           voice: The voice to use when generating the audio. List of voices can be found
               [here](/docs/text-to-speech).
 
-          response_format: The format to audio in. Supported formats are `wav, mp3`.
+          response_format: The format of the generated audio. Supported formats are
+              `flac, mp3, mulaw, ogg, wav`.
 
-          speed: The speed of the generated audio. 1.0 is the only supported value.
+          sample_rate: The sample rate for generated audio
+
+          speed: The speed of the generated audio.
 
           extra_headers: Send extra headers
 
@@ -172,6 +181,7 @@ class AsyncSpeech(AsyncAPIResource):
                     "model": model,
                     "voice": voice,
                     "response_format": response_format,
+                    "sample_rate": sample_rate,
                     "speed": speed,
                 },
                 speech_create_params.SpeechCreateParams,

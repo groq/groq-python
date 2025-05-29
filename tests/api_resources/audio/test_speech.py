@@ -45,7 +45,8 @@ class TestSpeech:
             input="The quick brown fox jumped over the lazy dog",
             model="playai-tts",
             voice="Fritz-PlayAI",
-            response_format="wav",
+            response_format="flac",
+            sample_rate=48000,
             speed=1,
         )
         assert speech.is_closed
@@ -113,7 +114,8 @@ class TestAsyncSpeech:
             input="The quick brown fox jumped over the lazy dog",
             model="playai-tts",
             voice="Fritz-PlayAI",
-            response_format="wav",
+            response_format="flac",
+            sample_rate=48000,
             speed=1,
         )
         assert speech.is_closed
