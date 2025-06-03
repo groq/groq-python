@@ -106,11 +106,7 @@ chat_completion = client.chat.completions.create(
         }
     ],
     model="meta-llama/llama-4-scout-17b-16e-instruct",
-    search_settings={
-        "exclude_domains": ["string"],
-        "include_domains": ["string"],
-        "include_images": True,
-    },
+    search_settings={},
 )
 print(chat_completion.search_settings)
 ```
