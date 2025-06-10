@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.27.0 (2025-06-10)
+
+Full Changelog: [v0.26.0...v0.27.0](https://github.com/groq/groq-python/compare/v0.26.0...v0.27.0)
+
+### Features
+
+* **api:** api update ([3f311d6](https://github.com/groq/groq-python/commit/3f311d6f1ae14a788bbd603fdca9552e3092ec9f))
+* **client:** add follow_redirects request option ([407d5f6](https://github.com/groq/groq-python/commit/407d5f6f6c192289f6822e91f92d15fdae613a7a))
+
+
+### Chores
+
+* **docs:** remove reference to rye shell ([69a126e](https://github.com/groq/groq-python/commit/69a126e1cbcba19793dcfebf8222351427ce8a28))
+* **docs:** remove unnecessary param examples ([f645e86](https://github.com/groq/groq-python/commit/f645e86baca1d5a5ba8e26f7a54427554f0ffe85))
+
 ## 0.26.0 (2025-05-29)
 
 Full Changelog: [v0.25.0...v0.26.0](https://github.com/groq/groq-python/compare/v0.25.0...v0.26.0)
