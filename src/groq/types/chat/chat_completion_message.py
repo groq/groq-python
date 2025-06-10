@@ -10,13 +10,81 @@ __all__ = [
     "ChatCompletionMessage",
     "ExecutedTool",
     "ExecutedToolCodeResult",
+    "ExecutedToolCodeResultChart",
+    "ExecutedToolCodeResultChartElement",
     "ExecutedToolSearchResults",
     "ExecutedToolSearchResultsResult",
     "FunctionCall",
 ]
 
 
+class ExecutedToolCodeResultChartElement(BaseModel):
+    label: str
+    """The label for this chart element"""
+
+    angle: Optional[float] = None
+    """The angle for this element"""
+
+    group: Optional[str] = None
+    """The group this element belongs to"""
+
+    points: Optional[List[List[float]]] = None
+    """The points for this element"""
+
+    radius: Optional[float] = None
+    """The radius for this element"""
+
+    value: Optional[float] = None
+    """The value for this element"""
+
+
+class ExecutedToolCodeResultChart(BaseModel):
+    elements: List[ExecutedToolCodeResultChartElement]
+    """The chart elements (data series, points, etc.)"""
+
+    type: Literal["bar", "box_and_whisker", "line", "pie", "scatter", "superchart", "unknown"]
+    """The type of chart"""
+
+    title: Optional[str] = None
+    """The title of the chart"""
+
+    x_label: Optional[str] = None
+    """The label for the x-axis"""
+
+    x_scale: Optional[str] = None
+    """The scale type for the x-axis"""
+
+    x_tick_labels: Optional[List[str]] = None
+    """The labels for the x-axis ticks"""
+
+    x_ticks: Optional[List[float]] = None
+    """The tick values for the x-axis"""
+
+    x_unit: Optional[str] = None
+    """The unit for the x-axis"""
+
+    y_label: Optional[str] = None
+    """The label for the y-axis"""
+
+    y_scale: Optional[str] = None
+    """The scale type for the y-axis"""
+
+    y_tick_labels: Optional[List[str]] = None
+    """The labels for the y-axis ticks"""
+
+    y_ticks: Optional[List[float]] = None
+    """The tick values for the y-axis"""
+
+    y_unit: Optional[str] = None
+    """The unit for the y-axis"""
+
+
 class ExecutedToolCodeResult(BaseModel):
+    chart: Optional[ExecutedToolCodeResultChart] = None
+
+    charts: Optional[List[ExecutedToolCodeResultChart]] = None
+    """Array of charts from a superchart"""
+
     png: Optional[str] = None
     """Base64 encoded PNG image output from code execution"""
 
