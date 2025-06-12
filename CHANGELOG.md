@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.28.0 (2025-06-12)
+
+Full Changelog: [v0.27.0...v0.28.0](https://github.com/groq/groq-python/compare/v0.27.0...v0.28.0)
+
+### Features
+
+* **api:** api update ([1b088b1](https://github.com/groq/groq-python/commit/1b088b11e42ddd9b04c3fa9fc0d1cf957696529a))
+* **api:** api update ([2a96d4f](https://github.com/groq/groq-python/commit/2a96d4fbcf6dbff9a8125a0f5f9d73ffe97d5223))
+* **api:** api update ([089ab40](https://github.com/groq/groq-python/commit/089ab404ada560ca59048ec23981252f439165ea))
+
+
+### Chores
+
+* fix streaming overloads ([bb31101](https://github.com/groq/groq-python/commit/bb3110118ca7fe8258d7eaed6856a1bed560e533))
+
 ## 0.27.0 (2025-06-10)
 
 Full Changelog: [v0.26.0...v0.27.0](https://github.com/groq/groq-python/compare/v0.26.0...v0.27.0)
