@@ -25,14 +25,31 @@ class ExecutedToolCodeResultChartElement(BaseModel):
     angle: Optional[float] = None
     """The angle for this element"""
 
+    first_quartile: Optional[float] = None
+    """The first quartile value for this element"""
+
     group: Optional[str] = None
     """The group this element belongs to"""
+
+    max: Optional[float] = None
+
+    median: Optional[float] = None
+    """The median value for this element"""
+
+    min: Optional[float] = None
+    """The minimum value for this element"""
+
+    outliers: Optional[List[float]] = None
+    """The outliers for this element"""
 
     points: Optional[List[List[float]]] = None
     """The points for this element"""
 
     radius: Optional[float] = None
     """The radius for this element"""
+
+    third_quartile: Optional[float] = None
+    """The third quartile value for this element"""
 
     value: Optional[float] = None
     """The value for this element"""
