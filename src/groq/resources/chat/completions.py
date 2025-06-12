@@ -68,6 +68,7 @@ class Completions(SyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_effort: Optional[Literal["none", "default"]] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
@@ -110,6 +111,7 @@ class Completions(SyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_effort: Optional[Literal["none", "default"]] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
@@ -152,6 +154,7 @@ class Completions(SyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_effort: Optional[Literal["none", "default"]] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
@@ -203,6 +206,7 @@ class Completions(SyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_effort: Optional[Literal["none", "default"]] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
@@ -284,6 +288,9 @@ class Completions(SyncAPIResource):
           presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
+
+          reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
+              reasoning. Set to 'default' or null to let Qwen reason.
 
           reasoning_format: Specifies how to output reasoning tokens
 
@@ -377,6 +384,7 @@ class Completions(SyncAPIResource):
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
+                    "reasoning_effort": reasoning_effort,
                     "reasoning_format": reasoning_format,
                     "response_format": response_format,
                     "search_settings": search_settings,
@@ -442,6 +450,7 @@ class AsyncCompletions(AsyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_effort: Optional[Literal["none", "default"]] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
@@ -484,6 +493,7 @@ class AsyncCompletions(AsyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_effort: Optional[Literal["none", "default"]] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
@@ -526,6 +536,7 @@ class AsyncCompletions(AsyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_effort: Optional[Literal["none", "default"]] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
@@ -577,6 +588,7 @@ class AsyncCompletions(AsyncAPIResource):
         n: Optional[int] | NotGiven = NOT_GIVEN,
         parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
         presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        reasoning_effort: Optional[Literal["none", "default"]] | NotGiven = NOT_GIVEN,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | NotGiven = NOT_GIVEN,
         response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
@@ -658,6 +670,9 @@ class AsyncCompletions(AsyncAPIResource):
           presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
               whether they appear in the text so far, increasing the model's likelihood to
               talk about new topics.
+
+          reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
+              reasoning. Set to 'default' or null to let Qwen reason.
 
           reasoning_format: Specifies how to output reasoning tokens
 
@@ -751,6 +766,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
+                    "reasoning_effort": reasoning_effort,
                     "reasoning_format": reasoning_format,
                     "response_format": response_format,
                     "search_settings": search_settings,

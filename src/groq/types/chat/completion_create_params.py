@@ -132,6 +132,12 @@ class CompletionCreateParams(TypedDict, total=False):
     far, increasing the model's likelihood to talk about new topics.
     """
 
+    reasoning_effort: Optional[Literal["none", "default"]]
+    """
+    this field is only available for qwen3 models. Set to 'none' to disable
+    reasoning. Set to 'default' or null to let Qwen reason.
+    """
+
     reasoning_format: Optional[Literal["hidden", "raw", "parsed"]]
     """Specifies how to output reasoning tokens"""
 
