@@ -60,6 +60,7 @@ class TestCompletions:
             n=1,
             parallel_tool_calls=True,
             presence_penalty=-2,
+            reasoning_effort="none",
             reasoning_format="hidden",
             response_format={"type": "text"},
             search_settings={
@@ -173,6 +174,7 @@ class TestAsyncCompletions:
             n=1,
             parallel_tool_calls=True,
             presence_penalty=-2,
+            reasoning_effort="none",
             reasoning_format="hidden",
             response_format={"type": "text"},
             search_settings={
