@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.28.1 (2025-06-13)
+
+Full Changelog: [v0.28.0...v0.28.1](https://github.com/groq/groq-python/compare/v0.28.0...v0.28.1)
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([da571bc](https://github.com/groq/groq-python/commit/da571bc0979873525bbf9c2d6efa53aee27a8519))
+
+
+### Chores
+
+* **tests:** run tests in parallel ([ce56989](https://github.com/groq/groq-python/commit/ce56989094581c26b79605012c637e942c972689))
+
 ## 0.28.0 (2025-06-12)
 
 Full Changelog: [v0.27.0...v0.28.0](https://github.com/groq/groq-python/compare/v0.27.0...v0.28.0)
