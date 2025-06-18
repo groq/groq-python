@@ -23,9 +23,7 @@ from pydantic import ValidationError
 
 from groq import Groq, AsyncGroq, APIResponseValidationError
 from groq._types import Omit
-from groq._utils import maybe_transform
 from groq._models import BaseModel, FinalRequestOptions
-from groq._constants import RAW_RESPONSE_HEADER
 from groq._exceptions import GroqError, APIStatusError, APITimeoutError, APIResponseValidationError
 from groq._base_client import (
     DEFAULT_TIMEOUT,
@@ -35,7 +33,6 @@ from groq._base_client import (
     DefaultAsyncHttpxClient,
     make_request_options,
 )
-from groq.types.chat.completion_create_params import CompletionCreateParams
 
 from .utils import update_env
 
@@ -707,68 +704,37 @@ class TestGroq:
 
     @mock.patch("groq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Groq) -> None:
         respx_mock.post("/openai/v1/chat/completions").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.post(
-                "/openai/v1/chat/completions",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            messages=[
-                                {
-                                    "role": "system",
-                                    "content": "You are a helpful assistant.",
-                                },
-                                {
-                                    "role": "user",
-                                    "content": "Explain the importance of low latency LLMs",
-                                },
-                            ],
-                            model="llama3-8b-8192",
-                        ),
-                        CompletionCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            client.chat.completions.with_streaming_response.create(
+                messages=[
+                    {
+                        "content": "content",
+                        "role": "system",
+                    }
+                ],
+                model="meta-llama/llama-4-scout-17b-16e-instruct",
+            ).__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("groq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Groq) -> None:
         respx_mock.post("/openai/v1/chat/completions").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.post(
-                "/openai/v1/chat/completions",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            messages=[
-                                {
-                                    "role": "system",
-                                    "content": "You are a helpful assistant.",
-                                },
-                                {
-                                    "role": "user",
-                                    "content": "Explain the importance of low latency LLMs",
-                                },
-                            ],
-                            model="llama3-8b-8192",
-                        ),
-                        CompletionCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            client.chat.completions.with_streaming_response.create(
+                messages=[
+                    {
+                        "content": "content",
+                        "role": "system",
+                    }
+                ],
+                model="meta-llama/llama-4-scout-17b-16e-instruct",
+            ).__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1582,68 +1548,37 @@ class TestAsyncGroq:
 
     @mock.patch("groq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncGroq) -> None:
         respx_mock.post("/openai/v1/chat/completions").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.post(
-                "/openai/v1/chat/completions",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            messages=[
-                                {
-                                    "role": "system",
-                                    "content": "You are a helpful assistant.",
-                                },
-                                {
-                                    "role": "user",
-                                    "content": "Explain the importance of low latency LLMs",
-                                },
-                            ],
-                            model="llama3-8b-8192",
-                        ),
-                        CompletionCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            await async_client.chat.completions.with_streaming_response.create(
+                messages=[
+                    {
+                        "content": "content",
+                        "role": "system",
+                    }
+                ],
+                model="meta-llama/llama-4-scout-17b-16e-instruct",
+            ).__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("groq._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncGroq) -> None:
         respx_mock.post("/openai/v1/chat/completions").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.post(
-                "/openai/v1/chat/completions",
-                body=cast(
-                    object,
-                    maybe_transform(
-                        dict(
-                            messages=[
-                                {
-                                    "role": "system",
-                                    "content": "You are a helpful assistant.",
-                                },
-                                {
-                                    "role": "user",
-                                    "content": "Explain the importance of low latency LLMs",
-                                },
-                            ],
-                            model="llama3-8b-8192",
-                        ),
-                        CompletionCreateParams,
-                    ),
-                ),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            await async_client.chat.completions.with_streaming_response.create(
+                messages=[
+                    {
+                        "content": "content",
+                        "role": "system",
+                    }
+                ],
+                model="meta-llama/llama-4-scout-17b-16e-instruct",
+            ).__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
