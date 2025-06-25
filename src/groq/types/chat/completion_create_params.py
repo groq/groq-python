@@ -322,6 +322,12 @@ ResponseFormat: TypeAlias = Union[
 
 
 class SearchSettings(TypedDict, total=False):
+    country: Optional[str]
+    """
+    Name of country to prioritize search results from (e.g., "united states",
+    "germany", "france").
+    """
+
     exclude_domains: Optional[List[str]]
     """A list of domains to exclude from the search results."""
 

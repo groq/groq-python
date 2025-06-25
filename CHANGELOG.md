@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.29.0 (2025-06-25)
+
+Full Changelog: [v0.28.0...v0.29.0](https://github.com/groq/groq-python/compare/v0.28.0...v0.29.0)
+
+### Features
+
+* **api:** api update ([2f78465](https://github.com/groq/groq-python/commit/2f7846558486855edc4001eefc6bec003a943d26))
+* **client:** add support for aiohttp ([a306987](https://github.com/groq/groq-python/commit/a30698732eeaa097832132908429c6b04e7cf027))
+
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([da571bc](https://github.com/groq/groq-python/commit/da571bc0979873525bbf9c2d6efa53aee27a8519))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([778531f](https://github.com/groq/groq-python/commit/778531f0de3f65881b226bf42b93cac119d3f209))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([daf0500](https://github.com/groq/groq-python/commit/daf050078783c0389c950d422335533d85320cf6))
+* **internal:** update conftest.py ([ed4b0b5](https://github.com/groq/groq-python/commit/ed4b0b59bc0bc63363f46d2baed8ff833470130e))
+* **readme:** update badges ([d08d4f4](https://github.com/groq/groq-python/commit/d08d4f4472e452eaa92ed1385342cb01b1a0797d))
+* **tests:** add tests for httpx client instantiation & proxies ([94821d3](https://github.com/groq/groq-python/commit/94821d3c726bb3ca7057c7a19958e6111789c9de))
+* **tests:** run tests in parallel ([ce56989](https://github.com/groq/groq-python/commit/ce56989094581c26b79605012c637e942c972689))
+* **tests:** skip some failing tests on the latest python versions ([15a744b](https://github.com/groq/groq-python/commit/15a744b4ce1043d3e17dfee8bcae329f5708e6c8))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([5776227](https://github.com/groq/groq-python/commit/577622772f66242961d216dffef1d6e003028d7f))
+
 ## 0.28.0 (2025-06-12)
 
 Full Changelog: [v0.27.0...v0.28.0](https://github.com/groq/groq-python/compare/v0.27.0...v0.28.0)

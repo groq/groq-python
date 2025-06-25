@@ -1,6 +1,6 @@
 [project]
 name = "groq"
-version = "0.28.0"
+version = "0.29.0"
 description = "The official Python library for the groq API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -37,6 +37,8 @@ classifiers = [
 Homepage = "https://github.com/groq/groq-python"
 Repository = "https://github.com/groq/groq-python"
 
+[project.optional-dependencies]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.6"]
 
 [tool.rye]
 managed = true
@@ -54,6 +56,7 @@ dev-dependencies = [
     "importlib-metadata>=6.7.0",
     "rich>=13.7.1",
     "nest_asyncio==1.6.0",
+    "pytest-xdist>=3.6.1",
 ]
 
 [tool.rye.scripts]
@@ -125,7 +128,7 @@ replacement = '[\1](https://github.com/groq/groq-python/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--tb=short"
+addopts = "--tb=short -n auto"
 xfail_strict = true
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "session"
