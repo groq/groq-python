@@ -64,6 +64,7 @@ class TestCompletions:
             reasoning_format="hidden",
             response_format={"type": "text"},
             search_settings={
+                "country": "country",
                 "exclude_domains": ["string"],
                 "include_domains": ["string"],
                 "include_images": True,
@@ -180,6 +181,7 @@ class TestAsyncCompletions:
             reasoning_format="hidden",
             response_format={"type": "text"},
             search_settings={
+                "country": "country",
                 "exclude_domains": ["string"],
                 "include_domains": ["string"],
                 "include_images": True,
