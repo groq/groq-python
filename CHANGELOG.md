@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.29.1 (2025-07-02)
+
+Full Changelog: [v0.29.0...v0.29.1](https://github.com/groq/groq-python/compare/v0.29.0...v0.29.1)
+
+### Bug Fixes
+
+* **ci:** correct conditional ([3506f77](https://github.com/groq/groq-python/commit/3506f7763bbe06f28660bd94771741e3c92a2566))
+* **ci:** release-doctor — report correct token name ([3ec9682](https://github.com/groq/groq-python/commit/3ec9682698051febe7070a8ef82a28e66919e4e6))
+
+
+### Chores
+
+* Add bklieger-groq to CODEOWNERS ([5b9fc30](https://github.com/groq/groq-python/commit/5b9fc30d6aa58a9b9fd3eb32b79618f4551316e2))
+* **ci:** change upload type ([83d01e6](https://github.com/groq/groq-python/commit/83d01e6a08b36b8bbc12fa139bf1bf7776f9fc96))
+* **ci:** only run for pushes and fork pull requests ([e4f2316](https://github.com/groq/groq-python/commit/e4f23163029c37ca575d7c53e0e0186cf6b87e07))
+
 ## 0.29.0 (2025-06-25)
 
 Full Changelog: [v0.28.0...v0.29.0](https://github.com/groq/groq-python/compare/v0.28.0...v0.29.0)
