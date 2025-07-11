@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.30.0 (2025-07-11)
+
+Full Changelog: [v0.29.0...v0.30.0](https://github.com/groq/groq-python/compare/v0.29.0...v0.30.0)
+
+### Features
+
+* **api:** api update ([55abbbc](https://github.com/groq/groq-python/commit/55abbbc39b85f5f179ce698b67d493e0ad359773))
+* **api:** api update ([cbd7df0](https://github.com/groq/groq-python/commit/cbd7df040d8b70d22ba5527d29a915459c69d482))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([a470509](https://github.com/groq/groq-python/commit/a4705094213290bf95c599dbfe30be078d584677))
+* **ci:** release-doctor — report correct token name ([b036bba](https://github.com/groq/groq-python/commit/b036bba0a7e3a306cb9849fc701fce32aec00501))
+* **parsing:** correctly handle nested discriminated unions ([f57dd03](https://github.com/groq/groq-python/commit/f57dd033543b07c24a6c2ae11d8e7303e3888cd7))
+* performance tier enum overloads ([dc7c41b](https://github.com/groq/groq-python/commit/dc7c41bdfc2759e36711d6faae0c3e29d8882b84))
+
+
+### Chores
+
+* Add bklieger-groq to CODEOWNERS ([5b9fc30](https://github.com/groq/groq-python/commit/5b9fc30d6aa58a9b9fd3eb32b79618f4551316e2))
+* **ci:** change upload type ([7044a2b](https://github.com/groq/groq-python/commit/7044a2b6fbdb996aab8e11a9c56bcbccb72530dc))
+* **ci:** only run for pushes and fork pull requests ([dc1b9ee](https://github.com/groq/groq-python/commit/dc1b9eea773fe7d9c8f972ad375024a99e03a58f))
+* fix code owners ([464ada9](https://github.com/groq/groq-python/commit/464ada9d4cde3fb7525e383e747178c94348472d))
+* **internal:** bump pinned h11 dep ([47bddbd](https://github.com/groq/groq-python/commit/47bddbdf76ec98464b97886d5e6c0fd5f25af453))
+* **internal:** codegen related update ([9d7f071](https://github.com/groq/groq-python/commit/9d7f071f7947f7895258bdee533e0e99f20aa5b8))
+* **package:** mark python 3.13 as supported ([55353b9](https://github.com/groq/groq-python/commit/55353b9f792db825a7b14be2221e342a11261c59))
+* **readme:** fix version rendering on pypi ([e145b51](https://github.com/groq/groq-python/commit/e145b5135125b25f1a0a5856dcf1223503882590))
+
 ## 0.29.0 (2025-06-25)
 
 Full Changelog: [v0.28.0...v0.29.0](https://github.com/groq/groq-python/compare/v0.28.0...v0.29.0)
