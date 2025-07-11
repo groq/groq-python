@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
+from .chat_completion_content_part_text_param import ChatCompletionContentPartTextParam
 from .chat_completion_message_tool_call_param import ChatCompletionMessageToolCallParam
 
 __all__ = ["ChatCompletionAssistantMessageParam", "FunctionCall"]
@@ -27,7 +28,7 @@ class ChatCompletionAssistantMessageParam(TypedDict, total=False):
     role: Required[Literal["assistant"]]
     """The role of the messages author, in this case `assistant`."""
 
-    content: Optional[str]
+    content: Union[str, Iterable[ChatCompletionContentPartTextParam], None]
     """The contents of the assistant message.
 
     Required unless `tool_calls` or `function_call` is specified.
