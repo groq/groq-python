@@ -712,7 +712,7 @@ class TestGroq:
             client.chat.completions.with_streaming_response.create(
                 messages=[
                     {
-                        "content": "content",
+                        "content": "string",
                         "role": "system",
                     }
                 ],
@@ -730,7 +730,7 @@ class TestGroq:
             client.chat.completions.with_streaming_response.create(
                 messages=[
                     {
-                        "content": "content",
+                        "content": "string",
                         "role": "system",
                     }
                 ],
@@ -767,7 +767,7 @@ class TestGroq:
         response = client.chat.completions.with_raw_response.create(
             messages=[
                 {
-                    "content": "content",
+                    "content": "string",
                     "role": "system",
                 }
             ],
@@ -797,7 +797,7 @@ class TestGroq:
         response = client.chat.completions.with_raw_response.create(
             messages=[
                 {
-                    "content": "content",
+                    "content": "string",
                     "role": "system",
                 }
             ],
@@ -829,7 +829,7 @@ class TestGroq:
         response = client.chat.completions.with_raw_response.create(
             messages=[
                 {
-                    "content": "content",
+                    "content": "string",
                     "role": "system",
                 }
             ],
@@ -1557,7 +1557,7 @@ class TestAsyncGroq:
             await async_client.chat.completions.with_streaming_response.create(
                 messages=[
                     {
-                        "content": "content",
+                        "content": "string",
                         "role": "system",
                     }
                 ],
@@ -1575,7 +1575,7 @@ class TestAsyncGroq:
             await async_client.chat.completions.with_streaming_response.create(
                 messages=[
                     {
-                        "content": "content",
+                        "content": "string",
                         "role": "system",
                     }
                 ],
@@ -1613,7 +1613,7 @@ class TestAsyncGroq:
         response = await client.chat.completions.with_raw_response.create(
             messages=[
                 {
-                    "content": "content",
+                    "content": "string",
                     "role": "system",
                 }
             ],
@@ -1646,7 +1646,7 @@ class TestAsyncGroq:
         response = await client.chat.completions.with_raw_response.create(
             messages=[
                 {
-                    "content": "content",
+                    "content": "string",
                     "role": "system",
                 }
             ],
@@ -1679,7 +1679,7 @@ class TestAsyncGroq:
         response = await client.chat.completions.with_raw_response.create(
             messages=[
                 {
-                    "content": "content",
+                    "content": "string",
                     "role": "system",
                 }
             ],
