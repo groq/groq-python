@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.30.1 (2025-07-12)
+
+Full Changelog: [v0.30.0...v0.30.1](https://github.com/groq/groq-python/compare/v0.30.0...v0.30.1)
+
+### Bug Fixes
+
+* **client:** don't send Content-Type header on GET requests ([7439911](https://github.com/groq/groq-python/commit/74399119e020f45a154f5cdf46bdd63b476090e9))
+
 ## 0.30.0 (2025-07-11)
 
 Full Changelog: [v0.29.0...v0.30.0](https://github.com/groq/groq-python/compare/v0.29.0...v0.30.0)
