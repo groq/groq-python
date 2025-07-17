@@ -27,5 +27,5 @@ class ChatCompletionMessageToolCallParam(TypedDict, total=False):
     function: Required[Function]
     """The function that the model called."""
 
-    type: Required[Literal["function"]]
-    """The type of the tool. Currently, only `function` is supported."""
+    type: Required[Literal["function", "mcp"]]
+    """The type of the tool. Currently, `function` and `mcp` are supported."""

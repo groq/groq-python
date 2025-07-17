@@ -83,6 +83,7 @@ class TestCompletions:
                         "description": "description",
                         "parameters": {"foo": "bar"},
                     },
+                    "server_url": "server_url",
                     "type": "function",
                 }
             ],
@@ -200,6 +201,7 @@ class TestAsyncCompletions:
                         "description": "description",
                         "parameters": {"foo": "bar"},
                     },
+                    "server_url": "server_url",
                     "type": "function",
                 }
             ],
