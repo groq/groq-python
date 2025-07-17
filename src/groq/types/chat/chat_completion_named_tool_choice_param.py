@@ -15,5 +15,5 @@ class Function(TypedDict, total=False):
 class ChatCompletionNamedToolChoiceParam(TypedDict, total=False):
     function: Required[Function]
 
-    type: Required[Literal["function"]]
-    """The type of the tool. Currently, only `function` is supported."""
+    type: Required[Literal["function", "mcp"]]
+    """The type of the tool. Currently, `function` and `mcp` are supported."""

@@ -1,6 +1,6 @@
 [project]
 name = "groq"
-version = "0.30.0"
+version = "0.31.0"
 description = "The official Python library for the groq API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -39,7 +39,7 @@ Homepage = "https://github.com/groq/groq-python"
 Repository = "https://github.com/groq/groq-python"
 
 [project.optional-dependencies]
-aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.6"]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
 
 [tool.rye]
 managed = true
