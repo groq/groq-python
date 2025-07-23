@@ -78,13 +78,12 @@ class TestCompletions:
             tool_choice="none",
             tools=[
                 {
+                    "type": "function",
                     "function": {
                         "name": "name",
                         "description": "description",
                         "parameters": {"foo": "bar"},
                     },
-                    "server_url": "server_url",
-                    "type": "function",
                 }
             ],
             top_logprobs=0,
@@ -196,13 +195,12 @@ class TestAsyncCompletions:
             tool_choice="none",
             tools=[
                 {
+                    "type": "function",
                     "function": {
                         "name": "name",
                         "description": "description",
                         "parameters": {"foo": "bar"},
                     },
-                    "server_url": "server_url",
-                    "type": "function",
                 }
             ],
             top_logprobs=0,
