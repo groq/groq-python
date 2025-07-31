@@ -52,6 +52,7 @@ class TestCompletions:
                 }
             ],
             include_domains=["string"],
+            include_reasoning=True,
             logit_bias={"foo": 0},
             logprobs=True,
             max_completion_tokens=0,
@@ -169,6 +170,7 @@ class TestAsyncCompletions:
                 }
             ],
             include_domains=["string"],
+            include_reasoning=True,
             logit_bias={"foo": 0},
             logprobs=True,
             max_completion_tokens=0,
