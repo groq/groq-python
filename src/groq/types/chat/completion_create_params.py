@@ -85,6 +85,14 @@ class CompletionCreateParams(TypedDict, total=False):
     include in the search results when the model uses a web search tool.
     """
 
+    include_reasoning: Optional[bool]
+    """Whether to include reasoning in the response.
+
+    If true, the response will include a `reasoning` field. If false, the model's
+    reasoning will not be included in the response. This field is mutually exclusive
+    with `reasoning_format`.
+    """
+
     logit_bias: Optional[Dict[str, int]]
     """
     This is not yet supported by any of our models. Modify the likelihood of
@@ -139,7 +147,10 @@ class CompletionCreateParams(TypedDict, total=False):
     """
 
     reasoning_format: Optional[Literal["hidden", "raw", "parsed"]]
-    """Specifies how to output reasoning tokens"""
+    """
+    Specifies how to output reasoning tokens This field is mutually exclusive with
+    `include_reasoning`.
+    """
 
     response_format: Optional[ResponseFormat]
     """An object specifying the format that the model must output.

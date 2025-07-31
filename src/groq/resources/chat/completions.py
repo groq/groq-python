@@ -67,6 +67,7 @@ class Completions(SyncAPIResource):
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
@@ -131,6 +132,10 @@ class Completions(SyncAPIResource):
           include_domains: Deprecated: Use search_settings.include_domains instead. A list of domains to
               include in the search results when the model uses a web search tool.
 
+          include_reasoning: Whether to include reasoning in the response. If true, the response will include
+              a `reasoning` field. If false, the model's reasoning will not be included in the
+              response. This field is mutually exclusive with `reasoning_format`.
+
           logit_bias: This is not yet supported by any of our models. Modify the likelihood of
               specified tokens appearing in the completion.
 
@@ -161,7 +166,8 @@ class Completions(SyncAPIResource):
           reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
               reasoning. Set to 'default' or null to let Qwen reason.
 
-          reasoning_format: Specifies how to output reasoning tokens
+          reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
+              `include_reasoning`.
 
           response_format: An object specifying the format that the model must output. Setting to
               `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs
@@ -246,6 +252,7 @@ class Completions(SyncAPIResource):
                     "function_call": function_call,
                     "functions": functions,
                     "include_domains": include_domains,
+                    "include_reasoning": include_reasoning,
                     "logit_bias": logit_bias,
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
@@ -319,6 +326,7 @@ class AsyncCompletions(AsyncAPIResource):
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
         include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
         max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
@@ -383,6 +391,10 @@ class AsyncCompletions(AsyncAPIResource):
           include_domains: Deprecated: Use search_settings.include_domains instead. A list of domains to
               include in the search results when the model uses a web search tool.
 
+          include_reasoning: Whether to include reasoning in the response. If true, the response will include
+              a `reasoning` field. If false, the model's reasoning will not be included in the
+              response. This field is mutually exclusive with `reasoning_format`.
+
           logit_bias: This is not yet supported by any of our models. Modify the likelihood of
               specified tokens appearing in the completion.
 
@@ -413,7 +425,8 @@ class AsyncCompletions(AsyncAPIResource):
           reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
               reasoning. Set to 'default' or null to let Qwen reason.
 
-          reasoning_format: Specifies how to output reasoning tokens
+          reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
+              `include_reasoning`.
 
           response_format: An object specifying the format that the model must output. Setting to
               `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs
@@ -498,6 +511,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "function_call": function_call,
                     "functions": functions,
                     "include_domains": include_domains,
+                    "include_reasoning": include_reasoning,
                     "logit_bias": logit_bias,
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
