@@ -1,4 +1,4 @@
 configured_endpoints: 17
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/groqcloud%2Fgroqcloud-c410fc3b9ad71dfbca3d88e212b0555fd4f0457148e5da92f897ed77fe6c9e54.yml
-openapi_spec_hash: 88f158c1fd81b6193f2db6b9a3c8dde6
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/groqcloud%2Fgroqcloud-ecfc2447a708c847d9e52f507e3a729cb0f193971cc7f0662555d0cd56f512ba.yml
+openapi_spec_hash: 4d5c9c3600d062463631bd89b6d6eba3
 config_hash: 6b1c374dcc1ffa3165dd22f52a77ff89

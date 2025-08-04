@@ -14,7 +14,7 @@ class ChatCompletionSystemMessageParam(TypedDict, total=False):
     content: Required[Union[str, Iterable[ChatCompletionContentPartTextParam]]]
     """The contents of the system message."""
 
-    role: Required[Literal["system"]]
+    role: Required[Literal["system", "developer"]]
     """The role of the messages author, in this case `system`."""
 
     name: str
