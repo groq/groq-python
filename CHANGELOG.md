@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.31.0 (2025-08-05)
+
+Full Changelog: [v0.30.0...v0.31.0](https://github.com/groq/groq-python/compare/v0.30.0...v0.31.0)
+
+### Features
+
+* **api:** api update ([be81724](https://github.com/groq/groq-python/commit/be81724579d5538d340fe4f1bce9ab787ef2e387))
+* **api:** api update ([bd9eafd](https://github.com/groq/groq-python/commit/bd9eafd4ef5ff1379c4a716fef023fbacfe0641e))
+* **api:** api update ([86eab4f](https://github.com/groq/groq-python/commit/86eab4f85c8e515cd54dfd163d694237f2d6f118))
+* **api:** api update ([4068695](https://github.com/groq/groq-python/commit/4068695a917367872432d6b35985692c87dd8faa))
+* **api:** api update ([5c45441](https://github.com/groq/groq-python/commit/5c45441126fa94690e4fcbeab497d2c07cf54e50))
+* **api:** api update ([30646f2](https://github.com/groq/groq-python/commit/30646f2f85dd6cf328b61628d2c9dac970299d28))
+* **api:** api update ([e8ede14](https://github.com/groq/groq-python/commit/e8ede14f50b999ebc9d39da2881f7f59c3aa8b4a))
+* **api:** api update ([3c06879](https://github.com/groq/groq-python/commit/3c068790ee3632a58f8da9cfb45d1055b8ac9058))
+* **api:** api update ([455c74a](https://github.com/groq/groq-python/commit/455c74a13f0552b9e9abc08a8ddcf40b34a654cc))
+* clean up environment call outs ([0627bc6](https://github.com/groq/groq-python/commit/0627bc60fd9c038ae47e63a1bf3a36557157ed9e))
+* **client:** support file upload requests ([0f2d5a7](https://github.com/groq/groq-python/commit/0f2d5a78551a91aedd44160126ec85b833a7682b))
+
+
+### Bug Fixes
+
+* **client:** don't send Content-Type header on GET requests ([7439911](https://github.com/groq/groq-python/commit/74399119e020f45a154f5cdf46bdd63b476090e9))
+* **parsing:** ignore empty metadata ([eccd423](https://github.com/groq/groq-python/commit/eccd42322df3347194b64688f222518b56acb7f9))
+* **parsing:** parse extra field types ([590a947](https://github.com/groq/groq-python/commit/590a947ec17aca23ce82f546ee9c25800a7061ff))
+* streaming overrides ([ff828d6](https://github.com/groq/groq-python/commit/ff828d6363fae6b401dd47e696e7a2380226e051))
+
+
+### Chores
+
+* **project:** add settings file for vscode ([938789a](https://github.com/groq/groq-python/commit/938789a2545daec2fd9eb5b0c0d612f2aac6419b))
+
 ## 0.30.0 (2025-07-11)
 
 Full Changelog: [v0.29.0...v0.30.0](https://github.com/groq/groq-python/compare/v0.29.0...v0.30.0)
