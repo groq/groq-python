@@ -271,13 +271,10 @@ class Function(TypedDict, total=False):
     """
 
     parameters: FunctionParameters
-    """The parameters the functions accepts, described as a JSON Schema object.
+    """Function parameters defined as a JSON Schema object.
 
-    See the docs on [tool use](/docs/tool-use) for examples, and the
-    [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for
-    documentation about the format.
-
-    Omitting `parameters` defines a function with an empty parameter list.
+    Refer to https://json-schema.org/understanding-json-schema/ for schema
+    documentation.
     """
 
 
@@ -316,11 +313,30 @@ class ResponseFormatResponseFormatJsonSchemaJsonSchema(TypedDict, total=False):
 
 
 class ResponseFormatResponseFormatJsonSchema(TypedDict, total=False):
-    json_schema: Required[ResponseFormatResponseFormatJsonSchemaJsonSchema]
-    """Structured Outputs configuration options, including a JSON Schema."""
+    name: Required[str]
+    """The name of the response format.
+
+    Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length
+    of 64.
+    """
+
+    schema: Required[Dict[str, object]]
+    """The schema for the response format, described as a JSON Schema object."""
 
     type: Required[Literal["json_schema"]]
     """The type of response format being defined. Always `json_schema`."""
+
+    description: str
+    """
+    A description of what the response format is for, used by the model to determine
+    how to respond in the format.
+    """
+
+    json_schema: ResponseFormatResponseFormatJsonSchemaJsonSchema
+    """Structured Outputs configuration options, including a JSON Schema."""
+
+    strict: Optional[bool]
+    """Whether to enable strict schema adherence when generating the output."""
 
 
 class ResponseFormatResponseFormatJsonObject(TypedDict, total=False):
