@@ -10,7 +10,7 @@ __all__ = ["ChatCompletionToolParam"]
 
 
 class ChatCompletionToolParam(TypedDict, total=False):
-    function: Required[FunctionDefinition]
-
-    type: Required[Literal["function"]]
+    type: Required[Literal["function", "browser_search", "code_interpreter"]]
     """The type of the tool. Currently, only `function` is supported."""
+
+    function: FunctionDefinition

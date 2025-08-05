@@ -85,6 +85,14 @@ class CompletionCreateParams(TypedDict, total=False):
     include in the search results when the model uses a web search tool.
     """
 
+    include_reasoning: Optional[bool]
+    """Whether to include reasoning in the response.
+
+    If true, the response will include a `reasoning` field. If false, the model's
+    reasoning will not be included in the response. This field is mutually exclusive
+    with `reasoning_format`.
+    """
+
     logit_bias: Optional[Dict[str, int]]
     """
     This is not yet supported by any of our models. Modify the likelihood of
@@ -132,24 +140,28 @@ class CompletionCreateParams(TypedDict, total=False):
     far, increasing the model's likelihood to talk about new topics.
     """
 
-    reasoning_effort: Optional[Literal["none", "default"]]
+    reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]]
     """
     this field is only available for qwen3 models. Set to 'none' to disable
     reasoning. Set to 'default' or null to let Qwen reason.
     """
 
     reasoning_format: Optional[Literal["hidden", "raw", "parsed"]]
-    """Specifies how to output reasoning tokens"""
+    """
+    Specifies how to output reasoning tokens This field is mutually exclusive with
+    `include_reasoning`.
+    """
 
     response_format: Optional[ResponseFormat]
     """An object specifying the format that the model must output.
 
     Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured
     Outputs which ensures the model will match your supplied JSON schema.
-    json_schema response format is only supported on llama 4 models. Setting to
-    `{ "type": "json_object" }` enables the older JSON mode, which ensures the
-    message the model generates is valid JSON. Using `json_schema` is preferred for
-    models that support it.
+    `json_schema` response format is only available on
+    [supported models](https://console.groq.com/docs/structured-outputs#supported-models).
+    Setting to `{ "type": "json_object" }` enables the older JSON mode, which
+    ensures the message the model generates is valid JSON. Using `json_schema` is
+    preferred for models that support it.
     """
 
     search_settings: Optional[SearchSettings]
@@ -259,13 +271,10 @@ class Function(TypedDict, total=False):
     """
 
     parameters: FunctionParameters
-    """The parameters the functions accepts, described as a JSON Schema object.
+    """Function parameters defined as a JSON Schema object.
 
-    See the docs on [tool use](/docs/tool-use) for examples, and the
-    [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for
-    documentation about the format.
-
-    Omitting `parameters` defines a function with an empty parameter list.
+    Refer to https://json-schema.org/understanding-json-schema/ for schema
+    documentation.
     """
 
 

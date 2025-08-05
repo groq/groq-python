@@ -52,6 +52,7 @@ class TestCompletions:
                 }
             ],
             include_domains=["string"],
+            include_reasoning=True,
             logit_bias={"foo": 0},
             logprobs=True,
             max_completion_tokens=0,
@@ -78,12 +79,12 @@ class TestCompletions:
             tool_choice="none",
             tools=[
                 {
+                    "type": "function",
                     "function": {
                         "name": "name",
                         "description": "description",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "function",
                 }
             ],
             top_logprobs=0,
@@ -169,6 +170,7 @@ class TestAsyncCompletions:
                 }
             ],
             include_domains=["string"],
+            include_reasoning=True,
             logit_bias={"foo": 0},
             logprobs=True,
             max_completion_tokens=0,
@@ -195,12 +197,12 @@ class TestAsyncCompletions:
             tool_choice="none",
             tools=[
                 {
+                    "type": "function",
                     "function": {
                         "name": "name",
                         "description": "description",
                         "parameters": {"foo": "bar"},
                     },
-                    "type": "function",
                 }
             ],
             top_logprobs=0,
