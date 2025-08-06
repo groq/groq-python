@@ -54,10 +54,11 @@ class CompletionCreateParams(TypedDict, total=False):
     """
 
     frequency_penalty: Optional[float]
-    """Number between -2.0 and 2.0.
+    """This is not yet supported by any of our models.
 
-    Positive values penalize new tokens based on their existing frequency in the
-    text so far, decreasing the model's likelihood to repeat the same line verbatim.
+    Number between -2.0 and 2.0. Positive values penalize new tokens based on their
+    existing frequency in the text so far, decreasing the model's likelihood to
+    repeat the same line verbatim.
     """
 
     function_call: Optional[FunctionCall]
@@ -134,10 +135,11 @@ class CompletionCreateParams(TypedDict, total=False):
     """Whether to enable parallel function calling during tool use."""
 
     presence_penalty: Optional[float]
-    """Number between -2.0 and 2.0.
+    """This is not yet supported by any of our models.
 
-    Positive values penalize new tokens based on whether they appear in the text so
-    far, increasing the model's likelihood to talk about new topics.
+    Number between -2.0 and 2.0. Positive values penalize new tokens based on
+    whether they appear in the text so far, increasing the model's likelihood to
+    talk about new topics.
     """
 
     reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]]

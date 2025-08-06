@@ -110,9 +110,9 @@ class Completions(SyncAPIResource):
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
 
-          frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
-              existing frequency in the text so far, decreasing the model's likelihood to
-              repeat the same line verbatim.
+          frequency_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on their existing frequency in the
+              text so far, decreasing the model's likelihood to repeat the same line verbatim.
 
           function_call: Deprecated in favor of `tool_choice`.
 
@@ -159,9 +159,9 @@ class Completions(SyncAPIResource):
 
           parallel_tool_calls: Whether to enable parallel function calling during tool use.
 
-          presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
-              whether they appear in the text so far, increasing the model's likelihood to
-              talk about new topics.
+          presence_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on whether they appear in the text so
+              far, increasing the model's likelihood to talk about new topics.
 
           reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
               reasoning. Set to 'default' or null to let Qwen reason.
@@ -369,9 +369,9 @@ class AsyncCompletions(AsyncAPIResource):
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
 
-          frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
-              existing frequency in the text so far, decreasing the model's likelihood to
-              repeat the same line verbatim.
+          frequency_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on their existing frequency in the
+              text so far, decreasing the model's likelihood to repeat the same line verbatim.
 
           function_call: Deprecated in favor of `tool_choice`.
 
@@ -418,9 +418,9 @@ class AsyncCompletions(AsyncAPIResource):
 
           parallel_tool_calls: Whether to enable parallel function calling during tool use.
 
-          presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
-              whether they appear in the text so far, increasing the model's likelihood to
-              talk about new topics.
+          presence_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on whether they appear in the text so
+              far, increasing the model's likelihood to talk about new topics.
 
           reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
               reasoning. Set to 'default' or null to let Qwen reason.
