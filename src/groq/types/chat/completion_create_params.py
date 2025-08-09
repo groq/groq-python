@@ -144,8 +144,11 @@ class CompletionCreateParams(TypedDict, total=False):
 
     reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]]
     """
-    this field is only available for qwen3 models. Set to 'none' to disable
-    reasoning. Set to 'default' or null to let Qwen reason.
+    qwen3 models support the following values Set to 'none' to disable reasoning.
+    Set to 'default' or null to let Qwen reason.
+
+    openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
+    'medium' is the default value.
     """
 
     reasoning_format: Optional[Literal["hidden", "raw", "parsed"]]

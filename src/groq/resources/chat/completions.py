@@ -297,8 +297,11 @@ class Completions(SyncAPIResource):
               Positive values penalize new tokens based on whether they appear in the text so
               far, increasing the model's likelihood to talk about new topics.
 
-          reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
-              reasoning. Set to 'default' or null to let Qwen reason.
+          reasoning_effort: qwen3 models support the following values Set to 'none' to disable reasoning.
+              Set to 'default' or null to let Qwen reason.
+
+              openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
+              'medium' is the default value.
 
           reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
               `include_reasoning`.
@@ -690,8 +693,11 @@ class AsyncCompletions(AsyncAPIResource):
               Positive values penalize new tokens based on whether they appear in the text so
               far, increasing the model's likelihood to talk about new topics.
 
-          reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
-              reasoning. Set to 'default' or null to let Qwen reason.
+          reasoning_effort: qwen3 models support the following values Set to 'none' to disable reasoning.
+              Set to 'default' or null to let Qwen reason.
+
+              openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
+              'medium' is the default value.
 
           reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
               `include_reasoning`.
