@@ -146,9 +146,9 @@ chat_completion = client.chat.completions.create(
         }
     ],
     model="meta-llama/llama-4-scout-17b-16e-instruct",
-    search_settings={},
+    compound_custom={},
 )
-print(chat_completion.search_settings)
+print(chat_completion.compound_custom)
 ```
 
 ## File uploads

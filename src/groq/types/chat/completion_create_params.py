@@ -13,6 +13,8 @@ from .chat_completion_function_call_option_param import ChatCompletionFunctionCa
 
 __all__ = [
     "CompletionCreateParams",
+    "CompoundCustom",
+    "CompoundCustomModels",
     "FunctionCall",
     "Function",
     "ResponseFormat",
@@ -46,6 +48,9 @@ class CompletionCreateParams(TypedDict, total=False):
     For details on which models are compatible with the Chat API, see available
     [models](https://console.groq.com/docs/models)
     """
+
+    compound_custom: Optional[CompoundCustom]
+    """Custom configuration of models and tools for Compound."""
 
     exclude_domains: Optional[List[str]]
     """
@@ -256,6 +261,18 @@ class CompletionCreateParams(TypedDict, total=False):
     A unique identifier representing your end-user, which can help us monitor and
     detect abuse.
     """
+
+
+class CompoundCustomModels(TypedDict, total=False):
+    answering_model: Optional[str]
+    """Custom model to use for answering."""
+
+    reasoning_model: Optional[str]
+    """Custom model to use for reasoning."""
+
+
+class CompoundCustom(TypedDict, total=False):
+    models: Optional[CompoundCustomModels]
 
 
 FunctionCall: TypeAlias = Union[Literal["none", "auto", "required"], ChatCompletionFunctionCallOptionParam]
