@@ -15,6 +15,7 @@ __all__ = [
     "CompletionCreateParams",
     "CompoundCustom",
     "CompoundCustomModels",
+    "Document",
     "FunctionCall",
     "Function",
     "ResponseFormat",
@@ -51,6 +52,12 @@ class CompletionCreateParams(TypedDict, total=False):
 
     compound_custom: Optional[CompoundCustom]
     """Custom configuration of models and tools for Compound."""
+
+    documents: Optional[Iterable[Document]]
+    """A list of documents to provide context for the conversation.
+
+    Each document contains text that can be referenced by the model.
+    """
 
     exclude_domains: Optional[List[str]]
     """
@@ -273,6 +280,11 @@ class CompoundCustomModels(TypedDict, total=False):
 
 class CompoundCustom(TypedDict, total=False):
     models: Optional[CompoundCustomModels]
+
+
+class Document(TypedDict, total=False):
+    text: Required[str]
+    """The text content of the document."""
 
 
 FunctionCall: TypeAlias = Union[Literal["none", "auto", "required"], ChatCompletionFunctionCallOptionParam]
