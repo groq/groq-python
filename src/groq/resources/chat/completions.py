@@ -63,6 +63,7 @@ class Completions(SyncAPIResource):
             ],
         ],
         compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
         exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
@@ -109,6 +110,9 @@ class Completions(SyncAPIResource):
               API, see available [models](https://console.groq.com/docs/models)
 
           compound_custom: Custom configuration of models and tools for Compound.
+
+          documents: A list of documents to provide context for the conversation. Each document
+              contains text that can be referenced by the model.
 
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
@@ -254,6 +258,7 @@ class Completions(SyncAPIResource):
                     "messages": messages,
                     "model": model,
                     "compound_custom": compound_custom,
+                    "documents": documents,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
@@ -329,6 +334,7 @@ class AsyncCompletions(AsyncAPIResource):
             ],
         ],
         compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
         exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
@@ -375,6 +381,9 @@ class AsyncCompletions(AsyncAPIResource):
               API, see available [models](https://console.groq.com/docs/models)
 
           compound_custom: Custom configuration of models and tools for Compound.
+
+          documents: A list of documents to provide context for the conversation. Each document
+              contains text that can be referenced by the model.
 
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
@@ -520,6 +529,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "messages": messages,
                     "model": model,
                     "compound_custom": compound_custom,
+                    "documents": documents,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,

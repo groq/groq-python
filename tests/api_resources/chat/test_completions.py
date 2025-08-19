@@ -47,6 +47,7 @@ class TestCompletions:
                     "reasoning_model": "reasoning_model",
                 }
             },
+            documents=[{"text": "text"}],
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
@@ -171,6 +172,7 @@ class TestAsyncCompletions:
                     "reasoning_model": "reasoning_model",
                 }
             },
+            documents=[{"text": "text"}],
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
