@@ -35,12 +35,18 @@ class CompletionCreateParams(TypedDict, total=False):
         Union[
             str,
             Literal[
+                "compound-beta",
+                "compound-beta-mini",
                 "gemma2-9b-it",
-                "llama-3.3-70b-versatile",
                 "llama-3.1-8b-instant",
-                "llama-guard-3-8b",
-                "llama3-70b-8192",
-                "llama3-8b-8192",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
             ],
         ]
     ]
