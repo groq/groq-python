@@ -39,7 +39,7 @@ chat_completion = client.chat.completions.create(
             "content": "Explain the importance of low latency LLMs",
         }
     ],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 )
 print(chat_completion.choices[0].message.content)
 ```
@@ -71,7 +71,7 @@ async def main() -> None:
                 "content": "Explain the importance of low latency LLMs",
             }
         ],
-        model="llama3-8b-8192",
+        model="openai/gpt-oss-20b",
     )
     print(chat_completion.choices[0].message.content)
 
@@ -112,7 +112,7 @@ async def main() -> None:
                     "content": "Explain the importance of low latency LLMs",
                 }
             ],
-            model="llama3-8b-8192",
+            model="openai/gpt-oss-20b",
         )
         print(chat_completion.id)
 
@@ -196,7 +196,7 @@ try:
                 "content": "Explain the importance of low latency LLMs",
             },
         ],
-        model="llama3-8b-8192",
+        model="openai/gpt-oss-20b",
     )
 except groq.APIConnectionError as e:
     print("The server could not be reached")
@@ -251,7 +251,7 @@ client.with_options(max_retries=5).chat.completions.create(
             "content": "Explain the importance of low latency LLMs",
         },
     ],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 )
 ```
 
@@ -286,7 +286,7 @@ client.with_options(timeout=5.0).chat.completions.create(
             "content": "Explain the importance of low latency LLMs",
         },
     ],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 )
 ```
 
@@ -336,7 +336,7 @@ response = client.chat.completions.with_raw_response.create(
         "role": "user",
         "content": "Explain the importance of low latency LLMs",
     }],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -366,7 +366,7 @@ with client.chat.completions.with_streaming_response.create(
             "content": "Explain the importance of low latency LLMs",
         },
     ],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
