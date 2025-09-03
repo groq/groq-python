@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
+from ..._types import SequenceNotStr
 from .chat_completion_tool_param import ChatCompletionToolParam
 from .chat_completion_message_param import ChatCompletionMessageParam
 from ..shared_params.function_parameters import FunctionParameters
@@ -65,7 +66,7 @@ class CompletionCreateParams(TypedDict, total=False):
     Each document contains text that can be referenced by the model.
     """
 
-    exclude_domains: Optional[List[str]]
+    exclude_domains: Optional[SequenceNotStr[str]]
     """
     Deprecated: Use search_settings.exclude_domains instead. A list of domains to
     exclude from the search results when the model uses a web search tool.
@@ -98,7 +99,7 @@ class CompletionCreateParams(TypedDict, total=False):
     A list of functions the model may generate JSON inputs for.
     """
 
-    include_domains: Optional[List[str]]
+    include_domains: Optional[SequenceNotStr[str]]
     """
     Deprecated: Use search_settings.include_domains instead. A list of domains to
     include in the search results when the model uses a web search tool.
@@ -206,7 +207,7 @@ class CompletionCreateParams(TypedDict, total=False):
     - `flex` uses the flex tier, which will succeed or fail quickly.
     """
 
-    stop: Union[Optional[str], List[str], None]
+    stop: Union[Optional[str], SequenceNotStr[str], None]
     """Up to 4 sequences where the API will stop generating further tokens.
 
     The returned text will not contain the stop sequence.
@@ -377,10 +378,10 @@ class SearchSettings(TypedDict, total=False):
     "germany", "france").
     """
 
-    exclude_domains: Optional[List[str]]
+    exclude_domains: Optional[SequenceNotStr[str]]
     """A list of domains to exclude from the search results."""
 
-    include_domains: Optional[List[str]]
+    include_domains: Optional[SequenceNotStr[str]]
     """A list of domains to include in the search results."""
 
     include_images: Optional[bool]
