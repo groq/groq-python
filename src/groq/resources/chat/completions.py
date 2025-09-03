@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional, overload
+from typing import Dict, Union, Iterable, Optional, overload
 from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -204,11 +204,11 @@ class Completions(SyncAPIResource):
         ],
         compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
         documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -224,7 +224,7 @@ class Completions(SyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -615,11 +615,11 @@ class AsyncCompletions(AsyncAPIResource):
         ],
         compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
         documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -635,7 +635,7 @@ class AsyncCompletions(AsyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
