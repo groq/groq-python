@@ -16,6 +16,8 @@ __all__ = [
     "CompletionCreateParams",
     "CompoundCustom",
     "CompoundCustomModels",
+    "CompoundCustomTools",
+    "CompoundCustomToolsWolframSettings",
     "Document",
     "FunctionCall",
     "Function",
@@ -285,8 +287,24 @@ class CompoundCustomModels(TypedDict, total=False):
     """Custom model to use for reasoning."""
 
 
+class CompoundCustomToolsWolframSettings(TypedDict, total=False):
+    authorization: Optional[str]
+    """API key used to authorize requests to Wolfram services."""
+
+
+class CompoundCustomTools(TypedDict, total=False):
+    enabled_tools: Optional[SequenceNotStr[str]]
+    """A list of tool names that are enabled for the request."""
+
+    wolfram_settings: Optional[CompoundCustomToolsWolframSettings]
+    """Configuration for the Wolfram tool integration."""
+
+
 class CompoundCustom(TypedDict, total=False):
     models: Optional[CompoundCustomModels]
+
+    tools: Optional[CompoundCustomTools]
+    """Configuration options for tools available to Compound."""
 
 
 class Document(TypedDict, total=False):
