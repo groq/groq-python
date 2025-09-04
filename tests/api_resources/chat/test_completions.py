@@ -45,7 +45,11 @@ class TestCompletions:
                 "models": {
                     "answering_model": "answering_model",
                     "reasoning_model": "reasoning_model",
-                }
+                },
+                "tools": {
+                    "enabled_tools": ["string"],
+                    "wolfram_settings": {"authorization": "authorization"},
+                },
             },
             documents=[{"text": "text"}],
             exclude_domains=["string"],
@@ -170,7 +174,11 @@ class TestAsyncCompletions:
                 "models": {
                     "answering_model": "answering_model",
                     "reasoning_model": "reasoning_model",
-                }
+                },
+                "tools": {
+                    "enabled_tools": ["string"],
+                    "wolfram_settings": {"authorization": "authorization"},
+                },
             },
             documents=[{"text": "text"}],
             exclude_domains=["string"],
