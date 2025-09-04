@@ -41,6 +41,17 @@ class TestCompletions:
                 }
             ],
             model="meta-llama/llama-4-scout-17b-16e-instruct",
+            compound_custom={
+                "models": {
+                    "answering_model": "answering_model",
+                    "reasoning_model": "reasoning_model",
+                },
+                "tools": {
+                    "enabled_tools": ["string"],
+                    "wolfram_settings": {"authorization": "authorization"},
+                },
+            },
+            documents=[{"text": "text"}],
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
@@ -159,6 +170,17 @@ class TestAsyncCompletions:
                 }
             ],
             model="meta-llama/llama-4-scout-17b-16e-instruct",
+            compound_custom={
+                "models": {
+                    "answering_model": "answering_model",
+                    "reasoning_model": "reasoning_model",
+                },
+                "tools": {
+                    "enabled_tools": ["string"],
+                    "wolfram_settings": {"authorization": "authorization"},
+                },
+            },
+            documents=[{"text": "text"}],
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",

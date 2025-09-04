@@ -1,6 +1,6 @@
 [project]
 name = "groq"
-version = "0.31.0"
+version = "0.31.1"
 description = "The official Python library for the groq API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -148,6 +148,7 @@ exclude = [
     "_dev",
     ".venv",
     ".nox",
+    ".git",
 ]
 
 reportImplicitOverride = true
@@ -159,7 +160,7 @@ reportPrivateUsage = false
 [tool.ruff]
 line-length = 120
 output-format = "grouped"
-target-version = "py37"
+target-version = "py38"
 
 [tool.ruff.format]
 docstring-code-format = true

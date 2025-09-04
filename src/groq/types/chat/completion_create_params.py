@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
+from ..._types import SequenceNotStr
 from .chat_completion_tool_param import ChatCompletionToolParam
 from .chat_completion_message_param import ChatCompletionMessageParam
 from ..shared_params.function_parameters import FunctionParameters
@@ -13,6 +14,11 @@ from .chat_completion_function_call_option_param import ChatCompletionFunctionCa
 
 __all__ = [
     "CompletionCreateParams",
+    "CompoundCustom",
+    "CompoundCustomModels",
+    "CompoundCustomTools",
+    "CompoundCustomToolsWolframSettings",
+    "Document",
     "FunctionCall",
     "Function",
     "ResponseFormat",
@@ -32,12 +38,18 @@ class CompletionCreateParams(TypedDict, total=False):
         Union[
             str,
             Literal[
+                "compound-beta",
+                "compound-beta-mini",
                 "gemma2-9b-it",
-                "llama-3.3-70b-versatile",
                 "llama-3.1-8b-instant",
-                "llama-guard-3-8b",
-                "llama3-70b-8192",
-                "llama3-8b-8192",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
             ],
         ]
     ]
@@ -47,17 +59,27 @@ class CompletionCreateParams(TypedDict, total=False):
     [models](https://console.groq.com/docs/models)
     """
 
-    exclude_domains: Optional[List[str]]
+    compound_custom: Optional[CompoundCustom]
+    """Custom configuration of models and tools for Compound."""
+
+    documents: Optional[Iterable[Document]]
+    """A list of documents to provide context for the conversation.
+
+    Each document contains text that can be referenced by the model.
+    """
+
+    exclude_domains: Optional[SequenceNotStr[str]]
     """
     Deprecated: Use search_settings.exclude_domains instead. A list of domains to
     exclude from the search results when the model uses a web search tool.
     """
 
     frequency_penalty: Optional[float]
-    """Number between -2.0 and 2.0.
+    """This is not yet supported by any of our models.
 
-    Positive values penalize new tokens based on their existing frequency in the
-    text so far, decreasing the model's likelihood to repeat the same line verbatim.
+    Number between -2.0 and 2.0. Positive values penalize new tokens based on their
+    existing frequency in the text so far, decreasing the model's likelihood to
+    repeat the same line verbatim.
     """
 
     function_call: Optional[FunctionCall]
@@ -79,7 +101,7 @@ class CompletionCreateParams(TypedDict, total=False):
     A list of functions the model may generate JSON inputs for.
     """
 
-    include_domains: Optional[List[str]]
+    include_domains: Optional[SequenceNotStr[str]]
     """
     Deprecated: Use search_settings.include_domains instead. A list of domains to
     include in the search results when the model uses a web search tool.
@@ -134,16 +156,20 @@ class CompletionCreateParams(TypedDict, total=False):
     """Whether to enable parallel function calling during tool use."""
 
     presence_penalty: Optional[float]
-    """Number between -2.0 and 2.0.
+    """This is not yet supported by any of our models.
 
-    Positive values penalize new tokens based on whether they appear in the text so
-    far, increasing the model's likelihood to talk about new topics.
+    Number between -2.0 and 2.0. Positive values penalize new tokens based on
+    whether they appear in the text so far, increasing the model's likelihood to
+    talk about new topics.
     """
 
     reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]]
     """
-    this field is only available for qwen3 models. Set to 'none' to disable
-    reasoning. Set to 'default' or null to let Qwen reason.
+    qwen3 models support the following values Set to 'none' to disable reasoning.
+    Set to 'default' or null to let Qwen reason.
+
+    openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
+    'medium' is the default value.
     """
 
     reasoning_format: Optional[Literal["hidden", "raw", "parsed"]]
@@ -183,7 +209,7 @@ class CompletionCreateParams(TypedDict, total=False):
     - `flex` uses the flex tier, which will succeed or fail quickly.
     """
 
-    stop: Union[Optional[str], List[str], None]
+    stop: Union[Optional[str], SequenceNotStr[str], None]
     """Up to 4 sequences where the API will stop generating further tokens.
 
     The returned text will not contain the stop sequence.
@@ -251,6 +277,39 @@ class CompletionCreateParams(TypedDict, total=False):
     A unique identifier representing your end-user, which can help us monitor and
     detect abuse.
     """
+
+
+class CompoundCustomModels(TypedDict, total=False):
+    answering_model: Optional[str]
+    """Custom model to use for answering."""
+
+    reasoning_model: Optional[str]
+    """Custom model to use for reasoning."""
+
+
+class CompoundCustomToolsWolframSettings(TypedDict, total=False):
+    authorization: Optional[str]
+    """API key used to authorize requests to Wolfram services."""
+
+
+class CompoundCustomTools(TypedDict, total=False):
+    enabled_tools: Optional[SequenceNotStr[str]]
+    """A list of tool names that are enabled for the request."""
+
+    wolfram_settings: Optional[CompoundCustomToolsWolframSettings]
+    """Configuration for the Wolfram tool integration."""
+
+
+class CompoundCustom(TypedDict, total=False):
+    models: Optional[CompoundCustomModels]
+
+    tools: Optional[CompoundCustomTools]
+    """Configuration options for tools available to Compound."""
+
+
+class Document(TypedDict, total=False):
+    text: Required[str]
+    """The text content of the document."""
 
 
 FunctionCall: TypeAlias = Union[Literal["none", "auto", "required"], ChatCompletionFunctionCallOptionParam]
@@ -337,10 +396,10 @@ class SearchSettings(TypedDict, total=False):
     "germany", "france").
     """
 
-    exclude_domains: Optional[List[str]]
+    exclude_domains: Optional[SequenceNotStr[str]]
     """A list of domains to exclude from the search results."""
 
-    include_domains: Optional[List[str]]
+    include_domains: Optional[SequenceNotStr[str]]
     """A list of domains to include in the search results."""
 
     include_images: Optional[bool]

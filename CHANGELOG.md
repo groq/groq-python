@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.31.1 (2025-09-04)
+
+Full Changelog: [v0.31.0...v0.31.1](https://github.com/groq/groq-python/compare/v0.31.0...v0.31.1)
+
+### Features
+
+* **api:** api update ([0a8a5c0](https://github.com/groq/groq-python/commit/0a8a5c0be7709857fdff72d03a34dce723f13b71))
+* **api:** api update ([7896dbd](https://github.com/groq/groq-python/commit/7896dbd7b60828795d2e9780cdf326b001fc839c))
+* **api:** api update ([f9b5dca](https://github.com/groq/groq-python/commit/f9b5dca378b9916ca2ab592922b9ffba7247a1ae))
+* **api:** api update ([e34ec28](https://github.com/groq/groq-python/commit/e34ec28c9705485684293cfb97eec63b16257bd7))
+* **api:** api update ([cd14d0a](https://github.com/groq/groq-python/commit/cd14d0ab7eb0b161ffeef69a7b89cce062aeb078))
+* **api:** api update ([7d02cd3](https://github.com/groq/groq-python/commit/7d02cd32852d47016cf3b6cc7ca0f898dd0c99c5))
+* **api:** api update ([437f5fb](https://github.com/groq/groq-python/commit/437f5fb2040d345614ffe9ff15c525feb2ab19de))
+* improve future compat with pydantic v3 ([42a6cb9](https://github.com/groq/groq-python/commit/42a6cb96e631ad48c371a1ab58b6adea07897685))
+* **types:** replace List[str] with SequenceNotStr in params ([d1ee744](https://github.com/groq/groq-python/commit/d1ee74483e6d2e2353985d760837e72af3143be8))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([21f93a7](https://github.com/groq/groq-python/commit/21f93a72c50f49187e09310df41e5dbb984298c3))
+* compeltions streaming overloads ([201e137](https://github.com/groq/groq-python/commit/201e137d9b336b4fef847713e6e743ac47e733be))
+* update example model from decommissioned models to gpt-oss-20b ([1570583](https://github.com/groq/groq-python/commit/1570583818c7355c1ea6cc4460075f60d3cd29bb))
+* update example model from decommissioned models to gpt-oss-20b ([#250](https://github.com/groq/groq-python/issues/250)) ([edb9132](https://github.com/groq/groq-python/commit/edb91324ebff8d10f993492dd68ed05ac030bc9f))
+
+
+### Chores
+
+* **internal:** add Sequence related utils ([01104d8](https://github.com/groq/groq-python/commit/01104d8c4a179a2ad347d0e12f935d6547f61b31))
+* **internal:** change ci workflow machines ([e796cb9](https://github.com/groq/groq-python/commit/e796cb9599db99fa9e29f97e54ffe519bd23bf1b))
+* **internal:** fix ruff target version ([b58149d](https://github.com/groq/groq-python/commit/b58149d9584a5c9b0afc935af6aef2a2c64c1187))
+* **internal:** update comment in script ([bd20c49](https://github.com/groq/groq-python/commit/bd20c49c957e990aeb8c3bb8bb9c3dc9bcc31b86))
+* **internal:** update pyright exclude list ([124e838](https://github.com/groq/groq-python/commit/124e8387b8ba18853f93dede16ffba8c49c441a0))
+* update @stainless-api/prism-cli to v5.15.0 ([b2f49cc](https://github.com/groq/groq-python/commit/b2f49cc1301696827eb00d5db91895d71c3da965))
+* update github action ([c7662e0](https://github.com/groq/groq-python/commit/c7662e01641af2daa758eb23bb19c9b65d0d5d20))
+
 ## 0.31.0 (2025-08-05)
 
 Full Changelog: [v0.30.0...v0.31.0](https://github.com/groq/groq-python/compare/v0.30.0...v0.31.0)

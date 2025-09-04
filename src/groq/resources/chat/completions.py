@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional, overload
+from typing import Dict, Union, Iterable, Optional, overload
 from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -54,12 +54,30 @@ class Completions(SyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: str,
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        model: Union[
+            str,
+            Literal[
+                "compound-beta",
+                "compound-beta-mini",
+                "gemma2-9b-it",
+                "llama-3.1-8b-instant",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
+            ],
+        ],
+        compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -75,7 +93,7 @@ class Completions(SyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -98,12 +116,30 @@ class Completions(SyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: str,
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        model: Union[
+            str,
+            Literal[
+                "compound-beta",
+                "compound-beta-mini",
+                "gemma2-9b-it",
+                "llama-3.1-8b-instant",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
+            ],
+        ],
+        compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -119,7 +155,7 @@ class Completions(SyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Literal[True],
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -142,12 +178,30 @@ class Completions(SyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: str,
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        model: Union[
+            str,
+            Literal[
+                "compound-beta",
+                "compound-beta-mini",
+                "gemma2-9b-it",
+                "llama-3.1-8b-instant",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
+            ],
+        ],
+        compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -163,7 +217,7 @@ class Completions(SyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: bool,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -188,19 +242,27 @@ class Completions(SyncAPIResource):
         model: Union[
             str,
             Literal[
+                "compound-beta",
+                "compound-beta-mini",
                 "gemma2-9b-it",
-                "llama-3.3-70b-versatile",
                 "llama-3.1-8b-instant",
-                "llama-guard-3-8b",
-                "llama3-70b-8192",
-                "llama3-8b-8192",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
             ],
         ],
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -216,7 +278,7 @@ class Completions(SyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -241,12 +303,17 @@ class Completions(SyncAPIResource):
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
 
+          compound_custom: Custom configuration of models and tools for Compound.
+
+          documents: A list of documents to provide context for the conversation. Each document
+              contains text that can be referenced by the model.
+
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
 
-          frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
-              existing frequency in the text so far, decreasing the model's likelihood to
-              repeat the same line verbatim.
+          frequency_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on their existing frequency in the
+              text so far, decreasing the model's likelihood to repeat the same line verbatim.
 
           function_call: Deprecated in favor of `tool_choice`.
 
@@ -293,12 +360,15 @@ class Completions(SyncAPIResource):
 
           parallel_tool_calls: Whether to enable parallel function calling during tool use.
 
-          presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
-              whether they appear in the text so far, increasing the model's likelihood to
-              talk about new topics.
+          presence_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on whether they appear in the text so
+              far, increasing the model's likelihood to talk about new topics.
 
-          reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
-              reasoning. Set to 'default' or null to let Qwen reason.
+          reasoning_effort: qwen3 models support the following values Set to 'none' to disable reasoning.
+              Set to 'default' or null to let Qwen reason.
+
+              openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
+              'medium' is the default value.
 
           reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
               `include_reasoning`.
@@ -381,6 +451,8 @@ class Completions(SyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "compound_custom": compound_custom,
+                    "documents": documents,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
@@ -447,12 +519,30 @@ class AsyncCompletions(AsyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: str,
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        model: Union[
+            str,
+            Literal[
+                "compound-beta",
+                "compound-beta-mini",
+                "gemma2-9b-it",
+                "llama-3.1-8b-instant",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
+            ],
+        ],
+        compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -468,7 +558,7 @@ class AsyncCompletions(AsyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -491,12 +581,30 @@ class AsyncCompletions(AsyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: str,
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        model: Union[
+            str,
+            Literal[
+                "compound-beta",
+                "compound-beta-mini",
+                "gemma2-9b-it",
+                "llama-3.1-8b-instant",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
+            ],
+        ],
+        compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -512,7 +620,7 @@ class AsyncCompletions(AsyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Literal[True],
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -535,12 +643,30 @@ class AsyncCompletions(AsyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: str,
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        model: Union[
+            str,
+            Literal[
+                "compound-beta",
+                "compound-beta-mini",
+                "gemma2-9b-it",
+                "llama-3.1-8b-instant",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
+            ],
+        ],
+        compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -556,7 +682,7 @@ class AsyncCompletions(AsyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: bool,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -581,19 +707,27 @@ class AsyncCompletions(AsyncAPIResource):
         model: Union[
             str,
             Literal[
+                "compound-beta",
+                "compound-beta-mini",
                 "gemma2-9b-it",
-                "llama-3.3-70b-versatile",
                 "llama-3.1-8b-instant",
-                "llama-guard-3-8b",
-                "llama3-70b-8192",
-                "llama3-8b-8192",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
             ],
         ],
-        exclude_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
+        exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
         function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
         functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        include_domains: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        include_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         include_reasoning: Optional[bool] | NotGiven = NOT_GIVEN,
         logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
         logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -609,7 +743,7 @@ class AsyncCompletions(AsyncAPIResource):
         search_settings: Optional[completion_create_params.SearchSettings] | NotGiven = NOT_GIVEN,
         seed: Optional[int] | NotGiven = NOT_GIVEN,
         service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | NotGiven = NOT_GIVEN,
         store: Optional[bool] | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
         temperature: Optional[float] | NotGiven = NOT_GIVEN,
@@ -634,12 +768,17 @@ class AsyncCompletions(AsyncAPIResource):
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
 
+          compound_custom: Custom configuration of models and tools for Compound.
+
+          documents: A list of documents to provide context for the conversation. Each document
+              contains text that can be referenced by the model.
+
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
 
-          frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
-              existing frequency in the text so far, decreasing the model's likelihood to
-              repeat the same line verbatim.
+          frequency_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on their existing frequency in the
+              text so far, decreasing the model's likelihood to repeat the same line verbatim.
 
           function_call: Deprecated in favor of `tool_choice`.
 
@@ -686,12 +825,15 @@ class AsyncCompletions(AsyncAPIResource):
 
           parallel_tool_calls: Whether to enable parallel function calling during tool use.
 
-          presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
-              whether they appear in the text so far, increasing the model's likelihood to
-              talk about new topics.
+          presence_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on whether they appear in the text so
+              far, increasing the model's likelihood to talk about new topics.
 
-          reasoning_effort: this field is only available for qwen3 models. Set to 'none' to disable
-              reasoning. Set to 'default' or null to let Qwen reason.
+          reasoning_effort: qwen3 models support the following values Set to 'none' to disable reasoning.
+              Set to 'default' or null to let Qwen reason.
+
+              openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
+              'medium' is the default value.
 
           reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
               `include_reasoning`.
@@ -774,6 +916,8 @@ class AsyncCompletions(AsyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "compound_custom": compound_custom,
+                    "documents": documents,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
