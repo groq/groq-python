@@ -75,7 +75,6 @@ multidict==6.4.4
 mypy==1.14.1
 mypy-extensions==1.0.0
     # via mypy
-nest-asyncio==1.6.0
 nodeenv==1.8.0
     # via pyright
 nox==2023.4.22
