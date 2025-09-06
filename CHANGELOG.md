@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.31.2 (2025-09-06)
+
+Full Changelog: [v0.31.1...v0.31.2](https://github.com/groq/groq-python/compare/v0.31.1...v0.31.2)
+
+### Bug Fixes
+
+* GitHub Terraform: Create/Update .github/workflows/stale.yaml [skip ci] ([ba00a6e](https://github.com/groq/groq-python/commit/ba00a6e71b7559da44a2d9b2a4babcdfa6d70b85))
+
+
+### Chores
+
+* **internal:** move mypy configurations to `pyproject.toml` file ([a8113a5](https://github.com/groq/groq-python/commit/a8113a56fc7a57c3c07231fa6925708d038c028f))
+* **tests:** simplify `get_platform` test ([a257487](https://github.com/groq/groq-python/commit/a257487327c3601743d49a8d96f74bef4a6c24f7))
+
 ## 0.31.1 (2025-09-04)
 
 Full Changelog: [v0.31.0...v0.31.1](https://github.com/groq/groq-python/compare/v0.31.0...v0.31.1)
