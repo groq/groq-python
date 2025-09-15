@@ -62,6 +62,13 @@ class CompletionCreateParams(TypedDict, total=False):
     compound_custom: Optional[CompoundCustom]
     """Custom configuration of models and tools for Compound."""
 
+    disable_tool_validation: bool
+    """
+    If set to true, groq will return called tools without validating that the tool
+    is present in request.tools. tool_choice=required/none will still be enforced,
+    but the request cannot require a specific tool be used.
+    """
+
     documents: Optional[Iterable[Document]]
     """A list of documents to provide context for the conversation.
 

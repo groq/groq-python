@@ -257,6 +257,7 @@ class Completions(SyncAPIResource):
             ],
         ],
         compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        disable_tool_validation: bool | NotGiven = NOT_GIVEN,
         documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
         exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -304,6 +305,10 @@ class Completions(SyncAPIResource):
               API, see available [models](https://console.groq.com/docs/models)
 
           compound_custom: Custom configuration of models and tools for Compound.
+
+          disable_tool_validation: If set to true, groq will return called tools without validating that the tool
+              is present in request.tools. tool_choice=required/none will still be enforced,
+              but the request cannot require a specific tool be used.
 
           documents: A list of documents to provide context for the conversation. Each document
               contains text that can be referenced by the model.
@@ -452,6 +457,7 @@ class Completions(SyncAPIResource):
                     "messages": messages,
                     "model": model,
                     "compound_custom": compound_custom,
+                    "disable_tool_validation": disable_tool_validation,
                     "documents": documents,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
@@ -722,6 +728,7 @@ class AsyncCompletions(AsyncAPIResource):
             ],
         ],
         compound_custom: Optional[completion_create_params.CompoundCustom] | NotGiven = NOT_GIVEN,
+        disable_tool_validation: bool | NotGiven = NOT_GIVEN,
         documents: Optional[Iterable[completion_create_params.Document]] | NotGiven = NOT_GIVEN,
         exclude_domains: Optional[SequenceNotStr[str]] | NotGiven = NOT_GIVEN,
         frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
@@ -769,6 +776,10 @@ class AsyncCompletions(AsyncAPIResource):
               API, see available [models](https://console.groq.com/docs/models)
 
           compound_custom: Custom configuration of models and tools for Compound.
+
+          disable_tool_validation: If set to true, groq will return called tools without validating that the tool
+              is present in request.tools. tool_choice=required/none will still be enforced,
+              but the request cannot require a specific tool be used.
 
           documents: A list of documents to provide context for the conversation. Each document
               contains text that can be referenced by the model.
@@ -917,6 +928,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "messages": messages,
                     "model": model,
                     "compound_custom": compound_custom,
+                    "disable_tool_validation": disable_tool_validation,
                     "documents": documents,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
