@@ -28,3 +28,11 @@ class FunctionDefinition(BaseModel):
     Refer to https://json-schema.org/understanding-json-schema/ for schema
     documentation.
     """
+
+    strict: Optional[bool] = None
+    """Whether to enable strict schema adherence when generating the output.
+
+    If set to true, the model will always follow the exact schema defined in the
+    `schema` field. Only a subset of JSON Schema is supported when `strict` is
+    `true`.
+    """

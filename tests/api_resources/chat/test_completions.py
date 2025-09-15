@@ -95,6 +95,7 @@ class TestCompletions:
                         "name": "name",
                         "description": "description",
                         "parameters": {"foo": "bar"},
+                        "strict": True,
                     },
                 }
             ],
@@ -224,6 +225,7 @@ class TestAsyncCompletions:
                         "name": "name",
                         "description": "description",
                         "parameters": {"foo": "bar"},
+                        "strict": True,
                     },
                 }
             ],
