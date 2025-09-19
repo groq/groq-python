@@ -3,7 +3,7 @@
 import typing as _t
 
 from . import types
-from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes
+from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes, omit, not_given
 from ._utils import file_from_path
 from ._client import Groq, Client, Stream, Timeout, AsyncGroq, Transport, AsyncClient, AsyncStream, RequestOptions
 from ._models import BaseModel
@@ -38,7 +38,9 @@ __all__ = [
     "ProxiesTypes",
     "NotGiven",
     "NOT_GIVEN",
+    "not_given",
     "Omit",
+    "omit",
     "GroqError",
     "APIError",
     "APIStatusError",
