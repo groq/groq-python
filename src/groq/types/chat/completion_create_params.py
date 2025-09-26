@@ -75,6 +75,13 @@ class CompletionCreateParams(TypedDict, total=False):
     Each document contains text that can be referenced by the model.
     """
 
+    enable_citations: Optional[bool]
+    """Whether to enable citations in the response.
+
+    When enabled, the model will include citations for information retrieved from
+    provided documents or web searches.
+    """
+
     exclude_domains: Optional[SequenceNotStr[str]]
     """
     Deprecated: Use search_settings.exclude_domains instead. A list of domains to

@@ -71,6 +71,7 @@ class Completions(SyncAPIResource):
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
         disable_tool_validation: bool | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
+        enable_citations: Optional[bool] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
         function_call: Optional[completion_create_params.FunctionCall] | Omit = omit,
@@ -124,6 +125,10 @@ class Completions(SyncAPIResource):
 
           documents: A list of documents to provide context for the conversation. Each document
               contains text that can be referenced by the model.
+
+          enable_citations: Whether to enable citations in the response. When enabled, the model will
+              include citations for information retrieved from provided documents or web
+              searches.
 
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
@@ -271,6 +276,7 @@ class Completions(SyncAPIResource):
                     "compound_custom": compound_custom,
                     "disable_tool_validation": disable_tool_validation,
                     "documents": documents,
+                    "enable_citations": enable_citations,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
@@ -354,6 +360,7 @@ class AsyncCompletions(AsyncAPIResource):
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
         disable_tool_validation: bool | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
+        enable_citations: Optional[bool] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
         function_call: Optional[completion_create_params.FunctionCall] | Omit = omit,
@@ -407,6 +414,10 @@ class AsyncCompletions(AsyncAPIResource):
 
           documents: A list of documents to provide context for the conversation. Each document
               contains text that can be referenced by the model.
+
+          enable_citations: Whether to enable citations in the response. When enabled, the model will
+              include citations for information retrieved from provided documents or web
+              searches.
 
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
@@ -554,6 +565,7 @@ class AsyncCompletions(AsyncAPIResource):
                     "compound_custom": compound_custom,
                     "disable_tool_validation": disable_tool_validation,
                     "documents": documents,
+                    "enable_citations": enable_citations,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
