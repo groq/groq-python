@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.32.0 (2025-09-27)
+
+Full Changelog: [v0.31.1...v0.32.0](https://github.com/groq/groq-python/compare/v0.31.1...v0.32.0)
+
+### Features
+
+* **api:** api update ([5d3f1db](https://github.com/groq/groq-python/commit/5d3f1dbe12828c92fcee1c4340e2f1ee9f5764b0))
+* **api:** api update ([5b48116](https://github.com/groq/groq-python/commit/5b4811685c7e81cc2933ebc521184fff9c55e267))
+
+
+### Bug Fixes
+
+* chat stream overloads ([42f9396](https://github.com/groq/groq-python/commit/42f9396959f205f3a439932f1811f82091d0e7f5))
+* GitHub Terraform: Create/Update .github/workflows/stale.yaml [skip ci] ([ba00a6e](https://github.com/groq/groq-python/commit/ba00a6e71b7559da44a2d9b2a4babcdfa6d70b85))
+
+
+### Chores
+
+* **internal:** move mypy configurations to `pyproject.toml` file ([a8113a5](https://github.com/groq/groq-python/commit/a8113a56fc7a57c3c07231fa6925708d038c028f))
+* **internal:** update pydantic dependency ([0d8773d](https://github.com/groq/groq-python/commit/0d8773d7520fe91d6eb721b00dbff0dcd850e69c))
+* **tests:** simplify `get_platform` test ([a257487](https://github.com/groq/groq-python/commit/a257487327c3601743d49a8d96f74bef4a6c24f7))
+* **types:** change optional parameter type from NotGiven to Omit ([882ffc0](https://github.com/groq/groq-python/commit/882ffc0f1f6b1e529b2cd6c3252f75b225fa514a))
+
 ## 0.31.1 (2025-09-04)
 
 Full Changelog: [v0.31.0...v0.31.1](https://github.com/groq/groq-python/compare/v0.31.0...v0.31.1)

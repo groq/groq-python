@@ -75,7 +75,6 @@ multidict==6.4.4
 mypy==1.14.1
 mypy-extensions==1.0.0
     # via mypy
-nest-asyncio==1.6.0
 nodeenv==1.8.0
     # via pyright
 nox==2023.4.22
@@ -89,9 +88,9 @@ pluggy==1.5.0
 propcache==0.3.1
     # via aiohttp
     # via yarl
-pydantic==2.10.3
+pydantic==2.11.9
     # via groq
-pydantic-core==2.27.1
+pydantic-core==2.33.2
     # via pydantic
 pygments==2.18.0
     # via rich
@@ -127,6 +126,9 @@ typing-extensions==4.12.2
     # via pydantic
     # via pydantic-core
     # via pyright
+    # via typing-inspection
+typing-inspection==0.4.1
+    # via pydantic
 virtualenv==20.24.5
     # via nox
 yarl==1.20.0

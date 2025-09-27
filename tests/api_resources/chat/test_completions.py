@@ -51,6 +51,7 @@ class TestCompletions:
                     "wolfram_settings": {"authorization": "authorization"},
                 },
             },
+            disable_tool_validation=True,
             documents=[{"text": "text"}],
             exclude_domains=["string"],
             frequency_penalty=-2,
@@ -95,6 +96,7 @@ class TestCompletions:
                         "name": "name",
                         "description": "description",
                         "parameters": {"foo": "bar"},
+                        "strict": True,
                     },
                 }
             ],
@@ -180,6 +182,7 @@ class TestAsyncCompletions:
                     "wolfram_settings": {"authorization": "authorization"},
                 },
             },
+            disable_tool_validation=True,
             documents=[{"text": "text"}],
             exclude_domains=["string"],
             frequency_penalty=-2,
@@ -224,6 +227,7 @@ class TestAsyncCompletions:
                         "name": "name",
                         "description": "description",
                         "parameters": {"foo": "bar"},
+                        "strict": True,
                     },
                 }
             ],
