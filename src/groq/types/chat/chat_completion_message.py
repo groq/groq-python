@@ -9,6 +9,7 @@ from .chat_completion_message_tool_call import ChatCompletionMessageToolCall
 __all__ = [
     "ChatCompletionMessage",
     "ExecutedTool",
+    "ExecutedToolBrowserResult",
     "ExecutedToolCodeResult",
     "ExecutedToolCodeResultChart",
     "ExecutedToolCodeResultChartElement",
@@ -16,6 +17,20 @@ __all__ = [
     "ExecutedToolSearchResultsResult",
     "FunctionCall",
 ]
+
+
+class ExecutedToolBrowserResult(BaseModel):
+    title: str
+    """The title of the browser window"""
+
+    url: str
+    """The URL of the browser window"""
+
+    content: Optional[str] = None
+    """The content of the browser result"""
+
+    live_view_url: Optional[str] = None
+    """The live view URL for the browser window"""
 
 
 class ExecutedToolCodeResultChartElement(BaseModel):
@@ -140,6 +155,9 @@ class ExecutedTool(BaseModel):
 
     type: str
     """The type of tool that was executed."""
+
+    browser_results: Optional[List[ExecutedToolBrowserResult]] = None
+    """Array of browser results"""
 
     code_results: Optional[List[ExecutedToolCodeResult]] = None
     """Array of code execution results"""
