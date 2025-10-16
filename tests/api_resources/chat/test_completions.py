@@ -53,7 +53,15 @@ class TestCompletions:
                 },
             },
             disable_tool_validation=True,
-            documents=[{"text": "text"}],
+            documents=[
+                {
+                    "source": {
+                        "text": "text",
+                        "type": "text",
+                    },
+                    "id": "id",
+                }
+            ],
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
@@ -185,7 +193,15 @@ class TestAsyncCompletions:
                 },
             },
             disable_tool_validation=True,
-            documents=[{"text": "text"}],
+            documents=[
+                {
+                    "source": {
+                        "text": "text",
+                        "type": "text",
+                    },
+                    "id": "id",
+                }
+            ],
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
