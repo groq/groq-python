@@ -59,6 +59,13 @@ class CompletionCreateParams(TypedDict, total=False):
     [models](https://console.groq.com/docs/models)
     """
 
+    citation_options: Optional[Literal["enabled", "disabled"]]
+    """Whether to enable citations in the response.
+
+    When enabled, the model will include citations for information retrieved from
+    provided documents or web searches.
+    """
+
     compound_custom: Optional[CompoundCustom]
     """Custom configuration of models and tools for Compound."""
 
@@ -73,13 +80,6 @@ class CompletionCreateParams(TypedDict, total=False):
     """A list of documents to provide context for the conversation.
 
     Each document contains text that can be referenced by the model.
-    """
-
-    enable_citations: Optional[bool]
-    """Whether to enable citations in the response.
-
-    When enabled, the model will include citations for information retrieved from
-    provided documents or web searches.
     """
 
     exclude_domains: Optional[SequenceNotStr[str]]

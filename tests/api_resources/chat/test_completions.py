@@ -41,6 +41,7 @@ class TestCompletions:
                 }
             ],
             model="meta-llama/llama-4-scout-17b-16e-instruct",
+            citation_options="enabled",
             compound_custom={
                 "models": {
                     "answering_model": "answering_model",
@@ -53,7 +54,6 @@ class TestCompletions:
             },
             disable_tool_validation=True,
             documents=[{"text": "text"}],
-            enable_citations=True,
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
@@ -173,6 +173,7 @@ class TestAsyncCompletions:
                 }
             ],
             model="meta-llama/llama-4-scout-17b-16e-instruct",
+            citation_options="enabled",
             compound_custom={
                 "models": {
                     "answering_model": "answering_model",
@@ -185,7 +186,6 @@ class TestAsyncCompletions:
             },
             disable_tool_validation=True,
             documents=[{"text": "text"}],
-            enable_citations=True,
             exclude_domains=["string"],
             frequency_penalty=-2,
             function_call="none",
