@@ -68,10 +68,10 @@ class Completions(SyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
         disable_tool_validation: bool | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
-        enable_citations: Optional[bool] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
         function_call: Optional[completion_create_params.FunctionCall] | Omit = omit,
@@ -117,6 +117,10 @@ class Completions(SyncAPIResource):
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
 
+          citation_options: Whether to enable citations in the response. When enabled, the model will
+              include citations for information retrieved from provided documents or web
+              searches.
+
           compound_custom: Custom configuration of models and tools for Compound.
 
           disable_tool_validation: If set to true, groq will return called tools without validating that the tool
@@ -125,10 +129,6 @@ class Completions(SyncAPIResource):
 
           documents: A list of documents to provide context for the conversation. Each document
               contains text that can be referenced by the model.
-
-          enable_citations: Whether to enable citations in the response. When enabled, the model will
-              include citations for information retrieved from provided documents or web
-              searches.
 
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
@@ -273,10 +273,10 @@ class Completions(SyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "citation_options": citation_options,
                     "compound_custom": compound_custom,
                     "disable_tool_validation": disable_tool_validation,
                     "documents": documents,
-                    "enable_citations": enable_citations,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
@@ -357,10 +357,10 @@ class AsyncCompletions(AsyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
         disable_tool_validation: bool | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
-        enable_citations: Optional[bool] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
         function_call: Optional[completion_create_params.FunctionCall] | Omit = omit,
@@ -406,6 +406,10 @@ class AsyncCompletions(AsyncAPIResource):
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
 
+          citation_options: Whether to enable citations in the response. When enabled, the model will
+              include citations for information retrieved from provided documents or web
+              searches.
+
           compound_custom: Custom configuration of models and tools for Compound.
 
           disable_tool_validation: If set to true, groq will return called tools without validating that the tool
@@ -414,10 +418,6 @@ class AsyncCompletions(AsyncAPIResource):
 
           documents: A list of documents to provide context for the conversation. Each document
               contains text that can be referenced by the model.
-
-          enable_citations: Whether to enable citations in the response. When enabled, the model will
-              include citations for information retrieved from provided documents or web
-              searches.
 
           exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
               exclude from the search results when the model uses a web search tool.
@@ -562,10 +562,10 @@ class AsyncCompletions(AsyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "citation_options": citation_options,
                     "compound_custom": compound_custom,
                     "disable_tool_validation": disable_tool_validation,
                     "documents": documents,
-                    "enable_citations": enable_citations,
                     "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
