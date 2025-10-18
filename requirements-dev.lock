@@ -56,7 +56,7 @@ httpx==0.28.1
     # via groq
     # via httpx-aiohttp
     # via respx
-httpx-aiohttp==0.1.8
+httpx-aiohttp==0.1.9
     # via groq
 idna==3.4
     # via anyio
