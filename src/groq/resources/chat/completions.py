@@ -71,8 +71,9 @@ class Completions(SyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
-        disable_tool_validation: bool | Omit = omit,
+        disable_tool_validation: Optional[bool] | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
@@ -134,8 +135,9 @@ class Completions(SyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
-        disable_tool_validation: bool | Omit = omit,
+        disable_tool_validation: Optional[bool] | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
@@ -197,8 +199,9 @@ class Completions(SyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
-        disable_tool_validation: bool | Omit = omit,
+        disable_tool_validation: Optional[bool] | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
@@ -259,8 +262,9 @@ class Completions(SyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
-        disable_tool_validation: bool | Omit = omit,
+        disable_tool_validation: Optional[bool] | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
@@ -306,6 +310,10 @@ class Completions(SyncAPIResource):
 
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
+
+          citation_options: Whether to enable citations in the response. When enabled, the model will
+              include citations for information retrieved from provided documents or web
+              searches.
 
           compound_custom: Custom configuration of models and tools for Compound.
 
@@ -459,6 +467,7 @@ class Completions(SyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "citation_options": citation_options,
                     "compound_custom": compound_custom,
                     "disable_tool_validation": disable_tool_validation,
                     "documents": documents,
@@ -545,8 +554,9 @@ class AsyncCompletions(AsyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
-        disable_tool_validation: bool | Omit = omit,
+        disable_tool_validation: Optional[bool] | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
@@ -608,8 +618,9 @@ class AsyncCompletions(AsyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
-        disable_tool_validation: bool | Omit = omit,
+        disable_tool_validation: Optional[bool] | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
@@ -671,8 +682,9 @@ class AsyncCompletions(AsyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
-        disable_tool_validation: bool | Omit = omit,
+        disable_tool_validation: Optional[bool] | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
@@ -733,8 +745,9 @@ class AsyncCompletions(AsyncAPIResource):
                 "qwen/qwen3-32b",
             ],
         ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
         compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
-        disable_tool_validation: bool | Omit = omit,
+        disable_tool_validation: Optional[bool] | Omit = omit,
         documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         frequency_penalty: Optional[float] | Omit = omit,
@@ -780,6 +793,10 @@ class AsyncCompletions(AsyncAPIResource):
 
           model: ID of the model to use. For details on which models are compatible with the Chat
               API, see available [models](https://console.groq.com/docs/models)
+
+          citation_options: Whether to enable citations in the response. When enabled, the model will
+              include citations for information retrieved from provided documents or web
+              searches.
 
           compound_custom: Custom configuration of models and tools for Compound.
 
@@ -933,6 +950,7 @@ class AsyncCompletions(AsyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "citation_options": citation_options,
                     "compound_custom": compound_custom,
                     "disable_tool_validation": disable_tool_validation,
                     "documents": documents,

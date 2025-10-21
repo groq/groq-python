@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.33.0 (2025-10-21)
+
+Full Changelog: [v0.32.0...v0.33.0](https://github.com/groq/groq-python/compare/v0.32.0...v0.33.0)
+
+### Features
+
+* **api:** api update ([e3ef279](https://github.com/groq/groq-python/commit/e3ef2792b74b312e4242c094071abcfa6d7694a4))
+* **api:** api update ([dba73cd](https://github.com/groq/groq-python/commit/dba73cdffede1882bade06dfc84e01c0df984a17))
+* **api:** api update ([0008a45](https://github.com/groq/groq-python/commit/0008a452ee15f83d0ac50bb2cff2e7508f5318c1))
+* **api:** api update ([b9e85a0](https://github.com/groq/groq-python/commit/b9e85a0362e9597fecad00d42853d38c6ebdd84b))
+
+
+### Bug Fixes
+
+* bad merge ([1d66042](https://github.com/groq/groq-python/commit/1d6604208a3a0b54f8bc3a32ae24075c7bbc99e8))
+* completions overloads ([cf9ad41](https://github.com/groq/groq-python/commit/cf9ad415ec9caa70bb2393c1c31a5de125cbd917))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([f366ae8](https://github.com/groq/groq-python/commit/f366ae888a9a3780f1d5ffacee33b984156a8938))
+* do not install brew dependencies in ./scripts/bootstrap by default ([77febdb](https://github.com/groq/groq-python/commit/77febdba2cb98a9731912b35510532ba68c64dfe))
+* **internal:** detect missing future annotations with ruff ([b25a9a9](https://github.com/groq/groq-python/commit/b25a9a9f4d42dafa9e82a2336d47dbf8a796fac6))
+* **types:** change optional parameter type from NotGiven to Omit ([437d52b](https://github.com/groq/groq-python/commit/437d52b779fc03152b45c7d0a652cab3ea551190))
+
 ## 0.32.0 (2025-09-27)
 
 Full Changelog: [v0.31.1...v0.32.0](https://github.com/groq/groq-python/compare/v0.31.1...v0.32.0)

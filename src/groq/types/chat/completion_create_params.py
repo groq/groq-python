@@ -19,6 +19,9 @@ __all__ = [
     "CompoundCustomTools",
     "CompoundCustomToolsWolframSettings",
     "Document",
+    "DocumentSource",
+    "DocumentSourceChatCompletionDocumentSourceText",
+    "DocumentSourceChatCompletionDocumentSourceJson",
     "FunctionCall",
     "Function",
     "ResponseFormat",
@@ -57,6 +60,13 @@ class CompletionCreateParams(TypedDict, total=False):
 
     For details on which models are compatible with the Chat API, see available
     [models](https://console.groq.com/docs/models)
+    """
+
+    citation_options: Optional[Literal["enabled", "disabled"]]
+    """Whether to enable citations in the response.
+
+    When enabled, the model will include citations for information retrieved from
+    provided documents or web searches.
     """
 
     compound_custom: Optional[CompoundCustom]
@@ -314,9 +324,33 @@ class CompoundCustom(TypedDict, total=False):
     """Configuration options for tools available to Compound."""
 
 
-class Document(TypedDict, total=False):
+class DocumentSourceChatCompletionDocumentSourceText(TypedDict, total=False):
     text: Required[str]
-    """The text content of the document."""
+    """The document contents."""
+
+    type: Required[Literal["text"]]
+    """Identifies this document source as inline text."""
+
+
+class DocumentSourceChatCompletionDocumentSourceJson(TypedDict, total=False):
+    data: Required[Dict[str, object]]
+    """The JSON payload associated with the document."""
+
+    type: Required[Literal["json"]]
+    """Identifies this document source as JSON data."""
+
+
+DocumentSource: TypeAlias = Union[
+    DocumentSourceChatCompletionDocumentSourceText, DocumentSourceChatCompletionDocumentSourceJson
+]
+
+
+class Document(TypedDict, total=False):
+    source: Required[DocumentSource]
+    """The source of the document. Only text and JSON sources are currently supported."""
+
+    id: Optional[str]
+    """Optional unique identifier that can be used for citations in responses."""
 
 
 FunctionCall: TypeAlias = Union[Literal["none", "auto", "required"], ChatCompletionFunctionCallOptionParam]
