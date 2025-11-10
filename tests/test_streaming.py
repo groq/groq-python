@@ -202,7 +202,7 @@ async def test_multi_byte_character_multiple_chunks(
     def body() -> Iterator[bytes]:
         yield b'data: {"content":"'
         # bytes taken from the string 'известни' and arbitrarily split
-        # so that some multi-byte characters span multiple chunks
+        # so that some multibyte characters span multiple chunks
         yield b"\xd0"
         yield b"\xb8\xd0\xb7\xd0"
         yield b"\xb2\xd0\xb5\xd1\x81\xd1\x82\xd0\xbd\xd0\xb8"

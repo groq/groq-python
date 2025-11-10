@@ -51,7 +51,7 @@ class ChatCompletionAssistantMessageParam(TypedDict, total=False):
     reasoning: Optional[str]
     """
     The reasoning output by the assistant if reasoning_format was set to 'parsed'.
-    This field is only useable with qwen3 models.
+    This field is only usable with qwen3 models.
     """
 
     tool_calls: Iterable[ChatCompletionMessageToolCallParam]

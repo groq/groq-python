@@ -68,7 +68,7 @@ Full Changelog: [v0.31.0...v0.31.1](https://github.com/groq/groq-python/compare/
 ### Bug Fixes
 
 * avoid newer type syntax ([21f93a7](https://github.com/groq/groq-python/commit/21f93a72c50f49187e09310df41e5dbb984298c3))
-* compeltions streaming overloads ([201e137](https://github.com/groq/groq-python/commit/201e137d9b336b4fef847713e6e743ac47e733be))
+* completions streaming overloads ([201e137](https://github.com/groq/groq-python/commit/201e137d9b336b4fef847713e6e743ac47e733be))
 * update example model from decommissioned models to gpt-oss-20b ([1570583](https://github.com/groq/groq-python/commit/1570583818c7355c1ea6cc4460075f60d3cd29bb))
 * update example model from decommissioned models to gpt-oss-20b ([#250](https://github.com/groq/groq-python/issues/250)) ([edb9132](https://github.com/groq/groq-python/commit/edb91324ebff8d10f993492dd68ed05ac030bc9f))
 
@@ -98,7 +98,7 @@ Full Changelog: [v0.30.0...v0.31.0](https://github.com/groq/groq-python/compare/
 * **api:** api update ([e8ede14](https://github.com/groq/groq-python/commit/e8ede14f50b999ebc9d39da2881f7f59c3aa8b4a))
 * **api:** api update ([3c06879](https://github.com/groq/groq-python/commit/3c068790ee3632a58f8da9cfb45d1055b8ac9058))
 * **api:** api update ([455c74a](https://github.com/groq/groq-python/commit/455c74a13f0552b9e9abc08a8ddcf40b34a654cc))
-* clean up environment call outs ([0627bc6](https://github.com/groq/groq-python/commit/0627bc60fd9c038ae47e63a1bf3a36557157ed9e))
+* clean up environment call-outs ([0627bc6](https://github.com/groq/groq-python/commit/0627bc60fd9c038ae47e63a1bf3a36557157ed9e))
 * **client:** support file upload requests ([0f2d5a7](https://github.com/groq/groq-python/commit/0f2d5a78551a91aedd44160126ec85b833a7682b))
 
 
@@ -413,7 +413,7 @@ Full Changelog: [v0.17.0...v0.18.0](https://github.com/groq/groq-python/compare/
 
 ### Chores
 
-* **internal:** bummp ruff dependency ([#190](https://github.com/groq/groq-python/issues/190)) ([61678fc](https://github.com/groq/groq-python/commit/61678fc5fd4eb42e42d88057934b6204d19086af))
+* **internal:** bump ruff dependency ([#190](https://github.com/groq/groq-python/issues/190)) ([61678fc](https://github.com/groq/groq-python/commit/61678fc5fd4eb42e42d88057934b6204d19086af))
 * **internal:** change default timeout to an int ([#188](https://github.com/groq/groq-python/issues/188)) ([348e152](https://github.com/groq/groq-python/commit/348e1526711e4d162379dcd80a9b201572508376))
 
 ## 0.17.0 (2025-02-03)

@@ -357,7 +357,7 @@ class APIResponse(BaseAPIResponse[R]):
 
     def iter_text(self, chunk_size: int | None = None) -> Iterator[str]:
         """A str-iterator over the decoded response content
-        that handles both gzip, deflate, etc but also detects the content's
+        that handles both gzip, deflate, etc. but also detects the content's
         string encoding.
         """
         for chunk in self.http_response.iter_text(chunk_size):
@@ -457,7 +457,7 @@ class AsyncAPIResponse(BaseAPIResponse[R]):
 
     async def iter_text(self, chunk_size: int | None = None) -> AsyncIterator[str]:
         """A str-iterator over the decoded response content
-        that handles both gzip, deflate, etc but also detects the content's
+        that handles both gzip, deflate, etc. but also detects the content's
         string encoding.
         """
         async for chunk in self.http_response.aiter_text(chunk_size):
