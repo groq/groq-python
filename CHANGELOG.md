@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.34.0 (2025-11-12)
+
+Full Changelog: [v0.33.0...v0.34.0](https://github.com/groq/groq-python/compare/v0.33.0...v0.34.0)
+
+### Features
+
+* **api:** api update ([51bb951](https://github.com/groq/groq-python/commit/51bb951f04069bdbc79fbcc96e9a89ad9bb945ed))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([99b9431](https://github.com/groq/groq-python/commit/99b9431a9663dc1c2abb8f46c2444fa2bb397eb4))
+* compat with Python 3.14 ([edd91d9](https://github.com/groq/groq-python/commit/edd91d90d640b74efcaa7d3085ab387fa069cf58))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([2e981f7](https://github.com/groq/groq-python/commit/2e981f7fdf618c7b85d68a7ba8070bc1e5d3ac37))
+
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([3af43e5](https://github.com/groq/groq-python/commit/3af43e5855668c3632a9053222d11c27fa40c70c))
+* **internal:** grammar fix (it's -&gt; its) ([37687bf](https://github.com/groq/groq-python/commit/37687bfc136e87b85f26f9617b02a80e21047858))
+* **package:** drop Python 3.8 support ([e45cc65](https://github.com/groq/groq-python/commit/e45cc6572c5da919b903c48c541d6039a188d3ab))
+
 ## 0.33.0 (2025-10-21)
 
 Full Changelog: [v0.32.0...v0.33.0](https://github.com/groq/groq-python/compare/v0.32.0...v0.33.0)
