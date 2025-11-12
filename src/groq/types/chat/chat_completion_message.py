@@ -8,6 +8,9 @@ from .chat_completion_message_tool_call import ChatCompletionMessageToolCall
 
 __all__ = [
     "ChatCompletionMessage",
+    "Annotation",
+    "AnnotationDocumentCitation",
+    "AnnotationFunctionCitation",
     "ExecutedTool",
     "ExecutedToolBrowserResult",
     "ExecutedToolCodeResult",
@@ -17,6 +20,45 @@ __all__ = [
     "ExecutedToolSearchResultsResult",
     "FunctionCall",
 ]
+
+
+class AnnotationDocumentCitation(BaseModel):
+    document_id: str
+    """
+    The ID of the document being cited, corresponding to a document provided in the
+    request.
+    """
+
+    end_index: int
+    """The character index in the message content where this citation ends."""
+
+    start_index: int
+    """The character index in the message content where this citation begins."""
+
+
+class AnnotationFunctionCitation(BaseModel):
+    end_index: int
+    """The character index in the message content where this citation ends."""
+
+    start_index: int
+    """The character index in the message content where this citation begins."""
+
+    tool_call_id: str
+    """
+    The ID of the tool call being cited, corresponding to a tool call made during
+    the conversation.
+    """
+
+
+class Annotation(BaseModel):
+    type: Literal["document_citation", "function_citation"]
+    """The type of annotation."""
+
+    document_citation: Optional[AnnotationDocumentCitation] = None
+    """A citation referencing a specific document that was provided in the request."""
+
+    function_citation: Optional[AnnotationFunctionCitation] = None
+    """A citation referencing the result of a function or tool call."""
 
 
 class ExecutedToolBrowserResult(BaseModel):
@@ -188,6 +230,12 @@ class ChatCompletionMessage(BaseModel):
 
     role: Literal["assistant"]
     """The role of the author of this message."""
+
+    annotations: Optional[List[Annotation]] = None
+    """
+    A list of annotations providing citations and references for the content in the
+    message.
+    """
 
     executed_tools: Optional[List[ExecutedTool]] = None
     """
