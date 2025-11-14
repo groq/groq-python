@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.34.1 (2025-11-14)
+
+Full Changelog: [v0.34.0...v0.34.1](https://github.com/groq/groq-python/compare/v0.34.0...v0.34.1)
+
+### Bug Fixes
+
+* Add annotations to streaming response ([#255](https://github.com/groq/groq-python/issues/255)) ([fd2f850](https://github.com/groq/groq-python/commit/fd2f850108029ea08981233235b8ab45aeb88063))
+
 ## 0.34.0 (2025-11-12)
 
 Full Changelog: [v0.33.0...v0.34.0](https://github.com/groq/groq-python/compare/v0.33.0...v0.34.0)
