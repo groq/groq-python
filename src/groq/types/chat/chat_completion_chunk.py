@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 from ..completion_usage import CompletionUsage
-from .chat_completion_message import ExecutedTool
+from .chat_completion_message import Annotation, ExecutedTool
 from .chat_completion_token_logprob import ChatCompletionTokenLogprob
 
 __all__ = [
@@ -61,6 +61,12 @@ class ChoiceDeltaToolCall(BaseModel):
 class ChoiceDelta(BaseModel):
     content: Optional[str] = None
     """The contents of the chunk message."""
+
+    annotations: Optional[List[Annotation]] = None
+    """
+    A list of annotations providing citations and references for the content in the
+    message.
+    """
 
     function_call: Optional[ChoiceDeltaFunctionCall] = None
     """Deprecated and replaced by `tool_calls`.
