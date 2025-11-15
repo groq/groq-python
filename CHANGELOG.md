@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.35.0 (2025-11-15)
+
+Full Changelog: [v0.34.1...v0.35.0](https://github.com/groq/groq-python/compare/v0.34.1...v0.35.0)
+
+### Features
+
+* **api:** api update ([16ea453](https://github.com/groq/groq-python/commit/16ea45372bd8deadd359ea2eae610363acf4b0d8))
+
 ## 0.34.1 (2025-11-14)
 
 Full Changelog: [v0.34.0...v0.34.1](https://github.com/groq/groq-python/compare/v0.34.0...v0.34.1)
