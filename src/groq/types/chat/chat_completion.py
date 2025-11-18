@@ -123,6 +123,12 @@ class XGroq(BaseModel):
     Only present when debug=true in the request.
     """
 
+    seed: Optional[int] = None
+    """The seed used for the request.
+
+    See the seed property on CreateChatCompletionRequest for more details.
+    """
+
     usage: Optional[XGroqUsage] = None
     """Additional Groq-specific usage metrics (hardware cache statistics)."""
 
