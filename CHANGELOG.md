@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.35.0 (2025-11-18)
+
+Full Changelog: [v0.34.1...v0.35.0](https://github.com/groq/groq-python/compare/v0.34.1...v0.35.0)
+
+### Features
+
+* **api:** api update ([d6ec93d](https://github.com/groq/groq-python/commit/d6ec93d000702baf001b1a5739489d8d5fd7b7da))
+* **api:** api update ([48c8f11](https://github.com/groq/groq-python/commit/48c8f11f014207d9665b1eacce3f97461265b12d))
+
+
+### Bug Fixes
+
+* update chat completion streaming types ([833cf83](https://github.com/groq/groq-python/commit/833cf83b5f2f59eaa17507c330be90a722a871e8))
+
+
+### Chores
+
+* GitHub Terraform: Create/Update .github/workflows/code-freeze-bypass.yaml [skip ci] ([63d11e3](https://github.com/groq/groq-python/commit/63d11e39fec78e040a95e6e3fe398fe6ca9e1fc2))
+
 ## 0.34.1 (2025-11-14)
 
 Full Changelog: [v0.34.0...v0.34.1](https://github.com/groq/groq-python/compare/v0.34.0...v0.34.1)
