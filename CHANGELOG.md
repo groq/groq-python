@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.36.0 (2025-11-20)
+
+Full Changelog: [v0.35.0...v0.36.0](https://github.com/groq/groq-python/compare/v0.35.0...v0.36.0)
+
+### Features
+
+* **api:** api update ([0287563](https://github.com/groq/groq-python/commit/0287563c912fa48175776e134b5668ea3e07cadd))
+
+
+### Chores
+
+* GitHub Terraform: Create/Update .github/workflows/code-freeze-bypass.yaml [skip ci] ([07f6b0b](https://github.com/groq/groq-python/commit/07f6b0b62205115ca6ee58b9bab5c73a9c81f0e9))
+
 ## 0.35.0 (2025-11-18)
 
 Full Changelog: [v0.34.1...v0.35.0](https://github.com/groq/groq-python/compare/v0.34.1...v0.35.0)
