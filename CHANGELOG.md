@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.36.1 (2025-11-22)
+
+Full Changelog: [v0.36.0...v0.36.1](https://github.com/groq/groq-python/compare/v0.36.0...v0.36.1)
+
+### Chores
+
+* add Python 3.14 classifier and testing ([26120a6](https://github.com/groq/groq-python/commit/26120a6a1bd7618413b5cca4324a1f7f4863d78e))
+
 ## 0.36.0 (2025-11-20)
 
 Full Changelog: [v0.35.0...v0.36.0](https://github.com/groq/groq-python/compare/v0.35.0...v0.36.0)
