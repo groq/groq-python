@@ -95,9 +95,9 @@ class Stream(Generic[_T]):
                     )
 
                 yield process_data(data={"data": data, "event": sse.event}, cast_to=cast_to, response=response)
-
-        # As we might not fully consume the response stream, we need to close it explicitly
-        response.close()
+        # The stream needs to be fully consumed to close the response
+        for _sse in iterator:
+            ...
 
     def __enter__(self) -> Self:
         return self
@@ -196,9 +196,9 @@ class AsyncStream(Generic[_T]):
                     )
 
                 yield process_data(data={"data": data, "event": sse.event}, cast_to=cast_to, response=response)
-
-        # As we might not fully consume the response stream, we need to close it explicitly
-        await response.aclose()
+        # The stream needs to be fully consumed to close the response
+        async for _sse in iterator:
+            ...
 
     async def __aenter__(self) -> Self:
         return self
