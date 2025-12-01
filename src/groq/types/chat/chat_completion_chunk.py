@@ -97,6 +97,7 @@ class ChoiceDelta(BaseModel):
     systems.
     """
 
+
 class ChoiceLogprobs(BaseModel):
     content: Optional[List[ChatCompletionTokenLogprob]] = None
     """A list of message content tokens with log probability information."""
