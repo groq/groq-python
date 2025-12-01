@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.37.0 (2025-12-01)
+
+Full Changelog: [v0.36.0...v0.37.0](https://github.com/groq/groq-python/compare/v0.36.0...v0.37.0)
+
+### Features
+
+* **api:** api update ([5d0d829](https://github.com/groq/groq-python/commit/5d0d829b558744b20f484bb51e21dbba5faea1c8))
+
+
+### Bug Fixes
+
+* always call close in the streaming generators ([f19496e](https://github.com/groq/groq-python/commit/f19496e290c60dd3b368d2485bcab69ffd955dd0))
+* ensure streams are always closed ([ba33c5e](https://github.com/groq/groq-python/commit/ba33c5e0bb9cac681b4334f11423e7be70bd5149))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([26120a6](https://github.com/groq/groq-python/commit/26120a6a1bd7618413b5cca4324a1f7f4863d78e))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([ceaffd2](https://github.com/groq/groq-python/commit/ceaffd2187418c99461e145efe1ea51fced6d4f3))
+
 ## 0.36.0 (2025-11-20)
 
 Full Changelog: [v0.35.0...v0.36.0](https://github.com/groq/groq-python/compare/v0.35.0...v0.36.0)
