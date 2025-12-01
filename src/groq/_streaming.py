@@ -97,7 +97,7 @@ class Stream(Generic[_T]):
 
                     yield process_data(data={"data": data, "event": sse.event}, cast_to=cast_to, response=response)
         finally:
-            # Always close the underlying HTTP response even if the consumer breaks early.
+            # Ensure the response is closed even if the consumer doesn't read all data
             response.close()
 
     def __enter__(self) -> Self:
@@ -199,7 +199,7 @@ class AsyncStream(Generic[_T]):
 
                     yield process_data(data={"data": data, "event": sse.event}, cast_to=cast_to, response=response)
         finally:
-            # Always close the underlying HTTP response even if the consumer breaks early.
+            # Ensure the response is closed even if the consumer doesn't read all data
             await response.aclose()
 
     async def __aenter__(self) -> Self:

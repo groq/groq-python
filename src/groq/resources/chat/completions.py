@@ -110,8 +110,7 @@ class Completions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ChatCompletion:
-        ...
+    ) -> ChatCompletion: ...
 
     @overload
     def create(
@@ -174,8 +173,7 @@ class Completions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Stream[ChatCompletionChunk]:
-        ...
+    ) -> Stream[ChatCompletionChunk]: ...
 
     @overload
     def create(
@@ -238,8 +236,7 @@ class Completions(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ChatCompletion | Stream[ChatCompletionChunk]:
-        ...
+    ) -> ChatCompletion | Stream[ChatCompletionChunk]: ...
 
     def create(
         self,
@@ -593,8 +590,7 @@ class AsyncCompletions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ChatCompletion:
-        ...
+    ) -> ChatCompletion: ...
 
     @overload
     async def create(
@@ -657,8 +653,7 @@ class AsyncCompletions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncStream[ChatCompletionChunk]:
-        ...
+    ) -> AsyncStream[ChatCompletionChunk]: ...
 
     @overload
     async def create(
@@ -721,8 +716,7 @@ class AsyncCompletions(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ChatCompletion | AsyncStream[ChatCompletionChunk]:
-        ...
+    ) -> ChatCompletion | AsyncStream[ChatCompletionChunk]: ...
 
     async def create(
         self,
