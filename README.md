@@ -95,6 +95,7 @@ pip install groq[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from groq import DefaultAioHttpClient
 from groq import AsyncGroq
@@ -102,7 +103,7 @@ from groq import AsyncGroq
 
 async def main() -> None:
     async with AsyncGroq(
-        api_key="My API Key",
+        api_key=os.environ.get("GROQ_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         chat_completion = await client.chat.completions.create(
