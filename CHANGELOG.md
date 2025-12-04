@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.37.1 (2025-12-04)
+
+Full Changelog: [v0.37.0...v0.37.1](https://github.com/groq/groq-python/compare/v0.37.0...v0.37.1)
+
+### Bug Fixes
+
+* consume stream to prevent hanging ([#260](https://github.com/groq/groq-python/issues/260)) ([42fcb07](https://github.com/groq/groq-python/commit/42fcb07bf0ce1f9910650410574e93ce05590260))
+
+
+### Chores
+
+* **docs:** use environment variables for authentication in code snippets ([3ed8c12](https://github.com/groq/groq-python/commit/3ed8c1292fc8e2d02b838c253de2ea60cd483801))
+* update lockfile ([f240076](https://github.com/groq/groq-python/commit/f240076efb2c0ab64fd4c001c1db0cd24e25d14d))
+
 ## 0.37.0 (2025-12-01)
 
 Full Changelog: [v0.36.0...v0.37.0](https://github.com/groq/groq-python/compare/v0.36.0...v0.37.0)
