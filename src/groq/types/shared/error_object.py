@@ -8,6 +8,11 @@ __all__ = ["ErrorObject", "Debug"]
 
 
 class Debug(BaseModel):
+    """Debug information including input and output token IDs and strings.
+
+    Only present when debug=true in the request.
+    """
+
     input_token_ids: Optional[List[int]] = None
     """Token IDs for the input."""
 

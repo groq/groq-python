@@ -6,5 +6,9 @@ __all__ = ["Transcription"]
 
 
 class Transcription(BaseModel):
+    """
+    Represents a transcription response returned by model, based on the provided input.
+    """
+
     text: str
     """The transcribed text."""
