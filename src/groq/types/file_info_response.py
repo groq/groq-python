@@ -9,6 +9,8 @@ __all__ = ["FileInfoResponse"]
 
 
 class FileInfoResponse(BaseModel):
+    """The `File` object represents a document that has been uploaded."""
+
     id: Optional[str] = None
     """The file identifier, which can be referenced in the API endpoints."""
 
