@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.37.2 (2025-12-12)
+
+Full Changelog: [v0.37.1...v0.37.2](https://github.com/groq/groq-python/compare/v0.37.1...v0.37.2)
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([4847b77](https://github.com/groq/groq-python/commit/4847b77d575ee800a28b02c8e01165a0c8931ceb))
+
+
+### Chores
+
+* add missing docstrings ([047ce99](https://github.com/groq/groq-python/commit/047ce99d97d4085227849a3f293411e1c6fe348b))
+
 ## 0.37.1 (2025-12-04)
 
 Full Changelog: [v0.37.0...v0.37.1](https://github.com/groq/groq-python/compare/v0.37.0...v0.37.1)
