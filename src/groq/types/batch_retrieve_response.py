@@ -31,6 +31,8 @@ class Errors(BaseModel):
 
 
 class RequestCounts(BaseModel):
+    """The request counts for different statuses within the batch."""
+
     completed: int
     """Number of requests that have been completed successfully."""
 

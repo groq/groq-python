@@ -23,6 +23,8 @@ __all__ = [
 
 
 class ChoiceLogprobs(BaseModel):
+    """Log probability information for the choice."""
+
     content: Optional[List[ChatCompletionTokenLogprob]] = None
     """A list of message content tokens with log probability information."""
 
@@ -84,11 +86,20 @@ class UsageBreakdownModel(BaseModel):
 
 
 class UsageBreakdown(BaseModel):
+    """
+    Detailed usage breakdown by model when multiple models are used in the request for compound AI systems.
+    """
+
     models: List[UsageBreakdownModel]
     """List of models used in the request and their individual usage statistics"""
 
 
 class XGroqDebug(BaseModel):
+    """Debug information including input and output token IDs and strings.
+
+    Only present when debug=true in the request.
+    """
+
     input_token_ids: Optional[List[int]] = None
     """Token IDs for the input."""
 
@@ -103,6 +114,8 @@ class XGroqDebug(BaseModel):
 
 
 class XGroqUsage(BaseModel):
+    """Additional Groq-specific usage metrics (hardware cache statistics)."""
+
     dram_cached_tokens: Optional[int] = None
     """Number of tokens served from DRAM cache."""
 
@@ -111,6 +124,8 @@ class XGroqUsage(BaseModel):
 
 
 class XGroq(BaseModel):
+    """Groq-specific metadata for non-streaming chat completion responses."""
+
     id: str
     """
     A groq request ID which can be used to refer to a specific request to groq
@@ -134,6 +149,10 @@ class XGroq(BaseModel):
 
 
 class ChatCompletion(BaseModel):
+    """
+    Represents a chat completion response returned by model, based on the provided input.
+    """
+
     id: str
     """A unique identifier for the chat completion."""
 
