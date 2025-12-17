@@ -268,8 +268,9 @@ class ChatCompletionMessage(BaseModel):
     reasoning: Optional[str] = None
     """The model's reasoning for a response.
 
-    Only available for reasoning models when requests parameter reasoning_format has
-    value `parsed.
+    Only available for
+    [models that support reasoning](https://console.groq.com/docs/reasoning) when
+    request parameter reasoning_format has value `parsed`.
     """
 
     tool_calls: Optional[List[ChatCompletionMessageToolCall]] = None
