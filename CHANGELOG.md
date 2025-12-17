@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.0.0 (2025-12-17)
+
+Full Changelog: [v0.37.1...v1.0.0](https://github.com/groq/groq-python/compare/v0.37.1...v1.0.0)
+
+### Features
+
+* **api:** api update ([f1f83f8](https://github.com/groq/groq-python/commit/f1f83f83fb8b91599d83db9c1a17da21a3b5d19a))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([4847b77](https://github.com/groq/groq-python/commit/4847b77d575ee800a28b02c8e01165a0c8931ceb))
+* use async_to_httpx_files in patch method ([360421b](https://github.com/groq/groq-python/commit/360421b88be0c9feb545ee7a2512a0af9ef53196))
+
+
+### Chores
+
+* add missing docstrings ([047ce99](https://github.com/groq/groq-python/commit/047ce99d97d4085227849a3f293411e1c6fe348b))
+* **internal:** add missing files argument to base client ([7c889d7](https://github.com/groq/groq-python/commit/7c889d73ea3b785aeec893c37c2e09289a4887b6))
+
 ## 0.37.1 (2025-12-04)
 
 Full Changelog: [v0.37.0...v0.37.1](https://github.com/groq/groq-python/compare/v0.37.0...v0.37.1)

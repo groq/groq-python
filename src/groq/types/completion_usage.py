@@ -8,16 +8,22 @@ __all__ = ["CompletionUsage", "CompletionTokensDetails", "PromptTokensDetails"]
 
 
 class CompletionTokensDetails(BaseModel):
+    """Breakdown of tokens in the completion."""
+
     reasoning_tokens: int
     """Number of tokens used for reasoning (for reasoning models)."""
 
 
 class PromptTokensDetails(BaseModel):
+    """Breakdown of tokens in the prompt."""
+
     cached_tokens: int
     """Number of tokens that were cached and reused."""
 
 
 class CompletionUsage(BaseModel):
+    """Usage statistics for the completion request."""
+
     completion_tokens: int
     """Number of tokens in the generated completion."""
 
