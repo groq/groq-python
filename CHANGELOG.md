@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.1 (2026-01-06)
+
+Full Changelog: [v1.0.0...v1.0.1](https://github.com/groq/groq-python/compare/v1.0.0...v1.0.1)
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([d511519](https://github.com/groq/groq-python/commit/d511519cb5aff218d9497949a9c330091c29879c))
+* **internal:** codegen related update ([0c1546c](https://github.com/groq/groq-python/commit/0c1546ccfd6aabb6b3de0802e18fea031cb9e734))
+
 ## 1.0.0 (2025-12-17)
 
 Full Changelog: [v0.37.1...v1.0.0](https://github.com/groq/groq-python/compare/v0.37.1...v1.0.0)
