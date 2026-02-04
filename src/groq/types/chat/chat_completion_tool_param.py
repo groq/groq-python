@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Union
 from typing_extensions import Literal, Required, TypedDict
 
 from ..shared_params.function_definition import FunctionDefinition
@@ -10,7 +11,10 @@ __all__ = ["ChatCompletionToolParam"]
 
 
 class ChatCompletionToolParam(TypedDict, total=False):
-    function: Required[FunctionDefinition]
+    type: Required[Union[Literal["function", "browser_search", "code_interpreter"], str]]
+    """The type of the tool.
 
-    type: Required[Literal["function"]]
-    """The type of the tool. Currently, only `function` is supported."""
+    `function`, `browser_search`, and `code_interpreter` are supported.
+    """
+
+    function: FunctionDefinition

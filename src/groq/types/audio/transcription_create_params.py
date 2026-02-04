@@ -11,14 +11,18 @@ __all__ = ["TranscriptionCreateParams"]
 
 
 class TranscriptionCreateParams(TypedDict, total=False):
-    file: Required[FileTypes]
-    """
-    The audio file object (not file name) to transcribe, in one of these formats:
-    flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
+    model: Required[Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]]]
+    """ID of the model to use.
+
+    `whisper-large-v3` and `whisper-large-v3-turbo` are currently available.
     """
 
-    model: Required[Union[str, Literal["whisper-large-v3"]]]
-    """ID of the model to use. Only `whisper-large-v3` is currently available."""
+    file: FileTypes
+    """
+    The audio file object (not file name) to transcribe, in one of these formats:
+    flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Either a file or a URL must
+    be provided. Note that the file field is not supported in Batch API requests.
+    """
 
     language: Union[
         str,
@@ -161,4 +165,11 @@ class TranscriptionCreateParams(TypedDict, total=False):
     Either or both of these options are supported: `word`, or `segment`. Note: There
     is no additional latency for segment timestamps, but generating word timestamps
     incurs additional latency.
+    """
+
+    url: str
+    """
+    The audio URL to translate/transcribe (supports Base64URL). Either a file or a
+    URL must be provided. For Batch API requests, the URL field is required since
+    the file field is not supported.
     """

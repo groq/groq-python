@@ -24,11 +24,16 @@ class FunctionDefinition(TypedDict, total=False):
     """
 
     parameters: FunctionParameters
-    """The parameters the functions accepts, described as a JSON Schema object.
+    """Function parameters defined as a JSON Schema object.
 
-    See the docs on [tool use](/docs/tool-use) for examples, and the
-    [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for
-    documentation about the format.
+    Refer to https://json-schema.org/understanding-json-schema/ for schema
+    documentation.
+    """
 
-    Omitting `parameters` defines a function with an empty parameter list.
+    strict: bool
+    """Whether to enable strict schema adherence when generating the output.
+
+    If set to true, the model will always follow the exact schema defined in the
+    `schema` field. Only a subset of JSON Schema is supported when `strict` is
+    `true`.
     """

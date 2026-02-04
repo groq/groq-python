@@ -136,6 +136,8 @@ class BaseAPIResponse(Generic[R]):
         if cast_to and is_annotated_type(cast_to):
             cast_to = extract_type_arg(cast_to, 0)
 
+        origin = get_origin(cast_to) or cast_to
+
         if self._is_sse_stream:
             if to:
                 if not is_stream_class_type(to):
@@ -195,8 +197,6 @@ class BaseAPIResponse(Generic[R]):
         if cast_to == bool:
             return cast(R, response.text.lower() == "true")
 
-        origin = get_origin(cast_to) or cast_to
-
         if origin == APIResponse:
             raise RuntimeError("Unexpected state - cast_to is `APIResponse`")
 
@@ -233,7 +233,7 @@ class BaseAPIResponse(Generic[R]):
         # split is required to handle cases where additional information is included
         # in the response, e.g. application/json; charset=utf-8
         content_type, *_ = response.headers.get("content-type", "*").split(";")
-        if content_type != "application/json":
+        if not content_type.endswith("json"):
             if is_basemodel(cast_to):
                 try:
                     data = response.json()

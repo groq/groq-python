@@ -2,16 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -54,34 +51,62 @@ class Completions(SyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]],
-        frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
-        function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
-        functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
-        logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
-        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
-        max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
-        n: Optional[int] | NotGiven = NOT_GIVEN,
-        parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
-        presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
-        response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
-        seed: Optional[int] | NotGiven = NOT_GIVEN,
-        service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
-        stream: Optional[bool] | NotGiven = NOT_GIVEN,
-        temperature: Optional[float] | NotGiven = NOT_GIVEN,
-        tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[ChatCompletionToolParam]] | NotGiven = NOT_GIVEN,
-        top_logprobs: Optional[int] | NotGiven = NOT_GIVEN,
-        top_p: Optional[float] | NotGiven = NOT_GIVEN,
-        user: Optional[str] | NotGiven = NOT_GIVEN,
+        model: Union[
+            str,
+            Literal[
+                "compound-beta",
+                "compound-beta-mini",
+                "gemma2-9b-it",
+                "llama-3.1-8b-instant",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
+            ],
+        ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
+        compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
+        disable_tool_validation: bool | Omit = omit,
+        documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
+        exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        frequency_penalty: Optional[float] | Omit = omit,
+        function_call: Optional[completion_create_params.FunctionCall] | Omit = omit,
+        functions: Optional[Iterable[completion_create_params.Function]] | Omit = omit,
+        include_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        include_reasoning: Optional[bool] | Omit = omit,
+        logit_bias: Optional[Dict[str, int]] | Omit = omit,
+        logprobs: Optional[bool] | Omit = omit,
+        max_completion_tokens: Optional[int] | Omit = omit,
+        max_tokens: Optional[int] | Omit = omit,
+        metadata: Optional[Dict[str, str]] | Omit = omit,
+        n: Optional[int] | Omit = omit,
+        parallel_tool_calls: Optional[bool] | Omit = omit,
+        presence_penalty: Optional[float] | Omit = omit,
+        reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]] | Omit = omit,
+        reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | Omit = omit,
+        response_format: Optional[completion_create_params.ResponseFormat] | Omit = omit,
+        search_settings: Optional[completion_create_params.SearchSettings] | Omit = omit,
+        seed: Optional[int] | Omit = omit,
+        service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | Omit = omit,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        store: Optional[bool] | Omit = omit,
+        stream: Optional[bool] | Omit = omit,
+        temperature: Optional[float] | Omit = omit,
+        tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | Omit = omit,
+        tools: Optional[Iterable[ChatCompletionToolParam]] | Omit = omit,
+        top_logprobs: Optional[int] | Omit = omit,
+        top_p: Optional[float] | Omit = omit,
+        user: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ChatCompletion:
         """
         Creates a model response for the given chat conversation.
@@ -90,11 +115,27 @@ class Completions(SyncAPIResource):
           messages: A list of messages comprising the conversation so far.
 
           model: ID of the model to use. For details on which models are compatible with the Chat
-              API, see available [models](/docs/models)
+              API, see available [models](https://console.groq.com/docs/models)
 
-          frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
-              existing frequency in the text so far, decreasing the model's likelihood to
-              repeat the same line verbatim.
+          citation_options: Whether to enable citations in the response. When enabled, the model will
+              include citations for information retrieved from provided documents or web
+              searches.
+
+          compound_custom: Custom configuration of models and tools for Compound.
+
+          disable_tool_validation: If set to true, groq will return called tools without validating that the tool
+              is present in request.tools. tool_choice=required/none will still be enforced,
+              but the request cannot require a specific tool be used.
+
+          documents: A list of documents to provide context for the conversation. Each document
+              contains text that can be referenced by the model.
+
+          exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
+              exclude from the search results when the model uses a web search tool.
+
+          frequency_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on their existing frequency in the
+              text so far, decreasing the model's likelihood to repeat the same line verbatim.
 
           function_call: Deprecated in favor of `tool_choice`.
 
@@ -111,6 +152,13 @@ class Completions(SyncAPIResource):
 
               A list of functions the model may generate JSON inputs for.
 
+          include_domains: Deprecated: Use search_settings.include_domains instead. A list of domains to
+              include in the search results when the model uses a web search tool.
+
+          include_reasoning: Whether to include reasoning in the response. If true, the response will include
+              a `reasoning` field. If false, the model's reasoning will not be included in the
+              response. This field is mutually exclusive with `reasoning_format`.
+
           logit_bias: This is not yet supported by any of our models. Modify the likelihood of
               specified tokens appearing in the completion.
 
@@ -126,23 +174,37 @@ class Completions(SyncAPIResource):
               that can be generated in the chat completion. The total length of input tokens
               and generated tokens is limited by the model's context length.
 
+          metadata: This parameter is not currently supported.
+
           n: How many chat completion choices to generate for each input message. Note that
               the current moment, only n=1 is supported. Other values will result in a 400
               response.
 
           parallel_tool_calls: Whether to enable parallel function calling during tool use.
 
-          presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
-              whether they appear in the text so far, increasing the model's likelihood to
-              talk about new topics.
+          presence_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on whether they appear in the text so
+              far, increasing the model's likelihood to talk about new topics.
 
-          response_format: An object specifying the format that the model must output.
+          reasoning_effort: qwen3 models support the following values Set to 'none' to disable reasoning.
+              Set to 'default' or null to let Qwen reason.
 
-              Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
-              message the model generates is valid JSON.
+              openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
+              'medium' is the default value.
 
-              **Important:** when using JSON mode, you **must** also instruct the model to
-              produce JSON yourself via a system or user message.
+          reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
+              `include_reasoning`.
+
+          response_format: An object specifying the format that the model must output. Setting to
+              `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs
+              which ensures the model will match your supplied JSON schema. `json_schema`
+              response format is only available on
+              [supported models](https://console.groq.com/docs/structured-outputs#supported-models).
+              Setting to `{ "type": "json_object" }` enables the older JSON mode, which
+              ensures the message the model generates is valid JSON. Using `json_schema` is
+              preferred for models that support it.
+
+          search_settings: Settings for web search functionality when the model uses a web search tool.
 
           seed: If specified, our system will make a best effort to sample deterministically,
               such that repeated requests with the same `seed` and parameters should return
@@ -158,6 +220,8 @@ class Completions(SyncAPIResource):
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
 
+          store: This parameter is not currently supported.
+
           stream: If set, partial message deltas will be sent. Tokens will be sent as data-only
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
               as they become available, with the stream terminated by a `data: [DONE]`
@@ -166,7 +230,7 @@ class Completions(SyncAPIResource):
           temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
               make the output more random, while lower values like 0.2 will make it more
               focused and deterministic. We generally recommend altering this or top_p but not
-              both
+              both.
 
           tool_choice: Controls which (if any) tool is called by the model. `none` means the model will
               not call any tool and instead generates a message. `auto` means the model can
@@ -209,20 +273,32 @@ class Completions(SyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "citation_options": citation_options,
+                    "compound_custom": compound_custom,
+                    "disable_tool_validation": disable_tool_validation,
+                    "documents": documents,
+                    "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
                     "functions": functions,
+                    "include_domains": include_domains,
+                    "include_reasoning": include_reasoning,
                     "logit_bias": logit_bias,
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
                     "max_tokens": max_tokens,
+                    "metadata": metadata,
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
+                    "reasoning_effort": reasoning_effort,
+                    "reasoning_format": reasoning_format,
                     "response_format": response_format,
+                    "search_settings": search_settings,
                     "seed": seed,
                     "service_tier": service_tier,
                     "stop": stop,
+                    "store": store,
                     "stream": stream,
                     "temperature": temperature,
                     "tool_choice": tool_choice,
@@ -264,34 +340,62 @@ class AsyncCompletions(AsyncAPIResource):
         self,
         *,
         messages: Iterable[ChatCompletionMessageParam],
-        model: Union[str, Literal["gemma-7b-it", "llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"]],
-        frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
-        function_call: Optional[completion_create_params.FunctionCall] | NotGiven = NOT_GIVEN,
-        functions: Optional[Iterable[completion_create_params.Function]] | NotGiven = NOT_GIVEN,
-        logit_bias: Optional[Dict[str, int]] | NotGiven = NOT_GIVEN,
-        logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
-        max_completion_tokens: Optional[int] | NotGiven = NOT_GIVEN,
-        max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
-        n: Optional[int] | NotGiven = NOT_GIVEN,
-        parallel_tool_calls: Optional[bool] | NotGiven = NOT_GIVEN,
-        presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
-        response_format: Optional[completion_create_params.ResponseFormat] | NotGiven = NOT_GIVEN,
-        seed: Optional[int] | NotGiven = NOT_GIVEN,
-        service_tier: Optional[Literal["auto", "on_demand", "flex"]] | NotGiven = NOT_GIVEN,
-        stop: Union[Optional[str], List[str], None] | NotGiven = NOT_GIVEN,
-        stream: Optional[bool] | NotGiven = NOT_GIVEN,
-        temperature: Optional[float] | NotGiven = NOT_GIVEN,
-        tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | NotGiven = NOT_GIVEN,
-        tools: Optional[Iterable[ChatCompletionToolParam]] | NotGiven = NOT_GIVEN,
-        top_logprobs: Optional[int] | NotGiven = NOT_GIVEN,
-        top_p: Optional[float] | NotGiven = NOT_GIVEN,
-        user: Optional[str] | NotGiven = NOT_GIVEN,
+        model: Union[
+            str,
+            Literal[
+                "compound-beta",
+                "compound-beta-mini",
+                "gemma2-9b-it",
+                "llama-3.1-8b-instant",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "moonshotai/kimi-k2-instruct",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
+            ],
+        ],
+        citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
+        compound_custom: Optional[completion_create_params.CompoundCustom] | Omit = omit,
+        disable_tool_validation: bool | Omit = omit,
+        documents: Optional[Iterable[completion_create_params.Document]] | Omit = omit,
+        exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        frequency_penalty: Optional[float] | Omit = omit,
+        function_call: Optional[completion_create_params.FunctionCall] | Omit = omit,
+        functions: Optional[Iterable[completion_create_params.Function]] | Omit = omit,
+        include_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        include_reasoning: Optional[bool] | Omit = omit,
+        logit_bias: Optional[Dict[str, int]] | Omit = omit,
+        logprobs: Optional[bool] | Omit = omit,
+        max_completion_tokens: Optional[int] | Omit = omit,
+        max_tokens: Optional[int] | Omit = omit,
+        metadata: Optional[Dict[str, str]] | Omit = omit,
+        n: Optional[int] | Omit = omit,
+        parallel_tool_calls: Optional[bool] | Omit = omit,
+        presence_penalty: Optional[float] | Omit = omit,
+        reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]] | Omit = omit,
+        reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | Omit = omit,
+        response_format: Optional[completion_create_params.ResponseFormat] | Omit = omit,
+        search_settings: Optional[completion_create_params.SearchSettings] | Omit = omit,
+        seed: Optional[int] | Omit = omit,
+        service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] | Omit = omit,
+        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        store: Optional[bool] | Omit = omit,
+        stream: Optional[bool] | Omit = omit,
+        temperature: Optional[float] | Omit = omit,
+        tool_choice: Optional[ChatCompletionToolChoiceOptionParam] | Omit = omit,
+        tools: Optional[Iterable[ChatCompletionToolParam]] | Omit = omit,
+        top_logprobs: Optional[int] | Omit = omit,
+        top_p: Optional[float] | Omit = omit,
+        user: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ChatCompletion:
         """
         Creates a model response for the given chat conversation.
@@ -300,11 +404,27 @@ class AsyncCompletions(AsyncAPIResource):
           messages: A list of messages comprising the conversation so far.
 
           model: ID of the model to use. For details on which models are compatible with the Chat
-              API, see available [models](/docs/models)
+              API, see available [models](https://console.groq.com/docs/models)
 
-          frequency_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on their
-              existing frequency in the text so far, decreasing the model's likelihood to
-              repeat the same line verbatim.
+          citation_options: Whether to enable citations in the response. When enabled, the model will
+              include citations for information retrieved from provided documents or web
+              searches.
+
+          compound_custom: Custom configuration of models and tools for Compound.
+
+          disable_tool_validation: If set to true, groq will return called tools without validating that the tool
+              is present in request.tools. tool_choice=required/none will still be enforced,
+              but the request cannot require a specific tool be used.
+
+          documents: A list of documents to provide context for the conversation. Each document
+              contains text that can be referenced by the model.
+
+          exclude_domains: Deprecated: Use search_settings.exclude_domains instead. A list of domains to
+              exclude from the search results when the model uses a web search tool.
+
+          frequency_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on their existing frequency in the
+              text so far, decreasing the model's likelihood to repeat the same line verbatim.
 
           function_call: Deprecated in favor of `tool_choice`.
 
@@ -321,6 +441,13 @@ class AsyncCompletions(AsyncAPIResource):
 
               A list of functions the model may generate JSON inputs for.
 
+          include_domains: Deprecated: Use search_settings.include_domains instead. A list of domains to
+              include in the search results when the model uses a web search tool.
+
+          include_reasoning: Whether to include reasoning in the response. If true, the response will include
+              a `reasoning` field. If false, the model's reasoning will not be included in the
+              response. This field is mutually exclusive with `reasoning_format`.
+
           logit_bias: This is not yet supported by any of our models. Modify the likelihood of
               specified tokens appearing in the completion.
 
@@ -336,23 +463,37 @@ class AsyncCompletions(AsyncAPIResource):
               that can be generated in the chat completion. The total length of input tokens
               and generated tokens is limited by the model's context length.
 
+          metadata: This parameter is not currently supported.
+
           n: How many chat completion choices to generate for each input message. Note that
               the current moment, only n=1 is supported. Other values will result in a 400
               response.
 
           parallel_tool_calls: Whether to enable parallel function calling during tool use.
 
-          presence_penalty: Number between -2.0 and 2.0. Positive values penalize new tokens based on
-              whether they appear in the text so far, increasing the model's likelihood to
-              talk about new topics.
+          presence_penalty: This is not yet supported by any of our models. Number between -2.0 and 2.0.
+              Positive values penalize new tokens based on whether they appear in the text so
+              far, increasing the model's likelihood to talk about new topics.
 
-          response_format: An object specifying the format that the model must output.
+          reasoning_effort: qwen3 models support the following values Set to 'none' to disable reasoning.
+              Set to 'default' or null to let Qwen reason.
 
-              Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the
-              message the model generates is valid JSON.
+              openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
+              'medium' is the default value.
 
-              **Important:** when using JSON mode, you **must** also instruct the model to
-              produce JSON yourself via a system or user message.
+          reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
+              `include_reasoning`.
+
+          response_format: An object specifying the format that the model must output. Setting to
+              `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs
+              which ensures the model will match your supplied JSON schema. `json_schema`
+              response format is only available on
+              [supported models](https://console.groq.com/docs/structured-outputs#supported-models).
+              Setting to `{ "type": "json_object" }` enables the older JSON mode, which
+              ensures the message the model generates is valid JSON. Using `json_schema` is
+              preferred for models that support it.
+
+          search_settings: Settings for web search functionality when the model uses a web search tool.
 
           seed: If specified, our system will make a best effort to sample deterministically,
               such that repeated requests with the same `seed` and parameters should return
@@ -368,6 +509,8 @@ class AsyncCompletions(AsyncAPIResource):
           stop: Up to 4 sequences where the API will stop generating further tokens. The
               returned text will not contain the stop sequence.
 
+          store: This parameter is not currently supported.
+
           stream: If set, partial message deltas will be sent. Tokens will be sent as data-only
               [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
               as they become available, with the stream terminated by a `data: [DONE]`
@@ -376,7 +519,7 @@ class AsyncCompletions(AsyncAPIResource):
           temperature: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
               make the output more random, while lower values like 0.2 will make it more
               focused and deterministic. We generally recommend altering this or top_p but not
-              both
+              both.
 
           tool_choice: Controls which (if any) tool is called by the model. `none` means the model will
               not call any tool and instead generates a message. `auto` means the model can
@@ -419,20 +562,32 @@ class AsyncCompletions(AsyncAPIResource):
                 {
                     "messages": messages,
                     "model": model,
+                    "citation_options": citation_options,
+                    "compound_custom": compound_custom,
+                    "disable_tool_validation": disable_tool_validation,
+                    "documents": documents,
+                    "exclude_domains": exclude_domains,
                     "frequency_penalty": frequency_penalty,
                     "function_call": function_call,
                     "functions": functions,
+                    "include_domains": include_domains,
+                    "include_reasoning": include_reasoning,
                     "logit_bias": logit_bias,
                     "logprobs": logprobs,
                     "max_completion_tokens": max_completion_tokens,
                     "max_tokens": max_tokens,
+                    "metadata": metadata,
                     "n": n,
                     "parallel_tool_calls": parallel_tool_calls,
                     "presence_penalty": presence_penalty,
+                    "reasoning_effort": reasoning_effort,
+                    "reasoning_format": reasoning_format,
                     "response_format": response_format,
+                    "search_settings": search_settings,
                     "seed": seed,
                     "service_tier": service_tier,
                     "stop": stop,
+                    "store": store,
                     "stream": stream,
                     "temperature": temperature,
                     "tool_choice": tool_choice,

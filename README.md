@@ -1,12 +1,13 @@
 # Groq Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/groq.svg)](https://pypi.org/project/groq/)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/groq.svg?label=pypi%20(stable))](https://pypi.org/project/groq/)
 
-The Groq Python library provides convenient access to the Groq REST API from any Python 3.8+
+The Groq Python library provides convenient access to the Groq REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
@@ -38,9 +39,9 @@ chat_completion = client.chat.completions.create(
             "content": "Explain the importance of low latency LLMs",
         }
     ],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 )
-print(chat_completion.choices_0.message.content)
+print(chat_completion.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -70,15 +71,55 @@ async def main() -> None:
                 "content": "Explain the importance of low latency LLMs",
             }
         ],
-        model="llama3-8b-8192",
+        model="openai/gpt-oss-20b",
     )
-    print(chat_completion.choices_0.message.content)
+    print(chat_completion.id)
 
 
 asyncio.run(main())
 ```
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
+
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from PyPI
+pip install groq[aiohttp]
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import os
+import asyncio
+from groq import DefaultAioHttpClient
+from groq import AsyncGroq
+
+
+async def main() -> None:
+    async with AsyncGroq(
+        api_key=os.environ.get("GROQ_API_KEY"),  # This is the default and can be omitted
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        chat_completion = await client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": "Explain the importance of low latency LLMs",
+                }
+            ],
+            model="openai/gpt-oss-20b",
+        )
+        print(chat_completion.id)
+
+
+asyncio.run(main())
+```
 
 ## Using types
 
@@ -88,6 +129,46 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
+
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from groq import Groq
+
+client = Groq()
+
+chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            "content": "string",
+            "role": "system",
+        }
+    ],
+    model="meta-llama/llama-4-scout-17b-16e-instruct",
+    compound_custom={},
+)
+print(chat_completion.compound_custom)
+```
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
+
+```python
+from pathlib import Path
+from groq import Groq
+
+client = Groq()
+
+client.audio.transcriptions.create(
+    model="whisper-large-v3-turbo",
+    file=Path("/path/to/file"),
+)
+```
+
+The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
 
 ## Handling errors
 
@@ -116,7 +197,7 @@ try:
                 "content": "Explain the importance of low latency LLMs",
             },
         ],
-        model="llama3-8b-8192",
+        model="openai/gpt-oss-20b",
     )
 except groq.APIConnectionError as e:
     print("The server could not be reached")
@@ -171,14 +252,14 @@ client.with_options(max_retries=5).chat.completions.create(
             "content": "Explain the importance of low latency LLMs",
         },
     ],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 )
 ```
 
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from groq import Groq
@@ -206,7 +287,7 @@ client.with_options(timeout=5.0).chat.completions.create(
             "content": "Explain the importance of low latency LLMs",
         },
     ],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 )
 ```
 
@@ -256,7 +337,7 @@ response = client.chat.completions.with_raw_response.create(
         "role": "user",
         "content": "Explain the importance of low latency LLMs",
     }],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -286,7 +367,7 @@ with client.chat.completions.with_streaming_response.create(
             "content": "Explain the importance of low latency LLMs",
         },
     ],
-    model="llama3-8b-8192",
+    model="openai/gpt-oss-20b",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -397,7 +478,7 @@ print(groq.__version__)
 
 ## Requirements
 
-Python 3.8 or higher.
+Python 3.9 or higher.
 
 ## Contributing
 

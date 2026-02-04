@@ -7,13 +7,8 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
-from ..._utils import (
-    extract_files,
-    maybe_transform,
-    deepcopy_minimal,
-    async_maybe_transform,
-)
+from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
+from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -52,8 +47,8 @@ class Transcriptions(SyncAPIResource):
     def create(
         self,
         *,
-        file: FileTypes,
-        model: Union[str, Literal["whisper-large-v3"]],
+        model: Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]],
+        file: FileTypes | Omit = omit,
         language: Union[
             str,
             Literal[
@@ -159,27 +154,30 @@ class Transcriptions(SyncAPIResource):
                 "yue",
             ],
         ]
-        | NotGiven = NOT_GIVEN,
-        prompt: str | NotGiven = NOT_GIVEN,
-        response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
-        temperature: float | NotGiven = NOT_GIVEN,
-        timestamp_granularities: List[Literal["word", "segment"]] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        prompt: str | Omit = omit,
+        response_format: Literal["json", "text", "verbose_json"] | Omit = omit,
+        temperature: float | Omit = omit,
+        timestamp_granularities: List[Literal["word", "segment"]] | Omit = omit,
+        url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcription:
         """
         Transcribes audio into the input language.
 
         Args:
+          model: ID of the model to use. `whisper-large-v3` and `whisper-large-v3-turbo` are
+              currently available.
+
           file:
               The audio file object (not file name) to transcribe, in one of these formats:
-              flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
-
-          model: ID of the model to use. Only `whisper-large-v3` is currently available.
+              flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Either a file or a URL must
+              be provided. Note that the file field is not supported in Batch API requests.
 
           language: The language of the input audio. Supplying the input language in
               [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will
@@ -203,6 +201,10 @@ class Transcriptions(SyncAPIResource):
               is no additional latency for segment timestamps, but generating word timestamps
               incurs additional latency.
 
+          url: The audio URL to translate/transcribe (supports Base64URL). Either a file or a
+              URL must be provided. For Batch API requests, the URL field is required since
+              the file field is not supported.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -213,13 +215,14 @@ class Transcriptions(SyncAPIResource):
         """
         body = deepcopy_minimal(
             {
-                "file": file,
                 "model": model,
+                "file": file,
                 "language": language,
                 "prompt": prompt,
                 "response_format": response_format,
                 "temperature": temperature,
                 "timestamp_granularities": timestamp_granularities,
+                "url": url,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
@@ -261,8 +264,8 @@ class AsyncTranscriptions(AsyncAPIResource):
     async def create(
         self,
         *,
-        file: FileTypes,
-        model: Union[str, Literal["whisper-large-v3"]],
+        model: Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]],
+        file: FileTypes | Omit = omit,
         language: Union[
             str,
             Literal[
@@ -368,27 +371,30 @@ class AsyncTranscriptions(AsyncAPIResource):
                 "yue",
             ],
         ]
-        | NotGiven = NOT_GIVEN,
-        prompt: str | NotGiven = NOT_GIVEN,
-        response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
-        temperature: float | NotGiven = NOT_GIVEN,
-        timestamp_granularities: List[Literal["word", "segment"]] | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        prompt: str | Omit = omit,
+        response_format: Literal["json", "text", "verbose_json"] | Omit = omit,
+        temperature: float | Omit = omit,
+        timestamp_granularities: List[Literal["word", "segment"]] | Omit = omit,
+        url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Transcription:
         """
         Transcribes audio into the input language.
 
         Args:
+          model: ID of the model to use. `whisper-large-v3` and `whisper-large-v3-turbo` are
+              currently available.
+
           file:
               The audio file object (not file name) to transcribe, in one of these formats:
-              flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
-
-          model: ID of the model to use. Only `whisper-large-v3` is currently available.
+              flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Either a file or a URL must
+              be provided. Note that the file field is not supported in Batch API requests.
 
           language: The language of the input audio. Supplying the input language in
               [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will
@@ -412,6 +418,10 @@ class AsyncTranscriptions(AsyncAPIResource):
               is no additional latency for segment timestamps, but generating word timestamps
               incurs additional latency.
 
+          url: The audio URL to translate/transcribe (supports Base64URL). Either a file or a
+              URL must be provided. For Batch API requests, the URL field is required since
+              the file field is not supported.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -422,13 +432,14 @@ class AsyncTranscriptions(AsyncAPIResource):
         """
         body = deepcopy_minimal(
             {
-                "file": file,
                 "model": model,
+                "file": file,
                 "language": language,
                 "prompt": prompt,
                 "response_format": response_format,
                 "temperature": temperature,
                 "timestamp_granularities": timestamp_granularities,
+                "url": url,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])

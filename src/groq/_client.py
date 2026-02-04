@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Union, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -11,20 +11,17 @@ import httpx
 from . import _exceptions
 from ._qs import Querystring
 from ._types import (
-    NOT_GIVEN,
     Omit,
     Timeout,
     NotGiven,
     Transport,
     ProxiesTypes,
     RequestOptions,
+    not_given,
 )
-from ._utils import (
-    is_given,
-    get_async_library,
-)
+from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import models, embeddings
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GroqError, APIStatusError
 from ._base_client import (
@@ -32,20 +29,20 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.chat import chat
-from .resources.audio import audio
+
+if TYPE_CHECKING:
+    from .resources import chat, audio, files, models, batches, embeddings
+    from .resources.files import Files, AsyncFiles
+    from .resources.models import Models, AsyncModels
+    from .resources.batches import Batches, AsyncBatches
+    from .resources.chat.chat import Chat, AsyncChat
+    from .resources.embeddings import Embeddings, AsyncEmbeddings
+    from .resources.audio.audio import Audio, AsyncAudio
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Groq", "AsyncGroq", "Client", "AsyncClient"]
 
 
 class Groq(SyncAPIClient):
-    chat: chat.Chat
-    embeddings: embeddings.Embeddings
-    audio: audio.Audio
-    models: models.Models
-    with_raw_response: GroqWithRawResponse
-    with_streaming_response: GroqWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -54,7 +51,7 @@ class Groq(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -72,7 +69,7 @@ class Groq(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous groq client instance.
+        """Construct a new synchronous Groq client instance.
 
         This automatically infers the `api_key` argument from the `GROQ_API_KEY` environment variable if it is not provided.
         """
@@ -100,12 +97,49 @@ class Groq(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.chat = chat.Chat(self)
-        self.embeddings = embeddings.Embeddings(self)
-        self.audio = audio.Audio(self)
-        self.models = models.Models(self)
-        self.with_raw_response = GroqWithRawResponse(self)
-        self.with_streaming_response = GroqWithStreamedResponse(self)
+    @cached_property
+    def chat(self) -> Chat:
+        from .resources.chat import Chat
+
+        return Chat(self)
+
+    @cached_property
+    def embeddings(self) -> Embeddings:
+        from .resources.embeddings import Embeddings
+
+        return Embeddings(self)
+
+    @cached_property
+    def audio(self) -> Audio:
+        from .resources.audio import Audio
+
+        return Audio(self)
+
+    @cached_property
+    def models(self) -> Models:
+        from .resources.models import Models
+
+        return Models(self)
+
+    @cached_property
+    def batches(self) -> Batches:
+        from .resources.batches import Batches
+
+        return Batches(self)
+
+    @cached_property
+    def files(self) -> Files:
+        from .resources.files import Files
+
+        return Files(self)
+
+    @cached_property
+    def with_raw_response(self) -> GroqWithRawResponse:
+        return GroqWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> GroqWithStreamedResponse:
+        return GroqWithStreamedResponse(self)
 
     @property
     @override
@@ -132,9 +166,9 @@ class Groq(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -213,13 +247,6 @@ class Groq(SyncAPIClient):
 
 
 class AsyncGroq(AsyncAPIClient):
-    chat: chat.AsyncChat
-    embeddings: embeddings.AsyncEmbeddings
-    audio: audio.AsyncAudio
-    models: models.AsyncModels
-    with_raw_response: AsyncGroqWithRawResponse
-    with_streaming_response: AsyncGroqWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -228,7 +255,7 @@ class AsyncGroq(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -246,7 +273,7 @@ class AsyncGroq(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async groq client instance.
+        """Construct a new async AsyncGroq client instance.
 
         This automatically infers the `api_key` argument from the `GROQ_API_KEY` environment variable if it is not provided.
         """
@@ -274,12 +301,49 @@ class AsyncGroq(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.chat = chat.AsyncChat(self)
-        self.embeddings = embeddings.AsyncEmbeddings(self)
-        self.audio = audio.AsyncAudio(self)
-        self.models = models.AsyncModels(self)
-        self.with_raw_response = AsyncGroqWithRawResponse(self)
-        self.with_streaming_response = AsyncGroqWithStreamedResponse(self)
+    @cached_property
+    def chat(self) -> AsyncChat:
+        from .resources.chat import AsyncChat
+
+        return AsyncChat(self)
+
+    @cached_property
+    def embeddings(self) -> AsyncEmbeddings:
+        from .resources.embeddings import AsyncEmbeddings
+
+        return AsyncEmbeddings(self)
+
+    @cached_property
+    def audio(self) -> AsyncAudio:
+        from .resources.audio import AsyncAudio
+
+        return AsyncAudio(self)
+
+    @cached_property
+    def models(self) -> AsyncModels:
+        from .resources.models import AsyncModels
+
+        return AsyncModels(self)
+
+    @cached_property
+    def batches(self) -> AsyncBatches:
+        from .resources.batches import AsyncBatches
+
+        return AsyncBatches(self)
+
+    @cached_property
+    def files(self) -> AsyncFiles:
+        from .resources.files import AsyncFiles
+
+        return AsyncFiles(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncGroqWithRawResponse:
+        return AsyncGroqWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncGroqWithStreamedResponse:
+        return AsyncGroqWithStreamedResponse(self)
 
     @property
     @override
@@ -306,9 +370,9 @@ class AsyncGroq(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -387,35 +451,175 @@ class AsyncGroq(AsyncAPIClient):
 
 
 class GroqWithRawResponse:
+    _client: Groq
+
     def __init__(self, client: Groq) -> None:
-        self.chat = chat.ChatWithRawResponse(client.chat)
-        self.embeddings = embeddings.EmbeddingsWithRawResponse(client.embeddings)
-        self.audio = audio.AudioWithRawResponse(client.audio)
-        self.models = models.ModelsWithRawResponse(client.models)
+        self._client = client
+
+    @cached_property
+    def chat(self) -> chat.ChatWithRawResponse:
+        from .resources.chat import ChatWithRawResponse
+
+        return ChatWithRawResponse(self._client.chat)
+
+    @cached_property
+    def embeddings(self) -> embeddings.EmbeddingsWithRawResponse:
+        from .resources.embeddings import EmbeddingsWithRawResponse
+
+        return EmbeddingsWithRawResponse(self._client.embeddings)
+
+    @cached_property
+    def audio(self) -> audio.AudioWithRawResponse:
+        from .resources.audio import AudioWithRawResponse
+
+        return AudioWithRawResponse(self._client.audio)
+
+    @cached_property
+    def models(self) -> models.ModelsWithRawResponse:
+        from .resources.models import ModelsWithRawResponse
+
+        return ModelsWithRawResponse(self._client.models)
+
+    @cached_property
+    def batches(self) -> batches.BatchesWithRawResponse:
+        from .resources.batches import BatchesWithRawResponse
+
+        return BatchesWithRawResponse(self._client.batches)
+
+    @cached_property
+    def files(self) -> files.FilesWithRawResponse:
+        from .resources.files import FilesWithRawResponse
+
+        return FilesWithRawResponse(self._client.files)
 
 
 class AsyncGroqWithRawResponse:
+    _client: AsyncGroq
+
     def __init__(self, client: AsyncGroq) -> None:
-        self.chat = chat.AsyncChatWithRawResponse(client.chat)
-        self.embeddings = embeddings.AsyncEmbeddingsWithRawResponse(client.embeddings)
-        self.audio = audio.AsyncAudioWithRawResponse(client.audio)
-        self.models = models.AsyncModelsWithRawResponse(client.models)
+        self._client = client
+
+    @cached_property
+    def chat(self) -> chat.AsyncChatWithRawResponse:
+        from .resources.chat import AsyncChatWithRawResponse
+
+        return AsyncChatWithRawResponse(self._client.chat)
+
+    @cached_property
+    def embeddings(self) -> embeddings.AsyncEmbeddingsWithRawResponse:
+        from .resources.embeddings import AsyncEmbeddingsWithRawResponse
+
+        return AsyncEmbeddingsWithRawResponse(self._client.embeddings)
+
+    @cached_property
+    def audio(self) -> audio.AsyncAudioWithRawResponse:
+        from .resources.audio import AsyncAudioWithRawResponse
+
+        return AsyncAudioWithRawResponse(self._client.audio)
+
+    @cached_property
+    def models(self) -> models.AsyncModelsWithRawResponse:
+        from .resources.models import AsyncModelsWithRawResponse
+
+        return AsyncModelsWithRawResponse(self._client.models)
+
+    @cached_property
+    def batches(self) -> batches.AsyncBatchesWithRawResponse:
+        from .resources.batches import AsyncBatchesWithRawResponse
+
+        return AsyncBatchesWithRawResponse(self._client.batches)
+
+    @cached_property
+    def files(self) -> files.AsyncFilesWithRawResponse:
+        from .resources.files import AsyncFilesWithRawResponse
+
+        return AsyncFilesWithRawResponse(self._client.files)
 
 
 class GroqWithStreamedResponse:
+    _client: Groq
+
     def __init__(self, client: Groq) -> None:
-        self.chat = chat.ChatWithStreamingResponse(client.chat)
-        self.embeddings = embeddings.EmbeddingsWithStreamingResponse(client.embeddings)
-        self.audio = audio.AudioWithStreamingResponse(client.audio)
-        self.models = models.ModelsWithStreamingResponse(client.models)
+        self._client = client
+
+    @cached_property
+    def chat(self) -> chat.ChatWithStreamingResponse:
+        from .resources.chat import ChatWithStreamingResponse
+
+        return ChatWithStreamingResponse(self._client.chat)
+
+    @cached_property
+    def embeddings(self) -> embeddings.EmbeddingsWithStreamingResponse:
+        from .resources.embeddings import EmbeddingsWithStreamingResponse
+
+        return EmbeddingsWithStreamingResponse(self._client.embeddings)
+
+    @cached_property
+    def audio(self) -> audio.AudioWithStreamingResponse:
+        from .resources.audio import AudioWithStreamingResponse
+
+        return AudioWithStreamingResponse(self._client.audio)
+
+    @cached_property
+    def models(self) -> models.ModelsWithStreamingResponse:
+        from .resources.models import ModelsWithStreamingResponse
+
+        return ModelsWithStreamingResponse(self._client.models)
+
+    @cached_property
+    def batches(self) -> batches.BatchesWithStreamingResponse:
+        from .resources.batches import BatchesWithStreamingResponse
+
+        return BatchesWithStreamingResponse(self._client.batches)
+
+    @cached_property
+    def files(self) -> files.FilesWithStreamingResponse:
+        from .resources.files import FilesWithStreamingResponse
+
+        return FilesWithStreamingResponse(self._client.files)
 
 
 class AsyncGroqWithStreamedResponse:
+    _client: AsyncGroq
+
     def __init__(self, client: AsyncGroq) -> None:
-        self.chat = chat.AsyncChatWithStreamingResponse(client.chat)
-        self.embeddings = embeddings.AsyncEmbeddingsWithStreamingResponse(client.embeddings)
-        self.audio = audio.AsyncAudioWithStreamingResponse(client.audio)
-        self.models = models.AsyncModelsWithStreamingResponse(client.models)
+        self._client = client
+
+    @cached_property
+    def chat(self) -> chat.AsyncChatWithStreamingResponse:
+        from .resources.chat import AsyncChatWithStreamingResponse
+
+        return AsyncChatWithStreamingResponse(self._client.chat)
+
+    @cached_property
+    def embeddings(self) -> embeddings.AsyncEmbeddingsWithStreamingResponse:
+        from .resources.embeddings import AsyncEmbeddingsWithStreamingResponse
+
+        return AsyncEmbeddingsWithStreamingResponse(self._client.embeddings)
+
+    @cached_property
+    def audio(self) -> audio.AsyncAudioWithStreamingResponse:
+        from .resources.audio import AsyncAudioWithStreamingResponse
+
+        return AsyncAudioWithStreamingResponse(self._client.audio)
+
+    @cached_property
+    def models(self) -> models.AsyncModelsWithStreamingResponse:
+        from .resources.models import AsyncModelsWithStreamingResponse
+
+        return AsyncModelsWithStreamingResponse(self._client.models)
+
+    @cached_property
+    def batches(self) -> batches.AsyncBatchesWithStreamingResponse:
+        from .resources.batches import AsyncBatchesWithStreamingResponse
+
+        return AsyncBatchesWithStreamingResponse(self._client.batches)
+
+    @cached_property
+    def files(self) -> files.AsyncFilesWithStreamingResponse:
+        from .resources.files import AsyncFilesWithStreamingResponse
+
+        return AsyncFilesWithStreamingResponse(self._client.files)
 
 
 Client = Groq

@@ -8,6 +8,14 @@ from .audio import (
     AudioWithStreamingResponse,
     AsyncAudioWithStreamingResponse,
 )
+from .speech import (
+    Speech,
+    AsyncSpeech,
+    SpeechWithRawResponse,
+    AsyncSpeechWithRawResponse,
+    SpeechWithStreamingResponse,
+    AsyncSpeechWithStreamingResponse,
+)
 from .translations import (
     Translations,
     AsyncTranslations,
@@ -26,6 +34,12 @@ from .transcriptions import (
 )
 
 __all__ = [
+    "Speech",
+    "AsyncSpeech",
+    "SpeechWithRawResponse",
+    "AsyncSpeechWithRawResponse",
+    "SpeechWithStreamingResponse",
+    "AsyncSpeechWithStreamingResponse",
     "Transcriptions",
     "AsyncTranscriptions",
     "TranscriptionsWithRawResponse",

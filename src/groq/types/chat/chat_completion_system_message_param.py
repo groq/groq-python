@@ -2,16 +2,19 @@
 
 from __future__ import annotations
 
+from typing import Union, Iterable
 from typing_extensions import Literal, Required, TypedDict
+
+from .chat_completion_content_part_text_param import ChatCompletionContentPartTextParam
 
 __all__ = ["ChatCompletionSystemMessageParam"]
 
 
 class ChatCompletionSystemMessageParam(TypedDict, total=False):
-    content: Required[str]
+    content: Required[Union[str, Iterable[ChatCompletionContentPartTextParam]]]
     """The contents of the system message."""
 
-    role: Required[Literal["system"]]
+    role: Required[Literal["system", "developer"]]
     """The role of the messages author, in this case `system`."""
 
     name: str

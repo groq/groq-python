@@ -7,13 +7,8 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
-from ..._utils import (
-    extract_files,
-    maybe_transform,
-    deepcopy_minimal,
-    async_maybe_transform,
-)
+from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
+from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -52,26 +47,29 @@ class Translations(SyncAPIResource):
     def create(
         self,
         *,
-        file: FileTypes,
-        model: Union[str, Literal["whisper-large-v3"]],
-        prompt: str | NotGiven = NOT_GIVEN,
-        response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
-        temperature: float | NotGiven = NOT_GIVEN,
+        model: Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]],
+        file: FileTypes | Omit = omit,
+        prompt: str | Omit = omit,
+        response_format: Literal["json", "text", "verbose_json"] | Omit = omit,
+        temperature: float | Omit = omit,
+        url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Translation:
-        """
-        Translates audio into English.
+        """Translates audio into English.
 
         Args:
+          model: ID of the model to use.
+
+        `whisper-large-v3` and `whisper-large-v3-turbo` are
+              currently available.
+
           file: The audio file object (not file name) translate, in one of these formats: flac,
               mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
-
-          model: ID of the model to use. Only `whisper-large-v3` is currently available.
 
           prompt: An optional text to guide the model's style or continue a previous audio
               segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in
@@ -86,6 +84,9 @@ class Translations(SyncAPIResource):
               [log probability](https://en.wikipedia.org/wiki/Log_probability) to
               automatically increase the temperature until certain thresholds are hit.
 
+          url: The audio URL to translate/transcribe (supports Base64URL). Either file or url
+              must be provided. When using the Batch API only url is supported.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -96,11 +97,12 @@ class Translations(SyncAPIResource):
         """
         body = deepcopy_minimal(
             {
-                "file": file,
                 "model": model,
+                "file": file,
                 "prompt": prompt,
                 "response_format": response_format,
                 "temperature": temperature,
+                "url": url,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
@@ -142,26 +144,29 @@ class AsyncTranslations(AsyncAPIResource):
     async def create(
         self,
         *,
-        file: FileTypes,
-        model: Union[str, Literal["whisper-large-v3"]],
-        prompt: str | NotGiven = NOT_GIVEN,
-        response_format: Literal["json", "text", "verbose_json"] | NotGiven = NOT_GIVEN,
-        temperature: float | NotGiven = NOT_GIVEN,
+        model: Union[str, Literal["whisper-large-v3", "whisper-large-v3-turbo"]],
+        file: FileTypes | Omit = omit,
+        prompt: str | Omit = omit,
+        response_format: Literal["json", "text", "verbose_json"] | Omit = omit,
+        temperature: float | Omit = omit,
+        url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Translation:
-        """
-        Translates audio into English.
+        """Translates audio into English.
 
         Args:
+          model: ID of the model to use.
+
+        `whisper-large-v3` and `whisper-large-v3-turbo` are
+              currently available.
+
           file: The audio file object (not file name) translate, in one of these formats: flac,
               mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
-
-          model: ID of the model to use. Only `whisper-large-v3` is currently available.
 
           prompt: An optional text to guide the model's style or continue a previous audio
               segment. The [prompt](/docs/guides/speech-to-text/prompting) should be in
@@ -176,6 +181,9 @@ class AsyncTranslations(AsyncAPIResource):
               [log probability](https://en.wikipedia.org/wiki/Log_probability) to
               automatically increase the temperature until certain thresholds are hit.
 
+          url: The audio URL to translate/transcribe (supports Base64URL). Either file or url
+              must be provided. When using the Batch API only url is supported.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -186,11 +194,12 @@ class AsyncTranslations(AsyncAPIResource):
         """
         body = deepcopy_minimal(
             {
-                "file": file,
                 "model": model,
+                "file": file,
                 "prompt": prompt,
                 "response_format": response_format,
                 "temperature": temperature,
+                "url": url,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
