@@ -30,7 +30,7 @@ class TestTranscriptions:
     def test_method_create_with_all_params(self, client: Groq) -> None:
         transcription = client.audio.transcriptions.create(
             model="whisper-large-v3-turbo",
-            file=b"raw file contents",
+            file=b"Example data",
             language="string",
             prompt="prompt",
             response_format="json",
@@ -85,7 +85,7 @@ class TestAsyncTranscriptions:
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
         transcription = await async_client.audio.transcriptions.create(
             model="whisper-large-v3-turbo",
-            file=b"raw file contents",
+            file=b"Example data",
             language="string",
             prompt="prompt",
             response_format="json",

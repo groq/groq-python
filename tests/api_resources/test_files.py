@@ -28,7 +28,7 @@ class TestFiles:
     @parametrize
     def test_method_create(self, client: Groq) -> None:
         file = client.files.create(
-            file=b"raw file contents",
+            file=b"Example data",
             purpose="batch",
         )
         assert_matches_type(FileCreateResponse, file, path=["response"])
@@ -36,7 +36,7 @@ class TestFiles:
     @parametrize
     def test_raw_response_create(self, client: Groq) -> None:
         response = client.files.with_raw_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
             purpose="batch",
         )
 
@@ -48,7 +48,7 @@ class TestFiles:
     @parametrize
     def test_streaming_response_create(self, client: Groq) -> None:
         with client.files.with_streaming_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
             purpose="batch",
         ) as response:
             assert not response.is_closed
@@ -219,7 +219,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_method_create(self, async_client: AsyncGroq) -> None:
         file = await async_client.files.create(
-            file=b"raw file contents",
+            file=b"Example data",
             purpose="batch",
         )
         assert_matches_type(FileCreateResponse, file, path=["response"])
@@ -227,7 +227,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
         response = await async_client.files.with_raw_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
             purpose="batch",
         )
 
@@ -239,7 +239,7 @@ class TestAsyncFiles:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
         async with async_client.files.with_streaming_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
             purpose="batch",
         ) as response:
             assert not response.is_closed
