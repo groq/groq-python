@@ -30,7 +30,7 @@ class TestTranslations:
     def test_method_create_with_all_params(self, client: Groq) -> None:
         translation = client.audio.translations.create(
             model="whisper-large-v3-turbo",
-            file=b"raw file contents",
+            file=b"Example data",
             prompt="prompt",
             response_format="json",
             temperature=0,
@@ -83,7 +83,7 @@ class TestAsyncTranslations:
     async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
         translation = await async_client.audio.translations.create(
             model="whisper-large-v3-turbo",
-            file=b"raw file contents",
+            file=b"Example data",
             prompt="prompt",
             response_format="json",
             temperature=0,
