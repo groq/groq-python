@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import sys
 import typing_extensions
 from typing import Any, Type, Union, Literal, Optional
 from datetime import date, datetime
@@ -21,12 +20,9 @@ def get_origin(tp: type[Any]) -> type[Any] | None:
 
 
 def is_union(tp: Optional[Type[Any]]) -> bool:
-    if sys.version_info < (3, 10):
-        return tp is Union  # type: ignore[comparison-overlap]
-    else:
-        import types
+    import types
 
-        return tp is Union or tp is types.UnionType
+    return tp is Union or tp is types.UnionType  # type: ignore[comparison-overlap]
 
 
 def is_typeddict(tp: Type[Any]) -> bool:
