@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.1.0 (2026-03-08)
+
+Full Changelog: [v1.0.0...v1.1.0](https://github.com/groq/groq-python/compare/v1.0.0...v1.1.0)
+
+### Features
+
+* **client:** add custom JSON encoder for extended type support ([a678f79](https://github.com/groq/groq-python/commit/a678f796d0d2cb89f0c6536ea48e329133e84704))
+* **client:** add support for binary request streaming ([93813fd](https://github.com/groq/groq-python/commit/93813fda0d087e2016c6f7697c8710803e3872d0))
+
+
+### Bug Fixes
+
+* use valid Python version and fix mypy lint error ([#267](https://github.com/groq/groq-python/issues/267)) ([5f0082a](https://github.com/groq/groq-python/commit/5f0082afd5ba6b28f9842e41bfc1dabe5ab075a8))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([03f1c19](https://github.com/groq/groq-python/commit/03f1c195bec877af2ef53ce8e8c32f7c930df8fa))
+* deprecate Python 3.9 support ([#264](https://github.com/groq/groq-python/issues/264)) ([01190ec](https://github.com/groq/groq-python/commit/01190ecbbb5b0c2afe107fabb02195ce7521e2e1))
+* **internal:** add `--fix` argument to lint script ([2d9ebd6](https://github.com/groq/groq-python/commit/2d9ebd681c002475a54fb4767da6662e6ade94c2))
+* **internal:** codegen related update ([c074088](https://github.com/groq/groq-python/commit/c074088c8cc0c98e9b995d8f7bee0799fc3981b2))
+* **internal:** codegen related update ([4f6b7d0](https://github.com/groq/groq-python/commit/4f6b7d0e8176a0603ac6488e7b6be7b4a868d74e))
+* **internal:** codegen related update ([48778ff](https://github.com/groq/groq-python/commit/48778ffdc7de491ea0348d78e4122c1e5910a027))
+* **internal:** codegen related update ([8b1aaa4](https://github.com/groq/groq-python/commit/8b1aaa4f8fad13c36abe9cb06353d560d33f4433))
+* **internal:** codegen related update ([17104ab](https://github.com/groq/groq-python/commit/17104ab57d03871a56fa9bd080c26b91770f313a))
+* **internal:** codegen related update ([a236a32](https://github.com/groq/groq-python/commit/a236a323d4ed881a6e2ed57885d027c8851fbc65))
+* **internal:** codegen related update ([544abc6](https://github.com/groq/groq-python/commit/544abc6accf3cd26185765a23cf4aeb7c921637b))
+* **internal:** codegen related update ([ef5b5f7](https://github.com/groq/groq-python/commit/ef5b5f7ef038b151bfe9272365070e08313edda4))
+* **internal:** codegen related update ([fbc0d70](https://github.com/groq/groq-python/commit/fbc0d702efa12c3e5e5257c807fcefb10c322973))
+* **internal:** update `actions/checkout` version ([a472539](https://github.com/groq/groq-python/commit/a472539fffe61d4b8ca2be88455a486468fa9e32))
+
 ## 1.0.0 (2025-12-17)
 
 Full Changelog: [v0.37.1...v1.0.0](https://github.com/groq/groq-python/compare/v0.37.1...v1.0.0)
