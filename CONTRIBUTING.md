@@ -62,7 +62,7 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ pip install git+ssh://git@github.com/groq/groq-python#main.git
+$ pip install git+ssh://git@github.com/groq/groq-python.git
 ```
 
 Alternatively, you can build from source and install the wheel file:
@@ -88,8 +88,7 @@ $ pip install ./path-to-wheel-file.whl
 Most tests require you to [set up a mock server](https://github.com/stoplightio/prism) against the OpenAPI spec to run the tests.
 
 ```sh
-# you will need npm installed
-$ npx prism mock path/to/your/openapi.yml
+$ ./scripts/mock
 ```
 
 ```sh

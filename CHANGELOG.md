@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.1.1 (2026-03-11)
+
+Full Changelog: [v1.1.0...v1.1.1](https://github.com/groq/groq-python/compare/v1.1.0...v1.1.1)
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([1995ebc](https://github.com/groq/groq-python/commit/1995ebc477fe434a449cbcef01264a80f020238c))
+* **docs:** remove www prefix ([2f429b1](https://github.com/groq/groq-python/commit/2f429b1a1a1041eba1ffafc3e80178f4480a358b))
+* format all `api.md` files ([b7a0488](https://github.com/groq/groq-python/commit/b7a0488d9825f071b86bf64be0d25bc997044c77))
+* **internal:** add request options to SSE classes ([7ffeb7c](https://github.com/groq/groq-python/commit/7ffeb7c99593bf014142d8b265771000535ba265))
+* **internal:** bump dependencies ([862b60e](https://github.com/groq/groq-python/commit/862b60e54157dc874dae9ee8356531a38bca4054))
+* **internal:** codegen related update ([f65774d](https://github.com/groq/groq-python/commit/f65774da349ab03b0fbb96391ac11860142d9ba0))
+* **internal:** fix lint error on Python 3.14 ([759089a](https://github.com/groq/groq-python/commit/759089a9c9fc1e7a6f087e350eec082ac98c5e7a))
+* **internal:** make `test_proxy_environment_variables` more resilient ([2421ef6](https://github.com/groq/groq-python/commit/2421ef6992b546d8c9afe1d43e71f882c7c8bcbc))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([fd9609d](https://github.com/groq/groq-python/commit/fd9609dfaf976665b07513bbbd22c6aa7f561d85))
+* **test:** do not count install time for mock server timeout ([c242fb0](https://github.com/groq/groq-python/commit/c242fb04f36f70d690760e4fb1e77ac451833d94))
+* update mock server docs ([6c8a563](https://github.com/groq/groq-python/commit/6c8a563e1babd4dbc92a2328eeda825ce8b09e51))
+* update placeholder string ([fb77938](https://github.com/groq/groq-python/commit/fb779388836e873cd3dba70ab12a2d42afbcade7))
+
 ## 1.1.0 (2026-03-08)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/groq/groq-python/compare/v1.0.0...v1.1.0)
