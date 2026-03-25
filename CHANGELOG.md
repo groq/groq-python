@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.1.2 (2026-03-25)
+
+Full Changelog: [v1.1.1...v1.1.2](https://github.com/groq/groq-python/compare/v1.1.1...v1.1.2)
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([3ef90d5](https://github.com/groq/groq-python/commit/3ef90d5a347a277257127abcba3f457ca35d5485))
+* **pydantic:** do not pass `by_alias` unless set ([f84dd8c](https://github.com/groq/groq-python/commit/f84dd8ce6be887992445f10af1aac8102b2c6423))
+* sanitize endpoint path params ([4e57480](https://github.com/groq/groq-python/commit/4e57480cbe6e7d85353d04c49f931a300ff50436))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([e34867c](https://github.com/groq/groq-python/commit/e34867c6f89e39d61fb18fd7710222dd8740bac6))
+* **internal:** tweak CI branches ([5ec9308](https://github.com/groq/groq-python/commit/5ec930859c7c819fe5fe5b565fa1c4046fa8274e))
+* **internal:** update gitignore ([29f97bf](https://github.com/groq/groq-python/commit/29f97bf5c11c1fb49276c8e080b1b0d24d156ba8))
+* **tests:** bump steady to v0.19.4 ([7c9854e](https://github.com/groq/groq-python/commit/7c9854eaa8532f4611e169e0b76bed87f80dc2cb))
+* **tests:** bump steady to v0.19.5 ([e3a0370](https://github.com/groq/groq-python/commit/e3a0370c2b379156e24816c471e1423b09c1eb99))
+* **tests:** bump steady to v0.19.6 ([001301b](https://github.com/groq/groq-python/commit/001301b292c08a94b41eb2fab8be04720fda2c78))
+* **tests:** bump steady to v0.19.7 ([5419e4c](https://github.com/groq/groq-python/commit/5419e4c2b9c0a8a4b065ce7b48c20723d81bfecf))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([491149a](https://github.com/groq/groq-python/commit/491149ac175410988863ab0e958c44c3907c45ca))
+
 ## 1.1.1 (2026-03-11)
 
 Full Changelog: [v1.1.0...v1.1.1](https://github.com/groq/groq-python/compare/v1.1.0...v1.1.1)
