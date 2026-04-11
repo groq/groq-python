@@ -31,7 +31,7 @@ class TestTranscriptions:
         transcription = client.audio.transcriptions.create(
             model="whisper-large-v3-turbo",
             file=b"Example data",
-            language="string",
+            language="en",
             prompt="prompt",
             response_format="json",
             temperature=0,
@@ -86,7 +86,7 @@ class TestAsyncTranscriptions:
         transcription = await async_client.audio.transcriptions.create(
             model="whisper-large-v3-turbo",
             file=b"Example data",
-            language="string",
+            language="en",
             prompt="prompt",
             response_format="json",
             temperature=0,
