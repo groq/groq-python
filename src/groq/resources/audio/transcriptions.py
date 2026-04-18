@@ -7,8 +7,9 @@ from typing_extensions import Literal
 
 import httpx
 
+from ..._files import deepcopy_with_paths
 from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
-from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ..._utils import extract_files, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -213,7 +214,7 @@ class Transcriptions(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "model": model,
                 "file": file,
@@ -223,7 +224,8 @@ class Transcriptions(SyncAPIResource):
                 "temperature": temperature,
                 "timestamp_granularities": timestamp_granularities,
                 "url": url,
-            }
+            },
+            [["file"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
         # It should be noted that the actual Content-Type header that will be
@@ -430,7 +432,7 @@ class AsyncTranscriptions(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        body = deepcopy_minimal(
+        body = deepcopy_with_paths(
             {
                 "model": model,
                 "file": file,
@@ -440,7 +442,8 @@ class AsyncTranscriptions(AsyncAPIResource):
                 "temperature": temperature,
                 "timestamp_granularities": timestamp_granularities,
                 "url": url,
-            }
+            },
+            [["file"]],
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
         # It should be noted that the actual Content-Type header that will be
