@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.2.0 (2026-04-18)
+
+Full Changelog: [v1.1.2...v1.2.0](https://github.com/groq/groq-python/compare/v1.1.2...v1.2.0)
+
+### Features
+
+* **internal:** implement indices array format for query and form serialization ([80ca975](https://github.com/groq/groq-python/commit/80ca9750622cdd94562c34de4ef69326fdb78dd7))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([ff12a20](https://github.com/groq/groq-python/commit/ff12a2087a814e0baf815d0ee89dd73f18e13bae))
+* ensure file data are only sent as 1 parameter ([f67099c](https://github.com/groq/groq-python/commit/f67099c22321d15021f283526c9cb85a58d98a8f))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([22d711f](https://github.com/groq/groq-python/commit/22d711f2bc262fe3bf8633d1a6c087f43c852c7d))
+
+
+### Chores
+
+* **tests:** bump steady to v0.20.1 ([f031213](https://github.com/groq/groq-python/commit/f031213b83b91aba73d67806d4a85c3b71351582))
+* **tests:** bump steady to v0.20.2 ([66e56a7](https://github.com/groq/groq-python/commit/66e56a7ea574ce79d17c8bc0c2d02d1d2f23608c))
+* **tests:** bump steady to v0.22.1 ([65e6535](https://github.com/groq/groq-python/commit/65e653508867f1c7cba8f83d4c56083577718bbe))
+
+
+### Documentation
+
+* improve examples ([9b75c4c](https://github.com/groq/groq-python/commit/9b75c4cb0c78c759df1ee4fbd0751ecf09328745))
+
 ## 1.1.2 (2026-03-25)
 
 Full Changelog: [v1.1.1...v1.1.2](https://github.com/groq/groq-python/compare/v1.1.1...v1.1.2)
