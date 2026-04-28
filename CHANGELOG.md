@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.3.0 (2026-04-28)
+
+Full Changelog: [v1.2.0...v1.3.0](https://github.com/groq/groq-python/compare/v1.2.0...v1.3.0)
+
+### Features
+
+* support setting headers via env ([21b1359](https://github.com/groq/groq-python/commit/21b1359fc37f295e563a9bfe7b51e2528453c4c6))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([8b8ee40](https://github.com/groq/groq-python/commit/8b8ee4003c88e2b47e648d8a96d006fd2886667d))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([b6a1b98](https://github.com/groq/groq-python/commit/b6a1b989057d5924768e1c4f68be11abbe22fb72))
+
 ## 1.2.0 (2026-04-18)
 
 Full Changelog: [v1.1.2...v1.2.0](https://github.com/groq/groq-python/compare/v1.1.2...v1.2.0)
