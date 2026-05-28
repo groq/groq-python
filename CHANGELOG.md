@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.0 (2026-05-12)
+
+Full Changelog: [v1.3.0...v1.4.0](https://github.com/groq/groq-python/compare/v1.3.0...v1.4.0)
+
+### Features
+
+* **internal/types:** support eagerly validating pydantic iterators ([8603587](https://github.com/groq/groq-python/commit/8603587f8a492580b35d6819411958d92cf7ef69))
+
 ## 1.3.0 (2026-05-09)
 
 Full Changelog: [v1.2.0...v1.3.0](https://github.com/groq/groq-python/compare/v1.2.0...v1.3.0)
