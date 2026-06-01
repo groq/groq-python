@@ -455,6 +455,15 @@ async def test_strips_notgiven(use_async: bool) -> None:
 
 @parametrize
 @pytest.mark.asyncio
+async def test_bare_dict_annotation_no_indexerror(use_async: bool) -> None:
+    # A bare `dict` annotation (no type args) previously raised IndexError because
+    # get_args(dict) returns () and the code unconditionally indexed [1].
+    result = await transform({"key": {"a": 1}}, Annotated[dict, PropertyInfo(alias="key")], use_async)
+    assert result == {"key": {"a": 1}}
+
+
+@parametrize
+@pytest.mark.asyncio
 async def test_strips_omit(use_async: bool) -> None:
     assert await transform({"foo_bar": "bar"}, Foo1, use_async) == {"fooBar": "bar"}
     assert await transform({"foo_bar": omit}, Foo1, use_async) == {}
