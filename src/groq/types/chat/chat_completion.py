@@ -86,9 +86,7 @@ class UsageBreakdownModel(BaseModel):
 
 
 class UsageBreakdown(BaseModel):
-    """
-    Detailed usage breakdown by model when multiple models are used in the request for compound AI systems.
-    """
+    """Usage statistics for compound AI completion requests."""
 
     models: List[UsageBreakdownModel]
     """List of models used in the request and their individual usage statistics"""
@@ -188,10 +186,7 @@ class ChatCompletion(BaseModel):
     """Usage statistics for the completion request."""
 
     usage_breakdown: Optional[UsageBreakdown] = None
-    """
-    Detailed usage breakdown by model when multiple models are used in the request
-    for compound AI systems.
-    """
+    """Usage statistics for compound AI completion requests."""
 
     x_groq: Optional[XGroq] = None
     """Groq-specific metadata for non-streaming chat completion responses."""
