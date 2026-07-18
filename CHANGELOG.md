@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.6.0 (2026-07-18)
+
+Full Changelog: [v1.5.0...v1.6.0](https://github.com/groq/groq-python/compare/v1.5.0...v1.6.0)
+
+### Features
+
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([b39b7db](https://github.com/groq/groq-python/commit/b39b7dbe71ced832f9a8ba9cddaa9dc828d5b333))
+
+
+### Chores
+
+* update CODEOWNERS (add [@pmichalina-groq](https://github.com/pmichalina-groq), remove [@gradenr](https://github.com/gradenr) and [@bklieger-groq](https://github.com/bklieger-groq)) ([#278](https://github.com/groq/groq-python/issues/278)) ([7b93dfa](https://github.com/groq/groq-python/commit/7b93dfa948e2832b468e6ec543db68a18b3bbd22))
+
 ## 1.5.0 (2026-06-17)
 
 Full Changelog: [v1.4.0...v1.5.0](https://github.com/groq/groq-python/compare/v1.4.0...v1.5.0)
