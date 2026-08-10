@@ -2,9 +2,9 @@
 
 errors=()
 
-if [ -z "${PYPI_TOKEN}" ]; then
-  errors+=("The PYPI_TOKEN secret has not been set. Please set it in either this repository's secrets or your organization secrets.")
-fi
+# PyPI publishing authenticates with Trusted Publishing (GitHub OIDC) in the
+# publish-pypi workflow, so no PyPI token is required in the release
+# environment. See https://docs.pypi.org/trusted-publishers/
 
 lenErrors=${#errors[@]}
 

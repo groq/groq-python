@@ -1,6 +1,10 @@
 # This workflow is triggered when a GitHub release is created.
 # It can also be run manually to re-publish to PyPI in case it failed for some reason.
 # You can run this workflow by navigating to https://www.github.com/groq/groq-python/actions/workflows/publish-pypi.yml
+#
+# Publishing authenticates with PyPI through Trusted Publishing (GitHub OIDC),
+# so no PyPI API token is required: https://docs.pypi.org/trusted-publishers/
+# PyPI generates PEP 740 attestations for the uploaded files automatically.
 name: Publish PyPI
 on:
   workflow_dispatch:
@@ -12,6 +16,10 @@ jobs:
   publish:
     name: publish
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Required to mint the OIDC token for PyPI Trusted Publishing.
+      id-token: write
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -24,8 +32,8 @@ jobs:
           RYE_VERSION: '0.44.0'
           RYE_INSTALL_OPTION: '--yes'
 
+      - name: Build distributions
+        run: rye build --clean
+
       - name: Publish to PyPI
-        run: |
-          bash ./bin/publish-pypi
-        env:
-          PYPI_TOKEN: ${{ secrets.GROQ_PYPI_TOKEN || secrets.PYPI_TOKEN }}
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
