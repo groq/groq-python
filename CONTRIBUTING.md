@@ -119,7 +119,7 @@ the changes aren't made through the automated pipeline, you may want to make rel
 
 ### Publish with a GitHub workflow
 
-You can release to package managers by using [the `Publish PyPI` GitHub action](https://www.github.com/groq/groq-python/actions/workflows/publish-pypi.yml). This requires a setup organization or repository secret to be set up.
+You can release to package managers by using [the `Publish PyPI` GitHub action](https://www.github.com/groq/groq-python/actions/workflows/publish-pypi.yml). The workflow authenticates with [PyPI Trusted Publishing](https://docs.pypi.org/trusted-publishers/) (GitHub OIDC), so it does not need a PyPI token secret. PyPI generates [PEP 740 attestations](https://docs.pypi.org/attestations/) for the uploaded files automatically.
 
 ### Publish manually
 
