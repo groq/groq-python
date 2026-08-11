@@ -1,0 +1,75 @@
+name: Promote SDKs
+
+# Promote staging to production by fast-forwarding production main up to staging,
+# preserving SHAs so the trunks stay identical and linear (nothing to heal on the
+# next stlc build). Manual dispatch by design: a maintainer promotes the accumulated
+# batch to cut a release; release-please then opens its version PR on production.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  promote:
+    # Runner comes from the STLC_RUNNER repo/org variable when set; defaults to GitHub-hosted.
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    if: github.repository == 'groq/groq-python-staging'
+    # Optional gate: add required reviewers to this environment to approve each
+    # promote. With none it only scopes secrets and adds no gate. Remove if unused.
+    environment: production
+    env:
+      PRODUCTION_REPO: groq/groq-python
+      GH_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
+    steps:
+      - name: Check out staging
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Fetch production main
+        run: |
+          git remote add production \
+            "https://x-access-token:${GH_TOKEN}@github.com/${PRODUCTION_REPO}.git"
+          git fetch production main
+
+      - name: Check whether production already has staging's content
+        id: diff
+        run: |
+          # After a release, production has release-please commits staging lacks, so compare trees.
+          MERGED=$(git merge-tree --write-tree production/main origin/main) || MERGED=conflict
+          PRODUCTION_TREE=$(git rev-parse 'production/main^{tree}')
+          if [ "$MERGED" = "$PRODUCTION_TREE" ]; then
+            echo "Production already contains staging's content. Nothing to promote."
+            echo "synced=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "synced=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Promote staging to production (fast-forward)
+        if: steps.diff.outputs.synced == 'false'
+        run: |
+          # Refuse unless production is an ancestor of staging: otherwise the trunks
+          # have forked (production advanced without a back-sync) and FF is unsafe.
+          if ! git merge-base --is-ancestor production/main origin/main; then
+            echo "::error title=Promote blocked::production/main is not an ancestor of staging main. Back-sync production into staging first."
+            exit 1
+          fi
+          git push production origin/main:refs/heads/main
+          echo "Fast-forwarded production/main to staging/main."
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.STLC_ALERT_WEBHOOK_URL }}
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          msg="stlc promote failed in ${{ github.repository }}. A stalled promote or back-sync lets custom-code tracking drift, which later builds refuse on — investigate before the next build. Run: $run_url"
+          echo "::error title=stlc workflow failed::$msg"
+          { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+            curl -sS -X POST -H 'Content-Type: application/json' \
+              -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
+              || echo "::warning::Alert webhook POST failed"
+          fi

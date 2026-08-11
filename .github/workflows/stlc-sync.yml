@@ -1,0 +1,220 @@
+name: Sync SDK repos
+
+# Keeps the staging and production trunks in sync and the config repo's
+# tracking files fresh. Each job self-routes by repo + event, so this one file
+# can live in both repos and only the right job runs. The dispatch jobs are
+# eager-only (the polls cover them) and no-op when their token isn't set.
+on:
+  schedule:
+    # back-sync poll: a cheap pure-git check, twice hourly so an unsynced production
+    # change (e.g. a community PR between releases) can't hold codegen for long.
+    - cron: '7,37 * * * *'
+  workflow_dispatch: {}
+  repository_dispatch:
+    types: [prod-released]
+  release:
+    types: [published]
+  push:
+    # main only. stlc preview/integrated/codegen branches never push to main.
+    branches: [main]
+
+jobs:
+  back-sync:
+    # Fast-forward production main back onto staging so the trunks stay identical.
+    # Runner comes from the STLC_RUNNER repo/org variable when set; defaults to GitHub-hosted.
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    if: >-
+      github.repository == 'groq/groq-python-staging' &&
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch')
+    permissions:
+      contents: write
+    concurrency:
+      group: stlc-back-sync
+      cancel-in-progress: true
+    env:
+      PRODUCTION_REPO: groq/groq-python
+    steps:
+      - name: Check out staging
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Fetch production main
+        env:
+          PRODUCTION_REPO_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
+        run: |
+          # Public production reads with no credential; a private production
+          # repo needs PRODUCTION_REPO_TOKEN (the same token the promote uses).
+          if [ -n "${PRODUCTION_REPO_TOKEN:-}" ]; then
+            git remote add production "https://x-access-token:${PRODUCTION_REPO_TOKEN}@github.com/${PRODUCTION_REPO}.git"
+          else
+            git remote add production "https://github.com/${PRODUCTION_REPO}.git"
+          fi
+          # actions/checkout persists this repo's token as an auth header, which
+          # outranks the remote URL credential; blank it for this fetch only.
+          git -c "http.https://github.com/.extraheader=" fetch production main
+
+      - name: Check whether production has content staging lacks
+        id: diff
+        run: |
+          # Content compare: would merging production into staging change its tree?
+          # If not, staging already has production's content (release-please commits).
+          MERGED=$(git merge-tree --write-tree origin/main production/main) || MERGED=conflict
+          STAGING_TREE=$(git rev-parse 'origin/main^{tree}')
+          if [ "$MERGED" = "$STAGING_TREE" ]; then
+            echo "Staging already has production's content. Nothing to pull back."
+            echo "behind=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "behind=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Sync production to staging (fast-forward)
+        if: steps.diff.outputs.behind == 'true'
+        run: |
+          # Refuse unless staging is an ancestor of production: otherwise the
+          # trunks have forked and a fast-forward would be unsafe.
+          if ! git merge-base --is-ancestor origin/main production/main; then
+            echo "::error title=Back-sync blocked::staging main is not an ancestor of production/main."
+            exit 1
+          fi
+          git push origin production/main:refs/heads/main
+          echo "Fast-forwarded staging/main to production/main."
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.STLC_ALERT_WEBHOOK_URL }}
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          msg="stlc back-sync (sync from production) failed in ${{ github.repository }}. A stalled back-sync lets custom-code tracking drift, which later builds refuse on — investigate before the next build. Run: $run_url"
+          echo "::error title=stlc workflow failed::$msg"
+          { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+            curl -sS -X POST -H 'Content-Type: application/json' \
+              -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
+              || echo "::warning::Alert webhook POST failed"
+          fi
+
+  notify-back-sync:
+    # On a published release, tell staging to back-sync now instead of waiting for
+    # the poll. Dispatch-only: it cannot write production or staging contents.
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    if: >-
+      github.repository == 'groq/groq-python' &&
+      (github.event_name == 'release' || github.event_name == 'workflow_dispatch')
+    permissions:
+      contents: read
+    env:
+      STAGING_REPO: groq/groq-python-staging
+    steps:
+      - name: Dispatch back-sync to staging
+        env:
+          DISPATCH_TOKEN: ${{ secrets.STAGING_DISPATCH_TOKEN }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${DISPATCH_TOKEN:-}" ]; then
+            echo "::notice::STAGING_DISPATCH_TOKEN not configured — skipping the eager back-sync notify. The staging repo's twice-hourly poll covers this."
+            exit 0
+          fi
+
+          payload=$(jq -n --arg ref "$REF_NAME" '{event_type:"prod-released",client_payload:{ref:$ref}}')
+          code=$(curl -sS -o /tmp/dispatch.txt -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer ${DISPATCH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${STAGING_REPO}/dispatches" \
+            -d "$payload")
+          if [ "$code" = "204" ]; then
+            echo "Back-sync dispatched to ${STAGING_REPO}."
+          else
+            echo "Dispatch failed (HTTP $code)" >&2; cat /tmp/dispatch.txt >&2; exit 1
+          fi
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.STLC_ALERT_WEBHOOK_URL }}
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          msg="stlc release back-sync trigger failed in ${{ github.repository }} — the staging repo was NOT notified to back-sync this release (likely an expired STAGING_DISPATCH_TOKEN). Staging catches up on its next poll, but verify the token. Run: $run_url"
+          echo "::error title=stlc workflow failed::$msg"
+          { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+            curl -sS -X POST -H 'Content-Type: application/json' \
+              -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
+              || echo "::warning::Alert webhook POST failed"
+          fi
+
+  seal-dispatch:
+    # When out-of-band custom code lands on staging main, tell the config repo to
+    # re-seal now instead of waiting for its scheduled sync. The loop guards skip
+    # stlc's own pushes, so the bot's commits can't trigger a re-seal loop.
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    if: >-
+      github.repository == 'groq/groq-python-staging' &&
+      github.event_name == 'push'
+    permissions:
+      contents: read
+    concurrency:
+      group: seal-dispatch-${{ github.ref }}
+      cancel-in-progress: false
+    env:
+      CONFIG_REPO: groq/orion
+    steps:
+      - name: Loop-guard and send re-seal dispatch
+        env:
+          DISPATCH_TOKEN: ${{ secrets.CONFIG_DISPATCH_TOKEN }}
+          HEAD_MSG: ${{ github.event.head_commit.message }}
+          HEAD_AUTHOR_NAME: ${{ github.event.head_commit.author.name }}
+          SHA: ${{ github.sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # Loop guard 1: skip the stlc "Build SDK" squash commit (Stainless-Generated-From trailer).
+          if printf '%s' "$HEAD_MSG" | grep -q 'Stainless-Generated-From'; then
+            echo "Head commit is an stlc build — skipping re-seal dispatch."
+            exit 0
+          fi
+
+          # Loop guard 2: skip stlc-bot commits (e.g. a regeneration commit).
+          if [ "$HEAD_AUTHOR_NAME" = "stlc-bot" ]; then
+            echo "Head commit authored by stlc-bot — skipping re-seal dispatch."
+            exit 0
+          fi
+
+          if [ -z "${DISPATCH_TOKEN:-}" ]; then
+            echo "::notice::CONFIG_DISPATCH_TOKEN not configured — skipping the eager re-seal. The config repo's scheduled sync covers this."
+            exit 0
+          fi
+
+          payload=$(jq -n --arg sha "$SHA" --arg repo "$REPO" \
+            '{event_type:"seal-custom-code",client_payload:{target:"all",sha:$sha,repo:$repo}}')
+          code=$(curl -sS -o /tmp/dispatch.txt -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer ${DISPATCH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${CONFIG_REPO}/dispatches" \
+            -d "$payload")
+          if [ "$code" = "204" ]; then
+            echo "Re-seal dispatched to ${CONFIG_REPO}."
+          else
+            echo "Dispatch failed (HTTP $code)" >&2; cat /tmp/dispatch.txt >&2; exit 1
+          fi
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.STLC_ALERT_WEBHOOK_URL }}
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          msg="stlc seal-dispatch failed in ${{ github.repository }} — the config repo was NOT notified to re-seal (likely an expired CONFIG_DISPATCH_TOKEN). The config repo's scheduled sync is the backstop, but verify the token. Run: $run_url"
+          echo "::error title=stlc workflow failed::$msg"
+          { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+            curl -sS -X POST -H 'Content-Type: application/json' \
+              -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
+              || echo "::warning::Alert webhook POST failed"
+          fi
