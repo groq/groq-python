@@ -9,8 +9,10 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
+MOCK_PORT="${STAINLESS_MOCK_PORT:-4010}"
+
 function steady_is_running() {
-  curl --silent "http://127.0.0.1:4010/_x-steady/health" >/dev/null 2>&1
+  curl --silent "http://127.0.0.1:$MOCK_PORT/_x-steady/health" >/dev/null 2>&1
 }
 
 kill_server_on_port() {
@@ -27,7 +29,7 @@ function is_overriding_api_base_url() {
 
 if ! is_overriding_api_base_url && ! steady_is_running ; then
   # When we exit this script, make sure to kill the background mock server process
-  trap 'kill_server_on_port 4010' EXIT
+  trap 'kill_server_on_port "$MOCK_PORT"' EXIT
 
   # Start the dev server
   ./scripts/mock --daemon
@@ -43,13 +45,17 @@ elif ! steady_is_running ; then
   echo -e "To run the server, pass in the path or url of your OpenAPI"
   echo -e "spec to the steady command:"
   echo
-  echo -e "  \$ ${YELLOW}npm exec --package=@stdy/cli@0.22.1 -- steady path/to/your.openapi.yml --host 127.0.0.1 -p 4010 --validator-query-array-format=comma --validator-form-array-format=comma --validator-query-object-format=brackets --validator-form-object-format=brackets${NC}"
+  echo -e "  \$ ${YELLOW}npm exec --package=@stdy/cli@0.22.1 -- steady path/to/your.openapi.yml --host 127.0.0.1 -p $MOCK_PORT --validator-query-array-format=comma --validator-form-array-format=comma --validator-query-object-format=brackets --validator-form-object-format=brackets${NC}"
   echo
 
   exit 1
 else
   echo -e "${GREEN}✔ Mock steady server is running with your OpenAPI spec${NC}"
   echo
+fi
+
+if [ -n "${STAINLESS_MOCK_PORT:-}" ] && ! is_overriding_api_base_url ; then
+  export TEST_API_BASE_URL="http://127.0.0.1:$MOCK_PORT"
 fi
 
 export DEFER_PYDANTIC_BUILD=false
