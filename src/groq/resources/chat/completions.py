@@ -70,6 +70,7 @@ class Completions(SyncAPIResource):
                 "openai/gpt-oss-20b",
                 "qwen/qwen3-32b",
                 "qwen/qwen3.6-27b",
+                "qwen/qwen3.8-27b",
             ],
         ],
         citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
@@ -378,8 +379,11 @@ class Completions(SyncAPIResource):
               Positive values penalize new tokens based on whether they appear in the text so
               far, increasing the model's likelihood to talk about new topics.
 
-          reasoning_effort: qwen3 models support the following values Set to 'none' to disable reasoning.
-              Set to 'default' or null to let Qwen reason.
+          reasoning_effort: qwen3 models support `none` to disable reasoning and `default` or null
+              to use the model default.
+
+              qwen/qwen3.8-27b additionally supports `low`, `medium`, and `high`. Its default
+              is `medium`; `high` selects the model's native `xhigh` mode.
 
               openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
               'medium' is the default value.
@@ -739,6 +743,7 @@ class AsyncCompletions(AsyncAPIResource):
                 "openai/gpt-oss-20b",
                 "qwen/qwen3-32b",
                 "qwen/qwen3.6-27b",
+                "qwen/qwen3.8-27b",
             ],
         ],
         citation_options: Optional[Literal["enabled", "disabled"]] | Omit = omit,
@@ -859,8 +864,11 @@ class AsyncCompletions(AsyncAPIResource):
               Positive values penalize new tokens based on whether they appear in the text so
               far, increasing the model's likelihood to talk about new topics.
 
-          reasoning_effort: qwen3 models support the following values Set to 'none' to disable reasoning.
-              Set to 'default' or null to let Qwen reason.
+          reasoning_effort: qwen3 models support `none` to disable reasoning and `default` or null
+              to use the model default.
+
+              qwen/qwen3.8-27b additionally supports `low`, `medium`, and `high`. Its default
+              is `medium`; `high` selects the model's native `xhigh` mode.
 
               openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
               'medium' is the default value.
