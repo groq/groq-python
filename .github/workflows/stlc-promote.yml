@@ -2,10 +2,16 @@ name: Promote SDKs
 
 # Promote staging to production by fast-forwarding production main up to staging,
 # preserving SHAs so the trunks stay identical and linear (nothing to heal on the
-# next stlc build). Manual dispatch by design: a maintainer promotes the accumulated
-# batch to cut a release; release-please then opens its version PR on production.
+# next stlc build). Fully continuous: every staging main push promotes; release-please
+# then opens or refreshes its version PR on production. Manual dispatch stays available.
 on:
   workflow_dispatch: {}
+  push:
+    branches: [main]
+
+concurrency:
+  group: stlc-promote
+  cancel-in-progress: false
 
 permissions:
   contents: read
