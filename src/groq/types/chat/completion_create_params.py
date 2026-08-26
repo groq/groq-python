@@ -54,6 +54,7 @@ class CompletionCreateParams(TypedDict, total=False):
                 "openai/gpt-oss-20b",
                 "qwen/qwen3-32b",
                 "qwen/qwen3.6-27b",
+                "qwen/qwen3.8-27b",
             ],
         ]
     ]
@@ -183,8 +184,11 @@ class CompletionCreateParams(TypedDict, total=False):
 
     reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]]
     """
-    qwen3 models support the following values Set to 'none' to disable reasoning.
-    Set to 'default' or null to let Qwen reason.
+    qwen3 models support `none` to disable reasoning and `default` or null to use
+    the model default.
+
+    qwen/qwen3.8-27b additionally supports `low`, `medium`, and `high`. Its default
+    is `medium`; `high` selects the model's native `xhigh` mode.
 
     openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
     'medium' is the default value.

@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.7.0 (2026-08-25)
+
+Full Changelog: [v1.6.0...v1.7.0](https://github.com/groq/groq-python/compare/v1.6.0...v1.7.0)
+
+### Features
+
+* **chat:** add Qwen3.8 reasoning guidance ([5d65203](https://github.com/groq/groq-python/commit/5d65203d2a98ef99527f031533bf17ec181bfbf5))
+
+
+### Bug Fixes
+
+* GitHub Terraform: Create/Update .github/workflows/stale.yaml [skip ci] ([26fdd4f](https://github.com/groq/groq-python/commit/26fdd4f0017592489aec95171e2ee47d4b6c4567))
+* GitHub Terraform: Create/Update .github/workflows/stale.yaml [skip ci] ([01f00ea](https://github.com/groq/groq-python/commit/01f00ea3a502f2ad8acc9a7b915c65a5273b1750))
+
+
+### Chores
+
+* **deps:** update lock files to fix known vulnerabilities (GC1-104) ([#280](https://github.com/groq/groq-python/issues/280)) ([9620fde](https://github.com/groq/groq-python/commit/9620fde0bc576d22ce7281fe0795215bc17972da))
+* GitHub Terraform: Create/Update .github/workflows/code-freeze-bypass.yaml [skip ci] ([85b6cce](https://github.com/groq/groq-python/commit/85b6cce1de4711e4051428bbab3a0450981d8c36))
+* **internal:** allow the mock server port to be set with STAINLESS_MOCK_PORT ([4e10497](https://github.com/groq/groq-python/commit/4e10497c4b4f324324f7712e575bfa148ee550e2))
+
 ## 1.6.0 (2026-07-18)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/groq/groq-python/compare/v1.5.0...v1.6.0)
