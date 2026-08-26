@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.1 (2026-08-26)
+
+Full Changelog: [v1.7.0...v1.7.1](https://github.com/groq/groq-python/compare/v1.7.0...v1.7.1)
+
+### Chores
+
+* **ci:** publish to PyPI with Trusted Publishing / OIDC (GC1-104) ([18e1a52](https://github.com/groq/groq-python/commit/18e1a528adf3c5cf3ba1f6bb8f0bc2d4005000ed))
+
 ## 1.7.0 (2026-08-25)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/groq/groq-python/compare/v1.6.0...v1.7.0)
