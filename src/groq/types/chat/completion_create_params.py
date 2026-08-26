@@ -188,7 +188,7 @@ class CompletionCreateParams(TypedDict, total=False):
     the model default.
 
     qwen/qwen3.8-27b additionally supports `low`, `medium`, and `high`. Its default
-    is `medium`; `high` selects the model's native `xhigh` mode.
+    is `none`; `high` selects the model's native `xhigh` mode.
 
     openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
     'medium' is the default value.
