@@ -38,6 +38,8 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/groq/groq-python"
 Repository = "https://github.com/groq/groq-python"
+Documentation = "https://console.groq.com/docs"
+Changelog = "https://github.com/groq/groq-python/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]

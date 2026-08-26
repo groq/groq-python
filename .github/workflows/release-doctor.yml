@@ -17,5 +17,3 @@ jobs:
       - name: Check release environment
         run: |
           bash ./bin/check-release-environment
-        env:
-          PYPI_TOKEN: ${{ secrets.GROQ_PYPI_TOKEN || secrets.PYPI_TOKEN }}
