@@ -91,7 +91,8 @@ class Completions(SyncAPIResource):
         n: Optional[int] | Omit = omit,
         parallel_tool_calls: Optional[bool] | Omit = omit,
         presence_penalty: Optional[float] | Omit = omit,
-        reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]] | Omit = omit,
+        reasoning_effort: Optional[Literal["none", "default", "minimal", "low", "medium", "high", "xhigh", "max"]]
+        | Omit = omit,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | Omit = omit,
         response_format: Optional[completion_create_params.ResponseFormat] | Omit = omit,
         search_settings: Optional[completion_create_params.SearchSettings] | Omit = omit,
@@ -154,7 +155,8 @@ class Completions(SyncAPIResource):
         n: Optional[int] | Omit = omit,
         parallel_tool_calls: Optional[bool] | Omit = omit,
         presence_penalty: Optional[float] | Omit = omit,
-        reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]] | Omit = omit,
+        reasoning_effort: Optional[Literal["none", "default", "minimal", "low", "medium", "high", "xhigh", "max"]]
+        | Omit = omit,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | Omit = omit,
         response_format: Optional[completion_create_params.ResponseFormat] | Omit = omit,
         search_settings: Optional[completion_create_params.SearchSettings] | Omit = omit,
@@ -387,6 +389,10 @@ class Completions(SyncAPIResource):
 
               openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
               'medium' is the default value.
+
+              t6 models support `low`, `medium`, `high`, and `max`.
+
+              Values outside a model's supported set are rejected with a 400.
 
           reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
               `include_reasoning`.
@@ -764,7 +770,8 @@ class AsyncCompletions(AsyncAPIResource):
         n: Optional[int] | Omit = omit,
         parallel_tool_calls: Optional[bool] | Omit = omit,
         presence_penalty: Optional[float] | Omit = omit,
-        reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]] | Omit = omit,
+        reasoning_effort: Optional[Literal["none", "default", "minimal", "low", "medium", "high", "xhigh", "max"]]
+        | Omit = omit,
         reasoning_format: Optional[Literal["hidden", "raw", "parsed"]] | Omit = omit,
         response_format: Optional[completion_create_params.ResponseFormat] | Omit = omit,
         search_settings: Optional[completion_create_params.SearchSettings] | Omit = omit,
@@ -872,6 +879,10 @@ class AsyncCompletions(AsyncAPIResource):
 
               openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
               'medium' is the default value.
+
+              t6 models support `low`, `medium`, `high`, and `max`.
+
+              Values outside a model's supported set are rejected with a 400.
 
           reasoning_format: Specifies how to output reasoning tokens This field is mutually exclusive with
               `include_reasoning`.

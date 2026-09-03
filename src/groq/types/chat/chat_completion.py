@@ -172,8 +172,12 @@ class ChatCompletion(BaseModel):
     mcp_list_tools: Optional[List[McpListTool]] = None
     """List of discovered MCP tools from connected servers."""
 
-    service_tier: Optional[Literal["auto", "on_demand", "flex", "performance"]] = None
-    """The service tier used for the request."""
+    service_tier: Optional[Literal["auto", "on_demand", "flex", "performance", "default"]] = None
+    """The service tier used for the request.
+
+    Deployments running in strict OpenAI compatibility report Groq-specific tiers as
+    `default`.
+    """
 
     system_fingerprint: Optional[str] = None
     """This fingerprint represents the backend configuration that the model runs with.

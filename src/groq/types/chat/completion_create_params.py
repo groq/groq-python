@@ -182,7 +182,7 @@ class CompletionCreateParams(TypedDict, total=False):
     talk about new topics.
     """
 
-    reasoning_effort: Optional[Literal["none", "default", "low", "medium", "high"]]
+    reasoning_effort: Optional[Literal["none", "default", "minimal", "low", "medium", "high", "xhigh", "max"]]
     """
     qwen3 models support `none` to disable reasoning and `default` or null to use
     the model default.
@@ -192,6 +192,10 @@ class CompletionCreateParams(TypedDict, total=False):
 
     openai/gpt-oss-20b and openai/gpt-oss-120b support 'low', 'medium', or 'high'.
     'medium' is the default value.
+
+    t6 models support `low`, `medium`, `high`, and `max`.
+
+    Values outside a model's supported set are rejected with a 400.
     """
 
     reasoning_format: Optional[Literal["hidden", "raw", "parsed"]]
