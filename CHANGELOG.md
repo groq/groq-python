@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.8.0 (2026-09-03)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/groq/groq-python/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* **api:** strict OpenAI compatibility for white-label deployments ([53d7973](https://github.com/groq/groq-python/commit/53d79739533a8d4cfde25d5d9bc6b109b5a719eb))
+
+
+### Chores
+
+* **ci:** publish to PyPI with Trusted Publishing / OIDC (GC1-104) ([18e1a52](https://github.com/groq/groq-python/commit/18e1a528adf3c5cf3ba1f6bb8f0bc2d4005000ed))
+
 ## 1.7.0 (2026-08-25)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/groq/groq-python/compare/v1.6.0...v1.7.0)
