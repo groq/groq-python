@@ -31,6 +31,9 @@ jobs:
     concurrency:
       group: stlc-back-sync
       cancel-in-progress: true
+    outputs:
+      heal_ref: ${{ steps.sync.outputs.heal_ref }}
+      heal_sha: ${{ steps.sync.outputs.heal_sha }}
     env:
       PRODUCTION_REPO: groq/groq-python
     steps:
@@ -68,17 +71,47 @@ jobs:
             echo "behind=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Sync production to staging (fast-forward)
+      - name: Sync production to staging (fast-forward, or stage a heal merge)
         if: steps.diff.outputs.behind == 'true'
+        id: sync
+        env:
+          RUN_ID: ${{ github.run_id }}
+          SERVER_URL: ${{ github.server_url }}
+          REPO: ${{ github.repository }}
         run: |
-          # Refuse unless staging is an ancestor of production: otherwise the
-          # trunks have forked and a fast-forward would be unsafe.
-          if ! git merge-base --is-ancestor origin/main production/main; then
-            echo "::error title=Back-sync blocked::staging main is not an ancestor of production/main."
+          set -euo pipefail
+          if git merge-base --is-ancestor origin/main production/main; then
+            git push origin production/main:refs/heads/main
+            echo "Fast-forwarded staging/main to production/main."
+            exit 0
+          fi
+          # Fork: production advanced while staging was ahead. Build the heal merge on a
+          # branch; a human approves the push to main in the heal-push job below.
+          git config user.name "stlc-bot"
+          git config user.email "stlc-bot@users.noreply.github.com"
+          git checkout -q -B heal origin/main
+          if ! git merge --no-ff production/main -m "sync: merge production main into staging (heal)"; then
+            echo "::error title=Heal merge conflict::production/main does not merge cleanly into staging main. Conflicting paths follow; heal by hand."
+            git diff --name-only --diff-filter=U
+            git merge --abort
             exit 1
           fi
-          git push origin production/main:refs/heads/main
-          echo "Fast-forwarded staging/main to production/main."
+          heal_sha=$(git rev-parse HEAD)
+          heal_ref="stlc/heal-${RUN_ID}"
+          # Drop heal branches from earlier polls of the same fork.
+          for b in $(git ls-remote --heads origin 'stlc/heal-*' | awk '{print $2}' | sed 's#refs/heads/##'); do
+            git push origin --delete "$b" || true
+          done
+          git push origin "HEAD:refs/heads/${heal_ref}"
+          {
+            echo "### Heal merge staged, awaiting approval"
+            echo ""
+            echo "production/main advanced while staging main was ahead. Merge commit \`${heal_sha}\` is on branch \`${heal_ref}\`."
+            echo "Review: ${SERVER_URL}/${REPO}/compare/main...${heal_ref}"
+            echo "Approve the heal-push job to push it to main. It is then promoted like any other staging commit."
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "heal_ref=${heal_ref}" >> "$GITHUB_OUTPUT"
+          echo "heal_sha=${heal_sha}" >> "$GITHUB_OUTPUT"
 
       - name: Alert on failure
         if: failure()
@@ -89,6 +122,69 @@ jobs:
           msg="stlc back-sync (sync from production) failed in ${{ github.repository }}. A stalled back-sync lets custom-code tracking drift, which later builds refuse on — investigate before the next build. Run: $run_url"
           echo "::error title=stlc workflow failed::$msg"
           { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
+            curl -sS -X POST -H 'Content-Type: application/json' \
+              -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
+              || echo "::warning::Alert webhook POST failed"
+          fi
+
+  heal-push:
+    # Human-approved push of a heal merge to staging main. The production environment's
+    # required reviewers are the gate; PRODUCTION_REPO_TOKEN is the groq-github-bot PAT,
+    # which holds the repository admin role here and so bypasses required_linear_history.
+    needs: back-sync
+    if: needs.back-sync.outputs.heal_sha != ''
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    environment: production
+    concurrency:
+      # Only the newest staged heal waits for approval; a later poll rebuilds it.
+      group: stlc-heal-push
+      cancel-in-progress: true
+    permissions:
+      contents: read
+    env:
+      HEAL_REF: ${{ needs.back-sync.outputs.heal_ref }}
+      HEAL_SHA: ${{ needs.back-sync.outputs.heal_sha }}
+      PUSH_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Check out staging
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Push the heal merge to main
+        run: |
+          set -euo pipefail
+          git fetch origin "refs/heads/${HEAL_REF}:refs/remotes/origin/${HEAL_REF}" main
+          if [ "$(git rev-parse "origin/${HEAL_REF}")" != "$HEAL_SHA" ]; then
+            echo "::error title=Heal push blocked::branch ${HEAL_REF} no longer points at ${HEAL_SHA}."
+            exit 1
+          fi
+          if [ "$(git rev-parse "${HEAL_SHA}^1")" != "$(git rev-parse origin/main)" ]; then
+            echo "::error title=Heal push blocked::staging main moved since the heal merge was built. The next back-sync poll rebuilds it."
+            exit 1
+          fi
+          # actions/checkout persists GITHUB_TOKEN as an auth header that outranks the URL
+          # credential; blank it so the push uses the bot PAT (ruleset bypass).
+          git -c "http.https://github.com/.extraheader=" push \
+            "https://x-access-token:${PUSH_TOKEN}@github.com/${REPO}.git" "${HEAL_SHA}:refs/heads/main"
+          echo "Pushed heal merge ${HEAL_SHA} to main."
+
+      - name: Delete the heal branch
+        run: |
+          git -c "http.https://github.com/.extraheader=" push \
+            "https://x-access-token:${PUSH_TOKEN}@github.com/${REPO}.git" --delete "${HEAL_REF}" || true
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.STLC_ALERT_WEBHOOK_URL }}
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          msg="stlc heal push failed in ${{ github.repository }}. The staging/production trunks stay forked until it succeeds or someone heals by hand. Run: $run_url"
+          echo "::error title=stlc workflow failed::$msg"
+          { echo "### stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
           if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
             curl -sS -X POST -H 'Content-Type: application/json' \
               -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
