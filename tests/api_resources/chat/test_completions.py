@@ -18,7 +18,7 @@ class TestCompletions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_create(self, client: Groq) -> None:
+    def test_method_create_overload_1(self, client: Groq) -> None:
         completion = client.chat.completions.create(
             messages=[
                 {
@@ -31,7 +31,7 @@ class TestCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params(self, client: Groq) -> None:
+    def test_method_create_with_all_params_overload_1(self, client: Groq) -> None:
         completion = client.chat.completions.create(
             messages=[
                 {
@@ -116,7 +116,7 @@ class TestCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    def test_raw_response_create(self, client: Groq) -> None:
+    def test_raw_response_create_overload_1(self, client: Groq) -> None:
         response = client.chat.completions.with_raw_response.create(
             messages=[
                 {
@@ -133,7 +133,7 @@ class TestCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    def test_streaming_response_create(self, client: Groq) -> None:
+    def test_streaming_response_create_overload_1(self, client: Groq) -> None:
         with client.chat.completions.with_streaming_response.create(
             messages=[
                 {
@@ -151,6 +151,142 @@ class TestCompletions:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_method_create_overload_2(self, client: Groq) -> None:
+        completion_stream = client.chat.completions.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "system",
+                }
+            ],
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            stream=True,
+        )
+        completion_stream.response.close()
+
+    @parametrize
+    def test_method_create_with_all_params_overload_2(self, client: Groq) -> None:
+        completion_stream = client.chat.completions.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "system",
+                    "name": "name",
+                }
+            ],
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            stream=True,
+            citation_options="enabled",
+            compound_custom={
+                "models": {
+                    "answering_model": "answering_model",
+                    "reasoning_model": "reasoning_model",
+                },
+                "tools": {
+                    "enabled_tools": ["string"],
+                    "wolfram_settings": {"authorization": "authorization"},
+                },
+            },
+            disable_tool_validation=True,
+            documents=[
+                {
+                    "source": {
+                        "text": "text",
+                        "type": "text",
+                    },
+                    "id": "id",
+                }
+            ],
+            exclude_domains=["string"],
+            frequency_penalty=-2,
+            function_call="none",
+            functions=[
+                {
+                    "name": "name",
+                    "description": "description",
+                    "parameters": {"foo": "bar"},
+                }
+            ],
+            include_domains=["string"],
+            include_reasoning=True,
+            logit_bias={"foo": 0},
+            logprobs=True,
+            max_completion_tokens=0,
+            max_tokens=0,
+            metadata={"foo": "string"},
+            n=1,
+            parallel_tool_calls=True,
+            presence_penalty=-2,
+            reasoning_effort="none",
+            reasoning_format="hidden",
+            response_format={"type": "text"},
+            search_settings={
+                "country": "country",
+                "exclude_domains": ["string"],
+                "include_domains": ["string"],
+                "include_images": True,
+            },
+            seed=0,
+            service_tier="auto",
+            stop="\n",
+            store=True,
+            temperature=1,
+            tool_choice="none",
+            tools=[
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "name",
+                        "description": "description",
+                        "parameters": {"foo": "bar"},
+                        "strict": True,
+                    },
+                }
+            ],
+            top_logprobs=0,
+            top_p=1,
+            user="user",
+        )
+        completion_stream.response.close()
+
+    @parametrize
+    def test_raw_response_create_overload_2(self, client: Groq) -> None:
+        response = client.chat.completions.with_raw_response.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "system",
+                }
+            ],
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            stream=True,
+        )
+
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        stream = response.parse()
+        stream.close()
+
+    @parametrize
+    def test_streaming_response_create_overload_2(self, client: Groq) -> None:
+        with client.chat.completions.with_streaming_response.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "system",
+                }
+            ],
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            stream=True,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            stream = response.parse()
+            stream.close()
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncCompletions:
     parametrize = pytest.mark.parametrize(
@@ -158,7 +294,7 @@ class TestAsyncCompletions:
     )
 
     @parametrize
-    async def test_method_create(self, async_client: AsyncGroq) -> None:
+    async def test_method_create_overload_1(self, async_client: AsyncGroq) -> None:
         completion = await async_client.chat.completions.create(
             messages=[
                 {
@@ -171,7 +307,7 @@ class TestAsyncCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncGroq) -> None:
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncGroq) -> None:
         completion = await async_client.chat.completions.create(
             messages=[
                 {
@@ -256,7 +392,7 @@ class TestAsyncCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncGroq) -> None:
+    async def test_raw_response_create_overload_1(self, async_client: AsyncGroq) -> None:
         response = await async_client.chat.completions.with_raw_response.create(
             messages=[
                 {
@@ -273,7 +409,7 @@ class TestAsyncCompletions:
         assert_matches_type(ChatCompletion, completion, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncGroq) -> None:
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncGroq) -> None:
         async with async_client.chat.completions.with_streaming_response.create(
             messages=[
                 {
@@ -288,5 +424,141 @@ class TestAsyncCompletions:
 
             completion = await response.parse()
             assert_matches_type(ChatCompletion, completion, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_create_overload_2(self, async_client: AsyncGroq) -> None:
+        completion_stream = await async_client.chat.completions.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "system",
+                }
+            ],
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            stream=True,
+        )
+        await completion_stream.response.aclose()
+
+    @parametrize
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncGroq) -> None:
+        completion_stream = await async_client.chat.completions.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "system",
+                    "name": "name",
+                }
+            ],
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            stream=True,
+            citation_options="enabled",
+            compound_custom={
+                "models": {
+                    "answering_model": "answering_model",
+                    "reasoning_model": "reasoning_model",
+                },
+                "tools": {
+                    "enabled_tools": ["string"],
+                    "wolfram_settings": {"authorization": "authorization"},
+                },
+            },
+            disable_tool_validation=True,
+            documents=[
+                {
+                    "source": {
+                        "text": "text",
+                        "type": "text",
+                    },
+                    "id": "id",
+                }
+            ],
+            exclude_domains=["string"],
+            frequency_penalty=-2,
+            function_call="none",
+            functions=[
+                {
+                    "name": "name",
+                    "description": "description",
+                    "parameters": {"foo": "bar"},
+                }
+            ],
+            include_domains=["string"],
+            include_reasoning=True,
+            logit_bias={"foo": 0},
+            logprobs=True,
+            max_completion_tokens=0,
+            max_tokens=0,
+            metadata={"foo": "string"},
+            n=1,
+            parallel_tool_calls=True,
+            presence_penalty=-2,
+            reasoning_effort="none",
+            reasoning_format="hidden",
+            response_format={"type": "text"},
+            search_settings={
+                "country": "country",
+                "exclude_domains": ["string"],
+                "include_domains": ["string"],
+                "include_images": True,
+            },
+            seed=0,
+            service_tier="auto",
+            stop="\n",
+            store=True,
+            temperature=1,
+            tool_choice="none",
+            tools=[
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "name",
+                        "description": "description",
+                        "parameters": {"foo": "bar"},
+                        "strict": True,
+                    },
+                }
+            ],
+            top_logprobs=0,
+            top_p=1,
+            user="user",
+        )
+        await completion_stream.response.aclose()
+
+    @parametrize
+    async def test_raw_response_create_overload_2(self, async_client: AsyncGroq) -> None:
+        response = await async_client.chat.completions.with_raw_response.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "system",
+                }
+            ],
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            stream=True,
+        )
+
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        stream = await response.parse()
+        await stream.close()
+
+    @parametrize
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncGroq) -> None:
+        async with async_client.chat.completions.with_streaming_response.create(
+            messages=[
+                {
+                    "content": "string",
+                    "role": "system",
+                }
+            ],
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            stream=True,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            stream = await response.parse()
+            await stream.close()
 
         assert cast(Any, response.is_closed) is True

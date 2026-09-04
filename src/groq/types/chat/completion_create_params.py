@@ -13,7 +13,7 @@ from .chat_completion_tool_choice_option_param import ChatCompletionToolChoiceOp
 from .chat_completion_function_call_option_param import ChatCompletionFunctionCallOptionParam
 
 __all__ = [
-    "CompletionCreateParams",
+    "CompletionCreateParamsBase",
     "CompoundCustom",
     "CompoundCustomModels",
     "CompoundCustomTools",
@@ -30,10 +30,12 @@ __all__ = [
     "ResponseFormatResponseFormatJsonSchemaJsonSchema",
     "ResponseFormatResponseFormatJsonObject",
     "SearchSettings",
+    "CompletionCreateParamsNonStreaming",
+    "CompletionCreateParamsStreaming",
 ]
 
 
-class CompletionCreateParams(TypedDict, total=False):
+class CompletionCreateParamsBase(TypedDict, total=False):
     messages: Required[Iterable[ChatCompletionMessageParam]]
     """A list of messages comprising the conversation so far."""
 
@@ -243,15 +245,6 @@ class CompletionCreateParams(TypedDict, total=False):
 
     store: Optional[bool]
     """This parameter is not currently supported."""
-
-    stream: Optional[bool]
-    """If set, partial message deltas will be sent.
-
-    Tokens will be sent as data-only
-    [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
-    as they become available, with the stream terminated by a `data: [DONE]`
-    message. [Example code](/docs/text-chat#streaming-a-chat-completion).
-    """
 
     temperature: Optional[float]
     """What sampling temperature to use, between 0 and 2.
@@ -479,3 +472,28 @@ class SearchSettings(TypedDict, total=False):
 
     include_images: Optional[bool]
     """Whether to include images in the search results."""
+
+
+class CompletionCreateParamsNonStreaming(CompletionCreateParamsBase, total=False):
+    stream: Optional[Literal[False]]
+    """If set, partial message deltas will be sent.
+
+    Tokens will be sent as data-only
+    [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+    as they become available, with the stream terminated by a `data: [DONE]`
+    message. [Example code](/docs/text-chat#streaming-a-chat-completion).
+    """
+
+
+class CompletionCreateParamsStreaming(CompletionCreateParamsBase):
+    stream: Required[Literal[True]]
+    """If set, partial message deltas will be sent.
+
+    Tokens will be sent as data-only
+    [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+    as they become available, with the stream terminated by a `data: [DONE]`
+    message. [Example code](/docs/text-chat#streaming-a-chat-completion).
+    """
+
+
+CompletionCreateParams = Union[CompletionCreateParamsNonStreaming, CompletionCreateParamsStreaming]

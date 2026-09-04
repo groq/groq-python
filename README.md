@@ -121,6 +121,50 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
+## Streaming responses
+
+We provide support for streaming responses using Server Side Events (SSE).
+
+```python
+from groq import Groq
+
+client = Groq()
+
+stream = client.chat.completions.create(
+    messages=[
+        {
+            "role": "user",
+            "content": "Explain the importance of low latency LLMs",
+        }
+    ],
+    model="openai/gpt-oss-20b",
+    stream=True,
+)
+for chat_completion in stream:
+    print(chat_completion.id)
+```
+
+The async client uses the exact same interface.
+
+```python
+from groq import AsyncGroq
+
+client = AsyncGroq()
+
+stream = await client.chat.completions.create(
+    messages=[
+        {
+            "role": "user",
+            "content": "Explain the importance of low latency LLMs",
+        }
+    ],
+    model="openai/gpt-oss-20b",
+    stream=True,
+)
+async for chat_completion in stream:
+    print(chat_completion.id)
+```
+
 ## Using types
 
 Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:

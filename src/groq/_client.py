@@ -110,6 +110,8 @@ class Groq(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self._default_stream_cls = Stream
+
     @cached_property
     def chat(self) -> Chat:
         from .resources.chat import Chat
@@ -322,6 +324,8 @@ class AsyncGroq(AsyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
+
+        self._default_stream_cls = AsyncStream
 
     @cached_property
     def chat(self) -> AsyncChat:

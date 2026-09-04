@@ -58,11 +58,29 @@ class Stream(Generic[_T]):
         process_data = self._client._process_response_data
         iterator = self._iter_events()
 
-        for sse in iterator:
-            if sse.data.startswith("[DONE]"):
-                break
+        try:
+            for sse in iterator:
+                if sse.data.startswith("[DONE]"):
+                    break
 
-            if sse.event is None:
+                if sse.event is None:
+                    data = sse.json()
+                    if is_mapping(data) and data.get("error"):
+                        message = None
+                        error = data.get("error")
+                        if is_mapping(error):
+                            message = error.get("message")
+                        if not message or not isinstance(message, str):
+                            message = "An error occurred during streaming"
+
+                        raise APIError(
+                            message=message,
+                            request=self.response.request,
+                            body=data["error"],
+                        )
+
+                    yield process_data(data=data, cast_to=cast_to, response=response)
+
                 data = sse.json()
                 if is_mapping(data) and data.get("error"):
                     message = None
@@ -79,28 +97,9 @@ class Stream(Generic[_T]):
                     )
 
                 yield process_data(data=data, cast_to=cast_to, response=response)
-
-            else:
-                data = sse.json()
-
-                if sse.event == "error" and is_mapping(data) and data.get("error"):
-                    message = None
-                    error = data.get("error")
-                    if is_mapping(error):
-                        message = error.get("message")
-                    if not message or not isinstance(message, str):
-                        message = "An error occurred during streaming"
-
-                    raise APIError(
-                        message=message,
-                        request=self.response.request,
-                        body=data["error"],
-                    )
-
-                yield process_data(data={"data": data, "event": sse.event}, cast_to=cast_to, response=response)
-        # The stream needs to be fully consumed to close the response
-        for _sse in iterator:
-            ...
+        finally:
+            # Ensure the response is closed even if the consumer doesn't read all data
+            response.close()
 
     def __enter__(self) -> Self:
         return self
@@ -161,11 +160,29 @@ class AsyncStream(Generic[_T]):
         process_data = self._client._process_response_data
         iterator = self._iter_events()
 
-        async for sse in iterator:
-            if sse.data.startswith("[DONE]"):
-                break
+        try:
+            async for sse in iterator:
+                if sse.data.startswith("[DONE]"):
+                    break
 
-            if sse.event is None:
+                if sse.event is None:
+                    data = sse.json()
+                    if is_mapping(data) and data.get("error"):
+                        message = None
+                        error = data.get("error")
+                        if is_mapping(error):
+                            message = error.get("message")
+                        if not message or not isinstance(message, str):
+                            message = "An error occurred during streaming"
+
+                        raise APIError(
+                            message=message,
+                            request=self.response.request,
+                            body=data["error"],
+                        )
+
+                    yield process_data(data=data, cast_to=cast_to, response=response)
+
                 data = sse.json()
                 if is_mapping(data) and data.get("error"):
                     message = None
@@ -182,28 +199,9 @@ class AsyncStream(Generic[_T]):
                     )
 
                 yield process_data(data=data, cast_to=cast_to, response=response)
-
-            else:
-                data = sse.json()
-
-                if sse.event == "error" and is_mapping(data) and data.get("error"):
-                    message = None
-                    error = data.get("error")
-                    if is_mapping(error):
-                        message = error.get("message")
-                    if not message or not isinstance(message, str):
-                        message = "An error occurred during streaming"
-
-                    raise APIError(
-                        message=message,
-                        request=self.response.request,
-                        body=data["error"],
-                    )
-
-                yield process_data(data={"data": data, "event": sse.event}, cast_to=cast_to, response=response)
-        # The stream needs to be fully consumed to close the response
-        async for _sse in iterator:
-            ...
+        finally:
+            # Ensure the response is closed even if the consumer doesn't read all data
+            await response.aclose()
 
     async def __aenter__(self) -> Self:
         return self
