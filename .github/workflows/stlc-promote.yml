@@ -1,31 +1,92 @@
 name: Promote SDKs
 
-# Promote staging to production by fast-forwarding production main up to staging,
-# preserving SHAs so the trunks stay identical and linear (nothing to heal on the
-# next stlc build). Fully continuous: every staging main push promotes; release-please
-# then opens or refreshes its version PR on production. Manual dispatch stays available.
+# Promote staging to production by fast-forwarding production main up to a staging
+# commit, preserving SHAs so the trunks stay identical and linear (nothing to heal on
+# the next stlc build).
+#
+# Gate, in order:
+#   1. The staging CI run for the commit must have passed (lint and build jobs green).
+#      Runs start from `workflow_run` of CI on main, so a red staging never promotes.
+#   2. A required reviewer on the `production` environment approves the run.
+# Manual dispatch stays available; it promotes the current main head after the same CI check.
+#
+# Process rule: merge the release PR promptly after approving a promote. Codegen holds while
+# production is ahead, so the only fork window is codegen landing on staging between the
+# promote approval and the release merge.
 on:
   workflow_dispatch: {}
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [main]
+
+run-name: Promote ${{ github.event.workflow_run.head_sha || github.sha }} to groq/groq-python
 
 concurrency:
   group: stlc-promote
-  cancel-in-progress: false
+  # A newer green commit supersedes an older waiting one: its fast-forward includes it.
+  cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
-  promote:
+  check:
+    # Runs before the environment gate so reviewers only ever see runs that already passed CI.
     # Runner comes from the STLC_RUNNER repo/org variable when set; defaults to GitHub-hosted.
     runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
-    if: github.repository == 'groq/groq-python-staging'
-    # Optional gate: add required reviewers to this environment to approve each
-    # promote. With none it only scopes secrets and adds no gate. Remove if unused.
+    if: >-
+      github.repository == 'groq/groq-python-staging' &&
+      (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      target_sha: ${{ steps.ci.outputs.target_sha }}
+    steps:
+      - name: Require a green CI run (lint and build jobs) for the target commit
+        id: ci
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT: ${{ github.event_name }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          MAIN_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT" = "workflow_run" ]; then
+            target="$HEAD_SHA"; run_id="$RUN_ID"
+          else
+            target="$MAIN_SHA"
+            run_id=$(gh run list -R "$REPO" --workflow CI --commit "$target" --json databaseId,status \
+              --jq '[.[] | select(.status=="completed")][0].databaseId // empty')
+            if [ -z "$run_id" ]; then
+              echo "::error title=Promote blocked::no completed CI run for $target. Wait for CI, then re-run."
+              exit 1
+            fi
+          fi
+          # CI's lint/build jobs skip on a "codegen metadata" commit message while test does not,
+          # so the run conclusion alone is not enough: require the lint and build jobs explicitly.
+          summary=$(gh run view -R "$REPO" "$run_id" --json conclusion,jobs \
+            --jq '{run: .conclusion, lint: ([.jobs[] | select(.name=="lint") | .conclusion][0]), build: ([.jobs[] | select(.name=="build") | .conclusion][0])}')
+          echo "CI run $run_id for $target: $summary"
+          for k in run lint build; do
+            if [ "$(jq -r --arg k "$k" '.[$k]' <<<"$summary")" != "success" ]; then
+              echo "::error title=Promote blocked::CI $k for $target is not success. Fix staging CI first."
+              exit 1
+            fi
+          done
+          echo "target_sha=$target" >> "$GITHUB_OUTPUT"
+
+  promote:
+    needs: check
+    runs-on: ${{ vars.STLC_RUNNER || 'ubuntu-latest' }}
+    # Required reviewers on this environment are the approval gate (repo settings, not this file).
     environment: production
     env:
       PRODUCTION_REPO: groq/groq-python
+      TARGET_SHA: ${{ needs.check.outputs.target_sha }}
       GH_TOKEN: ${{ secrets.PRODUCTION_REPO_TOKEN }}
     steps:
       - name: Check out staging
@@ -39,31 +100,35 @@ jobs:
           git remote add production \
             "https://x-access-token:${GH_TOKEN}@github.com/${PRODUCTION_REPO}.git"
           git fetch production main
+          if ! git cat-file -e "${TARGET_SHA}^{commit}"; then
+            echo "::error title=Promote blocked::target $TARGET_SHA is not in this checkout."
+            exit 1
+          fi
 
-      - name: Check whether production already has staging's content
+      - name: Check whether production already has the target's content
         id: diff
         run: |
           # After a release, production has release-please commits staging lacks, so compare trees.
-          MERGED=$(git merge-tree --write-tree production/main origin/main) || MERGED=conflict
+          MERGED=$(git merge-tree --write-tree production/main "$TARGET_SHA") || MERGED=conflict
           PRODUCTION_TREE=$(git rev-parse 'production/main^{tree}')
           if [ "$MERGED" = "$PRODUCTION_TREE" ]; then
-            echo "Production already contains staging's content. Nothing to promote."
+            echo "Production already contains the target's content. Nothing to promote."
             echo "synced=true" >> "$GITHUB_OUTPUT"
           else
             echo "synced=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Promote staging to production (fast-forward)
+      - name: Promote target to production (fast-forward)
         if: steps.diff.outputs.synced == 'false'
         run: |
-          # Refuse unless production is an ancestor of staging: otherwise the trunks
+          # Refuse unless production is an ancestor of the target: otherwise the trunks
           # have forked (production advanced without a back-sync) and FF is unsafe.
-          if ! git merge-base --is-ancestor production/main origin/main; then
-            echo "::error title=Promote blocked::production/main is not an ancestor of staging main. Back-sync production into staging first."
+          if ! git merge-base --is-ancestor production/main "$TARGET_SHA"; then
+            echo "::error title=Promote blocked::production/main is not an ancestor of $TARGET_SHA. Back-sync production into staging first."
             exit 1
           fi
-          git push production origin/main:refs/heads/main
-          echo "Fast-forwarded production/main to staging/main."
+          git push production "$TARGET_SHA:refs/heads/main"
+          echo "Fast-forwarded production/main to $TARGET_SHA."
 
       - name: Alert on failure
         if: failure()
@@ -71,9 +136,9 @@ jobs:
           ALERT_WEBHOOK_URL: ${{ secrets.STLC_ALERT_WEBHOOK_URL }}
         run: |
           run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          msg="stlc promote failed in ${{ github.repository }}. A stalled promote or back-sync lets custom-code tracking drift, which later builds refuse on — investigate before the next build. Run: $run_url"
+          msg="stlc promote failed in ${{ github.repository }}. A stalled promote or back-sync lets custom-code tracking drift, which later builds refuse on - investigate before the next build. Run: $run_url"
           echo "::error title=stlc workflow failed::$msg"
-          { echo "### ⚠️ stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
+          { echo "### stlc workflow failed"; echo ""; echo "$msg"; } >> "$GITHUB_STEP_SUMMARY"
           if [ -n "${ALERT_WEBHOOK_URL:-}" ]; then
             curl -sS -X POST -H 'Content-Type: application/json' \
               -d "$(jq -n --arg text "$msg" '{text:$text}')" "$ALERT_WEBHOOK_URL" \
