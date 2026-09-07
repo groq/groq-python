@@ -25,6 +25,14 @@ from ...types.audio.translation import Translation
 __all__ = ["Translations", "AsyncTranslations"]
 
 
+def _get_response_format_type(
+    response_format: Literal["json", "text", "verbose_json"] | Omit,
+) -> type[Translation] | type[str]:
+    # `text` responses are served as text/plain, so casting to a model makes the parser
+    # fall back to json.loads() and return whatever type the transcript happens to parse as.
+    return str if response_format == "text" else Translation
+
+
 class Translations(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> TranslationsWithRawResponse:
@@ -60,7 +68,7 @@ class Translations(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Translation:
+    ) -> Translation | str:
         """Translates audio into English.
 
         Args:
@@ -119,7 +127,7 @@ class Translations(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Translation,
+            cast_to=_get_response_format_type(response_format),
         )
 
 
@@ -158,7 +166,7 @@ class AsyncTranslations(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Translation:
+    ) -> Translation | str:
         """Translates audio into English.
 
         Args:
@@ -217,7 +225,7 @@ class AsyncTranslations(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Translation,
+            cast_to=_get_response_format_type(response_format),
         )
 
 
